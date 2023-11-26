@@ -94,7 +94,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-    <script src="./../assets/js/throttle.js"></script>
+    <script src="../assets/js/utils/throttle.js"></script>
 
     <script>
         /**
@@ -103,10 +103,13 @@
         let sendEmailBtn = $('#send_email_btn');
         sendEmailBtn.on('click', () => {
             sendEmail();
-        })
+        });
         $('#verify_code_img').on('click', throttle(flushVerifyCode, 10000));
         $('#register_btn').on('click', register);
 
+        /**
+         * 图形验证码
+         */
         function flushVerifyCode() {
             axios({
                 type: 'get',
@@ -123,6 +126,10 @@
         };
         flushVerifyCode();
 
+
+        /**
+         * 邮件验证码
+         */
         function sendEmail() {
             let waitTime = 60;
             let userEmail = $('#register_email').val();
@@ -138,9 +145,12 @@
                         sendEmailBtn.text("test");
                     }
                 }, 1000);
-            })
+            });
         }
 
+        /**
+         * 注册
+         */
         function register() {
             // 校验图形验证码
             const imgVerifyCode = $('#verify_code').val();

@@ -1,7 +1,7 @@
 package homestay.servlet;
 
 import homestay.dao.Data;
-import homestay.service.RegisterService;
+import homestay.service.UserService;
 import org.apache.commons.mail.EmailException;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,8 +15,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet({"/email/send", "/register"})
-public class RegisterServlet extends HttpServlet {
+@WebServlet({"/email/send", "/register", "/reset"})
+public class UserServlet extends HttpServlet {
 
     // 发邮件
     @Override
@@ -25,7 +25,7 @@ public class RegisterServlet extends HttpServlet {
         String id = session.getId();
         try {
             Data data = Data.getPageParameters(req, resp);
-            RegisterService service = new RegisterService();
+            UserService service = new UserService();
             String verifyCode = service.sendEmail(data);
             // 存入session
             session.setAttribute("SESSION_EMAIL_VERIFY_CODE_" + id, verifyCode);
@@ -36,7 +36,6 @@ public class RegisterServlet extends HttpServlet {
     }
 
     // 注册
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
@@ -44,7 +43,7 @@ public class RegisterServlet extends HttpServlet {
         try {
             Data data = Data.getPageParameters(req, resp);
             JSONObject resJson = new JSONObject();  /* 响应数据 */
-            RegisterService service = new RegisterService();
+            UserService service = new UserService();
 
             // 取session数据
             String serverEmailVerifyCode = (String) session.getAttribute("SESSION_EMAIL_VERIFY_CODE_" + id);
@@ -60,6 +59,23 @@ public class RegisterServlet extends HttpServlet {
             resp.getWriter().println(resJson);
         } catch (JSONException | SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+
+    // 修改密码
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            Data data = Data.getPageParameters(req, resp);
+            JSONObject resJson = new JSONObject();
+            UserService service = new UserService();
+            service.modifyUserInfo(data, resJson);
+            // 返回
+            resp.setContentType("application/json; charset=UTF-8");
+            resp.getWriter().println(resJson);
+        } catch (JSONException | SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

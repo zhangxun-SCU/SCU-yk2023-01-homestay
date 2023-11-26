@@ -23,8 +23,10 @@ public class VerifyServlet  extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         String id = session.getId();
-        // 生成验证码
-        Object[] verifyCode = VerifyUtil.newBuilder().build().createImage();
+        VerifyService service = new VerifyService();
+        Object[] verifyCode = service.getVerifyCode();
+
+        // 存入session
         session.setAttribute("SESSION_VERIFY_CODE_" + id, verifyCode[0]);
         System.out.println("[VerifyServlet genCode]" + verifyCode[0]);
         // 返回
@@ -36,10 +38,14 @@ public class VerifyServlet  extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        String id = session.getId();
         try {
+            // 验证验证码
+            String serverCode = (String) session.getAttribute("SESSION_VERIFY_CODE_" + id);
             Data data = Data.getPageParameters(req, resp);
             VerifyService service = new VerifyService();
-            String result = service.checkCode(data.getParam().getString("code"), req);
+            String result = service.checkCode(data.getParam().getString("code"), serverCode);
             resp.getWriter().println(result);
         } catch (JSONException e) {
             throw new RuntimeException(e);

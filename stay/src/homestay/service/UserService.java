@@ -7,12 +7,10 @@ import org.apache.commons.mail.EmailException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.Random;
 
-public class RegisterService {
+public class UserService {
 
     private int default_digits = 6;
 
@@ -65,5 +63,20 @@ public class RegisterService {
         }
         dao.addUser(data);
         resJson.put("register_info", "success");
+    }
+
+    public void modifyUserInfo(Data data, JSONObject resJson) throws JSONException, SQLException {
+        UserDao dao = new UserDao();
+        String email = data.getParam().getString("email");
+        // 检查是否存在
+        JSONObject attemptUser = dao.queryUserByKey("email", email);
+        if(attemptUser.length() == 0) {
+            // 不存在此用户
+            resJson.put("reset_info", "user does not exist");
+            return;
+        }
+        // 修改
+        dao.modifyUserInfo(data);
+        resJson.put("reset_info", "success");
     }
 }

@@ -10,12 +10,6 @@ import java.util.Random;
  * 图形验证码
  */
 public class VerifyUtil {
-    private static final char[] chars = {
-            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-            'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-            'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 
     // 默认字符数量
     private final Integer SIZE;
@@ -54,7 +48,7 @@ public class VerifyUtil {
      * [0]: 验证码
      * [1]: 图片
      */
-    public Object[] createImage() {
+    public Object[] createImage(String verifyCode) {
         StringBuffer sb = new StringBuffer();
         // 创建空白图片
         BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
@@ -73,14 +67,14 @@ public class VerifyUtil {
         int codeWidth = WIDTH / (SIZE + 1);
         // 字符所处的y轴的坐标
         int y = HEIGHT * 3 / 4;
-        for (int i = 0; i < SIZE; i++) {
+        for (int i = 0; i < verifyCode.length(); i++) {
             // 设置随机颜色
             graphic.setColor(getRandomColor());
             // 初始化字体
             Font font = new Font(null, Font.BOLD + Font.ITALIC, FONT_SIZE);
 
             if (TILT) {
-                // 随机一个倾斜的角度 -45到45度之间
+                // 随机一个倾斜的角度 30到-30度之间
                 int theta = ran.nextInt(30);
                 // 随机一个倾斜方向 左或者右
                 theta = (ran.nextBoolean() == true) ? theta : -theta;
@@ -95,9 +89,7 @@ public class VerifyUtil {
             int x = (i * codeWidth) + (codeWidth / 2);
 
             // 取随机字符索引
-            int n = ran.nextInt(chars.length);
-            // 得到字符文本
-            String code = String.valueOf(chars[n]);
+            String code = verifyCode.substring(i, i+1);
             // 画字符
             graphic.drawString(code, x, y);
 
