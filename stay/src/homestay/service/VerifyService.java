@@ -1,6 +1,8 @@
 package homestay.service;
 
 import homestay.utils.VerifyUtil;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -45,13 +47,15 @@ public class VerifyService {
         return verifyCode;
     }
 
-    public String checkCode(String code, String serverCode) {
+    public void checkCode(String code, String serverCode, JSONObject resJson) throws JSONException {
         // 验证验证码
 //        System.out.println("serverCode: " + serverCode);
 //        System.out.println("receiveCode: " + code);
         if (serverCode == null || code == null || !serverCode.toUpperCase().equals(code.toUpperCase())) {
-            return "verify code incorrect";
+            resJson.put("resCode", "V0001");
+            resJson.put("resInfo", "error: verify code correct");
         }
-        return "verify code correct";
+        resJson.put("resCode", "00000");
+        resJson.put("resInfo", "success");
     }
 }

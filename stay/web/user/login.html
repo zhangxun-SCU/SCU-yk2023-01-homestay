@@ -69,7 +69,7 @@
                                         </div>
                                     </div>
                                     <div class="text-center">
-                                        <button class="btn btn-primary btn-block" id="login_btn" type="button">Sign Me In</button>
+                                        <button class="btn btn-primary btn-block disabled" id="login_btn" type="button">Sign Me In</button>
                                     </div>
                                 </form>
                                 <div class="new-account mt-3">
@@ -101,7 +101,8 @@
 
 
 <script src="./../assets/js/axios.min.js"></script>
-<script src="../assets/js/utils/throttle.js"></script>
+<script src="./../assets/js/utils/throttle.js"></script>
+<script src="./../assets/js/utils/debounce.js"></script>
 <script>
 
 
@@ -110,6 +111,14 @@
      */
     $('#verify_code_img').on('click', throttle(flushVerifyCode, 100));
     $('#login_btn').on('click', login);
+    $('#user_id,#user_password').on('keyup', debounce(() => {
+        if(idInput() && passwordInput()) {
+            $('#login_btn').removeClass('disabled');
+        } else {
+            $('#login_btn').addClass('disabled');
+        }
+    }, 500))
+
     function flushVerifyCode() {
         axios({
             type: 'get',
@@ -124,13 +133,14 @@
                 ));
         })
     };
+
     flushVerifyCode();
     function login() {
         // 校验图形验证码
         const imgVerifyCode = $('#verify_code').val();
-        console.log(imgVerifyCode);
         $.post('/verify', {code: imgVerifyCode}, (res) => {
-            if(res.trim() === "verify code correct") {
+            console.log(res)
+            if(res.resCode !== "V0001") {
                 // alert("验证码正确");
                 // 正确则执行登录
                 /** 数据校验 **/
@@ -141,11 +151,11 @@
                 console.log("user login data", userLoginData);
                 $.post("/login", userLoginData, res => {
                     console.log("login res", res);
-                    if (res.login_info === "password incorrect") {
+                    if (res.resCode === "L0001") {
                         sweetAlert({
                             type: "error",
-                            title: "Sweet auto close alert !!",
-                            text: "Hey, i will close in 2 seconds !!",
+                            title: "密码错误",
+                            text: "请重新确认密码",
                             timer: 2e3,
                             showConfirmButton: !1
                         });
@@ -156,6 +166,25 @@
             }
         });
     }
+
+    /**
+     * 输入校验
+     */
+
+    function idInput() {
+        if($('#user_id').val() === '') {
+            return false;
+        }
+        return true;
+    }
+    function passwordInput() {
+        if($('#user_password').val() === '') {
+            return false;
+        }
+        return true;
+    }
+
+
 </script>
 </body>
 </html>

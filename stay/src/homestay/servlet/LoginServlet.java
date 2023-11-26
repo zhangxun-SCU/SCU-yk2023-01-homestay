@@ -25,12 +25,13 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        String id = session.getId();
         try {
             data = Data.getPageParameters(req, resp);
             JSONObject resJson = new JSONObject();  /* 响应数据 */
             LoginService service = new LoginService();
             service.checkLogin(data, resJson);
-
             // 返回
             resp.setContentType("application/json; charset=UTF-8");
             resp.getWriter().println(resJson);

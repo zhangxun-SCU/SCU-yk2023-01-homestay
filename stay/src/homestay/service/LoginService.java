@@ -19,18 +19,25 @@ public class LoginService {
         String id = data.getParam().getString("id");
         String inputPassword = data.getParam().getString("password");
         JSONObject userAccountInfo = dao.queryUserById(id);
-        String realPassword = userAccountInfo.getString("user_password");
+        String realPassword = userAccountInfo.has("user_password")
+                ? userAccountInfo.getString("user_password") : null;
+        if(realPassword == null) {
+            // 没有此用户
+            resJson.put("resCode", "L0002");
+            resJson.put("resInfo", "user does not exist");
+            return false;
+        }
         if(realPassword.equals(inputPassword)) {
             // 密码正确
             // 返回数据
             userAccountInfo.remove("user_password");
-            resJson.put("login_info", "success");
-            resJson.put("user_info", userAccountInfo);
-
+            resJson.put("resCode", "00000");
+            resJson.put("resInfo", "success");
             return true;
         }
         System.out.println("real passwd: " + userAccountInfo.getString("user_password"));
-        resJson.put("login_info", "password incorrect");
+        resJson.put("resCode", "L0001");
+        resJson.put("resInfo", "error: password incorrect");
         return false;
     }
 }
