@@ -4,14 +4,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class ConfigMysql {
-    private static ConfigMysql configMysql;
+public class Config {
+    private static Config config;
     private Properties properties;
 
-    private ConfigMysql() {
-        String configFile = "sql.properties";
+    private Config() {
+        String configFile = ".properties";
         properties = new Properties();
-        InputStream in = ConfigMysql.class.getClassLoader().getResourceAsStream(configFile);
+        InputStream in = Config.class.getClassLoader().getResourceAsStream(configFile);
         try {
             properties.load(in);
             in.close();
@@ -20,11 +20,11 @@ public class ConfigMysql {
         }
     }
 
-    public static ConfigMysql getInstance() {
-        if(configMysql == null) {
-            configMysql = new ConfigMysql();
+    public static Config getInstance() {
+        if(config == null) {
+            config = new Config();
         }
-        return configMysql;
+        return config;
     }
 
     public String getString(String key) {

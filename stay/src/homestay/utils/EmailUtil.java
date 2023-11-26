@@ -6,9 +6,9 @@ import org.apache.commons.mail.HtmlEmail;
 import java.util.Random;
 
 public class EmailUtil {
-    private String fromAddr = "2089647798@qq.com";
-    private String password = "srtppwdjnhisdgid";
-    private String smtp_server = "smtp.qq.com";
+    private String fromAddr = Config.getInstance().getString("qq.email.account");
+    private String password = Config.getInstance().getString("qq.email.password");
+    private String smtp_server = Config.getInstance().getString("qq.email.smtp_server");
 
 
     public void sendEmail(String toAddr, String info) throws EmailException {

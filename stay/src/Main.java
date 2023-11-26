@@ -1,8 +1,8 @@
-import homestay.utils.ConfigMysql;
+import homestay.utils.Config;
 
 public class Main {
     public static void main(String[] args) {
         System.out.println("Hello world!");
-        System.out.println(ConfigMysql.getInstance().getString("db.url"));
+        System.out.println(Config.getInstance().getString("db.url"));
     }
 }
