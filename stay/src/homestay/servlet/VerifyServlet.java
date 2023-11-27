@@ -47,7 +47,7 @@ public class VerifyServlet  extends HttpServlet{
             // 验证验证码
             String serverCode = (String) session.getAttribute("SESSION_VERIFY_CODE_" + id);
             VerifyService service = new VerifyService();
-            service.checkCode(data.getParam().getString("code"), serverCode, resJson);
+            service.checkCode(data, serverCode, resJson);
             // 返回
             resp.setContentType("application/json; charset=UTF-8");
             resp.getWriter().println(resJson);
