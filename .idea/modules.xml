@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/ScuStay.iml" filepath="$PROJECT_DIR$/ScuStay.iml" />
-      <module fileurl="file://$PROJECT_DIR$/stay/stay.iml" filepath="$PROJECT_DIR$/stay/stay.iml" />
-    </modules>
-  </component>
-</project>
