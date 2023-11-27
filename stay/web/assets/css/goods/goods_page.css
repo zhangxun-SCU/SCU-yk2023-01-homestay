@@ -1,0 +1,65 @@
+input[type="file"] {
+    display: none;
+}
+
+div:has(> label#specialty_image_preview) {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid transparent;
+}
+
+div:has(> label#specialty_image_preview) > .img_box {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+    width: 200px;
+    height: 200px;
+}
+
+div:has(> label#specialty_image_preview) > .img_box:nth-of-type(n+3) {
+    margin-top: 10px;
+}
+
+div:has(> label#specialty_image_preview) > .img_box > .hint {
+    position: absolute;
+    display: none;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: white;
+    line-height: 200px;
+    background-color: rgba(50, 50, 50, 0.5);
+}
+
+div:has(> label#specialty_image_preview) > .img_box:hover > .hint {
+    display: block;
+}
+
+div:has(> label#specialty_image_preview) > .img_box > img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+#specialty_image_preview {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background-color: #d5d5d5;
+    margin-right: 10px;
+    margin-bottom: 0 !important;
+}
+
+#specialty_image_preview > i {
+    position: absolute;
+    left: 50%;
+    margin-left: -85px;
+    top: 50%;
+    margin-top: -90px;
+    color: #EEEEEE;
+    font-size: 180px;
+    cursor: pointer;
+}
