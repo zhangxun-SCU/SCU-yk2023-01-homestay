@@ -25,7 +25,7 @@ public class Data {
         Enumeration<String> requestNames = req.getParameterNames();
         while (requestNames.hasMoreElements()) {
             String key = requestNames.nextElement();
-            System.out.print(key + " ");
+            System.out.println(key + ": " + req.getParameter(key));
             param.put(key, req.getParameter(key));
         }
         System.out.println();

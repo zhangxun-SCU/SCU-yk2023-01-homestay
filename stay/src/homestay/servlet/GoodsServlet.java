@@ -12,9 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/goods/page")
+@WebServlet("/seller")
 public class GoodsServlet extends HttpServlet {
     private Data data = null;
+
+    private void showDebug(String function, String message) {
+        String log = "[GoodsServlet]" + function + message;
+        System.out.println(log);
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,21 +31,26 @@ public class GoodsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             data = Data.getPageParameters(request, response);
-            String actionType = data.getParam().getString("actionType");
             JSONObject json = new JSONObject();
+            String actionType = data.getParam().getString("actionType");
+            showDebug("[doPost]", "actionType: " + actionType);
             if (actionType.equals("specialty")) {
                 dispatchSpecialtyAction(request, response, json);
             } else if (actionType.equals("homestay")) {
                 dispatchHomestayAction(request, response, json);
             }
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().println(json);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    private void dispatchSpecialtyAction(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException {
+    private void dispatchSpecialtyAction(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, IOException {
         SpecialtyService specialtyService = new SpecialtyService();
         String action = data.getParam().getString("action");
+        showDebug("[dispatchSpecialtyAction]", "action: " + action);
         if (action.equals("add_specialty")) {
             specialtyService.addSpecialty(data, json);
         }
