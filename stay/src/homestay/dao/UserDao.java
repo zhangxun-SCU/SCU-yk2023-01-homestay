@@ -48,7 +48,7 @@ public class UserDao {
         String id = data.getParam().getString("id");
         String email = data.getParam().getString("email");
         String password = data.getParam().getString("password");
-        sql += "VALUES('" + id + "','" + email + "','" + password + "');";
+        sql += "VALUES('" + id + "','" + password + "','" + email + "');";
         System.out.println("addUser sql: " + sql);
         DB db = new DB("group1");
         db.executeUpdate(sql);

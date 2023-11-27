@@ -4,6 +4,7 @@ import homestay.dao.Data;
 import homestay.service.VerifyService;
 import homestay.utils.VerifyUtil;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
@@ -41,12 +42,15 @@ public class VerifyServlet  extends HttpServlet{
         HttpSession session = req.getSession();
         String id = session.getId();
         try {
+            Data data = Data.getPageParameters(req, resp);
+            JSONObject resJson = new JSONObject();
             // 验证验证码
             String serverCode = (String) session.getAttribute("SESSION_VERIFY_CODE_" + id);
-            Data data = Data.getPageParameters(req, resp);
             VerifyService service = new VerifyService();
-            String result = service.checkCode(data.getParam().getString("code"), serverCode);
-            resp.getWriter().println(result);
+            service.checkCode(data, serverCode, resJson);
+            // 返回
+            resp.setContentType("application/json; charset=UTF-8");
+            resp.getWriter().println(resJson);
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
