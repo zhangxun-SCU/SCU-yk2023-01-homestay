@@ -24,8 +24,9 @@ public class SpecialtyService {
         dao.addSpecialty(data, json);
     }
 
-    public void modifySpeicialty(Data data, JSONObject json) {
-
+    public void modifySpeicialty(Data data, JSONObject json) throws SQLException, JSONException, IOException {
+        SpecialtyDao dao = new SpecialtyDao();
+        dao.modifySpecialty(data, json);
     }
 
     public void deleteSpecialty(Data data, JSONObject json) throws JSONException, SQLException {

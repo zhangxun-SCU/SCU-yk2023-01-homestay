@@ -49,6 +49,9 @@ $("#add_specialty_button").click((e) => {
         data,
         (res) => {
             console.log(JSON.stringify(res));
+            if (res.resCode === "00000") {
+                location.reload();
+            }
         }
     )
 })
@@ -104,23 +107,82 @@ function initButtons() {
     var deleteButtons = document.querySelectorAll(".delete_specialty_button");
     for (var i = 0; i < deleteButtons.length; i++) {
         var button = deleteButtons[i];
-        button.addEventListener("click", deleteSpecialty);
+        button.addEventListener("click", (e) => {
+            var specialtyId = e.currentTarget.parentNode.nextElementSibling.value;
+            showDeleteModal(specialtyId);
+        });
     }
 
     var modifyButtons = document.querySelectorAll(".modify_specialty_button");
     for (var i = 0; i < modifyButtons.length; i++) {
         var button = modifyButtons[i];
-        button.addEventListener("click", modifySpecialty);
+        button.addEventListener("click", (e) => {
+            var specialtyId = e.currentTarget.parentNode.nextElementSibling.value;
+            showModifyModal(specialtyId);
+        });
     }
 }
 
-function deleteSpecialty(e) {
+function showDeleteModal(specialtyId) {
+    $("#deleteSpecialtyModalCenter #deleteSpecialtyConfirmButton").click((e) => {
+        var url = "/stay/seller";
+        console.log(specialtyId);
+        var data = {
+            "actionType": "specialty",
+            "action": "delete_specialty",
+            "specialty_id": specialtyId
+        };
+        $.post(
+            url,
+            data,
+            (res) => {
+                console.log(JSON.stringify(res));
+                if (res.resCode === "00000") {
+                    location.reload();
+                }
+            }
+        )
+    });
+    $("#deleteSpecialtyModalCenter").modal("show");
+}
+
+function showModifyModal(specialtyId) {
+    getSpecialtyByID(specialtyId);
+    $("#modifySpecialtyModelCenter #modifySpecialtyConfirmButton").click((e) => {
+        var url = "/stay/seller";
+        console.log(specialtyId);
+        var data = {
+            "actionType": "specialty",
+            "action": "modify_specialty",
+            "specialty_id": specialtyId,
+            "specialty_name": $("#modify_specialty_name").val(),
+            "price": $("#modify_specialty_price").val(),
+            "num": $("#modify_specialty_num").val(),
+            "imageurl": document.querySelector("#modify_specialty_image_preview > img").src
+        };
+        // 去除 data:image/*;base64, 的前缀
+        data.imageurl = data.imageurl.substring(data.imageurl.indexOf(",") + 1);
+        console.log(data);
+        $.post(
+            url,
+            data,
+            (res) => {
+                console.log(JSON.stringify(res));
+                if (res.resCode === "00000") {
+                    location.reload();
+                }
+            }
+        )
+    })
+    $("#modifySpecialtyModelCenter").modal("show");
+}
+
+function getSpecialtyByID(specialtyId) {
     var url = "/stay/seller";
-    var specialtyId = e.currentTarget.parentNode.nextElementSibling.value;
     console.log(specialtyId);
     var data = {
         "actionType": "specialty",
-        "action": "delete_specialty",
+        "action": "get_specialty",
         "specialty_id": specialtyId
     };
     $.post(
@@ -128,17 +190,26 @@ function deleteSpecialty(e) {
         data,
         (res) => {
             console.log(JSON.stringify(res));
+            if (res.resCode === "00000") {
+                var specialty = res.specialty;
+                $("#modify_specialty_name").val(specialty.specialty_name);
+                $("#modify_specialty_price").val(specialty.price);
+                $("#modify_specialty_num").val(specialty.num);
+                document.querySelector("#modify_specialty_image_preview > img").src = specialty.imageurl;
+            }
         }
     )
 }
 
-function modifySpecialty(e) {
-    var url = "/stay/seller";
-    var specialtyId = e.currentTarget.parentNode.nextElementSibling.value;
-    console.log(specialtyId);
-    var data = {
-        "actionType": "specialty",
-        "action": "modify_specialty",
-        "specialty_id": specialtyId
-    };
-}
+$("#modify_specialty_image").change((input_event) => {
+    var file = input_event.target.files[0];
+    console.log(file);
+    if (file !== undefined && file !== null) {
+        var reader = new FileReader();
+        reader.addEventListener("load", (reader_event) => {
+            document.querySelector("#modify_specialty_image_preview > img").src = reader_event.target.result;
+        })
+        reader.readAsDataURL(file);
+        document.querySelector("#modify_specialty_image").value = "";
+    }
+})

@@ -25,7 +25,7 @@ public class GoodsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
-        response.sendRedirect("./seller/goods_page.html");
+        response.sendRedirect("./seller/goods_page.jsp");
     }
 
     @Override
@@ -58,6 +58,11 @@ public class GoodsServlet extends HttpServlet {
             specialtyService.getSpecialty(data, json);
         } else if (action.equals("delete_specialty")) {
             specialtyService.deleteSpecialty(data, json);
+        } else if (action.equals("modify_specialty")) {
+            specialtyService.modifySpeicialty(data, json);
+        } else {
+            json.put("resCode", "G0001");
+            json.put("Information", "´íÎó²Ù×÷");
         }
     }
 

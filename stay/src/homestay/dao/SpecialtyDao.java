@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import sun.misc.BASE64Decoder;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -37,6 +38,7 @@ public class SpecialtyDao {
             out.write(buffer);
             out.flush();
             out.close();
+            showDebug("[base64ToImage]", "image saved to " + filepath);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -46,7 +48,7 @@ public class SpecialtyDao {
         String resCode = "00000";
         String info = "success";
         DB db = new DB("group1");
-        String username = data.getParam().has("username") ? "" : data.getParam().getString("username");
+        String username = data.getParam().has("username") ? data.getParam().getString("username") : "";
         // id: GoodsSpecialty + timestamp
         String specialty_id = "GS" + Long.toString(new Date().getTime());
         String specialty_name = data.getParam().getString("specialty_name");
@@ -89,7 +91,7 @@ public class SpecialtyDao {
             Map map = new HashMap();
             for (int i = 0; i < fieldCount; i++) {
                 String key = resMetaData.getColumnName(i + 1);
-                String value = res.getString(resMetaData.getColumnName(i + 1));
+                String value = res.getString(key);
                 map.put(key, value);
                 showDebug("[getSpecialty]", key + ": " + value);
             }
@@ -103,7 +105,57 @@ public class SpecialtyDao {
     }
 
     public void getSpecialtyById(String specialtyId, JSONObject json) throws JSONException, SQLException {
+        String resCode = "00000";
+        String info = "success";
+        DB db = new DB("group1");
+        String sql = "Select * From specialty Where specialty_id='" + specialtyId + "'";
+        showDebug("[getSpecialtyById]", "sql: " + sql);
+        ResultSet res = db.executeQuery(sql);
+        ResultSetMetaData resMetadata = res.getMetaData();
+        int fieldCount = resMetadata.getColumnCount();
+        Map map = new HashMap();
+        while (res.next()) {
+            for (int i = 0; i < fieldCount; i++) {
+                String key = resMetadata.getColumnName(i + 1);
+                String value = res.getString(key);
+                map.put(key, value);
+                showDebug("[getSpecialty]", key + ": " + value);
+            }
+        }
+        if (map.isEmpty()) {
+            resCode = "GS001";
+            info = "特产不存在";
+        }
+        res.close();
+        db.close();
+        json.put("resCode", resCode);
+        json.put("getSpecialtyInfo", info);
+        json.put("specialty", map);
+    }
 
+    public void modifySpecialty(Data data, JSONObject json) throws JSONException, SQLException, IOException {
+        DB db = new DB("group1");
+        String resCode = "00000";
+        String info = "success";
+        String specialtyId = data.getParam().getString("specialty_id");
+        String specialtyName = data.getParam().getString("specialty_name");
+        double price = data.getParam().getDouble("price");
+        int num = data.getParam().getInt("num");
+        String imageurl = data.getParam().getString("imageurl");
+        String imagePath = IMAGE_DIR + specialtyId + ".png";
+        base64ToImage(imageurl, imagePath);
+        String sql = "Update specialty Set ";
+        String values = String.format(
+                "specialty_name='%s', price='%f', num='%d' Where specialty_id='%s'",
+                specialtyName,
+                price,
+                num,
+                specialtyId
+        );
+        sql += values;
+        db.executeUpdate(sql);
+        json.put("resCode", resCode);
+        json.put("modifySpecialtyInfo", info);
     }
 
     public void deleteSpecialty(Data data, JSONObject json) throws JSONException, SQLException {
@@ -112,13 +164,19 @@ public class SpecialtyDao {
         String info = "success";
         if (data.getParam().has("specialty_id")) {
             String specialtyId = data.getParam().getString("specialty_id");
-            String sql = "Delete * From specialty Where specialty_id='" + specialtyId + "'";
+            String imagePath = IMAGE_DIR + specialtyId + ".png";
+            File originImage = new File(imagePath);
+            if (originImage.delete()) {
+                showDebug("[deleteSpecialty]", "该商品图片已一同删除");
+            }
+            String sql = "Delete From specialty Where specialty_id='" + specialtyId + "'";
             showDebug("[deleteSpecialty]", "sql: " + sql);
             db.executeUpdate(sql);
         } else {
             resCode = "GS001";
-            info = "商品不存在";
+            info = "特产不存在";
         }
+        db.close();
         json.put("resCode", resCode);
         json.put("deleteSpecialtyInfo", info);
     }

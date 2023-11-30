@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -1575,7 +1576,7 @@
                                                 <div class="basic-form">
                                                     <form action="" enctype="multipart/form-data" id="specialty_form"
                                                           name="specialty_form" method="post">
-                                                        <div class="mb-3 row clearfix">
+                                                        <div class="mb-3 row">
                                                             <label class="col-sm-3 col-form-label-lg">商品名称</label>
                                                             <div class="col-sm-9">
                                                                 <input type="text" class="form-control border-light"
@@ -1583,7 +1584,7 @@
                                                                        name="specialty_name">
                                                             </div>
                                                         </div>
-                                                        <div class="mb-3 row clearfix">
+                                                        <div class="mb-3 row">
                                                             <label class="col-sm-3 col-form-label-lg">价格</label>
                                                             <div class="col-sm-9">
                                                                 <input type="text" class="form-control border-light"
@@ -1591,7 +1592,7 @@
                                                                        name="specialty_price">
                                                             </div>
                                                         </div>
-                                                        <div class="mb-3 row clearfix">
+                                                        <div class="mb-3 row">
                                                             <label class="col-sm-3 col-form-label-lg">数量</label>
                                                             <div class="col-sm-9">
                                                                 <input type="text" class="form-control border-light"
@@ -1698,6 +1699,8 @@
 
 
 </div>
+<%@ include file="modals/delete_modal.jsp" %>
+<%@ include file="modals/modify_modal.jsp" %>
 <!--**********************************
     Main wrapper end
 ***********************************-->
