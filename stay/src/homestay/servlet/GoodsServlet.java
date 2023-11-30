@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet("/seller")
 public class GoodsServlet extends HttpServlet {
@@ -42,17 +43,21 @@ public class GoodsServlet extends HttpServlet {
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().println(json);
-        } catch (JSONException e) {
+        } catch (JSONException | SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private void dispatchSpecialtyAction(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, IOException {
+    private void dispatchSpecialtyAction(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, IOException, SQLException {
         SpecialtyService specialtyService = new SpecialtyService();
         String action = data.getParam().getString("action");
         showDebug("[dispatchSpecialtyAction]", "action: " + action);
         if (action.equals("add_specialty")) {
             specialtyService.addSpecialty(data, json);
+        } else if (action.equals("get_specialty")) {
+            specialtyService.getSpecialty(data, json);
+        } else if (action.equals("delete_specialty")) {
+            specialtyService.deleteSpecialty(data, json);
         }
     }
 

@@ -63,3 +63,7 @@ div:has(> label#specialty_image_preview) > .img_box > img {
     font-size: 180px;
     cursor: pointer;
 }
+
+.img_preview {
+    width: 100%;
+}
