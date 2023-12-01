@@ -57,7 +57,8 @@ public class DB {
         }
         return resultset;
     }
-    public void executeUpdate(String sql){
+
+    public void executeUpdate(String sql) {
         try {
             statement.executeUpdate(sql);
         } catch (SQLException e) {

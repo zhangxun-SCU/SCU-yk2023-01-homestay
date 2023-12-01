@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,7 +34,7 @@
 
 </head>
 
-<body>
+<body onload="onLoadFunction();">
 
 <!--*******************
     Preloader start
@@ -1575,7 +1576,7 @@
                                                 <div class="basic-form">
                                                     <form action="" enctype="multipart/form-data" id="specialty_form"
                                                           name="specialty_form" method="post">
-                                                        <div class="mb-3 row clearfix">
+                                                        <div class="mb-3 row">
                                                             <label class="col-sm-3 col-form-label-lg">商品名称</label>
                                                             <div class="col-sm-9">
                                                                 <input type="text" class="form-control border-light"
@@ -1583,7 +1584,7 @@
                                                                        name="specialty_name">
                                                             </div>
                                                         </div>
-                                                        <div class="mb-3 row clearfix">
+                                                        <div class="mb-3 row">
                                                             <label class="col-sm-3 col-form-label-lg">价格</label>
                                                             <div class="col-sm-9">
                                                                 <input type="text" class="form-control border-light"
@@ -1591,7 +1592,7 @@
                                                                        name="specialty_price">
                                                             </div>
                                                         </div>
-                                                        <div class="mb-3 row clearfix">
+                                                        <div class="mb-3 row">
                                                             <label class="col-sm-3 col-form-label-lg">数量</label>
                                                             <div class="col-sm-9">
                                                                 <input type="text" class="form-control border-light"
@@ -1599,6 +1600,15 @@
                                                                        name="specialty_num">
                                                             </div>
                                                         </div>
+                                                        <!--                                                        <div class="mb-3 row">-->
+                                                        <!--                                                            <label class="col-sm-3 col-form-label-lg">商品描述</label>-->
+                                                        <!--                                                            <div class="col-sm-9">-->
+                                                        <!--                                                                <textarea class="form-control" rows="4"-->
+                                                        <!--                                                                          id="specialty_description"-->
+                                                        <!--                                                                          name="specialty_description">-->
+                                                        <!--                                                                </textarea>-->
+                                                        <!--                                                            </div>-->
+                                                        <!--                                                        </div>-->
                                                         <div class="mb-3 row clearfix">
                                                             <div class="mb-3 col-md-12">
                                                                 <label class="col-form-label-lg">商品图片</label>
@@ -1625,63 +1635,8 @@
                                                         </div>
                                                     </form>
                                                 </div>
-                                                <div class="profile-uoloaded-post border-bottom-1 pb-5">
-                                                    <img src="../assets/images/profile/8.jpg" alt=""
-                                                         class="img-fluid w-100 rounded">
-                                                    <a class="post-title" href="post-details.html"><h3
-                                                            class="text-black">Collection of textile samples lay
-                                                        spread</h3></a>
-                                                    <p>A wonderful serenity has take possession of my entire soul like
-                                                        these sweet morning of spare which enjoy whole heart.A wonderful
-                                                        serenity has take possession of my entire soul like these sweet
-                                                        morning
-                                                        of spare which enjoy whole heart.</p>
-                                                    <button class="btn btn-primary me-2"><span class="me-2"><i
-                                                            class="fa fa-heart"></i></span>Like
-                                                    </button>
-                                                    <button class="btn btn-secondary" data-bs-toggle="modal"
-                                                            data-bs-target="#replyModal"><span class="me-2"><i
-                                                            class="fa fa-reply"></i></span>Reply
-                                                    </button>
-                                                </div>
-                                                <div class="profile-uoloaded-post border-bottom-1 pb-5">
-                                                    <img src="../assets/images/profile/9.jpg" alt=""
-                                                         class="img-fluid w-100 rounded">
-                                                    <a class="post-title" href="post-details.html"><h3
-                                                            class="text-black">Collection of textile samples lay
-                                                        spread</h3></a>
-                                                    <p>A wonderful serenity has take possession of my entire soul like
-                                                        these sweet morning of spare which enjoy whole heart.A wonderful
-                                                        serenity has take possession of my entire soul like these sweet
-                                                        morning
-                                                        of spare which enjoy whole heart.</p>
-                                                    <button class="btn btn-primary me-2"><span class="me-2"><i
-                                                            class="fa fa-heart"></i></span>Like
-                                                    </button>
-                                                    <button class="btn btn-secondary" data-bs-toggle="modal"
-                                                            data-bs-target="#replyModal"><span class="me-2"><i
-                                                            class="fa fa-reply"></i></span>Reply
-                                                    </button>
-                                                </div>
-                                                <div class="profile-uoloaded-post pb-3">
-                                                    <img src="../assets/images/profile/8.jpg" alt=""
-                                                         class="img-fluid w-100 rounded">
-                                                    <a class="post-title" href="post-details.html"><h3
-                                                            class="text-black">Collection of textile samples lay
-                                                        spread</h3></a>
-                                                    <p>A wonderful serenity has take possession of my entire soul like
-                                                        these sweet morning of spare which enjoy whole heart.A wonderful
-                                                        serenity has take possession of my entire soul like these sweet
-                                                        morning
-                                                        of spare which enjoy whole heart.</p>
-                                                    <button class="btn btn-primary me-2"><span class="me-2"><i
-                                                            class="fa fa-heart"></i></span>Like
-                                                    </button>
-                                                    <button class="btn btn-secondary" data-bs-toggle="modal"
-                                                            data-bs-target="#replyModal"><span class="me-2"><i
-                                                            class="fa fa-reply"></i></span>Reply
-                                                    </button>
-                                                </div>
+                                            </div>
+                                            <div class="row" id="specialty_list">
                                             </div>
                                         </div>
                                     </div>
@@ -1744,6 +1699,8 @@
 
 
 </div>
+<%@ include file="modals/delete_modal.jsp" %>
+<%@ include file="modals/modify_modal.jsp" %>
 <!--**********************************
     Main wrapper end
 ***********************************-->
