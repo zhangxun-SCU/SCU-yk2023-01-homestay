@@ -35,7 +35,7 @@
                         <div class="col-xl-12">
                             <div class="auth-form">
                                 <div class="text-center mb-3">
-                                    <a href="index.html"><img src="images/logo-full.png" alt=""></a>
+                                    <a href="index.html"><img src="./../assets/images/logo-full.png" alt=""></a>
                                 </div>
                                 <h4 class="text-center mb-4">Sign in your account</h4>
                                 <form>
@@ -123,7 +123,7 @@
             $('#login_btn').addClass('disabled');
         }
     }, 500))
-
+    let reg = new RegExp(/\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/, 'g');
     function flushVerifyCode() {
         axios({
             type: 'get',
@@ -198,8 +198,6 @@
         }
         return true;
     }
-
-
 </script>
 </body>
 </html>

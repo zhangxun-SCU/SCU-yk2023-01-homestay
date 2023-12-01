@@ -33,7 +33,7 @@
                         <div class="col-xl-12">
                             <div class="auth-form">
                                 <div class="text-center mb-3">
-                                    <a href="index.html"><img src="images/logo-full.png" alt=""></a>
+                                    <a href="index.html"><img src="./../assets/images/logo-full.png" alt=""></a>
                                 </div>
                                 <h4 class="text-center mb-4">Sign up your account</h4>
                                 <form>
@@ -51,7 +51,7 @@
                                             <label class="mb-1"><strong>邮件验证码</strong></label>
                                             <div class="d-flex justify-content-between">
                                                 <input type="text" class="form-control w-75" id="email_verify_code">
-                                                <button type="button" class="btn light btn-primary" id="send_email_btn">
+                                                <button type="button" class="btn light btn-primary disabled" id="send_email_btn">
                                                     发送
                                                 </button>
                                             </div>
@@ -121,6 +121,13 @@
             $('#register_btn').addClass('disabled');
         }
         console.log(111);
+    }, 200));
+    $('#register_email').on('keyup', debounce(() => {
+        if(emailInput()) {
+            sendEmailBtn.removeClass('disabled');
+        } else {
+            sendEmailBtn.addClass('disabled');
+        }
     }, 200));
 
     /**

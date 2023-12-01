@@ -3,3 +3,4 @@ stay/web/WEB-INF/lib/
 *.properties
 stay/web/WEB-INF/classes/
 .idea/
+*.iml
