@@ -1,5 +1,6 @@
 package homestay.utils;
 
+import homestay.dao.Data;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -15,7 +16,7 @@ public class JwtUtil {
         String jwt = Jwts.builder()
                 .setClaims(claims)
                 .signWith(SignatureAlgorithm.HS256, "ScuStay")
-                .setExpiration(new Date(expire))
+                .setExpiration(new Date(System.currentTimeMillis() + expire))
                 .compact();
         return jwt;
     }
@@ -23,7 +24,7 @@ public class JwtUtil {
     public static Claims parseJwt(String jwt) {
         Claims claims = Jwts.parser()
                 .setSigningKey(signKey)
-                .parseClaimsJwt(jwt)
+                .parseClaimsJws(jwt)
                 .getBody();
         return claims;
     }

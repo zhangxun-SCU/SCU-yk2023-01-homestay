@@ -108,6 +108,7 @@
 <script src="./../assets/js/axios.min.js"></script>
 <script src="./../assets/js/utils/throttle.js"></script>
 <script src="./../assets/js/utils/debounce.js"></script>
+<script src="./../assets/js/utils/storage.js"></script>
 <script>
 
 
@@ -151,7 +152,6 @@
         userLoginData.rememberMe = $('#remember_me').get(0).checked;
         console.log("user login data", userLoginData);
         $.post("/login", userLoginData, res => {
-            console.log("login res", res);
             if (res.resCode === "L0001") {
                 sweetAlert({
                     type: "error",
@@ -170,6 +170,9 @@
                 });
             } else if(res.resCode ===  '00000') {
                 swal("success", "登录成功", "success");
+                let storage = new Storage("localStorage");
+                window.location.href="../seller/goods_page.jsp"
+                storage.set("user_info", JSON.parse(window.atob(res.token.split('.')[1])))
             }
         });
     }

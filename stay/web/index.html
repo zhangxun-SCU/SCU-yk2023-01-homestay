@@ -89,17 +89,13 @@
 <script src="./assets/js/styleSwitcher.js"></script>
 
 <script>
-  const login = () => {
-    /** 数据校验 **/
-    const userLoginData = {};
-    userLoginData.email = $('#user_email').val();
-    userLoginData.password = $('#user_password').val();
-    userLoginData.rememberMe = $('#remember_me').get(0).checked;
-    console.log(userLoginData);
-    $.post("/login", userLoginData, (res) => {
-      console.log("login")
-    })
-  }
+  $.ajax({
+    headers: {
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6Inh1biIsImV4cCI6MTcwMTQ3NDMxM30.n501HVNygdUTpPYIM9DoG9MFG-P5y06RSnYiViGzXzk"
+    },
+    type: 'GET',
+    url: "/frame/frame_blank.jsp"
+  })
 </script>
 </body>
 </html>

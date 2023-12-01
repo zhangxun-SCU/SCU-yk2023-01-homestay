@@ -4,10 +4,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -36,7 +33,12 @@ public class LoginServlet extends HttpServlet {
             VerifyService imgVerifyService = new VerifyService();
             if(imgVerifyService.checkCode(data, serverCode, resJson)) {
                // 图形验证码正确
-                loginService.checkLogin(data, serverCode, resJson);
+                if(loginService.checkLogin(data, serverCode, resJson)) {
+                    // 登录成功
+                    Cookie cookie = new Cookie("token", resJson.getString("token"));
+                    cookie.setMaxAge(60*60*24);
+                    resp.addCookie(cookie);
+                }
             }
             // 返回
             resp.setContentType("application/json; charset=UTF-8");
@@ -48,6 +50,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.getWriter().println(111);
+        resp.setContentType("text/html; charset=UTF-8");
+        resp.getWriter().println("login");
     }
 }
