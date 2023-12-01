@@ -2,6 +2,7 @@ package homestay.service;
 
 import homestay.dao.Data;
 import homestay.dao.UserDao;
+import homestay.entity.User;
 import homestay.utils.EmailUtil;
 import org.apache.commons.mail.EmailException;
 import org.json.JSONException;
@@ -17,8 +18,8 @@ public class UserService {
         // 取数据
         String id = data.getParam().getString("id");
         // 检查重复id
-        JSONObject attemptUser = dao.queryUserById(id);
-        if(attemptUser.length() != 0){
+        User attemptUser = dao.queryUserById(id);
+        if(attemptUser.id != null){
            // 存在相同id
             resJson.put("resCode", "R0001");
             resJson.put("registerInfo", "error: duplicate usernames");

@@ -1,29 +1,34 @@
 package homestay.dao;
 
+import homestay.entity.User;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import javax.jws.soap.SOAPBinding;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 public class UserDao {
 
-    public JSONObject queryUserById(String id) throws SQLException, JSONException {
+    public User queryUserById(String id) throws SQLException, JSONException {
         JSONObject obj = new JSONObject();
+        User user = new User();
         String sql = "SELECT * FROM user_account WHERE user_id='" + id + "'";
         System.out.println("queryUserById sql: " + sql);
         DB db = new DB("group1");
         ResultSet rs = db.executeQuery(sql);
         while (rs.next()) {
-            obj.put("user_id", rs.getString("user_id"));
-            obj.put("user_password", rs.getString("user_password"));
-            obj.put("email", rs.getString("email"));
-            obj.put("priority", rs.getString("priority"));
+            user.id = rs.getString("user_id");
+            user.password = rs.getString("password");
+            user.email = rs.getString("email");
+            user.priority =  rs.getString("priority");
+            user.permission = rs.getString("permission");
         }
         rs.close();
         db.close();
-        return obj;
+        return user;
     }
 
     public JSONObject queryUserByKey(String key, String value) throws SQLException, JSONException {
