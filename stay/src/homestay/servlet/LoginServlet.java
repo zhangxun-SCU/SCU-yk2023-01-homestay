@@ -17,7 +17,6 @@ import homestay.service.VerifyService;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 

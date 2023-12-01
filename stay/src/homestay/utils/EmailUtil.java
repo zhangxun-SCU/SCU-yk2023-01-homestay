@@ -19,7 +19,6 @@ public class EmailUtil {
         email.setFrom(fromAddr);
         email.setAuthentication(fromAddr,password);
 
-
         email.setSubject("测试");  //设置发送主题
         email.setMsg("验证码" + info);  //设置发送内容
         email.send();  //进行发送

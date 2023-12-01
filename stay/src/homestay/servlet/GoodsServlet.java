@@ -19,7 +19,7 @@ public class GoodsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
-        response.sendRedirect("./seller/goods_page.html");
+        response.sendRedirect("../seller/goods_page.html");
     }
 
     @Override
