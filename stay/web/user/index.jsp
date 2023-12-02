@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: cw
+  Date: 2023/12/2
+  Time: 17:39
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en" class="h-100">
 
 <head>
@@ -206,3 +213,11 @@
 </script>
 </body>
 </html>
+
+<%--<%--%>
+<%--    String info = request.getAttribute("msg").toString();--%>
+<%--    System.out.println(info);--%>
+<%--    if(info.equals("登录已过期")) {--%>
+<%--        response.getWriter().println("登录已过期");--%>
+<%--    }--%>
+<%--%>--%>

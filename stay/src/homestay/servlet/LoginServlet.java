@@ -50,7 +50,8 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html; charset=UTF-8");
-        resp.getWriter().println("login");
+//        resp.setContentType("text/html; charset=UTF-8");
+//        resp.getWriter().println("login");
+        resp.sendRedirect("/index.html");
     }
 }

@@ -13,10 +13,27 @@ import java.util.Map;
 public class UserDao {
 
     public User queryUserById(String id) throws SQLException, JSONException {
-        JSONObject obj = new JSONObject();
         User user = new User();
         String sql = "SELECT * FROM user_account WHERE user_id='" + id + "'";
         System.out.println("queryUserById sql: " + sql);
+        DB db = new DB("group1");
+        ResultSet rs = db.executeQuery(sql);
+        while (rs.next()) {
+            user.id = rs.getString("user_id");
+            user.password = rs.getString("user_password");
+            user.email = rs.getString("email");
+            user.priority =  rs.getString("priority");
+            user.permission = rs.getString("permission");
+        }
+        rs.close();
+        db.close();
+        return user;
+    }
+
+    public User queryUserByKey(String key, String value) throws SQLException, JSONException {
+        User user = new User();
+        String sql = "SELECT * FROM user_account WHERE " +  key + "='" + value + "'";
+        System.out.println("queryUserByKey sql: " + sql);
         DB db = new DB("group1");
         ResultSet rs = db.executeQuery(sql);
         while (rs.next()) {
@@ -29,23 +46,6 @@ public class UserDao {
         rs.close();
         db.close();
         return user;
-    }
-
-    public JSONObject queryUserByKey(String key, String value) throws SQLException, JSONException {
-        JSONObject obj = new JSONObject();
-        String sql = "SELECT * FROM user_account WHERE " +  key + "='" + value + "'";
-        System.out.println("queryUserByKey sql: " + sql);
-        DB db = new DB("group1");
-        ResultSet rs = db.executeQuery(sql);
-        while (rs.next()) {
-            obj.put("user_id", rs.getString("user_id"));
-            obj.put("user_password", rs.getString("user_password"));
-            obj.put("email", rs.getString("email"));
-            obj.put("priority", rs.getString("priority"));
-        }
-        rs.close();
-        db.close();
-        return obj;
     }
 
     public void addUser(Data data) throws JSONException {

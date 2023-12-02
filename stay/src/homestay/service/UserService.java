@@ -35,8 +35,8 @@ public class UserService {
         UserDao dao = new UserDao();
         String email = data.getParam().getString("email");
         // 检查是否存在
-        JSONObject attemptUser = dao.queryUserByKey("email", email);
-        if(attemptUser.length() == 0) {
+        User attemptUser = dao.queryUserByKey("email", email);
+        if(attemptUser.email == null) {
             // 不存在此用户
             resJson.put("resCode", "S0001");
             resJson.put("resetInfo", "user does not exist");

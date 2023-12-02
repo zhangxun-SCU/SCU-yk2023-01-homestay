@@ -16,7 +16,7 @@
 <%--  preloader start  --%>
 <%@include file="frame_preloader.jsp"%>
 <%--  preloader end  --%>
-<div id="main-warpper">
+<div id="main-wrapper">
     <%--  top-menu start  --%>
     <%@include file="frame_topmenu.jsp"%>
     <%--  top-menu end  --%>

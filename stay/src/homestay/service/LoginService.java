@@ -40,7 +40,7 @@ public class LoginService {
         resJson.put("loginInfo", "success");
         HashMap<String, Object> claims = new HashMap<String, Object>();
         claims.put("id", id);
-        resJson.put("token", JwtUtil.generateJwt(claims));
+        resJson.put("token", JwtUtil.generateJwt(claims, user.password));
         return true;
     }
 }
