@@ -1,6 +1,7 @@
 package homestay.filter;
 
 import homestay.utils.JwtUtil;
+import homestay.utils.UserUtil;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -64,6 +65,8 @@ public class LoginCheckFilter implements Filter {
             req.setAttribute("msg", "登录已过期");
             req.getRequestDispatcher("/user/login.html").forward(req, resp);
         }
+        System.out.println(UserUtil.getUserId(req));
+
         filterChain.doFilter(req, resp);
     }
 

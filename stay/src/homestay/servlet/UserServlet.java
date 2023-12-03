@@ -46,7 +46,6 @@ public class UserServlet extends HttpServlet {
                 }
             }
 
-
             // 返回
             resp.setContentType("application/json; charset=UTF-8");
             resp.getWriter().println(resJson);

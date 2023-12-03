@@ -101,9 +101,12 @@
 <script src="./../assets/js/styleSwitcher.js"></script>
 
 <script src="./../assets/js/axios.min.js"></script>
+<script src="./../assets/js/md5.min.js"></script>
 
 <script src="../assets/js/utils/throttle.js"></script>
 <script src="./../assets/js/utils/debounce.js"></script>
+<script src="./../assets/js/utils/encrypt.js"></script>
+
 <script>
     /**
      *  事件绑定
@@ -180,7 +183,7 @@
         userRegisterData.imgVerifyCode = $('#verify_code').val();
         userRegisterData.id = $('#register_id').val();
         userRegisterData.email = $('#register_email').val();
-        userRegisterData.password = $('#register_password').val();
+        userRegisterData.password = encrypt($('#register_password').val());
         userRegisterData.emailVerifyCode = $('#email_verify_code').val();
         console.log(userRegisterData)
         $.post('/register', userRegisterData, res => {

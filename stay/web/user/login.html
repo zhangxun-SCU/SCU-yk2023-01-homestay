@@ -104,11 +104,12 @@
 
 <script src="./../assets/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
 
-
+<script src="./../assets/js/md5.min.js"></script>
 <script src="./../assets/js/axios.min.js"></script>
 <script src="./../assets/js/utils/throttle.js"></script>
 <script src="./../assets/js/utils/debounce.js"></script>
 <script src="./../assets/js/utils/storage.js"></script>
+<script src="./../assets/js/utils/encrypt.js"></script>
 <script>
 
 
@@ -148,7 +149,7 @@
         const userLoginData = {};
         userLoginData.imgVerifyCode = $('#verify_code').val();
         userLoginData.id = $('#user_id').val();
-        userLoginData.password = $('#user_password').val();
+        userLoginData.password = encrypt($('#user_password').val());
         userLoginData.rememberMe = $('#remember_me').get(0).checked;
         console.log("user login data", userLoginData);
         $.post("/login", userLoginData, res => {
