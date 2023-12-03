@@ -19,7 +19,8 @@ public class LoginCheckFilter implements Filter {
             "register",
             "verify",
             "index",
-            "assets"
+            "assets",
+            "email"
     };
 
     @Override
