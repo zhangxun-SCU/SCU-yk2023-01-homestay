@@ -59,7 +59,8 @@
                                             <label class="mb-1"><strong>邮件验证码</strong></label>
                                             <div class="d-flex justify-content-between">
                                                 <input type="text" class="form-control w-75" id="email_verify_code">
-                                                <button type="button" class="btn light btn-primary disabled" id="send_email_btn">
+                                                <button type="button" class="btn light btn-primary disabled"
+                                                        id="send_email_btn">
                                                     发送
                                                 </button>
                                             </div>
@@ -138,7 +139,7 @@
         console.log(111);
     }, 200));
     $('#register_email').on('keyup', debounce(() => {
-        if(emailInput()) {
+        if (emailInput()) {
             sendEmailBtn.removeClass('disabled');
         } else {
             sendEmailBtn.addClass('disabled');
@@ -161,7 +162,7 @@
                     }, '')
                 ));
         })
-    };
+    }
     flushVerifyCode();
 
 
@@ -200,7 +201,7 @@
         console.log(userRegisterData)
         $.post('/register', userRegisterData, res => {
             console.log('register res', res);
-            if(res.resCode === "V0001") {
+            if (res.resCode === "V0001") {
                 sweetAlert({
                     type: "error",
                     title: "图形验证码错误",
@@ -208,9 +209,9 @@
                     timer: 1e3,
                     showConfirmButton: !1
                 });
-            } else if(res.resCode === "R0001") {
+            } else if (res.resCode === "R0001") {
                 // id已被占用
-            } else if(res.resCode === "R0002") {
+            } else if (res.resCode === "R0002") {
                 sweetAlert({
                     type: "error",
                     title: "账户已存在",
