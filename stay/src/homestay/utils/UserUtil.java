@@ -25,6 +25,23 @@ public class UserUtil {
         }
     }
 
+    public static String getUserByKey(HttpServletRequest req, String key) {
+        String jwt = null;
+        Cookie[] cookies = req.getCookies();
+        for(Cookie cookie: cookies) {
+            if (cookie.getName().equals("token")) {
+                jwt = cookie.getValue();
+            }
+        }
+        try {
+            Claims claims = JwtUtil.parseJwt(jwt);
+            return claims.get(key).toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static String encrypt(String info) {
         return DigestUtils.md5Hex(info);
     }

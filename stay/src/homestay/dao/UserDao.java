@@ -1,6 +1,7 @@
 package homestay.dao;
 
 import homestay.entity.User;
+import homestay.utils.UserUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,7 +39,7 @@ public class UserDao {
         ResultSet rs = db.executeQuery(sql);
         while (rs.next()) {
             user.id = rs.getString("user_id");
-            user.password = rs.getString("password");
+            user.password = rs.getString("user_password");
             user.email = rs.getString("email");
             user.priority =  rs.getString("priority");
             user.permission = rs.getString("permission");
@@ -52,7 +53,7 @@ public class UserDao {
         String sql = "INSERT INTO user_account(user_id,user_password,email)";
         String id = data.getParam().getString("id");
         String email = data.getParam().getString("email");
-        String password = data.getParam().getString("password");
+        String password = UserUtil.encrypt(data.getParam().getString("password"));
         sql += "VALUES('" + id + "','" + password + "','" + email + "');";
         System.out.println("addUser sql: " + sql);
         DB db = new DB("group1");
@@ -63,7 +64,7 @@ public class UserDao {
     public void modifyUserInfo(Data data) throws JSONException {
         String id = data.getParam().has("resetId") ? data.getParam().getString("reset_id") : null;
         String email = data.getParam().getString("email");
-        String password = data.getParam().has("resetPassword") ? data.getParam().getString("resetPassword") : null;
+        String password = UserUtil.encrypt(data.getParam().has("resetPassword") ? data.getParam().getString("resetPassword") : null);
         String sql = "UPDATE user_account";
         boolean firstModify = true;
         if(id != null) {

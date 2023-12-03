@@ -17,6 +17,7 @@ public class UserService {
         UserDao dao = new UserDao();
         // 取数据
         String id = data.getParam().getString("id");
+        String email = data.getParam().getString("email");
         // 检查重复id
         User attemptUser = dao.queryUserById(id);
         if(attemptUser.id != null){
@@ -24,6 +25,13 @@ public class UserService {
             resJson.put("resCode", "R0001");
             resJson.put("registerInfo", "error: duplicate usernames");
            return false;
+        }
+        User attemptUserEmail = dao.queryUserByKey("email", email);
+        if(attemptUserEmail.email != null) {
+            // 已经有账号了
+            resJson.put("resCode", "R0002");
+            resJson.put("registerInfo", "error: account already exists");
+            return false;
         }
         dao.addUser(data);
         resJson.put("resCode", "00000");

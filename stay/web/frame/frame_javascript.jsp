@@ -14,6 +14,10 @@
 <script src="./../assets/js/styleSwitcher.js"></script>
 <script src="./../assets/js/utils/storage.js"></script>
 <script>
+    function getUserInfo() {
+        const token = getCookie("token")
+        return JSON.parse(window.atob(token.split('.')[1]))
+    }
     // $('#user_id').text(userInfo.id);
     // $('#to-profile').on('click', (event) => {
     //     event.preventDefault();
@@ -22,11 +26,10 @@
     //
     //     })
     // })
-    function getUserInfo() {
-        const token = getCookie("token")
-        return JSON.parse(window.atob(token.split('.')[1]))
-    }
-    const userInfo = getUserInfo();
+</script>
+<script>
+    /**
+     * top menu slider
+     */
 
-    console.log(userInfo)
 </script>

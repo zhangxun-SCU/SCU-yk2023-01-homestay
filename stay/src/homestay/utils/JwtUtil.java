@@ -26,7 +26,6 @@ public class JwtUtil {
                 .setSigningKey(signKey)
                 .parseClaimsJws(jwt)
                 .getBody();
-        System.out.println(claims);
         return claims;
     }
 }

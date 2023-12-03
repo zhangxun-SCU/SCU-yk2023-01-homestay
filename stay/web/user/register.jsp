@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: cw
+  Date: 2023/12/3
+  Time: 14:19
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en" class="h-100">
 
 <head>
@@ -20,7 +27,8 @@
     <!-- FAVICONS ICON -->
     <link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
     <link href="./../assets/css/style.css" rel="stylesheet">
-
+    <link href="./../assets/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="./../assets/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
 </head>
 
 <body class="vh-100">
@@ -111,7 +119,6 @@
 <script src="../assets/js/utils/throttle.js"></script>
 <script src="./../assets/js/utils/debounce.js"></script>
 <script src="./../assets/js/utils/encrypt.js"></script>
-
 <script>
     /**
      *  事件绑定
@@ -164,7 +171,7 @@
     function sendEmail() {
         let waitTime = 60;
         let userEmail = $('#register_email').val();
-        $.get(`/email?email=${userEmail}`, (res) => {
+        $.get(`/email?email=\${userEmail}`, (res) => {
             console.log("sendEmailRes");
             sendEmailBtn.addClass("disabled");
             sendEmailBtn.text(waitTime);
@@ -193,8 +200,24 @@
         console.log(userRegisterData)
         $.post('/register', userRegisterData, res => {
             console.log('register res', res);
-            if (res.email_verify_info === 'Invalid verification code') {
-                alert("邮箱验证码错误");
+            if(res.resCode === "V0001") {
+                sweetAlert({
+                    type: "error",
+                    title: "图形验证码错误",
+                    text: "请再次尝试",
+                    timer: 1e3,
+                    showConfirmButton: !1
+                });
+            } else if(res.resCode === "R0001") {
+                // id已被占用
+            } else if(res.resCode === "R0002") {
+                sweetAlert({
+                    type: "error",
+                    title: "账户已存在",
+                    text: "请直接登录",
+                    timer: 1e3,
+                    showConfirmButton: !1
+                });
             }
         })
     }

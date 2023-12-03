@@ -32,15 +32,7 @@ public class LoginCheckFilter implements Filter {
         HttpServletRequest req =(HttpServletRequest) servletRequest;
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
 
-        //        1. url
-        String url = req.getRequestURI().toString();
-        System.out.println("request url:" + url);
-        // 通过必要的请求
-        if(!this.isRequiringCheck(url)) {
-            filterChain.doFilter(req, resp);
-            return;
-        }
-        //        3. token check
+        //  先获取token
         String loginJwt = req.getHeader("token");
         if(loginJwt == null) {
             // 查看cookie是否有, cookie 有直接登录
@@ -50,6 +42,19 @@ public class LoginCheckFilter implements Filter {
                     loginJwt = cookies[i].getValue();
                 }
             }
+        }
+
+        //        1. url
+        String url = req.getRequestURI().toString();
+//        System.out.println("request url:" + url);
+        // 处理自动登录
+        if(url.equals("/") || url.contains("login")) {
+            if(autoLogin(req, resp, loginJwt)) {return;}
+        }
+        // 通过必要的请求
+        if(!this.isRequiringCheck(url)) {
+            filterChain.doFilter(req, resp);
+            return;
         }
         if(loginJwt == null) {
             req.setAttribute("msg", "登录已过期");
@@ -63,9 +68,8 @@ public class LoginCheckFilter implements Filter {
         } catch (Exception e) {
             e.printStackTrace();
             req.setAttribute("msg", "登录已过期");
-            req.getRequestDispatcher("/user/login.html").forward(req, resp);
+            req.getRequestDispatcher("/user/login.jsp").forward(req, resp);
         }
-        System.out.println(UserUtil.getUserId(req));
 
         filterChain.doFilter(req, resp);
     }
@@ -83,5 +87,25 @@ public class LoginCheckFilter implements Filter {
             }
         }
         return true;
+    }
+
+    private boolean autoLogin(HttpServletRequest req, HttpServletResponse resp, String jwt) {
+        String auto = UserUtil.getUserByKey(req, "auto");
+        if(auto == null || auto.equals("")) return false;
+        if(auto.equals("true")) {
+            // 自动登录
+            if(jwt != null && !jwt.equals("")) {
+                try {
+                    System.out.println(UserUtil.getUserId(req) + "auto login:" + auto);
+                    JwtUtil.parseJwt(jwt);
+                    resp.sendRedirect("/seller/goods_list.jsp");
+                    return true;
+                } catch (Exception e) {
+                    return false;
+                }
+            }
+            return false;
+        }
+        return false;
     }
 }

@@ -21,6 +21,7 @@ public class LoginService {
         UserDao dao = new UserDao();
         String id = data.getParam().getString("id");
         String inputPassword = data.getParam().getString("password");
+        String auto = data.getParam().getString("rememberMe");
         User user = dao.queryUserById(id);
         String realPassword = user.password;
         if(realPassword == null) {
@@ -29,6 +30,7 @@ public class LoginService {
             resJson.put("loginInfo", "error: user does not exist");
             return false;
         }
+        System.out.println("inputPassword: "+ inputPassword);
         if(!realPassword.equals(inputPassword)) {
             // 密码错误
             resJson.put("resCode", "L0001");
@@ -40,6 +42,7 @@ public class LoginService {
         resJson.put("loginInfo", "success");
         HashMap<String, Object> claims = new HashMap<String, Object>();
         claims.put("id", id);
+        claims.put("auto", auto);
         resJson.put("token", JwtUtil.generateJwt(claims, user.password));
         return true;
     }

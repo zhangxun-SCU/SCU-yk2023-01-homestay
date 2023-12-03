@@ -29,6 +29,7 @@ public class EmailService {
 
     public String sendEmail(Data data) throws JSONException, EmailException {
         String toAddr = data.getParam().getString("email");
+        System.out.println("toAddr" + toAddr);
         String emailVerifyCode = genEmailVerifyCode(default_digits);
         (new EmailUtil()).sendEmail(toAddr, emailVerifyCode);
         System.out.println(emailVerifyCode);
