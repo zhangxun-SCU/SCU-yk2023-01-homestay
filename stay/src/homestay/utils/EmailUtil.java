@@ -12,12 +12,12 @@ public class EmailUtil {
 
 
     public void sendEmail(String toAddr, String info) throws EmailException {
-        HtmlEmail email=new HtmlEmail();
+        HtmlEmail email = new HtmlEmail();
         email.setHostName(smtp_server);
         email.setCharset("utf-8");
         email.addTo(toAddr);
         email.setFrom(fromAddr);
-        email.setAuthentication(fromAddr,password);
+        email.setAuthentication(fromAddr, password);
 
         email.setSubject("测试");  //设置发送主题
         email.setMsg("验证码" + info);  //设置发送内容

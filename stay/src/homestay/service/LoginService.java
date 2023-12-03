@@ -7,6 +7,7 @@ import homestay.dao.Data;
 import homestay.dao.UserDao;
 import homestay.entity.User;
 import homestay.utils.JwtUtil;
+import homestay.utils.UserUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,18 +21,18 @@ public class LoginService {
     public Boolean checkLogin(Data data, String serverCode, JSONObject resJson) throws JSONException, SQLException {
         UserDao dao = new UserDao();
         String id = data.getParam().getString("id");
-        String inputPassword = data.getParam().getString("password");
+        String inputPassword = UserUtil.encrypt(data.getParam().getString("password"));
         String auto = data.getParam().getString("rememberMe");
         User user = dao.queryUserById(id);
         String realPassword = user.password;
-        if(realPassword == null) {
+        if (realPassword == null) {
             // 没有此用户
             resJson.put("resCode", "L0002");
             resJson.put("loginInfo", "error: user does not exist");
             return false;
         }
-        System.out.println("inputPassword: "+ inputPassword);
-        if(!realPassword.equals(inputPassword)) {
+        System.out.println("inputPassword: " + inputPassword);
+        if (!realPassword.equals(inputPassword)) {
             // 密码错误
             resJson.put("resCode", "L0001");
             resJson.put("loginInfo", "error: password incorrect");

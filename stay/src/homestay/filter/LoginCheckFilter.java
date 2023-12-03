@@ -30,15 +30,15 @@ public class LoginCheckFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest req =(HttpServletRequest) servletRequest;
+        HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
 
         //  先获取token
         String loginJwt = req.getHeader("token");
-        if(loginJwt == null) {
+        if (loginJwt == null) {
             // 查看cookie是否有, cookie 有直接登录
             Cookie[] cookies = req.getCookies();
-            for(int i = 0; i  < cookies.length; ++i) {
+            for (int i = 0; i < cookies.length; ++i) {
                 if (cookies[i].getName().equals("token")) {
                     loginJwt = cookies[i].getValue();
                 }
@@ -49,15 +49,17 @@ public class LoginCheckFilter implements Filter {
         String url = req.getRequestURI().toString();
 //        System.out.println("request url:" + url);
         // 处理自动登录
-        if(url.equals("/") || url.contains("login")) {
-            if(autoLogin(req, resp, loginJwt)) {return;}
+        if (url.equals("/") || url.contains("login")) {
+            if (autoLogin(req, resp, loginJwt)) {
+                return;
+            }
         }
         // 通过必要的请求
-        if(!this.isRequiringCheck(url)) {
+        if (!this.isRequiringCheck(url)) {
             filterChain.doFilter(req, resp);
             return;
         }
-        if(loginJwt == null) {
+        if (loginJwt == null) {
             req.setAttribute("msg", "登录已过期");
             req.getRequestDispatcher("/user/login.jsp").forward(req, resp);
             return;
@@ -81,9 +83,9 @@ public class LoginCheckFilter implements Filter {
     }
 
     boolean isRequiringCheck(String path) {
-        if(path.equals("/")) return false;
-        for(String checkPath: this.noCheckedPaths) {
-            if(path.contains(checkPath)) {
+        if (path.equals("/")) return false;
+        for (String checkPath : this.noCheckedPaths) {
+            if (path.contains(checkPath)) {
                 return false;
             }
         }
@@ -92,10 +94,10 @@ public class LoginCheckFilter implements Filter {
 
     private boolean autoLogin(HttpServletRequest req, HttpServletResponse resp, String jwt) {
         String auto = UserUtil.getUserByKey(req, "auto");
-        if(auto == null || auto.equals("")) return false;
-        if(auto.equals("true")) {
+        if (auto == null || auto.equals("")) return false;
+        if (auto.equals("true")) {
             // 自动登录
-            if(jwt != null && !jwt.equals("")) {
+            if (jwt != null && !jwt.equals("")) {
                 try {
                     System.out.println(UserUtil.getUserId(req) + "auto login:" + auto);
                     JwtUtil.parseJwt(jwt);

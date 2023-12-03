@@ -62,7 +62,7 @@ public class GoodsServlet extends HttpServlet {
             specialtyService.modifySpeicialty(data, json);
         } else {
             json.put("resCode", "G0001");
-            json.put("Information", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+            json.put("Information", "´íÎó²Ù×÷");
         }
     }
 
