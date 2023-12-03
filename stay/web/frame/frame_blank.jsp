@@ -9,28 +9,32 @@
 <html>
 <head>
     <title>Title</title>
-    <%@include file="./frame_style.jsp" %>
+    <%@include file="/frame/frame_style.jsp" %>
 </head>
 <body>
 
 <%--  preloader start  --%>
-<%@include file="frame_preloader.jsp"%>
+<%@include file="/frame/frame_preloader.jsp" %>
 <%--  preloader end  --%>
 <div id="main-wrapper">
     <%--  top-menu start  --%>
-    <%@include file="frame_topmenu.jsp"%>
+    <%@include file="/frame/frame_topmenu.jsp" %>
     <%--  top-menu end  --%>
 
     <%--  slider start  --%>
-    <%@include file="frame_slider.jsp"%>
+    <%@include file="/frame/frame_slider.jsp" %>
     <%--  slider end  --%>
 
-        <div class="content-body">
+    <div class="content-body">
 
-        </div>
+    </div>
+
+    <%--  footer start  --%>
+    <%@include file="/frame/frame_footer.jsp" %>
+    <%--  footer end  --%>
 </div>
 <%--  script start  --%>
-<%@include file="frame_javascript.jsp"%>
+<%@include file="/frame/frame_javascript.jsp" %>
 <%--  script end  --%>
 </body>
 </html>
