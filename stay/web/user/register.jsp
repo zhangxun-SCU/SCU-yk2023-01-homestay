@@ -41,7 +41,7 @@
                         <div class="col-xl-12">
                             <div class="auth-form">
                                 <div class="text-center mb-3">
-                                    <a href="index.html"><img src="./../assets/images/logo-full.png" alt=""></a>
+                                    <a href="/index.html"><img src="./../assets/images/logo-full.png" alt=""></a>
                                 </div>
                                 <h4 class="text-center mb-4">Sign up your account</h4>
                                 <form>
@@ -88,7 +88,7 @@
                                     </div>
                                 </form>
                                 <div class="new-account mt-3">
-                                    <p>Already have an account? <a class="text-primary" href="login.html">Sign in</a>
+                                    <p>Already have an account? <a class="text-primary" href="/user/login.jsp">Sign in</a>
                                     </p>
                                 </div>
                             </div>

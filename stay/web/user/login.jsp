@@ -42,7 +42,7 @@
                         <div class="col-xl-12">
                             <div class="auth-form">
                                 <div class="text-center mb-3">
-                                    <a href="index.html"><img src="./../assets/images/logo-full.png" alt=""></a>
+                                    <a href="/index.html"><img src="./../assets/images/logo-full.png" alt=""></a>
                                 </div>
                                 <h4 class="text-center mb-4">Sign in your account</h4>
                                 <form>
@@ -74,7 +74,7 @@
                                             </div>
                                         </div>
                                         <div class="mb-3">
-                                            <a href="forgot-password.html">Forgot Password?</a>
+                                            <a href="/user/forgot-password.html">Forgot Password?</a>
                                         </div>
                                     </div>
                                     <div class="text-center">
@@ -84,8 +84,13 @@
                                     </div>
                                 </form>
                                 <div class="new-account mt-3">
+                                    <<<<<<< HEAD
                                     <p>Don't have an account? <a class="text-primary" href="../user/register.html">Sign
                                         up</a>
+                                        =======
+                                    <p>Don't have an account? <a class="text-primary" href="/user/register.jsp">Sign
+                                        up</a>
+                                        >>>>>>> 6d6e92f808f72ec5d9f80fecd2cb45e21d8485a3
                                     </p>
                                 </div>
                             </div>
@@ -218,7 +223,9 @@
 </body>
 </html>
 <%--java脚本--%>
-<%if (request.getAttribute("msg").toString().equals("登录已过期")) {%>
+<%
+    Object msg = request.getAttribute("msg");
+    if (msg != null && msg.toString().equals("登录已过期")) {%>
 <script>
     sweetAlert({
         title: "登录已过期",
