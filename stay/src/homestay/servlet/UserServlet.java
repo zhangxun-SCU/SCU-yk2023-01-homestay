@@ -54,7 +54,6 @@ public class UserServlet extends HttpServlet {
         }
     }
 
-
     // 修改密码
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -82,4 +81,5 @@ public class UserServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
+
 }

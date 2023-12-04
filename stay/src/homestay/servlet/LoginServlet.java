@@ -14,7 +14,7 @@ import homestay.service.VerifyService;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-@WebServlet("/login")
+@WebServlet({"/login", "/logout"})
 public class LoginServlet extends HttpServlet {
 
     private Data data = null;
@@ -48,10 +48,14 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
+    // logout
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        resp.setContentType("text/html; charset=UTF-8");
-//        resp.getWriter().println("login");
-        resp.sendRedirect("/index.html");
+        // 删除cookie
+        Cookie cookie = new Cookie("token", null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        resp.addCookie(cookie);
+        resp.sendRedirect("/user/login.jsp");
     }
 }

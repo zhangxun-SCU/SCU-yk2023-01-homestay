@@ -17,6 +17,8 @@ public class LoginCheckFilter implements Filter {
     private String[] noCheckedPaths = {
             "login",
             "register",
+            "forgot-password",
+            "reset",
             "verify",
             "index",
             "assets",
@@ -38,9 +40,11 @@ public class LoginCheckFilter implements Filter {
         if(loginJwt == null) {
             // 查看cookie是否有, cookie 有直接登录
             Cookie[] cookies = req.getCookies();
-            for(int i = 0; i  < cookies.length; ++i) {
-                if (cookies[i].getName().equals("token")) {
-                    loginJwt = cookies[i].getValue();
+            if(cookies != null) {
+                for(int i = 0; i  < cookies.length; ++i) {
+                    if (cookies[i].getName().equals("token")) {
+                        loginJwt = cookies[i].getValue();
+                    }
                 }
             }
         }
@@ -57,7 +61,7 @@ public class LoginCheckFilter implements Filter {
             filterChain.doFilter(req, resp);
             return;
         }
-        if(loginJwt == null) {
+        if(loginJwt == null || loginJwt.equals("")) {
             req.setAttribute("msg", "登录已过期");
             req.getRequestDispatcher("/user/login.jsp").forward(req, resp);
             return;
