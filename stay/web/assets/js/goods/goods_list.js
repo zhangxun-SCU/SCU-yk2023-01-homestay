@@ -3,8 +3,8 @@ function onLoadFunction() {
 }
 
 function getAllSpecialty() {
-    var owner = "xun";
-    var url = "/stay/seller";
+    var owner = getUserInfo().id;
+    var url = "/seller";
     var data = {
         "actionType": "specialty",
         "action": "get_specialty",
@@ -71,7 +71,7 @@ function initButtons() {
 
 function showDeleteModal(specialtyId) {
     $("#deleteSpecialtyModalCenter #deleteSpecialtyConfirmButton").click((e) => {
-        var url = "/stay/seller";
+        var url = "/seller";
         console.log(specialtyId);
         var data = {
             "actionType": "specialty",
@@ -95,7 +95,7 @@ function showDeleteModal(specialtyId) {
 function showModifyModal(specialtyId) {
     getSpecialtyByID(specialtyId);
     $("#modifySpecialtyModelCenter #modifySpecialtyConfirmButton").click((e) => {
-        var url = "/stay/seller";
+        var url = "/seller";
         console.log(specialtyId);
         var data = {
             "actionType": "specialty",
@@ -124,7 +124,7 @@ function showModifyModal(specialtyId) {
 }
 
 function getSpecialtyByID(specialtyId) {
-    var url = "/stay/seller";
+    var url = "/seller";
     console.log(specialtyId);
     var data = {
         "actionType": "specialty",

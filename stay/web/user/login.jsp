@@ -84,13 +84,8 @@
                                     </div>
                                 </form>
                                 <div class="new-account mt-3">
-                                    <<<<<<< HEAD
-                                    <p>Don't have an account? <a class="text-primary" href="../user/register.html">Sign
-                                        up</a>
-                                        =======
                                     <p>Don't have an account? <a class="text-primary" href="/user/register.jsp">Sign
                                         up</a>
-                                        >>>>>>> 6d6e92f808f72ec5d9f80fecd2cb45e21d8485a3
                                     </p>
                                 </div>
                             </div>

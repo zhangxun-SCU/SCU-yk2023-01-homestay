@@ -29,13 +29,13 @@ $("#specialty_image").change((input_event) => {
 })
 
 $("#add_specialty_button").click((e) => {
-    var url = "/stay/seller";
+    var url = "/seller";
     console.log(url);
     // TODO: 怎么知道是哪个用户上架的商品呢？
     var data = {
         "actionType": "specialty",
         "action": "add_specialty",
-        "username": "xun",
+        "username": getUserInfo().id,
         "specialty_name": $("#specialty_name").val(),
         "price": $("#specialty_price").val(),
         "num": $("#specialty_num").val(),
@@ -58,7 +58,7 @@ $("#add_specialty_button").click((e) => {
 
 function getAllSpecialty() {
     var owner = "xun";
-    var url = "/stay/seller";
+    var url = "/seller";
     var data = {
         "actionType": "specialty",
         "action": "get_specialty",
@@ -125,7 +125,7 @@ function initButtons() {
 
 function showDeleteModal(specialtyId) {
     $("#deleteSpecialtyModalCenter #deleteSpecialtyConfirmButton").click((e) => {
-        var url = "/stay/seller";
+        var url = "/seller";
         console.log(specialtyId);
         var data = {
             "actionType": "specialty",
@@ -149,7 +149,7 @@ function showDeleteModal(specialtyId) {
 function showModifyModal(specialtyId) {
     getSpecialtyByID(specialtyId);
     $("#modifySpecialtyModelCenter #modifySpecialtyConfirmButton").click((e) => {
-        var url = "/stay/seller";
+        var url = "/seller";
         console.log(specialtyId);
         var data = {
             "actionType": "specialty",
@@ -178,7 +178,7 @@ function showModifyModal(specialtyId) {
 }
 
 function getSpecialtyByID(specialtyId) {
-    var url = "/stay/seller";
+    var url = "/seller";
     console.log(specialtyId);
     var data = {
         "actionType": "specialty",

@@ -359,7 +359,12 @@
 <script src="../assets/js/demo.js"></script>
 <script src="../assets/js/styleSwitcher.js"></script>
 <script src="../assets/js/goods/goods_list.js"></script>
-
+<script>
+    function getUserInfo() {
+        const token = getCookie("token")
+        return JSON.parse(window.atob(token.split('.')[1]))
+    }
+</script>
 
 </body>
 </html>

@@ -18,14 +18,6 @@
         const token = getCookie("token")
         return JSON.parse(window.atob(token.split('.')[1]))
     }
-    // $('#user_id').text(userInfo.id);
-    // $('#to-profile').on('click', (event) => {
-    //     event.preventDefault();
-    //     // 请求
-    //     $.get(`/profile?id=\${userInfo.id}`, () => {
-    //
-    //     })
-    // })
 </script>
 <script>
     /**
