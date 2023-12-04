@@ -129,173 +129,75 @@
                                     <ul class="nav nav-tabs">
                                         <li class="nav-item">
                                             <a href="#houses-post" data-bs-toggle="tab"
-                                               class="nav-link">民宿</a>
+                                               class="nav-link active show">民宿</a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="#specialty-post" data-bs-toggle="tab"
-                                               class="nav-link active show">特产</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#profile-settings" data-bs-toggle="tab"
-                                               class="nav-link">Setting</a>
+                                               class="nav-link">特产</a>
                                         </li>
                                     </ul>
                                     <div class="tab-content">
-                                        <div id="houses-post" class="tab-pane fade">
+                                        <div id="houses-post" class="tab-pane fade active show">
                                             <div class="my-post-content pt-3">
-                                                <div class="post-input">
-                                                    <textarea name="textarea" id="houses_descrip" cols="30" rows="5"
-                                                              class="form-control bg-transparent"
-                                                              placeholder="Please type what you want...."></textarea>
-                                                    <a href="javascript:void(0);"
-                                                       class="btn btn-primary light me-1 px-3" data-bs-toggle="modal"
-                                                       data-bs-target="#linkModal"><i class="fa fa-link m-0"></i> </a>
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="linkModal">
-                                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title">Social Links</h5>
-                                                                    <button type="button" class="btn-close"
-                                                                            data-bs-dismiss="modal">
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <a class="btn-social facebook"
-                                                                       href="javascript:void(0)"><i
-                                                                            class="fa fa-facebook"></i></a>
-                                                                    <a class="btn-social google-plus"
-                                                                       href="javascript:void(0)"><i
-                                                                            class="fa fa-google-plus"></i></a>
-                                                                    <a class="btn-social linkedin"
-                                                                       href="javascript:void(0)"><i
-                                                                            class="fa fa-linkedin"></i></a>
-                                                                    <a class="btn-social instagram"
-                                                                       href="javascript:void(0)"><i
-                                                                            class="fa fa-instagram"></i></a>
-                                                                    <a class="btn-social twitter"
-                                                                       href="javascript:void(0)"><i
-                                                                            class="fa fa-twitter"></i></a>
-                                                                    <a class="btn-social youtube"
-                                                                       href="javascript:void(0)"><i
-                                                                            class="fa fa-youtube"></i></a>
-                                                                    <a class="btn-social whatsapp"
-                                                                       href="javascript:void(0)"><i
-                                                                            class="fa fa-whatsapp"></i></a>
+                                                <div class="basic-form">
+                                                    <form action="" enctype="multipart/form-data" id="house_form"
+                                                          name="house_form" method="post">
+                                                        <div class="mb-3 row">
+                                                            <label class="col-sm-3 col-form-label-lg">民宿名称</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control border-light"
+                                                                       id="house_name"
+                                                                       name="house_name">
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3 row">
+                                                            <label class="col-sm-3 col-form-label-lg">民宿地址</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text"
+                                                                       class="form-control border-light"
+                                                                       placeholder="点击选择民宿地址"
+                                                                       id="house_location"
+                                                                       name="house_location">
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3 row">
+                                                            <label class="col-sm-3 col-form-label-lg">民宿地址经纬度</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text"
+                                                                       class="form-control border-light disabled"
+                                                                       id="house_lnglat"
+                                                                       name="house_lnglat">
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3 row clearfix">
+                                                            <div class="mb-3 col-md-12">
+                                                                <label class="col-form-label-lg">民宿图片</label>
+                                                                <div class="col-sm-12">
+                                                                    <input type="file" class="form-control"
+                                                                           accept="image/*"
+                                                                           id="house_image"
+                                                                           name="house_image">
+                                                                    <label for="house_image"
+                                                                           id="house_image_preview">
+                                                                        <i class="fa fa-plus"></i>
+                                                                    </label>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <a href="javascript:void(0);"
-                                                       class="btn btn-primary light me-1 px-3" data-bs-toggle="modal"
-                                                       data-bs-target="#cameraModal"><i class="fa fa-camera m-0"></i>
-                                                    </a>
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="cameraModal">
-                                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title">Upload images</h5>
-                                                                    <button type="button" class="btn-close"
-                                                                            data-bs-dismiss="modal">
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="input-group mb-3">
-                                                                        <span class="input-group-text">Upload</span>
-                                                                        <div class="form-file">
-                                                                            <input type="file"
-                                                                                   class="form-file-input form-control">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                        <div class="mb-3 row clearfix">
+                                                            <div class="col-sm-10">
+                                                                <button type="button" class="btn btn-primary"
+                                                                        id="add_house_button"
+                                                                        name="add_house_button">
+                                                                    发布新民宿
+                                                                </button>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <a href="javascript:void(0);" class="btn btn-primary"
-                                                       data-bs-toggle="modal" data-bs-target="#postModal">Post</a>
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="postModal">
-                                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title">Post</h5>
-                                                                    <button type="button" class="btn-close"
-                                                                            data-bs-dismiss="modal">
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <textarea name="textarea" id="textarea2" cols="30"
-                                                                              rows="5"
-                                                                              class="form-control bg-transparent"
-                                                                              placeholder="Please type what you want...."></textarea>
-                                                                    <a class="btn btn-primary btn-rounded"
-                                                                       href="javascript:void(0)">Post</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="profile-uoloaded-post border-bottom-1 pb-5">
-                                                    <img src="../assets/images/profile/8.jpg" alt=""
-                                                         class="img-fluid w-100 rounded">
-                                                    <a class="post-title" href="post-details.html"><h3
-                                                            class="text-black">Collection of textile samples lay
-                                                        spread</h3></a>
-                                                    <p>A wonderful serenity has take possession of my entire soul like
-                                                        these sweet morning of spare which enjoy whole heart.A wonderful
-                                                        serenity has take possession of my entire soul like these sweet
-                                                        morning
-                                                        of spare which enjoy whole heart.</p>
-                                                    <button class="btn btn-primary me-2"><span class="me-2"><i
-                                                            class="fa fa-heart"></i></span>Like
-                                                    </button>
-                                                    <button class="btn btn-secondary" data-bs-toggle="modal"
-                                                            data-bs-target="#replyModal"><span class="me-2"><i
-                                                            class="fa fa-reply"></i></span>Reply
-                                                    </button>
-                                                </div>
-                                                <div class="profile-uoloaded-post border-bottom-1 pb-5">
-                                                    <img src="../assets/images/profile/9.jpg" alt=""
-                                                         class="img-fluid w-100 rounded">
-                                                    <a class="post-title" href="post-details.html"><h3
-                                                            class="text-black">Collection of textile samples lay
-                                                        spread</h3></a>
-                                                    <p>A wonderful serenity has take possession of my entire soul like
-                                                        these sweet morning of spare which enjoy whole heart.A wonderful
-                                                        serenity has take possession of my entire soul like these sweet
-                                                        morning
-                                                        of spare which enjoy whole heart.</p>
-                                                    <button class="btn btn-primary me-2"><span class="me-2"><i
-                                                            class="fa fa-heart"></i></span>Like
-                                                    </button>
-                                                    <button class="btn btn-secondary" data-bs-toggle="modal"
-                                                            data-bs-target="#replyModal"><span class="me-2"><i
-                                                            class="fa fa-reply"></i></span>Reply
-                                                    </button>
-                                                </div>
-                                                <div class="profile-uoloaded-post pb-3">
-                                                    <img src="../assets/images/profile/8.jpg" alt=""
-                                                         class="img-fluid w-100 rounded">
-                                                    <a class="post-title" href="post-details.html"><h3
-                                                            class="text-black">Collection of textile samples lay
-                                                        spread</h3></a>
-                                                    <p>A wonderful serenity has take possession of my entire soul like
-                                                        these sweet morning of spare which enjoy whole heart.A wonderful
-                                                        serenity has take possession of my entire soul like these sweet
-                                                        morning
-                                                        of spare which enjoy whole heart.</p>
-                                                    <button class="btn btn-primary me-2"><span class="me-2"><i
-                                                            class="fa fa-heart"></i></span>Like
-                                                    </button>
-                                                    <button class="btn btn-secondary" data-bs-toggle="modal"
-                                                            data-bs-target="#replyModal"><span class="me-2"><i
-                                                            class="fa fa-reply"></i></span>Reply
-                                                    </button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="specialty-post" class="tab-pane fade active show">
+                                        <div id="specialty-post" class="tab-pane fade">
                                             <div class="my-post-content pt-3">
                                                 <div class="basic-form">
                                                     <form action="" enctype="multipart/form-data" id="specialty_form"
@@ -360,8 +262,6 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                            <div class="row" id="specialty_list">
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -372,31 +272,35 @@
             </div>
         </div>
     </div>
-    <!--**********************************
-        Content body end
-    ***********************************-->
+
+</div>
+<!--**********************************
+    Content body end
+***********************************-->
 
 
-    <!--**********************************
-        Footer start
-    ***********************************-->
-    <%@ include file="/frame/frame_footer.jsp" %>
-    <!--**********************************
-        Footer end
-    ***********************************-->
+<!--**********************************
+    Footer start
+***********************************-->
+<%@ include file="/frame/frame_footer.jsp" %>
+<!--**********************************
+    Footer end
+***********************************-->
 
-    <!--**********************************
-       Support ticket button start
-    ***********************************-->
+<!--**********************************
+   Support ticket button start
+***********************************-->
 
-    <!--**********************************
-       Support ticket button end
-    ***********************************-->
+<!--**********************************
+   Support ticket button end
+***********************************-->
 
 
 </div>
 <%@ include file="modals/delete_modal.jsp" %>
 <%@ include file="modals/modify_modal.jsp" %>
+<%@ include file="modals/location_modal.jsp" %>
+<%@ include file="modals/warning_modal.jsp" %>
 <!--**********************************
     Main wrapper end
 ***********************************-->
@@ -417,6 +321,17 @@
 <script src="../assets/js/demo.js"></script>
 <script src="../assets/js/styleSwitcher.js"></script>
 <script src="../assets/js/goods/goods_page.js"></script>
+<%-- 地图API --%>
+<%--<script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=vHACkq2zCcvmYIGWtlw8dYbwYHbQj458"></script>--%>
+<script type="text/javascript">
+    window._AMapSecurityConfig = {
+        securityJsCode: 'd71806b25af8ceba503a3b358b33694b',
+    }
+</script>
+<script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+<script type="text/javascript"
+        src="https://webapi.amap.com/maps?v=1.4.15&key=89fd825427ce3fbf3dc999e544b50f99&plugin=AMap.Geocoder"></script>
+<script src="../assets/js/goods/location.js"></script>
 <script>
     function getUserInfo() {
         const token = getCookie("token")

@@ -1,6 +1,7 @@
 package homestay.servlet;
 
 import homestay.dao.Data;
+import homestay.service.HomestayService;
 import homestay.service.SpecialtyService;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +40,9 @@ public class GoodsServlet extends HttpServlet {
                 dispatchSpecialtyAction(request, response, json);
             } else if (actionType.equals("homestay")) {
                 dispatchHomestayAction(request, response, json);
+            } else {
+                json.put("resCode", "G0001");
+                json.put("Information", "错误操作");
             }
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
@@ -61,12 +65,26 @@ public class GoodsServlet extends HttpServlet {
         } else if (action.equals("modify_specialty")) {
             specialtyService.modifySpeicialty(data, json);
         } else {
-            json.put("resCode", "G0001");
-            json.put("Information", "�������");
+            json.put("resCode", "GS001");
+            json.put("Information", "特产错误操作");
         }
     }
 
-    private void dispatchHomestayAction(HttpServletRequest request, HttpServletResponse response, JSONObject json) {
-
+    private void dispatchHomestayAction(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, IOException, SQLException {
+        HomestayService homestayService = new HomestayService();
+        String action = data.getParam().getString("action");
+        showDebug("[dispatchHomestayAction]", "action: " + action);
+        if (action.equals("add_homestay")) {
+            homestayService.addHomestay(data, json);
+        } else if (action.equals("get_homestay")) {
+            homestayService.getHomestay(data, json);
+        } else if (action.equals("delete_homestay")) {
+            homestayService.deleteHomestay(data, json);
+        } else if (action.equals("modify_homestay")) {
+            homestayService.modifyHomestay(data, json);
+        } else {
+            json.put("resCode", "GH001");
+            json.put("Information", "民宿错误操作");
+        }
     }
 }

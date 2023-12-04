@@ -82,7 +82,7 @@ public class SpecialtyDao {
         DB db = new DB("group1");
         String ownerId = data.getParam().getString("username");
         String sql = "Select * From specialty Where owner_id='" + ownerId + "'";
-        showDebug("[getSpecialty]", "sql: " + sql);
+        showDebug("[getSpecialtyByOwner]", "sql: " + sql);
         ResultSet res = db.executeQuery(sql);
         ResultSetMetaData resMetaData = res.getMetaData();
         List resList = new ArrayList();
@@ -93,7 +93,7 @@ public class SpecialtyDao {
                 String key = resMetaData.getColumnName(i + 1);
                 String value = res.getString(key);
                 map.put(key, value);
-                showDebug("[getSpecialty]", key + ": " + value);
+                showDebug("[getSpecialtyByOwner]", key + ": " + value);
             }
             resList.add(map);
         }
@@ -119,11 +119,11 @@ public class SpecialtyDao {
                 String key = resMetadata.getColumnName(i + 1);
                 String value = res.getString(key);
                 map.put(key, value);
-                showDebug("[getSpecialty]", key + ": " + value);
+                showDebug("[getSpecialtyById]", key + ": " + value);
             }
         }
         if (map.isEmpty()) {
-            resCode = "GS001";
+            resCode = "GS002";
             info = "特产不存在";
         }
         res.close();
@@ -173,7 +173,7 @@ public class SpecialtyDao {
             showDebug("[deleteSpecialty]", "sql: " + sql);
             db.executeUpdate(sql);
         } else {
-            resCode = "GS001";
+            resCode = "GS002";
             info = "特产不存在";
         }
         db.close();
