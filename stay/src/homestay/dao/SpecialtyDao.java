@@ -164,14 +164,14 @@ public class SpecialtyDao {
         String info = "success";
         if (data.getParam().has("specialty_id")) {
             String specialtyId = data.getParam().getString("specialty_id");
+            String sql = "Delete From specialty Where specialty_id='" + specialtyId + "'";
+            showDebug("[deleteSpecialty]", "sql: " + sql);
+            db.executeUpdate(sql);
             String imagePath = IMAGE_DIR + specialtyId + ".png";
             File originImage = new File(imagePath);
             if (originImage.delete()) {
                 showDebug("[deleteSpecialty]", "该商品图片已一同删除");
             }
-            String sql = "Delete From specialty Where specialty_id='" + specialtyId + "'";
-            showDebug("[deleteSpecialty]", "sql: " + sql);
-            db.executeUpdate(sql);
         } else {
             resCode = "GS002";
             info = "特产不存在";

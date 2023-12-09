@@ -53,7 +53,7 @@ $("#add_specialty_button").click((e) => {
     )
 })
 
-$("#house_image").change((input_event) => {
+$("#homestay_image").change((input_event) => {
     var file = input_event.target.files[0];
     console.log(input_event.target.files);
     if (file !== null && file !== undefined) {
@@ -75,33 +75,33 @@ $("#house_image").change((input_event) => {
             }
         })
         reader.readAsDataURL(file);
-        document.querySelector("#house_image").value = "";
+        document.querySelector("#homestay_image").value = "";
     }
 })
 
-$("#add_house_button").click((e) => {
-    console.log("add house");
+$("#add_homestay_button").click((e) => {
+    console.log("add homestay");
     var url = "/seller";
-    var lnglat = $("#house_lnglat").val();
+    var lnglat = $("#homestay_lnglat").val();
     var longitude = lnglat.split(",")[0];
     var latitude = lnglat.split(",")[1];
-    var houseName = $("#house_name").val();
-    var houseLocation = $("#house_location").val();
-    if (isNull(houseName)) {
+    var homestayName = $("#homestay_name").val();
+    var homestayLocation = $("#homestay_location").val();
+    if (isNull(homestayName)) {
         showWarningModal("请输入正确的民宿名称");
-    } else if (isNull(houseLocation) || isNull(lnglat)) {
+    } else if (isNull(homestayLocation) || isNull(lnglat)) {
         showWarningModal("请选择民宿的地址");
     } else {
         var data = {
             "actionType": "homestay",
             "action": "add_homestay",
             "username": getUserInfo().id,
-            "house_name": houseName,
-            "location": houseLocation,
+            "house_name": homestayName,
+            "location": homestayLocation,
             "longitude": longitude,
             "latitude": latitude
         };
-        var img_list = document.querySelectorAll("div:has(> label#house_image_preview) > .img_box > img");
+        var img_list = document.querySelectorAll("div:has(> label#homestay_image_preview) > .img_box > img");
         data.imageurl = img_list[0].src;
         // 去除 data:image/*;base64, 的前缀
         data.imageurl = data.imageurl.substring(data.imageurl.indexOf(",") + 1);

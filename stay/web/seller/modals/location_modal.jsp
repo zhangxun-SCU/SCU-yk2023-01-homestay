@@ -20,7 +20,7 @@
                     <label class="col-sm-3 col-form-label-lg">地址</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control border-light"
-                               value="北京市天安门"
+                               placeholder="..."
                                id="input_location"
                                name="input_location">
                         <button type="button" class="btn btn-primary mt-3"

@@ -128,7 +128,7 @@
                                 <div class="custom-tab-1">
                                     <ul class="nav nav-tabs">
                                         <li class="nav-item">
-                                            <a href="#houses-post" data-bs-toggle="tab"
+                                            <a href="#homestays-post" data-bs-toggle="tab"
                                                class="nav-link active show">民宿</a>
                                         </li>
                                         <li class="nav-item">
@@ -137,17 +137,17 @@
                                         </li>
                                     </ul>
                                     <div class="tab-content">
-                                        <div id="houses-post" class="tab-pane fade active show">
+                                        <div id="homestays-post" class="tab-pane fade active show">
                                             <div class="my-post-content pt-3">
                                                 <div class="basic-form">
-                                                    <form action="" enctype="multipart/form-data" id="house_form"
-                                                          name="house_form" method="post">
+                                                    <form action="" enctype="multipart/form-data" id="homestay_form"
+                                                          name="homestay_form" method="post">
                                                         <div class="mb-3 row">
                                                             <label class="col-sm-3 col-form-label-lg">民宿名称</label>
                                                             <div class="col-sm-9">
                                                                 <input type="text" class="form-control border-light"
-                                                                       id="house_name"
-                                                                       name="house_name">
+                                                                       id="homestay_name"
+                                                                       name="homestay_name">
                                                             </div>
                                                         </div>
                                                         <div class="mb-3 row">
@@ -156,8 +156,8 @@
                                                                 <input type="text"
                                                                        class="form-control border-light"
                                                                        placeholder="点击选择民宿地址"
-                                                                       id="house_location"
-                                                                       name="house_location">
+                                                                       id="homestay_location"
+                                                                       name="homestay_location">
                                                             </div>
                                                         </div>
                                                         <div class="mb-3 row">
@@ -165,8 +165,9 @@
                                                             <div class="col-sm-9">
                                                                 <input type="text"
                                                                        class="form-control border-light disabled"
-                                                                       id="house_lnglat"
-                                                                       name="house_lnglat">
+                                                                       readonly="readonly"
+                                                                       id="homestay_lnglat"
+                                                                       name="homestay_lnglat">
                                                             </div>
                                                         </div>
                                                         <div class="mb-3 row clearfix">
@@ -175,10 +176,10 @@
                                                                 <div class="col-sm-12">
                                                                     <input type="file" class="form-control"
                                                                            accept="image/*"
-                                                                           id="house_image"
-                                                                           name="house_image">
-                                                                    <label for="house_image"
-                                                                           id="house_image_preview">
+                                                                           id="homestay_image"
+                                                                           name="homestay_image">
+                                                                    <label for="homestay_image"
+                                                                           id="homestay_image_preview">
                                                                         <i class="fa fa-plus"></i>
                                                                     </label>
                                                                 </div>
@@ -187,8 +188,8 @@
                                                         <div class="mb-3 row clearfix">
                                                             <div class="col-sm-10">
                                                                 <button type="button" class="btn btn-primary"
-                                                                        id="add_house_button"
-                                                                        name="add_house_button">
+                                                                        id="add_homestay_button"
+                                                                        name="add_homestay_button">
                                                                     发布新民宿
                                                                 </button>
                                                             </div>
@@ -297,8 +298,8 @@
 
 
 </div>
-<%@ include file="modals/delete_modal.jsp" %>
-<%@ include file="modals/modify_modal.jsp" %>
+<%@ include file="modals/delete_specialty_modal.jsp" %>
+<%@ include file="modals/modify_specialty_modal.jsp" %>
 <%@ include file="modals/location_modal.jsp" %>
 <%@ include file="modals/warning_modal.jsp" %>
 <!--**********************************

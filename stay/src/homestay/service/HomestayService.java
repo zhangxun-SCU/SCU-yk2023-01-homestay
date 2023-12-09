@@ -17,7 +17,7 @@ public class HomestayService {
     public void getHomestay(Data data, JSONObject json) throws JSONException, SQLException {
         HomestayDao homestayDao = new HomestayDao();
         String house_id = data.getParam().has("house_id") ? data.getParam().getString("house_id") : "";
-        if (!house_id.isEmpty()) {
+        if (house_id.isEmpty()) {
             homestayDao.getHomestayByOwner(data, json);
         } else {
             homestayDao.getHomestayById(house_id, json);

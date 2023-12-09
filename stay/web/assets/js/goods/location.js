@@ -17,11 +17,11 @@
 //         console.log(addComp);
 //         var address = addComp.province + addComp.city + addComp.district + addComp.street + addComp.streetNumber;//获取地址
 //         console.log(address);
-//         $("#house_location").val(address);
+//         $("#homestay_location").val(address);
 //     })
 // }
 //
-$("#house_location").click((e) => {
+$("#homestay_location").click((e) => {
     showLocationModal();
 })
 
@@ -48,8 +48,8 @@ function geoCode() {
             marker.setPosition(lnglat);
             map.add(marker);
             map.setFitView(marker);
-            $("#house_lnglat").val(lnglat);
-            $("#house_location").val(address);
+            $("#homestay_lnglat").val(lnglat);
+            $("#homestay_location").val(address);
         } else {
             log.error('根据地址查询位置失败');
         }

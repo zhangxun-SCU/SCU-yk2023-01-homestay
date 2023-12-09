@@ -123,7 +123,7 @@ public class HomestayDao {
             }
         }
         if (map.isEmpty()) {
-            resCode = "GS002";
+            resCode = "GH002";
             info = "民宿不存在";
         }
         res.close();
@@ -137,7 +137,6 @@ public class HomestayDao {
         DB db = new DB("group1");
         String resCode = "00000";
         String info = "success";
-        String owner = data.getParam().getString("username");
         String houseId = data.getParam().getString("house_id");
         String houseName = data.getParam().getString("house_name");
         double longitude = data.getParam().getDouble("longitude");

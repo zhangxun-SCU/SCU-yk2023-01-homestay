@@ -136,170 +136,52 @@
                                 <div class="custom-tab-1">
                                     <ul class="nav nav-tabs">
                                         <li class="nav-item">
-                                            <a href="#houses-post" data-bs-toggle="tab"
-                                               class="nav-link">民宿</a>
+                                            <a href="#homestays-post" data-bs-toggle="tab"
+                                               class="nav-link active show">民宿</a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="#specialty-post" data-bs-toggle="tab"
-                                               class="nav-link active show">特产</a>
+                                               class="nav-link">特产</a>
                                         </li>
                                     </ul>
                                     <div class="tab-content">
-                                        <div id="houses-post" class="tab-pane fade">
+                                        <div id="homestays-post" class="tab-pane fade active show">
                                             <div class="my-post-content pt-3">
-                                                <div class="post-input">
-                                                    <textarea name="textarea" id="houses_descrip" cols="30" rows="5"
-                                                              class="form-control bg-transparent"
-                                                              placeholder="Please type what you want...."></textarea>
-                                                    <a href="javascript:void(0);"
-                                                       class="btn btn-primary light me-1 px-3" data-bs-toggle="modal"
-                                                       data-bs-target="#linkModal"><i class="fa fa-link m-0"></i> </a>
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="linkModal">
-                                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title">Social Links</h5>
-                                                                    <button type="button" class="btn-close"
-                                                                            data-bs-dismiss="modal">
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <a class="btn-social facebook"
-                                                                       href="javascript:void(0)"><i
-                                                                            class="fa fa-facebook"></i></a>
-                                                                    <a class="btn-social google-plus"
-                                                                       href="javascript:void(0)"><i
-                                                                            class="fa fa-google-plus"></i></a>
-                                                                    <a class="btn-social linkedin"
-                                                                       href="javascript:void(0)"><i
-                                                                            class="fa fa-linkedin"></i></a>
-                                                                    <a class="btn-social instagram"
-                                                                       href="javascript:void(0)"><i
-                                                                            class="fa fa-instagram"></i></a>
-                                                                    <a class="btn-social twitter"
-                                                                       href="javascript:void(0)"><i
-                                                                            class="fa fa-twitter"></i></a>
-                                                                    <a class="btn-social youtube"
-                                                                       href="javascript:void(0)"><i
-                                                                            class="fa fa-youtube"></i></a>
-                                                                    <a class="btn-social whatsapp"
-                                                                       href="javascript:void(0)"><i
-                                                                            class="fa fa-whatsapp"></i></a>
-                                                                </div>
-                                                            </div>
+                                            </div>
+                                            <div id="homestay_list">
+                                                <div class="card-body pb-3 transaction-details d-flex flex-wrap justify-content-between align-items-center">
+                                                    <div class="user-bx-2 me-3 mb-3">
+                                                        <img src="/upload/house_image/GH1701779773111.png"
+                                                             class="rounded" alt="">
+                                                        <div>
+                                                            <h3 class="fs-20 font-w700">民宿名称</h3>
+                                                            <span class="font-w400">民宿地址</span>
                                                         </div>
                                                     </div>
-                                                    <a href="javascript:void(0);"
-                                                       class="btn btn-primary light me-1 px-3" data-bs-toggle="modal"
-                                                       data-bs-target="#cameraModal"><i class="fa fa-camera m-0"></i>
-                                                    </a>
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="cameraModal">
-                                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title">Upload images</h5>
-                                                                    <button type="button" class="btn-close"
-                                                                            data-bs-dismiss="modal">
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="input-group mb-3">
-                                                                        <span class="input-group-text">Upload</span>
-                                                                        <div class="form-file">
-                                                                            <input type="file"
-                                                                                   class="form-file-input form-control">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div class="me-3 mb-3">
+                                                            <button type="button"
+                                                                    class="btn light btn-primary detail_button">
+                                                                查看民宿内房间
+                                                            </button>
+                                                        </div>
+                                                        <div class="me-3 mb-3">
+                                                            <button type="button"
+                                                                    class="btn light btn-primary modify_homestay_button">
+                                                                修改民宿信息
+                                                            </button>
+                                                        </div>
+                                                        <div class="me-3 mb-3">
+                                                            <button type="button"
+                                                                    class="btn btn-sm btn-outline-danger delete_homestay_button">
+                                                                下架民宿
+                                                            </button>
                                                         </div>
                                                     </div>
-                                                    <a href="javascript:void(0);" class="btn btn-primary"
-                                                       data-bs-toggle="modal" data-bs-target="#postModal">Post</a>
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="postModal">
-                                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title">Post</h5>
-                                                                    <button type="button" class="btn-close"
-                                                                            data-bs-dismiss="modal">
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <textarea name="textarea" id="textarea2" cols="30"
-                                                                              rows="5"
-                                                                              class="form-control bg-transparent"
-                                                                              placeholder="Please type what you want...."></textarea>
-                                                                    <a class="btn btn-primary btn-rounded"
-                                                                       href="javascript:void(0)">Post</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="profile-uoloaded-post border-bottom-1 pb-5">
-                                                    <img src="../assets/images/profile/8.jpg" alt=""
-                                                         class="img-fluid w-100 rounded">
-                                                    <a class="post-title" href="post-details.html"><h3
-                                                            class="text-black">Collection of textile samples lay
-                                                        spread</h3></a>
-                                                    <p>A wonderful serenity has take possession of my entire soul like
-                                                        these sweet morning of spare which enjoy whole heart.A wonderful
-                                                        serenity has take possession of my entire soul like these sweet
-                                                        morning
-                                                        of spare which enjoy whole heart.</p>
-                                                    <button class="btn btn-primary me-2"><span class="me-2"><i
-                                                            class="fa fa-heart"></i></span>Like
-                                                    </button>
-                                                    <button class="btn btn-secondary" data-bs-toggle="modal"
-                                                            data-bs-target="#replyModal"><span class="me-2"><i
-                                                            class="fa fa-reply"></i></span>Reply
-                                                    </button>
-                                                </div>
-                                                <div class="profile-uoloaded-post border-bottom-1 pb-5">
-                                                    <img src="../assets/images/profile/9.jpg" alt=""
-                                                         class="img-fluid w-100 rounded">
-                                                    <a class="post-title" href="post-details.html"><h3
-                                                            class="text-black">Collection of textile samples lay
-                                                        spread</h3></a>
-                                                    <p>A wonderful serenity has take possession of my entire soul like
-                                                        these sweet morning of spare which enjoy whole heart.A wonderful
-                                                        serenity has take possession of my entire soul like these sweet
-                                                        morning
-                                                        of spare which enjoy whole heart.</p>
-                                                    <button class="btn btn-primary me-2"><span class="me-2"><i
-                                                            class="fa fa-heart"></i></span>Like
-                                                    </button>
-                                                    <button class="btn btn-secondary" data-bs-toggle="modal"
-                                                            data-bs-target="#replyModal"><span class="me-2"><i
-                                                            class="fa fa-reply"></i></span>Reply
-                                                    </button>
-                                                </div>
-                                                <div class="profile-uoloaded-post pb-3">
-                                                    <img src="../assets/images/profile/8.jpg" alt=""
-                                                         class="img-fluid w-100 rounded">
-                                                    <a class="post-title" href="post-details.html"><h3
-                                                            class="text-black">Collection of textile samples lay
-                                                        spread</h3></a>
-                                                    <p>A wonderful serenity has take possession of my entire soul like
-                                                        these sweet morning of spare which enjoy whole heart.A wonderful
-                                                        serenity has take possession of my entire soul like these sweet
-                                                        morning
-                                                        of spare which enjoy whole heart.</p>
-                                                    <button class="btn btn-primary me-2"><span class="me-2"><i
-                                                            class="fa fa-heart"></i></span>Like
-                                                    </button>
-                                                    <button class="btn btn-secondary" data-bs-toggle="modal"
-                                                            data-bs-target="#replyModal"><span class="me-2"><i
-                                                            class="fa fa-reply"></i></span>Reply
-                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="specialty-post" class="tab-pane fade active show">
+                                        <div id="specialty-post" class="tab-pane fade">
                                             <div class="my-post-content pt-3">
                                             </div>
                                             <div class="row" id="specialty_list">
@@ -337,8 +219,10 @@
 
 
 </div>
-<%@ include file="modals/delete_modal.jsp" %>
-<%@ include file="modals/modify_modal.jsp" %>
+<%@ include file="modals/delete_specialty_modal.jsp" %>
+<%@ include file="modals/modify_specialty_modal.jsp" %>
+<%@ include file="modals/delete_homestay_modal.jsp" %>
+<%@ include file="modals/modify_homestay_modal.jsp" %>
 <!--**********************************
     Main wrapper end
 ***********************************-->
@@ -358,6 +242,50 @@
 <script src="../assets/js/dlabnav-init.js"></script>
 <script src="../assets/js/demo.js"></script>
 <script src="../assets/js/styleSwitcher.js"></script>
+<script type="text/javascript">
+    window._AMapSecurityConfig = {
+        securityJsCode: 'd71806b25af8ceba503a3b358b33694b',
+    }
+</script>
+<script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+<script type="text/javascript"
+        src="https://webapi.amap.com/maps?v=1.4.15&key=89fd825427ce3fbf3dc999e544b50f99&plugin=AMap.Geocoder"></script>
+<script type="text/javascript">
+    var map = new AMap.Map("map_container", {
+        resizeEnable: true
+    });
+
+    var geocoder = new AMap.Geocoder({
+        city: "全国", //城市设为北京，默认：“全国”
+    });
+
+    var marker = new AMap.Marker();
+
+    function geoCode() {
+        var address = document.getElementById('modify_location').value;
+        geocoder.getLocation(address, function (status, result) {
+            console.log(address);
+            if (status === 'complete' && result.geocodes.length) {
+                var lnglat = result.geocodes[0].location;
+                marker.setPosition(lnglat);
+                map.add(marker);
+                map.setFitView(marker);
+                $("#modify_lnglat").val(lnglat);
+            } else {
+                console.log('根据地址查询位置失败');
+            }
+        });
+    }
+
+    document.getElementById("geo").onclick = geoCode;
+    document.getElementById('modify_location').onkeydown = function (e) {
+        if (e.keyCode === 13) {
+            geoCode();
+            return false;
+        }
+        return true;
+    };
+</script>
 <script src="../assets/js/goods/goods_list.js"></script>
 <script>
     function getUserInfo() {
