@@ -142,6 +142,7 @@ public class SpecialtyDao {
         double price = data.getParam().getDouble("price");
         int num = data.getParam().getInt("num");
         String imageurl = data.getParam().getString("imageurl");
+        showDebug("[addSpecialty]", "imageurl: " + imageurl);
         String imagePath = IMAGE_DIR + specialtyId + ".png";
         base64ToImage(imageurl, imagePath);
         String sql = "Update specialty Set ";
