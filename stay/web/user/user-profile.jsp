@@ -1,5 +1,5 @@
-<%@ page import="homestay.utils.JwtUtil" %>
-<%@ page import="io.jsonwebtoken.Claims" %><%--
+<%@ page import="homestay.dao.Data" %>
+<%@ page import="homestay.entity.User" %><%--
   Created by IntelliJ IDEA.
   User: cw
   Date: 2023/12/1
@@ -7,12 +7,20 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<!DOCTYPE html>
 <html>
 <head>
     <title>Title</title>
     <%@include file="./../frame/frame_style.jsp" %>
     <link href="./../assets/vendor/lightgallery/css/lightgallery.min.css" rel="stylesheet">
+    <link href="./../assets/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+    <link href="./../assets/css/style.css" rel="stylesheet">
+    <style>
+        #upload_avatar:hover {
+
+        }
+    </style>
 </head>
 <body>
 
@@ -21,19 +29,24 @@
 <%--  preloader end  --%>
 <div id="main-wrapper">
     <%--  top-menu start  --%>
-    <%@include file="./../frame/frame_topmenu.jsp" %>
-    <%--  top-menu end  --%>
-
-    <%--  slider start  --%>
-    <%@include file="./../frame/frame_slider.jsp" %>
+        <%@include file="/frame/frame_menu.jsp"%>
     <%--  slider end  --%>
-
+        <%
+            // 判断是否是自己
+            Data data = Data.getPageParameters(request, response);
+            String visitedId = data.getParam().getString("id");
+            boolean isSelf = visitedId.equals(userId);
+        %>
+        <%
+            // 获取访问人信息
+            User visited = userDao.queryUserByKey("user_id", visitedId);
+        %>
     <div class="content-body">
         <div class="container-fluid">
             <div class="row page-titles">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active"><a href="javascript:void(0)">ScuStay</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Profile</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)"><%=visited.id%> Profile</a></li>
                 </ol>
             </div>
             <!-- row -->
@@ -47,15 +60,15 @@
 <%--                            profile--%>
                             <div class="profile-info">
                                 <div class="profile-photo">
-                                    <img src="/upload/avatar/default_avatar.png" class="img-fluid rounded-circle" alt="">
+                                    <img src="<%=visited.avatarURL%>" class="img-fluid rounded-circle" alt="">
                                 </div>
                                 <div class="profile-details">
                                     <div class="profile-name px-3 pt-2">
-                                        <h4 class="text-primary mb-0">Mitchell C. Shay</h4>
-                                        <p>UX / UI Designer</p>
+                                        <h4 class="text-primary mb-0"><%=visited.id%></h4>
+                                        <p>free</p>
                                     </div>
                                     <div class="profile-email px-2 pt-2">
-                                        <h4 class="text-muted mb-0">info@example.com</h4>
+                                        <h4 class="text-muted mb-0"><%=visited.email%></h4>
                                         <p>Email</p>
                                     </div>
                                     <div class="dropdown ms-auto">
@@ -102,21 +115,21 @@
                                         <div class="text-center">
                                             <div class="row">
                                                 <div class="col">
-                                                    <h3 class="m-b-0">150</h3><span>Follower</span>
+                                                    <h3 class="m-b-0">150</h3><span>钱包余额</span>
                                                 </div>
                                                 <div class="col">
-                                                    <h3 class="m-b-0">140</h3><span>Place Stay</span>
+                                                    <h3 class="m-b-0">140</h3><span>收入</span>
                                                 </div>
                                                 <div class="col">
-                                                    <h3 class="m-b-0">45</h3><span>Reviews</span>
+                                                    <h3 class="m-b-0">45</h3><span>支出</span>
                                                 </div>
                                             </div>
-                                            <div class="mt-4">
+                                            <div class="mt-4 justify-content-around" style="display: flex">
                                                 <a href="javascript:void(0);"
-                                                   class="btn btn-primary mb-1 me-1">Follow</a>
-                                                <a href="javascript:void(0);" class="btn btn-primary mb-1"
-                                                   data-bs-toggle="modal" data-bs-target="#sendMessageModal">Send
-                                                    Message</a>
+                                                   class="btn btn-primary mb-1 w-25">充值</a>
+                                                <a href="javascript:void(0);" class="btn btn-primary mb-1 w-25"
+                                                   data-bs-toggle="modal" data-bs-target="#sendMessageModal">
+                                                    提现</a>
                                             </div>
                                         </div>
                                         <!-- Modal -->
@@ -277,12 +290,19 @@
                                         <li class="nav-item"><a href="#my-posts" data-bs-toggle="tab"
                                                                 class="nav-link active show">Posts</a>
                                         </li>
+                                        <%if (!isSelf) {%>
+                                        <li class="nav-item"><a href="#about-me" data-bs-toggle="tab" class="nav-link">About
+                                            He</a>
+                                        </li>
+                                        <%}%>
+                                        <%if (isSelf) {%>
                                         <li class="nav-item"><a href="#about-me" data-bs-toggle="tab" class="nav-link">About
                                             Me</a>
                                         </li>
                                         <li class="nav-item"><a href="#profile-settings" data-bs-toggle="tab"
                                                                 class="nav-link">Setting</a>
                                         </li>
+                                        <%}%>
                                     </ul>
                                     <div class="tab-content">
                                         <div id="my-posts" class="tab-pane fade active show">
@@ -526,88 +546,73 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <%
-                                            String token = null;
-                                            Cookie[] cookies = request.getCookies();
-                                            for(Cookie cookie: cookies) {
-                                                if(cookie.getName().equals("token")) {
-                                                    token = cookie.getValue();
-                                                }
-                                            }
-                                            Claims claims = JwtUtil.parseJwt(token);
-                                            String id = claims.get("id").toString();
-                                        %>
 
-<%--                                        <%@include file="../../../inc/public.jsp"%>--%>
+                                        <%if(isSelf == true){%>
+                                        <div id="profile-settings" class="tab-pane fade">
+                                            <div class="pt-3">
+                                                <div class="settings-form">
+                                                    <h4 class="text-primary">Account Setting</h4>
+                                                    <form>
+                                                        <div class="row justify-content-around" style="display: flex;">
+                                                            <label for="upload_avatar_btn">
+                                                                <input type="file" id="upload_avatar_btn" style="display: none">
+                                                            </label>
+                                                            <img src="<%=visited.avatarURL%>"
+                                                                 class="img-fluid rounded-circle w-25"
+                                                                 id="upload_avatar"
+                                                                 style="right: 25%; cursor: pointer;"
+                                                                 alt="上传头像">
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="mb-3 col-md-6">
+                                                                <label class="form-label">Email</label>
+                                                                <input type="email" placeholder="<%=visited.email%>" class="form-control">
+                                                            </div>
+                                                            <div class="mb-3 col-md-6">
+                                                                <label class="form-label">Password</label>
+                                                                <input type="password" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Address</label>
+                                                            <input type="text" placeholder="1234 Main St" class="form-control">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Address 2</label>
+                                                            <input type="text" placeholder="Apartment, studio, or floor" class="form-control">
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="mb-3 col-md-6">
+                                                                <label class="form-label">City</label>
+                                                                <input type="text" class="form-control">
+                                                            </div>
+                                                            <div class="mb-3 col-md-4">
+                                                                <label class="form-label">State</label>
+                                                                <select class="form-control default-select wide" id="inputState">
+                                                                    <option selected="">Choose...</option>
+                                                                    <option>Option 1</option>
+                                                                    <option>Option 2</option>
+                                                                    <option>Option 3</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="mb-3 col-md-2">
+                                                                <label class="form-label">Zip</label>
+                                                                <input type="text" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <div class="form-check custom-checkbox">
+                                                                <input type="checkbox" class="form-check-input" id="gridCheck">
+                                                                <label class="form-check-label form-label" for="gridCheck"> Check me out</label>
+                                                            </div>
+                                                        </div>
+                                                        <button class="btn btn-primary" id="submit_btn" type="button">确定</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <%}%>
 
-<%--                                        <%@include file="../../../inc/formValidation.jsp"%>--%>
-
-<%--                                        <%@include file="../../../inc/uploader.jsp"%>--%>
-
-<%--                                        <%@include file="../../../inc/bootstrap-table.jsp"%>--%>
-
-<%--                                        <div id="profile-settings" class="tab-pane fade">--%>
-<%--                                            <div class="pt-3">--%>
-<%--                                                <div class="settings-form">--%>
-<%--                                                    <h4 class="text-primary">Account Setting</h4>--%>
-<%--                                                    <form>--%>
-<%--                                                        <div class="row">--%>
-<%--                                                            <div class="mb-3 col-md-6">--%>
-<%--                                                                <label class="form-label">Email</label>--%>
-<%--                                                                <input type="email" placeholder="Email"--%>
-<%--                                                                       class="form-control">--%>
-<%--                                                            </div>--%>
-<%--                                                            <div class="mb-3 col-md-6">--%>
-<%--                                                                <label class="form-label">Password</label>--%>
-<%--                                                                <input type="password" placeholder="Password"--%>
-<%--                                                                       class="form-control">--%>
-<%--                                                            </div>--%>
-<%--                                                        </div>--%>
-<%--                                                        <div class="mb-3">--%>
-<%--                                                            <label class="form-label">Address</label>--%>
-<%--                                                            <input type="text" placeholder="1234 Main St"--%>
-<%--                                                                   class="form-control">--%>
-<%--                                                        </div>--%>
-<%--                                                        <div class="mb-3">--%>
-<%--                                                            <label class="form-label">Address 2</label>--%>
-<%--                                                            <input type="text" placeholder="Apartment, studio, or floor"--%>
-<%--                                                                   class="form-control">--%>
-<%--                                                        </div>--%>
-<%--                                                        <div class="row">--%>
-<%--                                                            <div class="mb-3 col-md-6">--%>
-<%--                                                                <label class="form-label">City</label>--%>
-<%--                                                                <input type="text" class="form-control">--%>
-<%--                                                            </div>--%>
-<%--                                                            <div class="mb-3 col-md-4">--%>
-<%--                                                                <label class="form-label">State</label>--%>
-<%--                                                                <select class="form-control default-select wide"--%>
-<%--                                                                        id="inputState">--%>
-<%--                                                                    <option selected="">Choose...</option>--%>
-<%--                                                                    <option>Option 1</option>--%>
-<%--                                                                    <option>Option 2</option>--%>
-<%--                                                                    <option>Option 3</option>--%>
-<%--                                                                </select>--%>
-<%--                                                            </div>--%>
-<%--                                                            <div class="mb-3 col-md-2">--%>
-<%--                                                                <label class="form-label">Zip</label>--%>
-<%--                                                                <input type="text" class="form-control">--%>
-<%--                                                            </div>--%>
-<%--                                                        </div>--%>
-<%--                                                        <div class="mb-3">--%>
-<%--                                                            <div class="form-check custom-checkbox">--%>
-<%--                                                                <input type="checkbox" class="form-check-input"--%>
-<%--                                                                       id="gridCheck">--%>
-<%--                                                                <label class="form-check-label form-label"--%>
-<%--                                                                       for="gridCheck"> Check me out</label>--%>
-<%--                                                            </div>--%>
-<%--                                                        </div>--%>
-<%--                                                        <button class="btn btn-primary" type="submit">Sign--%>
-<%--                                                            in--%>
-<%--                                                        </button>--%>
-<%--                                                    </form>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
                                     </div>
                                 </div>
                                 <!-- Modal -->
@@ -642,14 +647,44 @@
     </div>
 
     </div>
-<%--  script start  --%>
-<%@include file="./../frame/frame_javascript.jsp" %>
-<script src="./../assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-<script src="./../assets/vendor/chart.js/Chart.bundle.min.js"></script>
-<script src="./../assets/vendor/lightgallery/js/lightgallery-all.min.js"></script>
-<script>
+<%--  script start--%>
+<script src="/assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+<script src="/assets/vendor/chart.js/Chart.bundle.min.js"></script>
+<script src="/assets/vendor/lightgallery/js/lightgallery-all.min.js"></script>
+<%@include file="/frame/frame_javascript.jsp" %>
 
+<script>
+    const uploadAvatarBtn = $('#upload_avatar_btn');
+    const uploadAvatar = $('#upload_avatar');
+    const submitBtn = $('#submit_btn');
+    uploadAvatar.on('click', () => {
+        uploadAvatarBtn.click();
+    })
+    uploadAvatarBtn.on('change', (event) => {
+        const file = event.target.files[0];
+        console.log(file)
+        let tmpURL = window.URL.createObjectURL(file);
+        uploadAvatar.attr('src', tmpURL);
+    });
+    submitBtn.on('click', (event) => {
+        const file = uploadAvatarBtn.prop("files")[0];
+        if(file) {
+            const formData = new FormData();
+            formData.append("avatar", file);
+            $.ajax({
+                url: '/reset',
+                type: 'POST',
+                data: formData,
+                processData: false,  // 不处理数据
+                contentType: false,
+                success(res) {
+                    console.log(res)
+                }
+            })
+        }
+    })
 </script>
+
 <%--  script end  --%>
 </body>
 </html>

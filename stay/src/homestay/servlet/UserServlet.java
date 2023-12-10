@@ -2,8 +2,10 @@ package homestay.servlet;
 
 import homestay.dao.Data;
 import homestay.service.EmailService;
+import homestay.service.UploadService;
 import homestay.service.UserService;
 import homestay.service.VerifyService;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.mail.EmailException;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,15 +18,57 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet({"/register", "/reset"})
 public class UserServlet extends HttpServlet {
 
 
 
-    // 注册
+    // 注册  // 重置密码
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        try {
+            // 是否上传头像
+            if (ServletFileUpload.isMultipartContent(req)) {
+                doModifyAvatar(req, resp);
+                return;
+            }
+            Data data = Data.getPageParameters(req, resp);
+            String action = data.getParam().getString("action");
+            if(action.equals("register")) {
+                doRegister(req, resp);
+            } else if(data.getParam().getString("action").equals("modifyPassword")) {
+                doModifyPassword(req, resp);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            resp.getWriter().println("error");
+        }
+    }
+
+    // 修改
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            // 是否上传头像
+            if (ServletFileUpload.isMultipartContent(req)) {
+                doModifyAvatar(req, resp);
+                return;
+            }
+            Data data = Data.getPageParameters(req, resp);
+            if(data.getParam().getString("action").equals("modifyPassword")) {
+                doModifyPassword(req, resp);
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            resp.getWriter().println("error");
+        }
+    }
+
+    protected void doRegister(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession();
         String id = session.getId();
         try {
@@ -49,14 +93,12 @@ public class UserServlet extends HttpServlet {
             // 返回
             resp.setContentType("application/json; charset=UTF-8");
             resp.getWriter().println(resJson);
-        } catch (JSONException | SQLException e) {
+        } catch (JSONException | SQLException | IOException e) {
             e.printStackTrace();
         }
     }
 
-    // 修改密码
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected  void doModifyPassword(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession();
         String id = session.getId();
         String serverEmailVerifyCode = (String) session.getAttribute("SESSION_EMAIL_VERIFY_CODE_" + id);
@@ -77,9 +119,18 @@ public class UserServlet extends HttpServlet {
             // 返回
             resp.setContentType("application/json; charset=UTF-8");
             resp.getWriter().println(resJson);
-        } catch (JSONException | SQLException e) {
+        } catch (JSONException | SQLException | IOException e) {
             throw new RuntimeException(e);
         }
     }
 
+    protected void doModifyAvatar(HttpServletRequest req, HttpServletResponse resp) throws IOException, JSONException {
+        JSONObject resJson = new JSONObject();
+        UploadService uploadService = new UploadService();
+        List<String> urls = uploadService.upload(req, resp, resJson, "avatar");
+        UserService userService = new UserService();
+        userService.modifyUserAvatar(req, resp, urls, resJson);
+        resp.setContentType("application/json; charset=UTF-8");
+        resp.getWriter().println(resJson);
+    }
 }
