@@ -85,7 +85,8 @@
                                     </div>
                                 </form>
                                 <div class="new-account mt-3">
-                                    <p>Don't have an account? <a class="text-primary" href="/user/register.jsp">Sign up</a>
+                                    <p>Don't have an account? <a class="text-primary" href="/user/register.jsp">Sign
+                                        up</a>
                                     </p>
                                 </div>
                             </div>
@@ -135,6 +136,7 @@
         }
     }, 500))
     let reg = new RegExp(/\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/, 'g');
+
     function flushVerifyCode() {
         axios({
             type: 'get',
@@ -170,7 +172,7 @@
                     timer: 2e3,
                     showConfirmButton: !1
                 });
-            } else if(res.resCode === 'V0001') {
+            } else if (res.resCode === 'V0001') {
                 sweetAlert({
                     type: "error",
                     title: "图形验证码错误",
@@ -178,13 +180,13 @@
                     timer: 1e3,
                     showConfirmButton: !1
                 });
-            } else if(res.resCode ===  '00000') {
+            } else if (res.resCode === '00000') {
                 swal("success", "登录成功", "success");
                 let storage = new Storage("localStorage");
                 storage.get("user_info")
-                const userInfo =JSON.parse(window.atob(res.token.split('.')[1]));
+                const userInfo = JSON.parse(window.atob(res.token.split('.')[1]));
                 storage.set("user_info", userInfo, userInfo.exp * 14);
-                window.location.href="../seller/goods_page.jsp";
+                window.location.href = "../seller/goods_page.jsp";
             }
         });
     }
@@ -208,7 +210,7 @@
     }
 
     function imgVerifyInput() {
-        if($('#verify_code').val() === '') {
+        if ($('#verify_code').val() === '') {
             return false;
         }
         return true;
@@ -219,7 +221,7 @@
 <%--java脚本--%>
 <%
     Object msg = request.getAttribute("msg");
-    if(msg != null && msg.toString().equals("登录已过期")) {%>
+    if (msg != null && msg.toString().equals("登录已过期")) {%>
 <script>
     sweetAlert({
         title: "登录已过期",

@@ -33,12 +33,18 @@
     <%@include file="/frame/frame_menu.jsp"%>
     <%--  end  --%>
 
-        <div class="content-body">
+    <div class="content-body">
 
-        </div>
+    </div>
+
+    <%--  footer start  --%>
+    <%@include file="/frame/frame_footer.jsp" %>
+    <%--  footer end  --%>
 </div>
 <%--  script start  --%>
-<%@include file="/frame/frame_javascript.jsp"%>
+
+<%@include file="/frame/frame_javascript.jsp" %>
+
 <%--  script end  --%>
 </body>
 </html>

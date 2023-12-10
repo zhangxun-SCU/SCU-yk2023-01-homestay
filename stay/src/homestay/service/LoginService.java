@@ -25,14 +25,14 @@ public class LoginService {
         String auto = data.getParam().getString("rememberMe");
         User user = dao.queryUserById(id);
         String realPassword = user.password;
-        if(realPassword == null) {
+        if (realPassword == null) {
             // 没有此用户
             resJson.put("resCode", "L0002");
             resJson.put("loginInfo", "error: user does not exist");
             return false;
         }
-        System.out.println("inputPassword: "+ inputPassword);
-        if(!realPassword.equals(inputPassword)) {
+        System.out.println("inputPassword: " + inputPassword);
+        if (!realPassword.equals(inputPassword)) {
             // 密码错误
             resJson.put("resCode", "L0001");
             resJson.put("loginInfo", "error: password incorrect");
