@@ -1,8 +1,8 @@
-package homestay.servlet;
+package homestay.servlet.seller;
 
 import homestay.dao.Data;
-import homestay.service.HomestayService;
-import homestay.service.SpecialtyService;
+import homestay.service.seller.HomestayService;
+import homestay.service.seller.SpecialtyService;
 import org.json.JSONException;
 import org.json.JSONObject;
 
