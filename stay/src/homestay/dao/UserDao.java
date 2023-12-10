@@ -16,7 +16,7 @@ import homestay.bean.UserBean;
 
 public class UserDao {
 
-    public User queryUserById(String id) throws SQLException, JSONException {
+    public User queryUserById(String id) throws SQLException {
         User user = new User();
         String sql = "SELECT * FROM user_account WHERE user_id='" + id + "'";
         System.out.println("queryUserById sql: " + sql);
@@ -35,7 +35,7 @@ public class UserDao {
         return user;
     }
 
-    public User queryUserByKey(String key, String value) throws SQLException, JSONException {
+    public User queryUserByKey(String key, String value) throws SQLException {
         User user = new User();
         String sql = "SELECT * FROM user_account WHERE " +  key + "='" + value + "'";
         System.out.println("queryUserByKey sql: " + sql);
