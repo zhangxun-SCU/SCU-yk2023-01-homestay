@@ -65,15 +65,7 @@
     <!--**********************************
         Nav header start
     ***********************************-->
-    <%@ include file="/frame/frame_topmenu.jsp" %>
-    <!--**********************************
-        Header end ti-comment-alt
-    ***********************************-->
-
-    <!--**********************************
-        Sidebar start
-    ***********************************-->
-    <%@ include file="/frame/frame_slider.jsp" %>
+    <%@ include file="/frame/frame_menu.jsp" %>
     <!--**********************************
         Sidebar end
     ***********************************-->
@@ -232,16 +224,11 @@
 <!--**********************************
     Scripts
 ***********************************-->
+<%@ include file="/frame/frame_javascript.jsp" %>
 <!-- Required vendors -->
-<script src="../assets/vendor/global/global.min.js"></script>
 <script src="../assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-<script src="../assets/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
 <script src="../assets/vendor/chart.js/Chart.bundle.min.js"></script>
 <script src="../assets/vendor/lightgallery/js/lightgallery-all.min.js"></script>
-<script src="../assets/js/custom.min.js"></script>
-<script src="../assets/js/dlabnav-init.js"></script>
-<script src="../assets/js/demo.js"></script>
-<script src="../assets/js/styleSwitcher.js"></script>
 <script type="text/javascript">
     window._AMapSecurityConfig = {
         securityJsCode: 'd71806b25af8ceba503a3b358b33694b',
@@ -287,12 +274,5 @@
     };
 </script>
 <script src="../assets/js/goods/goods_list.js"></script>
-<script>
-    function getUserInfo() {
-        const token = getCookie("token")
-        return JSON.parse(window.atob(token.split('.')[1]))
-    }
-</script>
-
 </body>
 </html>
