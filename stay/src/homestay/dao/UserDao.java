@@ -1,6 +1,7 @@
 package homestay.dao;
 
 import homestay.entity.User;
+import homestay.utils.Config;
 import homestay.utils.UserUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -8,6 +9,8 @@ import org.json.JSONObject;
 import javax.jws.soap.SOAPBinding;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +28,7 @@ public class UserDao {
             user.email = rs.getString("email");
             user.priority =  rs.getString("priority");
             user.permission = rs.getString("permission");
+            user.avatarURL = rs.getString("avatar");
         }
         rs.close();
         db.close();
@@ -43,6 +47,7 @@ public class UserDao {
             user.email = rs.getString("email");
             user.priority =  rs.getString("priority");
             user.permission = rs.getString("permission");
+            user.avatarURL = rs.getString("avatar");
         }
         rs.close();
         db.close();
@@ -50,11 +55,13 @@ public class UserDao {
     }
 
     public void addUser(Data data) throws JSONException {
-        String sql = "INSERT INTO user_account(user_id,user_password,email)";
+        String sql = "INSERT INTO user_account(user_id,user_password,email,avatar)";
         String id = data.getParam().getString("id");
         String email = data.getParam().getString("email");
         String password = UserUtil.encrypt(data.getParam().getString("password"));
-        sql += "VALUES('" + id + "','" + password + "','" + email + "');";
+        java.util.Date date = new Date();//获得当前时间
+        Timestamp createTime = new Timestamp(date.getTime());//将时间转换成Timestamp类型，便于存入到mysql数据库中
+        sql += "VALUES('" + id + "','" + password + "','" + email + "','" + Config.getInstance().getString("default.avatar.url") +"');";
         System.out.println("addUser sql: " + sql);
         DB db = new DB("group1");
         db.executeUpdate(sql);
@@ -62,6 +69,8 @@ public class UserDao {
     }
 
     public void modifyUserInfo(Data data) throws JSONException {
+        java.util.Date date = new Date();//获得当前时间
+        Timestamp modifyTime = new Timestamp(date.getTime());//将时间转换成Timestamp类型，便于存入到mysql数据库中
         String id = data.getParam().has("resetId") ? data.getParam().getString("reset_id") : null;
         String email = data.getParam().getString("email");
         String password = UserUtil.encrypt(data.getParam().has("resetPassword") ? data.getParam().getString("resetPassword") : null);
@@ -86,6 +95,18 @@ public class UserDao {
         }
         sql += " WHERE email='" + email + "'";
         System.out.println("modify user info sql: " + sql);
+        DB db = new DB("group1");
+        db.executeUpdate(sql);
+        db.close();
+    }
+
+    public void updateByKey(String userId, String key, String value) {
+        String sql = "UPDATE user_account";
+        if(value != null) {
+            sql += " SET " + key + "='" + value + "'";
+        }
+        sql += " WHERE user_id='" + userId + "'";
+        System.out.println(sql);
         DB db = new DB("group1");
         db.executeUpdate(sql);
         db.close();

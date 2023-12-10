@@ -53,7 +53,7 @@ public class LoginCheckFilter implements Filter {
         String url = req.getRequestURI().toString();
 //        System.out.println("request url:" + url);
         // 处理自动登录
-        if(url.equals("/") || url.contains("login")) {
+        if(url.equals("/") || url.equals("") || url.contains("login")) {
             if(autoLogin(req, resp, loginJwt)) {return;}
         }
         // 通过必要的请求

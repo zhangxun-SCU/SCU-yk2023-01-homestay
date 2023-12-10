@@ -6,4 +6,7 @@ public class User {
     public String email;
     public String priority;
     public String permission;
+
+    public String avatarURL;
+
 }
