@@ -1,4 +1,4 @@
-package homestay.service;
+package homestay.service.seller;
 
 import homestay.dao.Data;
 import homestay.dao.HomestayDao;
