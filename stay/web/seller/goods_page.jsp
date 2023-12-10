@@ -58,16 +58,7 @@
     <!--**********************************
         Nav header start
     ***********************************-->
-    <%@ include file="/frame/frame_topmenu.jsp" %>
-
-    <!--**********************************
-        Header end ti-comment-alt
-    ***********************************-->
-
-    <!--**********************************
-        Sidebar start
-    ***********************************-->
-    <%@ include file="/frame/frame_slider.jsp" %>
+    <%@ include file="/frame/frame_menu.jsp" %>
     <!--**********************************
         Sidebar end
     ***********************************-->
@@ -311,16 +302,11 @@
 <!--**********************************
     Scripts
 ***********************************-->
+<%@ include file="/frame/frame_javascript.jsp" %>
 <!-- Required vendors -->
-<script src="../assets/vendor/global/global.min.js"></script>
 <script src="../assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-<script src="../assets/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
 <script src="../assets/vendor/chart.js/Chart.bundle.min.js"></script>
 <script src="../assets/vendor/lightgallery/js/lightgallery-all.min.js"></script>
-<script src="../assets/js/custom.min.js"></script>
-<script src="../assets/js/dlabnav-init.js"></script>
-<script src="../assets/js/demo.js"></script>
-<script src="../assets/js/styleSwitcher.js"></script>
 <script src="../assets/js/goods/goods_page.js"></script>
 <%-- 地图API --%>
 <%--<script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=vHACkq2zCcvmYIGWtlw8dYbwYHbQj458"></script>--%>
@@ -333,12 +319,6 @@
 <script type="text/javascript"
         src="https://webapi.amap.com/maps?v=1.4.15&key=89fd825427ce3fbf3dc999e544b50f99&plugin=AMap.Geocoder"></script>
 <script src="../assets/js/goods/location.js"></script>
-<script>
-    function getUserInfo() {
-        const token = getCookie("token")
-        return JSON.parse(window.atob(token.split('.')[1]))
-    }
-</script>
 
 </body>
 </html>

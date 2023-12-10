@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html lang="en" class="h-100">
 
 <head>
@@ -121,6 +122,7 @@
 <script src="./../assets/js/utils/debounce.js"></script>
 <script src="./../assets/js/utils/encrypt.js"></script>
 <script>
+
     /**
      *  事件绑定
      */
@@ -219,6 +221,9 @@
                     timer: 1e3,
                     showConfirmButton: !1
                 });
+            } else if(res.resCode === "00000") {
+                swal("success", "注册成功", "请登录");
+                window.location.href = '/user/login.jsp'
             }
         })
     }

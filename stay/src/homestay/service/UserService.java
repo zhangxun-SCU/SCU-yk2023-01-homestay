@@ -4,11 +4,15 @@ import homestay.dao.Data;
 import homestay.dao.UserDao;
 import homestay.entity.User;
 import homestay.utils.EmailUtil;
+import homestay.utils.UserUtil;
 import org.apache.commons.mail.EmailException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Random;
 
 public class UserService {
@@ -52,6 +56,14 @@ public class UserService {
         }
         // 修改
         dao.modifyUserInfo(data);
+        resJson.put("resCode", "00000");
+        resJson.put("resetInfo", "success");
+    }
+
+    public void modifyUserAvatar(HttpServletRequest req, HttpServletResponse resp, List<String> urls, JSONObject resJson) throws JSONException {
+        UserDao dao = new UserDao();
+        String id = UserUtil.getUserId(req);
+        dao.updateByKey(id, "avatar", urls.get(0));
         resJson.put("resCode", "00000");
         resJson.put("resetInfo", "success");
     }
