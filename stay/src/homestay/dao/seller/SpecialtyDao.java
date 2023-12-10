@@ -1,5 +1,7 @@
-package homestay.dao;
+package homestay.dao.seller;
 
+import homestay.dao.DB;
+import homestay.dao.Data;
 import org.json.JSONException;
 import org.json.JSONObject;
 import sun.misc.BASE64Decoder;

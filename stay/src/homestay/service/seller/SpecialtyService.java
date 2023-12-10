@@ -1,7 +1,7 @@
 package homestay.service.seller;
 
 import homestay.dao.Data;
-import homestay.dao.SpecialtyDao;
+import homestay.dao.seller.SpecialtyDao;
 import org.json.JSONException;
 import org.json.JSONObject;
 
