@@ -195,6 +195,7 @@
     function register() {
         // 校验图形验证码
         const userRegisterData = {};
+        userRegisterData.action = "register"
         userRegisterData.imgVerifyCode = $('#verify_code').val();
         userRegisterData.id = $('#register_id').val();
         userRegisterData.email = $('#register_email').val();
