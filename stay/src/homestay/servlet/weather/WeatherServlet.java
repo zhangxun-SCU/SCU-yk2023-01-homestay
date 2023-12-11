@@ -1,4 +1,4 @@
-package homestay.servlet;
+package homestay.servlet.weather;
 /*
  * 待完成：用MVC模式分开DB和Action操作
  * 增删改查看导印统功能的实现
@@ -6,7 +6,7 @@ package homestay.servlet;
 
 import homestay.dao.Data;
 import homestay.dao.WeatherDao;
-import homestay.service.WeatherService;
+import homestay.service.weather.WeatherService;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.*;

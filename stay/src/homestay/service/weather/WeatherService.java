@@ -1,8 +1,8 @@
-package homestay.service;
+package homestay.service.weather;
 
 import homestay.dao.Data;
 import homestay.dao.WeatherDao;
-import homestay.servlet.MyExcel;
+//import homestay.servlet.MyExcel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -57,10 +57,10 @@ public class WeatherService {
         }
     }
 
-    private void exportRecordToExcel(Data data, JSONObject json) throws JSONException, IOException {
-        MyExcel myExcel = new MyExcel();
-        json.put("download_url", "/upload/maintain/device/export_device.xls");
-        json.put("file_path", "C:\\upload\\maintain\\device\\export_device.xls");
-        myExcel.exportData(data, json);
-    }
+//    private void exportRecordToExcel(Data data, JSONObject json) throws JSONException, IOException {
+//        MyExcel myExcel = new MyExcel();
+//        json.put("download_url", "/upload/maintain/device/export_device.xls");
+//        json.put("file_path", "C:\\upload\\maintain\\device\\export_device.xls");
+//        myExcel.exportData(data, json);
+//    }
 }
