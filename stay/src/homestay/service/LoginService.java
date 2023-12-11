@@ -45,6 +45,7 @@ public class LoginService {
         claims.put("id", id);
         claims.put("auto", auto);
         resJson.put("token", JwtUtil.generateJwt(claims, user.password));
+        resJson.put("userType",user.permission);
         return true;
     }
 }
