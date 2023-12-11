@@ -1,8 +1,7 @@
-package homestay.servlet;
+package homestay.servlet.verify;
 
 import homestay.dao.Data;
-import homestay.service.EmailService;
-import homestay.service.UserService;
+import homestay.service.verify.EmailService;
 import org.apache.commons.mail.EmailException;
 import org.json.JSONException;
 

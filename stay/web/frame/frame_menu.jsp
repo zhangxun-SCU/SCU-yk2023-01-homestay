@@ -652,8 +652,8 @@ Sidebar start
                     <span class="nav-text">商场</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="index.html">民宿商场</a></li>
-                    <li><a href="index-2.html">特产商场</a></li>
+                    <li><a href="/market/house_market.jsp">民宿商场</a></li>
+                    <li><a href="/market/specialty_market.jsp">特产商场</a></li>
                     <%--                    <li><a href="wallet-page.html">My Wallet</a></li>--%>
                     <%--                    <li><a href="invoices.html">Invoices</a></li>--%>
                     <%--                    <li><a href="create-invoices.html">Create Invoices</a></li>--%>
@@ -698,6 +698,18 @@ Sidebar start
                     <li><a href="./chart-chartjs.html">待评价</a></li>
                 </ul>
             </li>
+                <li>
+                    <a href="/GPS/GPS.jsp">
+                        <i class="fas fa-chart-line"></i>
+                        <span class="nav-text">地图导航</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/weather/weather.jsp">
+                        <i class="fas fa-chart-line"></i>
+                        <span class="nav-text">今日天气</span>
+                    </a>
+                </li>
             <li>
                 <a class="has-arrow " href="javascript:void()" aria-expanded="false">
                     <i class="fab fa-bootstrap"></i>
@@ -763,25 +775,10 @@ Sidebar start
                     <li><a href="table-datatable-basic.html">Datatable</a></li>
                 </ul>
             </li>
-            <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+            <li><a href="/Feedback/feedback-page.jsp">
                 <i class="fas fa-clone"></i>
-                <span class="nav-text">Pages</span>
+                <span class="nav-text">问题反馈</span>
             </a>
-                <ul aria-expanded="false">
-                    <li><a href="./page-login.html">Login</a></li>
-                    <li><a href="./page-register.html">Register</a></li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
-                        <ul aria-expanded="false">
-                            <li><a href="./page-error-400.html">Error 400</a></li>
-                            <li><a href="./page-error-403.html">Error 403</a></li>
-                            <li><a href="./page-error-404.html">Error 404</a></li>
-                            <li><a href="./page-error-500.html">Error 500</a></li>
-                            <li><a href="./page-error-503.html">Error 503</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="./page-lock-screen.html">Lock Screen</a></li>
-                    <li><a href="./empty-page.html">Empty Page</a></li>
-                </ul>
             </li>
         </ul>
 

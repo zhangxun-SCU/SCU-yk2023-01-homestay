@@ -1,4 +1,4 @@
-package homestay.service;
+package homestay.service.verify;
 
 import homestay.dao.Data;
 import homestay.utils.VerifyUtil;

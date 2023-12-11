@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import homestay.dao.Data;
 import homestay.service.LoginService;
-import homestay.service.VerifyService;
+import homestay.service.verify.VerifyService;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,12 +37,16 @@ public class LoginServlet extends HttpServlet {
             if(imgVerifyService.checkCode(data, serverCode, resJson)) {
                 // 图形验证码正确
                 if(loginService.checkLogin(data, serverCode, resJson)){
+                    Cookie cookie = new Cookie("token", resJson.getString("token"));
+                    cookie.setMaxAge(60*60*24);
+
                     String loginToken = UUID.randomUUID().toString();
-                    Cookie cookie = new Cookie("LOGIN_TOKEN", loginToken);
+                    Cookie cookieLogin = new Cookie("LOGIN_TOKEN", loginToken);
                     String userId= data.getParam().getString("id");
                     Cookie userIdCookie=new Cookie("USER_ID",userId);
                     System.out.println("logintoken:"+loginToken);
                     resp.addCookie(cookie);
+                    resp.addCookie(cookieLogin);
                     resp.addCookie(userIdCookie);
 
                     userIdTokenMap.put(userId,loginToken);
@@ -51,15 +55,6 @@ public class LoginServlet extends HttpServlet {
             // 返回
             resp.setContentType("application/json; charset=UTF-8");
             resp.getWriter().println(resJson);
-//            String loginToken = UUID.randomUUID().toString();
-//            Cookie cookie = new Cookie("LOGIN_TOKEN", loginToken);
-//            String userId= data.getParam().getString("id");
-//            Cookie userIdCookie=new Cookie("USER_ID",userId);
-//            System.out.println("logintoken:"+loginToken);
-//            resp.addCookie(cookie);
-//            resp.addCookie(userIdCookie);
-//
-//            userIdTokenMap.put(userId,loginToken);
         } catch (JSONException | SQLException e) {
             throw new RuntimeException(e);
         }
@@ -67,6 +62,12 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // 删除cookie
+        Cookie cookie = new Cookie("token", null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        resp.addCookie(cookie);
+
         Cookie loginTokenCookie = new Cookie("LOGIN_TOKEN", null);
         loginTokenCookie.setMaxAge(0);
         loginTokenCookie.setPath("/");

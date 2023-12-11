@@ -1,8 +1,7 @@
-package homestay.servlet;
+package homestay.servlet.verify;
 
 import homestay.dao.Data;
-import homestay.service.VerifyService;
-import homestay.utils.VerifyUtil;
+import homestay.service.verify.VerifyService;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 
 @WebServlet("/verify")
 public class VerifyServlet  extends HttpServlet{

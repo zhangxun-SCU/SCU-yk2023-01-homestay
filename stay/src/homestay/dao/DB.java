@@ -65,4 +65,8 @@ public class DB {
             e.printStackTrace();
         }
     }
+
+    public Connection getConnection() {
+        return this.connection;
+    }
 }
