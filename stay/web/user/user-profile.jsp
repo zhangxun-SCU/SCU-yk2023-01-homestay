@@ -60,7 +60,7 @@
 <%--                            profile--%>
                             <div class="profile-info">
                                 <div class="profile-photo">
-                                    <img src="<%=visited.avatarURL%>" class="img-fluid rounded-circle" alt="">
+                                    <img src="<%=visited.avatarURL%>" class="img-fluid rounded-circle" id="profile_avatar" alt="profile_avatar">
                                 </div>
                                 <div class="profile-details">
                                     <div class="profile-name px-3 pt-2">
@@ -679,6 +679,8 @@
                 contentType: false,
                 success(res) {
                     console.log(res)
+                    $('#upload_avatar').attr('src', res.urls[0]);
+                    $('#profile_avatar').attr('src', res.urls[0]);
                 }
             })
         }

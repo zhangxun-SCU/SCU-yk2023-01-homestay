@@ -57,11 +57,10 @@ var Page = function() {
     var initWeatherListControlEvent=function(){
         $("#help_button").click(function() {help();});
         $('#add_button').click(function() {onAddRecord();});
-        //$('#datatable_button').click(function() {onDataTableTab();});
-        //$('#table_button').click(function() {onTableTab();});
-        //$('#bar_button').click(function() {onBarTab();});
         $('#weather_modify_div #submit_button').click(function() {onModifyDivSubmit();});
         $('#weather_add_div #submit_button').click(function() {onAddDivSubmit();});
+        $('#weather_add_div #cancel_button').click(function() {returnBack();});
+        $('#weather_modify_div #cancel_button').click(function() {returnBack();});
         $('#query_button').click(function() {onQueryRecord();});
         $('#export_button').click(function() {onExportRecord();});
         $('#device_statistic').click(function() {window.location.href="weather_statistic.jsp";});
@@ -100,10 +99,8 @@ var Page = function() {
     }
     var onAddRecord=function(){
         $("#weather_add_div").modal("show");
-        //window.location.href="weather_add_div.jsp"
     }
     var submitAddRecord=function(){
-        console.log(1);
         var url="/weather";
         var data={};
         data.action="add_device_record";

@@ -37,7 +37,7 @@ public class UserServlet extends HttpServlet {
             String action = data.getParam().getString("action");
             if(action.equals("register")) {
                 doRegister(req, resp);
-            } else if(data.getParam().getString("action").equals("modifyPassword")) {
+            } else if(action.equals("modifyPassword")) {
                 doModifyPassword(req, resp);
             }
         } catch (JSONException e) {
