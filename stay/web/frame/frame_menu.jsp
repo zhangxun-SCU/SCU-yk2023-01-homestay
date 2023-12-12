@@ -677,7 +677,7 @@ Sidebar start
                 <%}%>
             <%--            订单管理--%>
             <li>
-                <a href="/order/device/order.jsp">
+                <a href="/order/device/specialty_order.jsp">
                     <i class="fas fa-chart-line"></i>
                     <span class="nav-text">我的订单</span>
                 </a>

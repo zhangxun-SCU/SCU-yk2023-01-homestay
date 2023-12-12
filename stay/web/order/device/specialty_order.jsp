@@ -691,7 +691,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row display-none" id="finished_order_tab">
+            <div class="row display-none" style ="display:none" id="finished_order_tab">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
@@ -743,7 +743,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row display-none" id="unfinished_order_tab">
+            <div class="row display-none" style ="display:none" id="unfinished_order_tab">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
