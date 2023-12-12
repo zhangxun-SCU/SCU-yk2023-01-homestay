@@ -186,7 +186,12 @@
                 storage.get("user_info")
                 const userInfo = JSON.parse(window.atob(res.token.split('.')[1]));
                 storage.set("user_info", userInfo, userInfo.exp * 14);
-                window.location.href = "../seller/goods_page.jsp";
+                if(res.userType==='low'||res.userType==='middle')
+                    window.location.href = "/market/house_market.jsp"
+                else if(res.userType==='high')
+                    window.location.href = "/admin/empty-page.html"//管理员
+                else
+                    window.location.href = "/superadmin/users.jsp"//超级管理员
             }
         });
     }

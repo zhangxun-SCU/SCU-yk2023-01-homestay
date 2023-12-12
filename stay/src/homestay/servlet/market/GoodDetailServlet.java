@@ -1,6 +1,5 @@
 package homestay.servlet.market;
 
-import com.sun.deploy.net.HttpRequest;
 import homestay.dao.Data;
 import homestay.service.market.HouseMarketService;
 import homestay.service.market.RoomService;

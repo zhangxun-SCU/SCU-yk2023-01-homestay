@@ -1,12 +1,11 @@
 package homestay.servlet;
 
 import homestay.dao.Data;
-import homestay.service.EmailService;
+import homestay.service.verify.EmailService;
 import homestay.service.UploadService;
 import homestay.service.UserService;
-import homestay.service.VerifyService;
+import homestay.service.verify.VerifyService;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.mail.EmailException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,7 +37,7 @@ public class UserServlet extends HttpServlet {
             String action = data.getParam().getString("action");
             if(action.equals("register")) {
                 doRegister(req, resp);
-            } else if(data.getParam().getString("action").equals("modifyPassword")) {
+            } else if(action.equals("modifyPassword")) {
                 doModifyPassword(req, resp);
             }
         } catch (JSONException e) {

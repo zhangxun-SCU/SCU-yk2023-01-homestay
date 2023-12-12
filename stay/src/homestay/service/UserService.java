@@ -1,5 +1,6 @@
 package homestay.service;
 
+import homestay.bean.UserBean;
 import homestay.dao.Data;
 import homestay.dao.UserDao;
 import homestay.entity.User;
@@ -25,10 +26,10 @@ public class UserService {
         // 检查重复id
         User attemptUser = dao.queryUserById(id);
         if(attemptUser.id != null){
-           // 存在相同id
+            // 存在相同id
             resJson.put("resCode", "R0001");
             resJson.put("registerInfo", "error: duplicate usernames");
-           return false;
+            return false;
         }
         User attemptUserEmail = dao.queryUserByKey("email", email);
         if(attemptUserEmail.email != null) {
@@ -66,5 +67,35 @@ public class UserService {
         dao.updateByKey(id, "avatar", urls.get(0));
         resJson.put("resCode", "00000");
         resJson.put("resetInfo", "success");
+    }
+    public List<UserBean> getAllUsers() {
+
+        UserDao userDao=  new UserDao();
+        return userDao.getAllUsers();
+    }
+
+    public void addNewUser(UserBean user) {
+        UserDao userDao=  new UserDao();
+        userDao.addNewUser(user);
+    }
+
+    public void deleteUserById(String user_id) {
+        UserDao userDao=  new UserDao();
+        userDao.deleteUserById(user_id);
+    }
+
+    public UserBean getUserById(String user_id) {
+        UserDao userDao=  new UserDao();
+        return  userDao.getUserById(user_id);
+    }
+
+    public void updateUserById(UserBean user) {
+        UserDao userDao=  new UserDao();
+        userDao.updateUserById(user);
+    }
+
+    public List<UserBean> searchUsersByUserId(String searchUserId) {
+        UserDao userDao=  new UserDao();
+        return userDao.searchUsersByUserId(searchUserId);
     }
 }
