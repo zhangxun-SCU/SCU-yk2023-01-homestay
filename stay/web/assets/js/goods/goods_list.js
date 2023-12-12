@@ -36,7 +36,7 @@ function getAllHomestays() {
                     html += `    <div class="d-flex justify-content-between align-items-center">`;
                     html += `        <div class="me-3 mb-3">`;
                     html += `            <button type="button"`;
-                    html += `                    class="btn btn-sm light btn-primary detail_button" data-id=${homestay.house_id}>`;
+                    html += `                    class="btn btn-sm light btn-primary detail_homestay_button" data-id=${homestay.house_id}>`;
                     html += `                查看民宿内房间`;
                     html += `            </button>`;
                     html += `        </div>`;
@@ -64,6 +64,16 @@ function getAllHomestays() {
 }
 
 function initHomestayButtons() {
+    var detailButtons = document.querySelectorAll(".detail_homestay_button");
+    for (var i = 0; i < detailButtons.length; i++) {
+        var button = detailButtons[i];
+        button.addEventListener("click", (e) => {
+            var homestayId = e.target.dataset.id;
+            console.log(homestayId);
+            window.location.href = `/seller/house_detail.jsp?house_id=${homestayId}`;
+        })
+    }
+
     var deleteButtons = document.querySelectorAll(".delete_homestay_button");
     for (var i = 0; i < deleteButtons.length; i++) {
         var button = deleteButtons[i];
@@ -223,11 +233,11 @@ function getAllSpecialty() {
                     html += `</div>`;
                 }
                 $("#specialty_list").html(html);
-                initSpecialtyButtons();
             }
         }
     )
     $.ajaxSettings.async = true;
+    initSpecialtyButtons();
 }
 
 function initSpecialtyButtons() {

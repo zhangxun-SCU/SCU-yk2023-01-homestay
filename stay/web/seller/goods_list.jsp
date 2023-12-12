@@ -141,36 +141,6 @@
                                             <div class="my-post-content pt-3">
                                             </div>
                                             <div id="homestay_list">
-                                                <div class="card-body pb-3 transaction-details d-flex flex-wrap justify-content-between align-items-center">
-                                                    <div class="user-bx-2 me-3 mb-3">
-                                                        <img src="/upload/house_image/GH1701779773111.png"
-                                                             class="rounded" alt="">
-                                                        <div>
-                                                            <h3 class="fs-20 font-w700">民宿名称</h3>
-                                                            <span class="font-w400">民宿地址</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <div class="me-3 mb-3">
-                                                            <button type="button"
-                                                                    class="btn light btn-primary detail_button">
-                                                                查看民宿内房间
-                                                            </button>
-                                                        </div>
-                                                        <div class="me-3 mb-3">
-                                                            <button type="button"
-                                                                    class="btn light btn-primary modify_homestay_button">
-                                                                修改民宿信息
-                                                            </button>
-                                                        </div>
-                                                        <div class="me-3 mb-3">
-                                                            <button type="button"
-                                                                    class="btn btn-sm btn-outline-danger delete_homestay_button">
-                                                                下架民宿
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                         <div id="specialty-post" class="tab-pane fade">
