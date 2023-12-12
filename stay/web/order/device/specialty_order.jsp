@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <input type="hidden" id="page_id" name="page_id" value="order_list"/>
-<%--<script src="order.js"></script>--%>
+<%--<script src="specialty_order.js"></script>--%>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -1222,7 +1222,7 @@
 <script src="../../assets/js/dlabnav-init.js"></script>
 <script src="../../assets/js/demo.js"></script>
 <script src="../../assets/js/styleSwitcher.js"></script>
-<script src="../../assets/js/order/order.js"></script>
+<script src="../../assets/js/order/specialty_order.js"></script>
 
 </body>
 </html>
