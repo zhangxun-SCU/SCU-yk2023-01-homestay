@@ -302,7 +302,7 @@
 <!--**********************************
     Scripts
 ***********************************-->
-<%@ include file="/frame/frame_javascript.jsp" %>
+<%@ include file="../frame/frame_javascript.jsp" %>
 <!-- Required vendors -->
 <script src="../assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 <script src="../assets/vendor/chart.js/Chart.bundle.min.js"></script>
