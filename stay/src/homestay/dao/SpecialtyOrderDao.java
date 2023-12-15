@@ -38,7 +38,7 @@ public class SpecialtyOrderDao {
 		//构造sql语句，根据传递过来的条件参数
 		String id=data.getParam().has("order_id")?data.getParam().getString("order_id"):null;
 		if(id!=null){
-			String sql="delete from specialty_order where order_id="+data.getParam().getString("order_id");
+			String sql="delete from specialty_order where order_id='"+ data.getParam().getString("order_id")+"'";
 			data.getParam().put("sql",sql);
 			updateRecord(data,json);
 		}
@@ -147,7 +147,7 @@ public class SpecialtyOrderDao {
 		String sql="select * from specialty_order, specialty where (specialty_order.good_id=specialty.specialty_id)";
 		String order_id=data.getParam().has("order_id")?data.getParam().getString("order_id"):null;
 		if(order_id!=null && (! order_id.isEmpty())){
-			sql=sql+" and order_id="+order_id;
+			sql=sql+" and order_id like '%"+order_id+"%'";
 		}
 		String specialty_name=data.getParam().has("specialty_name")?data.getParam().getString("specialty_name"):null;
 		if(specialty_name!=null && (! specialty_name.isEmpty())){

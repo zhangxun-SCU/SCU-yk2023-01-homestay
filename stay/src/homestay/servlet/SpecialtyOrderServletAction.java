@@ -241,6 +241,7 @@ public class SpecialtyOrderServletAction extends HttpServlet {
 		dao.modifyDeviceRecord(data,json);
 	}
 	private void deleteDeviceRecord(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
+		System.out.println("aa");
 		SpecialtyOrderDao dao=new SpecialtyOrderDao();
 		dao.deleteDeviceRecord(data,json);
 	}

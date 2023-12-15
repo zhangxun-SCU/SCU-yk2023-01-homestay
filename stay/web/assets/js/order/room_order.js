@@ -13,10 +13,10 @@ var Page = function() {
     /*----------------------------------------入口函数  开始----------------------------------------*/
     var initPageControl=function(){
         pageId=$("#page_id").val();
-        if(pageId=="order_list"){
+        if(pageId=="room_order_list"){
             initOrderList();
         }
-        if(pageId=="print_word"){
+        if(pageId=="print_room_list_word"){
             initOrderListPrintWordRecord();
         }
     };
@@ -180,17 +180,17 @@ var Page = function() {
     }
     var onDeleteRecord = function(order_id){
         if(confirm("您确定要删除这条订单记录吗？")){
-            var url="../../homestay_servlet_specialty_order_servlet_action";
-            var data={};
-            data.action="delete_specialty_order_record";
-            data.order_id=order_id;
-            console.log(JSON.stringify(data));
-            $.post(url,data,function(json){
-                if(json.result_code==0){
-                    window.location.reload();
-                }
-            })
-
+            if(order_id>-1){
+                var url="../../homestay/servlet_specialty_order_servlet_action";
+                var data={};
+                data.action="delete_specialty_order_record";
+                data.order_id=order_id;
+                $.post(url,data,function(json){
+                    if(json.result_code==0){
+                        window.location.reload();
+                    }
+                })
+            }
         }
     };
 
