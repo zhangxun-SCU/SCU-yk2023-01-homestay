@@ -2,6 +2,7 @@ package homestay.servlet.seller;
 
 import homestay.dao.Data;
 import homestay.service.seller.HomestayService;
+import homestay.service.seller.RoomService;
 import homestay.service.seller.SpecialtyService;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,6 +41,8 @@ public class GoodsServlet extends HttpServlet {
                 dispatchSpecialtyAction(request, response, json);
             } else if (actionType.equals("homestay")) {
                 dispatchHomestayAction(request, response, json);
+            } else if (actionType.equals("room")) {
+                dispatchRoomAction(request, response, json);
             } else {
                 json.put("resCode", "G0001");
                 json.put("Information", "错误操作");
@@ -85,6 +88,24 @@ public class GoodsServlet extends HttpServlet {
         } else {
             json.put("resCode", "GH001");
             json.put("Information", "民宿错误操作");
+        }
+    }
+
+    private void dispatchRoomAction(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, IOException, SQLException {
+        RoomService roomService = new RoomService();
+        String action = data.getParam().getString("action");
+        showDebug("[dispatchRoomAction]", "action: " + action);
+        if (action.equals("add_room")) {
+            roomService.addRoom(data, json);
+        } else if (action.equals("get_room")) {
+            roomService.getRoom(data, json);
+        } else if (action.equals("delete_room")) {
+            roomService.deleteRoom(data, json);
+        } else if (action.equals("modify_room")) {
+            roomService.modifyRoom(data, json);
+        } else {
+            json.put("resCode", "GR001");
+            json.put("Information", "房间错误操作");
         }
     }
 }

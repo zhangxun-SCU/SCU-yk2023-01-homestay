@@ -27,7 +27,7 @@
     <%@include file="/frame/frame_style.jsp" %>
     <link rel="stylesheet" href="/assets/css/goods/house_detail.css">
 </head>
-<body>
+<body onload="onLoadFunction();">
 
 <%--  preloader start  --%>
 <%@include file="/frame/frame_preloader.jsp" %>
@@ -73,79 +73,62 @@
                                     <div class="product-detail-content">
                                         <!--Product details-->
                                         <div class="new-arrival-content pr">
-                                            <h4>
+                                            <h3 class="font-w700">
                                                 <%=homestay.house_name%>
-                                            </h4>
-                                            <div class="d-table mb-2">
-                                                <p class="price float-start d-block">$325.00</p>
-                                            </div>
+                                            </h3>
                                             <p>地址: <span class="item"><%=homestay.location%></span></p>
-                                            <p class="text-content">There are many variations of passages of Lorem Ipsum
-                                                available, but the majority have suffered alteration in some form, by
-                                                injected humour, or randomised words which don't look even slightly
-                                                believable.
-                                                If you are going to use a passage of Lorem Ipsum, you need to be sure
-                                                there isn't anything embarrassing.</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="mt-4 card-footer">
-                                    <a class="btn btn-primary float-end" href="javascript:void(0);">
-                                        <i class="fa fa-shopping-basket me-2"></i>
-                                        Add to cart
-                                    </a>
+                                    <div class="float-end">
+                                        <button type="button" class="btn btn-primary"
+                                                id="addRoomButton" data-id="<%=homestay.house_id%>">
+                                            <i class="fa fa-plus me-2"></i>
+                                            添加房间
+                                        </button>
+                                        <button type="button" class="btn btn-primary ml-5"
+                                                onclick="window.history.go(-1);">
+                                            <i class="fa fa-arrow-left me-2"></i>
+                                            返回上一页
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- review -->
-                <div class="modal fade" id="reviewModal">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Review</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal">
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form>
-                                    <div class="text-center mb-4">
-                                        <img class="img-fluid rounded" width="78" src="./images/avatar/1.jpg"
-                                             alt="DexignZone">
-                                    </div>
-                                    <div class="mb-3">
-                                        <div class="rating-widget mb-4 text-center">
-                                            <!-- Rating Stars Box -->
-                                            <div class="rating-stars">
-                                                <ul id="stars">
-                                                    <li class="star" title="Poor" data-value="1">
-                                                        <i class="fa fa-star fa-fw"></i>
-                                                    </li>
-                                                    <li class="star" title="Fair" data-value="2">
-                                                        <i class="fa fa-star fa-fw"></i>
-                                                    </li>
-                                                    <li class="star" title="Good" data-value="3">
-                                                        <i class="fa fa-star fa-fw"></i>
-                                                    </li>
-                                                    <li class="star" title="Excellent" data-value="4">
-                                                        <i class="fa fa-star fa-fw"></i>
-                                                    </li>
-                                                    <li class="star" title="WOW!!!" data-value="5">
-                                                        <i class="fa fa-star fa-fw"></i>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <textarea class="form-control" placeholder="Comment" rows="5"></textarea>
-                                    </div>
-                                    <button class="btn btn-success btn-block">RATE</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+            </div>
+            <div class="row card">
+                <div class="card-header">
+                    <h3 class="font-w700">所有房间信息</h3>
+                </div>
+                <div id="room_list">
+                    <%--                    <div class="card-body pb-3 transaction-details d-flex flex-wrap justify-content-between align-items-center">--%>
+                    <%--                        <div class="user-bx-2 me-3 mb-3">--%>
+                    <%--                            <img src="{imageurl}"--%>
+                    <%--                                 class="rounded"--%>
+                    <%--                                 alt="">--%>
+                    <%--                            <div>--%>
+                    <%--                                <h3 class="fs-20 font-w700">{房间名称}</h3>--%>
+                    <%--                                <span class="font-w400 price">&yen;{price}</span>--%>
+                    <%--                            </div>--%>
+                    <%--                        </div>--%>
+                    <%--                        <div class="d-flex justify-content-between align-items-center">--%>
+                    <%--                            <div class="me-3 mb-3">--%>
+                    <%--                                <button type="button" class="btn btn-sm light btn-primary modify_room_button"--%>
+                    <%--                                        data-id="{room_id}">--%>
+                    <%--                                    修改房间信息--%>
+                    <%--                                </button>--%>
+                    <%--                            </div>--%>
+                    <%--                            <div class="me-3 mb-3">--%>
+                    <%--                                <button type="button" class="btn btn-sm btn-outline-danger delete_room_button"--%>
+                    <%--                                        data-id="room_id">--%>
+                    <%--                                    删除房间--%>
+                    <%--                                </button>--%>
+                    <%--                            </div>--%>
+                    <%--                        </div>--%>
+                    <%--                    </div>--%>
                 </div>
             </div>
         </div>
@@ -155,10 +138,14 @@
     <%@include file="/frame/frame_footer.jsp" %>
     <%--  footer end  --%>
 </div>
+
+<%@ include file="/seller/modals/add_room_modal.jsp" %>
+<%@ include file="/seller/modals/modify_room_modal.jsp" %>
+<%@ include file="/seller/modals/delete_room_modal.jsp" %>
 <%--  script start  --%>
 
 <%@include file="/frame/frame_javascript.jsp" %>
-
+<script src="../assets/js/goods/house_detail.js"></script>
 <%--  script end  --%>
 </body>
 </html>
