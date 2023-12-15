@@ -25,16 +25,9 @@
     <link href="../assets/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/goods/goods_page.css">
 
-    <!--    &lt;!&ndash; dropify &ndash;&gt;-->
-    <!--&lt;!&ndash;    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"/>&ndash;&gt;-->
-    <!--    <link rel="stylesheet" href="../assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.css"/>-->
-    <!--    <link rel="stylesheet" href="../assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"/>-->
-    <!--    <link rel="stylesheet" href="../assets/plugins/multi-select/css/multi-select.css">-->
-    <!--    <link rel="stylesheet" href="../assets/plugins/dropify/css/dropify.min.css">-->
-
 </head>
 
-<body onload="onLoadFunction();">
+<body>
 
 <!--*******************
     Preloader start

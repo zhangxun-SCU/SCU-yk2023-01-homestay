@@ -1,6 +1,3 @@
-function onLoadFunction() {
-}
-
 $("#specialty_image").change((input_event) => {
     var file = input_event.target.files[0];
     console.log(input_event.target.files);

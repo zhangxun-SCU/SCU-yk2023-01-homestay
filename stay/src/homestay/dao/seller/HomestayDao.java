@@ -2,6 +2,7 @@ package homestay.dao.seller;
 
 import homestay.dao.DB;
 import homestay.dao.Data;
+import homestay.entity.Homestay;
 import org.json.JSONException;
 import org.json.JSONObject;
 import sun.misc.BASE64Decoder;
@@ -183,5 +184,25 @@ public class HomestayDao {
         }
         json.put("resCode", resCode);
         json.put("deleteHomestayInfo", info);
+    }
+
+    public Homestay queryHomestayById(String homestayId) throws SQLException {
+        DB db = new DB("group1");
+        String sql = "Select * From house Where house_id='" + homestayId + "'";
+        showDebug("[queryHomestayById]", "sql: " + sql);
+        ResultSet res = db.executeQuery(sql);
+        Homestay homestay = new Homestay();
+        while (res.next()) {
+            homestay.house_id = res.getString("house_id");
+            homestay.house_name = res.getString("house_name");
+            homestay.owner_id = res.getString("owner_id");
+            homestay.latitude = res.getDouble("latitude");
+            homestay.longitude = res.getDouble("longitude");
+            homestay.imageurl = res.getString("imageurl");
+            homestay.location = res.getString("location");
+        }
+        res.close();
+        db.close();
+        return homestay;
     }
 }
