@@ -14,10 +14,7 @@ public class HouseMarketService {
         MarketDao dao=new MarketDao();
         JSONArray specialtyList=new JSONArray();
         RoomService ros=new RoomService();
-
-
         try{
-            String user_id="Sunshuo";
             specialtyList =dao.queryAllHouse();
             json.put("good_list",specialtyList);
             json.put("code",0);
@@ -43,7 +40,6 @@ public class HouseMarketService {
                 String key=String.valueOf(keys.next());
                 json.put(key,specialty.getString(key));
             }
-            String user_id="Sunshuo";
             json.put("code",0);
         }
 
@@ -62,7 +58,6 @@ public class HouseMarketService {
         JSONArray specialtyList=new JSONArray();
 
         try{
-            String user_id="Sunshuo";
 
             specialtyList =dao.queryHouseByName(data.getParam().getString("search_name"));
             json.put("good_list",specialtyList);
@@ -81,9 +76,7 @@ public class HouseMarketService {
         MarketDao dao=new MarketDao();
         JSONArray specialtyList=new JSONArray();
         try{
-            String user_id="Sunshuo";
-            CartService cs=new CartService();
-            cs.queryNumCartByUserId("Sunshuo",json);
+
             specialtyList =dao.queryHouseByList(data);
             json.put("good_list",specialtyList);
             json.put("code",0);

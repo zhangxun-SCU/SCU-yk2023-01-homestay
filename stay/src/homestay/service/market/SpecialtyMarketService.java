@@ -10,14 +10,14 @@ import java.sql.SQLException;
 import java.util.*;
 
 public class SpecialtyMarketService {
-    public void queryAllSpecialty(Data data, JSONObject json) throws SQLException, JSONException {
+    public void queryAllSpecialty(Data data, JSONObject json,String user_id) throws SQLException, JSONException {
         MarketDao dao=new MarketDao();
         JSONArray specialtyList=new JSONArray();
 
         try{
 
             CartService cs=new CartService();
-            cs.queryNumCartByUserId("Sunshuo",json);
+            cs.queryNumCartByUserId(user_id,json);
             specialtyList =dao.queryAllSpecialty();
             json.put("good_list",specialtyList);
             json.put("code",0);
@@ -32,7 +32,7 @@ public class SpecialtyMarketService {
 
     }
 
-    public void querySpecialtyById(String goodId, JSONObject json) throws SQLException, JSONException {
+    public void querySpecialtyById(String goodId, JSONObject json,String user_id) throws SQLException, JSONException {
         MarketDao dao=new MarketDao();
         try{
             JSONObject specialty=new JSONObject();
@@ -43,9 +43,9 @@ public class SpecialtyMarketService {
                 String key=String.valueOf(keys.next());
                 json.put(key,specialty.getString(key));
             }
-            String user_id="Sunshuo";
+
             CartService cs=new CartService();
-            cs.queryNumCartByUserId("Sunshuo",json);
+            cs.queryNumCartByUserId(user_id,json);
             json.put("code",0);
         }
 
@@ -59,14 +59,14 @@ public class SpecialtyMarketService {
     }
 
 
-    public void querySpecialtyByName(Data data, JSONObject json) throws JSONException {
+    public void querySpecialtyByName(Data data, JSONObject json,String user_id) throws JSONException {
         MarketDao dao=new MarketDao();
         JSONArray specialtyList=new JSONArray();
 
         try{
 
             CartService cs=new CartService();
-            cs.queryNumCartByUserId("Sunshuo",json);
+            cs.queryNumCartByUserId(user_id,json);
             specialtyList =dao.querySpecialtyByName(data.getParam().getString("search_name"));
             json.put("good_list",specialtyList);
             json.put("code",0);
@@ -80,13 +80,13 @@ public class SpecialtyMarketService {
         }
     }
 
-    public void querySpecialtyByList(Data data, JSONObject json) throws JSONException {
+    public void querySpecialtyByList(Data data, JSONObject json,String user_id) throws JSONException {
         MarketDao dao=new MarketDao();
         JSONArray specialtyList=new JSONArray();
         try{
 
             CartService cs=new CartService();
-            cs.queryNumCartByUserId("Sunshuo",json);
+            cs.queryNumCartByUserId(user_id,json);
             specialtyList =dao.querySpecialtyByList(data);
             json.put("good_list",specialtyList);
             json.put("code",0);

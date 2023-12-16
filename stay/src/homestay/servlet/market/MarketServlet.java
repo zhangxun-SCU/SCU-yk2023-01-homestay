@@ -1,8 +1,10 @@
 package homestay.servlet.market;
 
 import homestay.dao.Data;
+import homestay.entity.User;
 import homestay.service.market.HouseMarketService;
 import homestay.service.market.SpecialtyMarketService;
+import homestay.utils.UserUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,10 +22,12 @@ public class MarketServlet extends HttpServlet {
     public  void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             Data data = Data.getPageParameters(req, resp);
+            String user_id=UserUtil.getUserId(req);
+
             JSONObject resJson = new JSONObject();  /* 响应数据 */
             String goodType=data.getParam().getString("good_type");
             if(goodType.equals("specialty")){
-                getSpecialtyMarketService(data,resJson);
+                getSpecialtyMarketService(data,resJson,user_id);
             }
 
             if(goodType.equals("house")){
@@ -55,20 +59,20 @@ public class MarketServlet extends HttpServlet {
         }
     }
 
-    public void getSpecialtyMarketService(Data data,JSONObject json) throws JSONException, SQLException {
+    public void getSpecialtyMarketService(Data data,JSONObject json,String user_id) throws JSONException, SQLException {
         SpecialtyMarketService sms=new SpecialtyMarketService();
         String action=data.getParam().getString("action");
         if(action.equals("query_all"))
         {
-            sms.queryAllSpecialty(data,json);
+            sms.queryAllSpecialty(data,json,user_id);
         }
         if(action.equals("query_by_name"))
         {
-            sms.querySpecialtyByName(data,json);
+            sms.querySpecialtyByName(data,json,user_id);
         }
         if(action.equals("query_by_list"))
         {
-            sms.querySpecialtyByList(data,json);
+            sms.querySpecialtyByList(data,json,user_id);
         }
     }
     }

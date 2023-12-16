@@ -4,6 +4,7 @@ import homestay.dao.Data;
 import homestay.service.market.HouseMarketService;
 import homestay.service.market.RoomService;
 import homestay.service.market.SpecialtyMarketService;
+import homestay.utils.UserUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,13 +21,14 @@ public class GoodDetailServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp) {
         try {
             Data data = Data.getPageParameters(req, resp);
+            String user_id= UserUtil.getUserId(req);
 
             JSONObject resJson = new JSONObject();  /* 响应数据 */
             String goodType = data.getParam().getString("good_type");
             String goodId=data.getParam().getString("good_id");
             if (goodType.equals("specialty")) {
                 SpecialtyMarketService service=new SpecialtyMarketService();
-                service.querySpecialtyById(goodId,resJson);
+                service.querySpecialtyById(goodId,resJson,user_id);
             }
             if(goodType.equals("house"))
             {
