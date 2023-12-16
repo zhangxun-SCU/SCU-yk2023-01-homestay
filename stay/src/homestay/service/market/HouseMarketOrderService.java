@@ -8,11 +8,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class HouseMarketOrderService {
-    public void queryHouseOrderByList(Data data, JSONObject json) throws JSONException {
+    public void queryHouseOrderByList(Data data, JSONObject json,String buyer_id) throws JSONException {
         MarketOrderDao dao=new MarketOrderDao();
         JSONArray specialtyList=new JSONArray();
         try{
-            String buyer_id="Sunshuo";
+
             String goodlist=data.getParam().getString("good_list");
             System.out.println(goodlist);
             JSONArray infolist=new JSONArray(goodlist);
