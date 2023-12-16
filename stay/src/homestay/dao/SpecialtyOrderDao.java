@@ -46,14 +46,23 @@ public class SpecialtyOrderDao {
 	/*修改记录*/
 	public void modifyDeviceRecord(Data data, JSONObject json) throws JSONException, SQLException{
 		//构造sql语句，根据传递过来的条件参数
-		String id=data.getParam().has("id")?data.getParam().getString("id"):null;
-		String deviceId=data.getParam().has("device_id")?data.getParam().getString("device_id"):null;
-		String deviceName=data.getParam().has("device_name")?data.getParam().getString("device_name"):null;
-		if(id!=null){
-			String sql="update device_file";
-			sql=sql+" set device_id='"+deviceId+"'";
-			sql=sql+" ,device_name='"+deviceName+"'";
-			sql=sql+" where id="+id;
+		String order_id=data.getParam().has("order_id")?data.getParam().getString("order_id"):null;
+		String good_id=data.getParam().has("good_id")?data.getParam().getString("good_id"):null;
+		String specialty_name=data.getParam().has("specialty_name")?data.getParam().getString("specialty_name"):null;
+		String per_price=data.getParam().has("per_price")?data.getParam().getString("per_price"):null;
+		if(order_id!=null){
+			String sql="update specialty_order";
+			//sql=sql+" set order_id='"+order_id+"'";
+			//sql=sql+" ,specialty_name='"+specialty_name+"'";
+			sql=sql+" set price="+per_price;
+			sql=sql+" where order_id='"+order_id+"'";
+			data.getParam().put("sql",sql);
+			updateRecord(data,json);
+		}
+		if(specialty_name!=null){
+			String sql="update specialty";
+			sql=sql+" set specialty_name='"+specialty_name+"'";
+			sql=sql+" where specialty_id='"+good_id+"'";
 			data.getParam().put("sql",sql);
 			updateRecord(data,json);
 		}
@@ -144,7 +153,8 @@ public class SpecialtyOrderDao {
 
 	private String createGetRecordSql(Data data) throws JSONException {
 		JSONObject param=data.getParam();
-		String sql="select * from specialty_order, specialty where (specialty_order.good_id=specialty.specialty_id)";
+		String username=data.getParam().has("username")?data.getParam().getString("username"):null;
+		String sql="select * from specialty_order, specialty where specialty_order.good_id=specialty.specialty_id and buyer_id='"+username+"'";
 		String order_id=data.getParam().has("order_id")?data.getParam().getString("order_id"):null;
 		if(order_id!=null && (! order_id.isEmpty())){
 			sql=sql+" and order_id like '%"+order_id+"%'";
@@ -153,6 +163,7 @@ public class SpecialtyOrderDao {
 		if(specialty_name!=null && (! specialty_name.isEmpty())){
 			sql=sql+" and specialty_name like '%"+specialty_name+"%'";
 		}
+
 //		String where="";
 //		if(checkParamValid(param,"id")){
 //			where="id="+param.getString("id");

@@ -828,6 +828,7 @@
     Main wrapper end
 ***********************************-->
 <%@ include file="device_modify_div.jsp" %>
+<%@ include file="/frame/frame_javascript.jsp" %>
 <!--**********************************
     Scripts
 ***********************************-->

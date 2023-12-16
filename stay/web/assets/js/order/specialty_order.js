@@ -10,6 +10,7 @@ jQuery(document).ready(function() {
 /* ================================================================================ */
 //关于页面的控件生成等操作都放在Page里
 var Page = function() {
+    var user = getUserInfo().id;
     /*----------------------------------------入口函数  开始----------------------------------------*/
     var initPageControl=function(){
         pageId=$("#page_id").val();
@@ -141,7 +142,7 @@ var Page = function() {
         data = {};
         data.order_id=$("#record_query_setup #order_id").val();
         data.specialty_name=$("#record_query_setup #specialty_name").val();
-
+        data.username=user;
         console.log(1)
         $.post("../../"+module+"_"+sub+"_specialty_order_servlet_action?action=get_specialty_order_record",data,function(json){
             console.log(JSON.stringify(json));
@@ -167,7 +168,7 @@ var Page = function() {
                         html=html+"                                        <td><div class=\"d-flex align-items-center\"><i class=\"fa fa-circle text-success me-1\"></i> "+(record.order_status!=0?'已支付':'未支付')+"</div></td>";
                         html=html+"                                        <td>";
                         html=html+"                                            <div class=\"d-flex\">";
-                        html=html+"                                                <a href=\"#\" class=\"btn btn-primary shadow btn-xs sharp me-1\"><i class=\"fas fa-pencil-alt\"></i></a>";
+                        html=html+"                                                <a href=\"javascript:Page.onModifyRecord('"+record.order_id+"')\" class=\"btn btn-primary shadow btn-xs sharp me-1\"><i class=\"fas fa-pencil-alt\"></i></a>";
                         html=html+"                                                <a href=\"javascript:Page.onDeleteRecord('"+record.order_id+"')\" class=\"btn btn-danger shadow btn-xs sharp\"><i class=\"fa fa-trash\"></i></a>";
                         html=html+"                                            </div>";
                         html=html+"                                        </td>";
@@ -197,15 +198,33 @@ var Page = function() {
     var onModifyRecord=function(order_id){
         //显示出修改前数据
         //window.location.href="device_modify.jsp?order_id="+order_id;
-        for(var i=0;i<resultList.length;i++){
-            if(resultList[i].order_id==order_id){
-                $("#record_modify_div #order_id").val(resultList[i].order_id);
-                $("#record_modify_div #specialty_name").val(resultList[i].specialty_name);
-                $("#record_modify_div #total_price").val(resultList[i].price*resultList[i].num);
-                $("#record_modify_div").modal("hide");
+        $.post("../../"+module+"_"+sub+"_specialty_order_servlet_action?action=get_specialty_order_record",data,function(json){
+            console.log(JSON.stringify(json));
+            if(json.result_code==0){
+                var list=json.aaData;
+                console.log(list);
+                for(var i=0;i<list.length;i++)
+                {
+                    if(list[i].order_id==order_id){
+                        $("#record_modify_div #order_id").val(list[i].order_id);
+                        $("#record_modify_div #good_id").val(list[i].good_id);
+                        $("#record_modify_div #specialty_name").val(list[i].specialty_name);
+                        $("#record_modify_div #per_price").val(list[i].price);
+                        $("#record_modify_div").modal("hide");
+                    }
+                }
+                $("#record_modify_div").modal("show");
             }
-        }
-        $("#record_modify_div").modal("show");
+        })
+        // for(var i=0;i<resultList.length;i++){
+        //     if(resultList[i].order_id==order_id){
+        //         $("#record_modify_div #order_id").val(resultList[i].order_id);
+        //         $("#record_modify_div #specialty_name").val(resultList[i].specialty_name);
+        //         $("#record_modify_div #total_price").val(resultList[i].price*resultList[i].num);
+        //         $("#record_modify_div").modal("hide");
+        //     }
+        // }
+        // $("#record_modify_div").modal("show");
     }
     var initOrderFileControlEvent=function(id){
         $('#jump_div #upload_button').click(function() {onJumpUploadFile();});
@@ -292,7 +311,7 @@ var Page = function() {
                         html=html+"                                        <td><div class=\"d-flex align-items-center\"><i class=\"fa fa-circle text-success me-1\"></i> "+(record.order_status!=0?'已支付':'未支付')+"</div></td>";
                         html=html+"                                        <td>";
                         html=html+"                                            <div class=\"d-flex\">";
-                        html=html+"                                                <a href=\"#\" class=\"btn btn-primary shadow btn-xs sharp me-1\"><i class=\"fas fa-pencil-alt\"></i></a>";
+                        html=html+"                                                <a href=\"javascript:Page.onModifyRecord('"+record.order_id+"')\" class=\"btn btn-primary shadow btn-xs sharp me-1\"><i class=\"fas fa-pencil-alt\"></i></a>";
                         html=html+"                                                <a href=\"javascript:Page.onDeleteRecord('"+record.order_id+"')\" class=\"btn btn-danger shadow btn-xs sharp\"><i class=\"fa fa-trash\"></i></a>";
                         html=html+"                                            </div>";
                         html=html+"                                        </td>";
@@ -354,7 +373,7 @@ var Page = function() {
                         html=html+"                                        <td><div class=\"d-flex align-items-center\"><i class=\"fa fa-circle text-success me-1\"></i> "+(record.order_status!=0?'已支付':'未支付')+"</div></td>";
                         html=html+"                                        <td>";
                         html=html+"                                            <div class=\"d-flex\">";
-                        html=html+"                                                <a href=\"#\" class=\"btn btn-primary shadow btn-xs sharp me-1\"><i class=\"fas fa-pencil-alt\"></i></a>";
+                        html=html+"                                                <a href=\"javascript:Page.onModifyRecord('"+record.order_id+"')\" class=\"btn btn-primary shadow btn-xs sharp me-1\"><i class=\"fas fa-pencil-alt\"></i></a>";
                         html=html+"                                                <a href=\"javascript:Page.onDeleteRecord('"+record.order_id+"')\" class=\"btn btn-danger shadow btn-xs sharp\"><i class=\"fa fa-trash\"></i></a>";
                         html=html+"                                            </div>";
                         html=html+"                                        </td>";
@@ -378,12 +397,13 @@ var Page = function() {
     }
     var submitModifyRecordDiv=function(){
         if(confirm("您确定要修改该记录吗？")){
-            var url="../../homestay/servlet_specialty_order_servlet_action";
+            var url="../../homestay_servlet_specialty_order_servlet_action";
             var data={};
             data.action="modify_device_record";
             data.order_id=$("#record_modify_div #order_id").val();
             data.specialty_name=$("#record_modify_div #specialty_name").val();
-            data.total_price=$("#record_modify_div #total_price").val();
+            data.per_price=$("#record_modify_div #per_price").val();
+            data.good_id=$("#record_modify_div #good_id").val();
             $.post(url,data,function(json){
                 if(json.result_code==0){
                     alert("已经完成设备修改。");
