@@ -25,7 +25,7 @@
     <meta name="format-detection" content="telephone=no">
     <title>Title</title>
     <%@include file="/frame/frame_style.jsp" %>
-    <link rel="stylesheet" href="/assets/css/goods/house_detail.css">
+    <link rel="stylesheet" href="/assets/css/seller/house_detail.css">
 </head>
 <body onload="onLoadFunction();">
 
@@ -145,7 +145,7 @@
 <%--  script start  --%>
 
 <%@include file="/frame/frame_javascript.jsp" %>
-<script src="../assets/js/goods/house_detail.js"></script>
+<script src="../assets/js/seller/house_detail.js"></script>
 <%--  script end  --%>
 </body>
 </html>

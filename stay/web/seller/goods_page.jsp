@@ -24,7 +24,7 @@
     <link href="../assets/vendor/lightgallery/css/lightgallery.min.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
     <link href="../assets/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/goods/goods_page.css">
+    <link rel="stylesheet" href="../assets/css/seller/goods_page.css">
 
 </head>
 
@@ -308,7 +308,7 @@
 <script src="../assets/vendor/lightgallery/js/lightgallery-all.min.js"></script>
 <script src="../assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
 <script src="../assets/js/plugins-init/sweetalert.init.js"></script>
-<script src="../assets/js/goods/goods_page.js"></script>
+<script src="../assets/js/seller/goods_page.js"></script>
 <%-- 地图API --%>
 <%--<script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=vHACkq2zCcvmYIGWtlw8dYbwYHbQj458"></script>--%>
 <script type="text/javascript">
@@ -319,7 +319,7 @@
 <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
 <script type="text/javascript"
         src="https://webapi.amap.com/maps?v=1.4.15&key=89fd825427ce3fbf3dc999e544b50f99&plugin=AMap.Geocoder"></script>
-<script src="../assets/js/goods/location.js"></script>
+<script src="../assets/js/seller/location.js"></script>
 
 </body>
 </html>

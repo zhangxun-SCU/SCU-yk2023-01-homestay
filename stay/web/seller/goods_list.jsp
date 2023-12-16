@@ -33,7 +33,7 @@
     <link href="../assets/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
     <link href="../assets/vendor/lightgallery/css/lightgallery.min.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/goods/goods_page.css">
+    <link rel="stylesheet" href="../assets/css/seller/goods_page.css">
 
     <!--    &lt;!&ndash; dropify &ndash;&gt;-->
     <!--&lt;!&ndash;    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"/>&ndash;&gt;-->
@@ -250,6 +250,6 @@
         return true;
     };
 </script>
-<script src="../assets/js/goods/goods_list.js"></script>
+<script src="../assets/js/seller/goods_list.js"></script>
 </body>
 </html>
