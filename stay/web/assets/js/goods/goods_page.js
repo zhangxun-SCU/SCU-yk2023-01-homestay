@@ -123,6 +123,7 @@ $("#add_homestay_button").click((e) => {
                             "您成功添加一间民宿",
                             "success"
                         )
+                        resolve("ok");
                     }).then((_) => {
                         window.location.reload();
                     })
