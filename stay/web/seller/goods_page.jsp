@@ -23,6 +23,7 @@
     <link href="../assets/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
     <link href="../assets/vendor/lightgallery/css/lightgallery.min.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="../assets/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/goods/goods_page.css">
 
 </head>
@@ -175,7 +176,8 @@
                                                         </div>
                                                         <div class="mb-3 row clearfix">
                                                             <div class="col-sm-10">
-                                                                <button type="button" class="btn btn-primary"
+                                                                <button type="button"
+                                                                        class="btn btn-primary sweet-success"
                                                                         id="add_homestay_button"
                                                                         name="add_homestay_button">
                                                                     发布新民宿
@@ -304,6 +306,8 @@
 <script src="../assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 <script src="../assets/vendor/chart.js/Chart.bundle.min.js"></script>
 <script src="../assets/vendor/lightgallery/js/lightgallery-all.min.js"></script>
+<script src="../assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
+<script src="../assets/js/plugins-init/sweetalert.init.js"></script>
 <script src="../assets/js/goods/goods_page.js"></script>
 <%-- 地图API --%>
 <%--<script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=vHACkq2zCcvmYIGWtlw8dYbwYHbQj458"></script>--%>
