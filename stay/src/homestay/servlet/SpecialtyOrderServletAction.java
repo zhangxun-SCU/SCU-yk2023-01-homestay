@@ -90,6 +90,22 @@ public class SpecialtyOrderServletAction extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
+			if (action.equals("get_specialty_order_record_up")) {
+				actionOk=true;
+				try {
+					getOrderRecordUp(request, response, json);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (action.equals("get_specialty_order_record_down")) {
+				actionOk=true;
+				try {
+					getOrderRecordDown(request, response, json);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 			if (action.equals("add_device_record")) {
 				actionOk=true;
 				try {
@@ -112,6 +128,14 @@ public class SpecialtyOrderServletAction extends HttpServlet {
 				actionOk=true;
 				try {
 					deleteDeviceRecord(request, response, json);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (action.equals("pay_specialty_order_record")) {
+				actionOk=true;
+				try {
+					paySpecialtyOrderRecord(request, response, json);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -236,9 +260,23 @@ public class SpecialtyOrderServletAction extends HttpServlet {
 		SpecialtyOrderDao dao=new SpecialtyOrderDao();
 		dao.getDeviceRecordUnfinished(data,json);
 	}
+	private void getOrderRecordUp(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
+		SpecialtyOrderDao dao=new SpecialtyOrderDao();
+		dao.getDeviceRecordUp(data,json);
+	}
+	private void getOrderRecordDown(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
+		SpecialtyOrderDao dao=new SpecialtyOrderDao();
+		dao.getDeviceRecordDown(data,json);
+	}
 	private void modifyDeviceRecord(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
 		SpecialtyOrderDao dao=new SpecialtyOrderDao();
 		dao.modifyDeviceRecord(data,json);
+	}
+
+	private void paySpecialtyOrderRecord(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
+		System.out.println("aa");
+		SpecialtyOrderDao dao=new SpecialtyOrderDao();
+		dao.paySpecialtyOrderRecord(data,json);
 	}
 	private void deleteDeviceRecord(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
 		System.out.println("aa");

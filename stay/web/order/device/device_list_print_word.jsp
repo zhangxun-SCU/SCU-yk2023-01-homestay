@@ -182,6 +182,25 @@
 </div>
 
 </body>
+<script src="/assets/vendor/global/global.min.js"></script>
+<script src="/assets/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+<script src="/assets/js/custom.min.js"></script>
+<script src="/assets/js/dlabnav-init.js"></script>
+<script src="/assets/js/demo.js"></script>
+<script>
+    function getUserInfo() {
+        const token = getCookie("token")
+        return JSON.parse(window.atob(token.split('.')[1]))
+    }
+</script>
+<script>
+    /**
+     * top menu slider
+     */
+
+    $('#to-profile').attr('href', `/user/user-profile.jsp?id=\${getUserInfo().id}`);
+</script>
+
 <%--<%@include file="../home/frame/frame_javascript.jsp" %>--%>
 <script src="../../assets/js/order/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="../../assets/js/order/specialty_order.js" defer></script>

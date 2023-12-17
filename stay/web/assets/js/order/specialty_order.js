@@ -54,6 +54,9 @@ var Page = function() {
         $('#order_list_all_button').click(function() {onOrderListAll();});
         $('#order_list_finished_button').click(function() {onOrderListFinished();});
         $('#order_list_unfinished_button').click(function() {onOrderListUnfinished();});
+        $('#order_list_up_button').click(function() {onOrderListUp();});
+        $('#order_list_down_button').click(function() {onOrderListDown();});
+
         $('#record_modify_div #submit_button').click(function() {onModifyDivSubmit();});
         $('#record_add_div #submit_button').click(function() {onAddDivSubmit();});
         $('#query_button').click(function() {onQueryRecord();});
@@ -134,6 +137,8 @@ var Page = function() {
         getOrderRecordList();
         getOrderRecordFinished();
         getOrderRecordUnfinished();
+        getOrderRecordUp();
+        getOrderRecordDown();
     }
     var initOrderMobileRecord=function(){
         getOrderMobileRecord();
@@ -282,10 +287,9 @@ var Page = function() {
     var resultList=[];
     var getOrderRecordFinished=function(){
         data = {};
-        data = {};
         data.order_id=$("#record_query_setup #order_id").val();
         data.specialty_name=$("#record_query_setup #specialty_name").val();
-
+        data.username=user;
         console.log(1)
         $.post("../../"+module+"_"+sub+"_specialty_order_servlet_action?action=get_specialty_order_record_finished",data,function(json){
             console.log(JSON.stringify(json));
@@ -326,27 +330,53 @@ var Page = function() {
     $('#order_list_all_button').click(function() {onOrderListAll();});
     $('#order_list_finished_button').click(function() {onOrderListFinished();});
     $('#order_list_unfinished_button').click(function() {onOrderListUnfinished();});
+    $('#order_list_up_button').click(function() {onOrderListUp();});
 
     var onOrderListAll=function(){
         $("#all_order_tab").show();
         $("#finished_order_tab").hide();
         $("#unfinished_order_tab").hide();
+        $("#up_order_tab").hide();
+        $("#down_order_tab").hide();
+
     }
     var onOrderListFinished=function(){
         $("#all_order_tab").hide();
         $("#finished_order_tab").show();
         $("#unfinished_order_tab").hide();
+        $("#up_order_tab").hide();
+        $("#down_order_tab").hide();
+
     }
     var onOrderListUnfinished=function(){
         $("#all_order_tab").hide();
         $("#finished_order_tab").hide();
         $("#unfinished_order_tab").show();
+        $("#up_order_tab").hide();
+        $("#down_order_tab").hide();
+
+    }
+    var onOrderListUp=function(){
+        $("#all_order_tab").hide();
+        $("#finished_order_tab").hide();
+        $("#unfinished_order_tab").hide();
+        $("#up_order_tab").show();
+        $("#down_order_tab").hide();
+
+    }
+    var onOrderListDown=function(){
+        $("#all_order_tab").hide();
+        $("#finished_order_tab").hide();
+        $("#unfinished_order_tab").hide();
+        $("#up_order_tab").hide();
+        $("#down_order_tab").show();
     }
 
     var getOrderRecordUnfinished=function(){
         data = {};
         data.order_id=$("#record_query_setup #order_id").val();
         data.specialty_name=$("#record_query_setup #specialty_name").val();
+        data.username=user;
 
         console.log(1)
         $.post("../../"+module+"_"+sub+"_specialty_order_servlet_action?action=get_specialty_order_record_unfinished",data,function(json){
@@ -378,7 +408,7 @@ var Page = function() {
                         html=html+"                                            </div>";
                         html=html+"                                        </td>";
                         html=html+"                                        <td>";
-                        html=html+"                                            <a href=\"javascript:Page.onModifyRecord('"+record.order_id+"')\">【修改记录】</a><a href=\"javascript:Page.onDeleteRecord("+record.id+")\">【删除记录】</a>";
+                        html=html+"                                            <a href=\"javascript:Page.onPayOrder('"+record.order_id+"')\">【支付订单】</a>";
                         html=html+"                                        </td>";
                         html=html+"                                    </tr>";
                     }
@@ -387,6 +417,105 @@ var Page = function() {
             }
         })
     }
+    var getOrderRecordUp=function(){
+        data = {};
+        data.order_id=$("#record_query_setup #order_id").val();
+        data.specialty_name=$("#record_query_setup #specialty_name").val();
+        data.username=user;
+
+        console.log(1)
+        $.post("../../"+module+"_"+sub+"_specialty_order_servlet_action?action=get_specialty_order_record_up",data,function(json){
+            console.log(JSON.stringify(json));
+            if(json.result_code==0){
+                var list=json.aaData;
+                console.log(list);
+                var html="";
+                if(list!=undefined && list.length>0){
+                    for(var i=0;i<list.length;i++){
+                        var record=list[i];
+                        console.log(record);
+                        html=html+"                                   <tr>";
+                        html=html+"                                        <td>";
+                        html=html+"                                            <div class=\"form-check custom-checkbox checkbox-success check-lg me-3\">";
+                        html=html+"                                                <input type=\"checkbox\" class=\"form-check-input\" id=\"customCheckBox2\" required=\"\">";
+                        html=html+"                                                <label class=\"form-check-label\" for=\"customCheckBox2\"></label>";
+                        html=html+"                                            </div>";
+                        html=html+"                                        </td>";
+                        html=html+"                                        <td><strong>"+record.order_id+"</strong></td>";
+                        html=html+"                                        <td><div class=\"d-flex align-items-center\"><img src=\"images/avatar/1.jpg\" class=\"rounded-lg me-2\" width=\"24\" alt=\"\"/> <span class=\"w-space-no\">"+record.specialty_name+"</span></div></td>";
+                        html=html+"                                        <td>"+record.num+"	</td>";
+                        html=html+"                                        <td>"+record.price*record.num+"</td>";
+                        html=html+"                                        <td><div class=\"d-flex align-items-center\"><i class=\"fa fa-circle text-success me-1\"></i> "+(record.order_status!=0?'已支付':'未支付')+"</div></td>";
+                        html=html+"                                        <td>";
+                        html=html+"                                            <div class=\"d-flex\">";
+                        html=html+"                                                <a href=\"javascript:Page.onModifyRecord('"+record.order_id+"')\" class=\"btn btn-primary shadow btn-xs sharp me-1\"><i class=\"fas fa-pencil-alt\"></i></a>";
+                        html=html+"                                                <a href=\"javascript:Page.onDeleteRecord('"+record.order_id+"')\" class=\"btn btn-danger shadow btn-xs sharp\"><i class=\"fa fa-trash\"></i></a>";
+                        html=html+"                                            </div>";
+                        html=html+"                                        </td>";
+                        html=html+"                                    </tr>";
+                    }
+                }
+                $("#order_table_content_up_div").html(html);
+            }
+        })
+    }
+    var getOrderRecordDown=function(){
+        data = {};
+        data.order_id=$("#record_query_setup #order_id").val();
+        data.specialty_name=$("#record_query_setup #specialty_name").val();
+        data.username=user;
+
+        console.log(1)
+        $.post("../../"+module+"_"+sub+"_specialty_order_servlet_action?action=get_specialty_order_record_down",data,function(json){
+            console.log(JSON.stringify(json));
+            if(json.result_code==0){
+                var list=json.aaData;
+                console.log(list);
+                var html="";
+                if(list!=undefined && list.length>0){
+                    for(var i=0;i<list.length;i++){
+                        var record=list[i];
+                        console.log(record);
+                        html=html+"                                   <tr>";
+                        html=html+"                                        <td>";
+                        html=html+"                                            <div class=\"form-check custom-checkbox checkbox-success check-lg me-3\">";
+                        html=html+"                                                <input type=\"checkbox\" class=\"form-check-input\" id=\"customCheckBox2\" required=\"\">";
+                        html=html+"                                                <label class=\"form-check-label\" for=\"customCheckBox2\"></label>";
+                        html=html+"                                            </div>";
+                        html=html+"                                        </td>";
+                        html=html+"                                        <td><strong>"+record.order_id+"</strong></td>";
+                        html=html+"                                        <td><div class=\"d-flex align-items-center\"><img src=\"images/avatar/1.jpg\" class=\"rounded-lg me-2\" width=\"24\" alt=\"\"/> <span class=\"w-space-no\">"+record.specialty_name+"</span></div></td>";
+                        html=html+"                                        <td>"+record.num+"	</td>";
+                        html=html+"                                        <td>"+record.price*record.num+"</td>";
+                        html=html+"                                        <td><div class=\"d-flex align-items-center\"><i class=\"fa fa-circle text-success me-1\"></i> "+(record.order_status!=0?'已支付':'未支付')+"</div></td>";
+                        html=html+"                                        <td>";
+                        html=html+"                                            <div class=\"d-flex\">";
+                        html=html+"                                                <a href=\"javascript:Page.onModifyRecord('"+record.order_id+"')\" class=\"btn btn-primary shadow btn-xs sharp me-1\"><i class=\"fas fa-pencil-alt\"></i></a>";
+                        html=html+"                                                <a href=\"javascript:Page.onDeleteRecord('"+record.order_id+"')\" class=\"btn btn-danger shadow btn-xs sharp\"><i class=\"fa fa-trash\"></i></a>";
+                        html=html+"                                            </div>";
+                        html=html+"                                        </td>";
+                        html=html+"                                    </tr>";
+                    }
+                }
+                $("#order_table_content_down_div").html(html);
+            }
+        })
+    }
+    var onPayOrder = function(order_id){
+        if(confirm("您确定要支付该订单吗？")){
+            var url="../../homestay_servlet_specialty_order_servlet_action";
+            var data={};
+            data.action="pay_specialty_order_record";
+            data.order_id=order_id;
+            console.log(JSON.stringify(data));
+            $.post(url,data,function(json){
+                if(json.result_code==0){
+                    window.location.reload();
+                }
+            })
+
+        }
+    };
     var onModifyDivSubmit=function(){
         submitModifyRecordDiv();
         $("#record_modify_div").modal("hide");
@@ -454,7 +583,7 @@ var Page = function() {
         $("#page_header").hide();
         $("#page_content").attr("style","margin-left:0px");
         $("#page_container").attr("style","margin-top:0px");
-        var url="../../homestay/servlet_specialty_order_servlet_action";
+        var url="../../homestay_servlet_specialty_order_servlet_action";
         var data={"action":"get_device_record"};
         $.post(url,data,function(json){
             console.log(JSON.stringify(json));
@@ -500,6 +629,7 @@ var Page = function() {
         $("#page_container").attr("style","margin-top:0px");
         var url="../../homestay_servlet_specialty_order_servlet_action";
         var data={"action":"get_specialty_order_record"};
+        data.username=user;
         $.post(url,data,function(json){
             console.log(JSON.stringify(json));
             var list=json.aaData;
@@ -662,6 +792,9 @@ var Page = function() {
         },
         onDeleteRecord:function(id){
             onDeleteRecord(id);
+        },
+        onPayOrder:function(id){
+            onPayOrder(id);
         },
         onModifyRecord:function(id){
             onModifyRecord(id);
