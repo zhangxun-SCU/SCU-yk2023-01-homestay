@@ -302,41 +302,43 @@ public class SpecialtyOrderDao {
 		/*--------------------循环 结束--------------------*/
 	}
 
-	public void getGpsReceiveCountByHour(Data data, JSONObject json) throws JSONException {
+	public void getOrderCountByHour(Data data, JSONObject json) throws JSONException {
 		/*--------------------获取变量 开始--------------------*/
+		String username=data.getParam().has("username")?data.getParam().getString("username"):null;
 		String resultMsg = "ok";
 		int resultCode = 0;
 		List jsonList = new ArrayList();
 		Calendar cal=Calendar.getInstance();
-		cal.add(Calendar.DATE,-1);   //yyyy-MM-dd
+		cal.add(Calendar.DATE,-5);   //yyyy-MM-dd
 		String timeFrom=(new SimpleDateFormat("yyyy-MM-dd 00:00:00")).format(cal.getTime());
+		cal.add(Calendar.DATE,5);   //yyyy-MM-dd
 		String timeTo=(new SimpleDateFormat("yyyy-MM-dd 23:59:59")).format(cal.getTime());
 		int totalGpsActiveCount=0;
 		/*--------------------获取变量 完毕--------------------*/
 		/*--------------------数据操作 开始--------------------*/
-//		DbRemote queryDb = new DbRemote("yjykfsj2023");
-//		String sql="SELECT DATE_FORMAT(GPSTime,\"%Y-%m-%d %H\") as time_interval,count(*) as total from gps_history_202310";
-//		sql=sql+" where GPSTime between '"+timeFrom+"' and '"+timeTo+"'";
-//		sql=sql+" group by DATE_FORMAT(GPSTime,\"%Y-%m-%d %H\")";
-//		showDebug("[getGpsStatistic]构造的SQL语句是：" + sql);
-//		try {
-//			ResultSet rs = queryDb.executeQuery(sql);
-//			ResultSetMetaData rsmd = rs.getMetaData();
-//			int fieldCount = rsmd.getColumnCount();
-//			while (rs.next()) {
-//				HashMap map=new HashMap();
-//				map.put("time_interval",rs.getString("time_interval"));
-//				map.put("total",rs.getInt("total"));
-//				jsonList.add(map);
-//			}
-//			rs.close();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			showDebug("[getGpsStatistic]查询数据库出现错误：" + sql);
-//			resultCode = 10;
-//			resultMsg = "查询数据库出现错误！" + e.getMessage();
-//		}
-//		queryDb.close();
+		DB queryDb = new DB("group1");
+		String sql="SELECT DATE_FORMAT(create_date,\"%Y-%m-%d %H\") as time_interval,count(*) as total from specialty_order";
+		sql=sql+" where buyer_id='"+username+"' and create_date between '"+timeFrom+"' and '"+timeTo+"'";
+		sql=sql+" group by DATE_FORMAT(create_date,\"%Y-%m-%d %H\")";
+		showDebug("[getOrderStatistic]构造的SQL语句是：" + sql);
+		try {
+			ResultSet rs = queryDb.executeQuery(sql);
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int fieldCount = rsmd.getColumnCount();
+			while (rs.next()) {
+				HashMap map=new HashMap();
+				map.put("time_interval",rs.getString("time_interval"));
+				map.put("total",rs.getInt("total"));
+				jsonList.add(map);
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			showDebug("[getOrderStatistic]查询数据库出现错误：" + sql);
+			resultCode = 10;
+			resultMsg = "查询数据库出现错误！" + e.getMessage();
+		}
+		queryDb.close();
 		/*--------------------数据操作 结束--------------------*/
 		/*--------------------返回数据 开始--------------------*/
 		json.put("aaData",jsonList);

@@ -295,7 +295,7 @@ public class RoomOrderServletAction {
 //	}
     private void getGpsReceiveCountByHour(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, IOException {
         SpecialtyOrderDao dao=new SpecialtyOrderDao();
-        dao.getGpsReceiveCountByHour(data,json);
+        //dao.getGpsReceiveCountByHour(data,json);
     }
     /*========================================上传文件函数 开始========================================*/
     private void uploadFile(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {

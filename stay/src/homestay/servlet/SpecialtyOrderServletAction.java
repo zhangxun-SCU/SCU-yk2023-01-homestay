@@ -106,6 +106,14 @@ public class SpecialtyOrderServletAction extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
+			if(action.equals("get_specialty_order_record_by_hour")){
+				actionOk=true;
+				try {
+					getOrderCountByHour(request, response, json);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 			if (action.equals("add_device_record")) {
 				actionOk=true;
 				try {
@@ -295,10 +303,15 @@ public class SpecialtyOrderServletAction extends HttpServlet {
 		dao.getDeviceRecord(data,json);
 		getExportDeviceRecordToFile(json);
 		getExportDeviceRecordToTxt(json);
-//		getExportDeviceRecordToExcel(json);
+		getExportDeviceRecordToExcel(json);
 		getExportDeviceRecordToPdf(json);
 	}
-
+	private void getExportDeviceRecordToExcel(JSONObject json) throws JSONException, IOException {
+		MyExcel me=new MyExcel("C:\\upload\\maintain\\device\\export_order.xls");
+		json.put("download_url","/upload/maintain/device/export_order.xls");
+		json.put("file_path","C:\\upload\\maintain\\device\\export_order.xls");
+		me.exportData(data,json);
+	}
 	private void getExportDeviceRecordToPdf(JSONObject json) {
 		//exportDeviceRecordToPdf(data,json);
 	}
@@ -332,9 +345,9 @@ public class SpecialtyOrderServletAction extends HttpServlet {
 //		json.put("file_path","C:\\upload\\maintain\\device\\export_order.xls");
 //		me.exportData(data,json);
 //	}
-	private void getGpsReceiveCountByHour(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, IOException {
+	private void getOrderCountByHour(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, IOException {
 		SpecialtyOrderDao dao=new SpecialtyOrderDao();
-		dao.getGpsReceiveCountByHour(data,json);
+		dao.getOrderCountByHour(data,json);
 	}
 	/*========================================上传文件函数 开始========================================*/
 	private void uploadFile(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {

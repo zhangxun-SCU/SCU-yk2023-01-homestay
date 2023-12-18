@@ -20,8 +20,11 @@ var Page = function() {
         if(pageId=="print_word"){
             initOrderListPrintWordRecord();
         }
+        if(pageId=="specialty_order_statistic"){
+            initOrderStatistic();
+        }
     };
-
+    var chartData=[];
     /*----------------------------------------入口函数  结束----------------------------------------*/
     var columnsData=undefined;
     var recordResult=undefined;
@@ -62,8 +65,15 @@ var Page = function() {
         $('#query_button').click(function() {onQueryRecord();});
         $('#export_button').click(function() {onExportRecord();});
         $('#print_table_button').click(function() {window.location.href="device_list_print_table.jsp";});
-        $('#device_statistic').click(function() {window.location.href="device_statistic.jsp";});
+        $('#order_statistic').click(function() {window.location.href="device_statistic.jsp";});
         $('#print_word').click(function() {window.location.href="device_list_print_word.jsp";});
+    }
+
+    var initOrderStatistic=function(){
+        $.ajaxSettings.async=false;
+        initOrderStatisticRecord();
+        $.ajaxSettings.async=true;
+        initBarChart();
     }
     var initOrderAddControlEvent=function(){
         $("#help_button").click(function() {help();});
@@ -96,6 +106,7 @@ var Page = function() {
             }
         })
     }
+
     var onAddRecord=function(){
         $("#record_add_div").modal("show");
         //window.location.href="device_add.jsp";
@@ -566,8 +577,9 @@ var Page = function() {
     }
     var onExportRecord=function(){
         console.log("Export Record post");
-        var url="../../homestay/servlet_specialty_order_servlet_action";
+        var url="../../homestay_servlet_specialty_order_servlet_action";
         var data={"action":"export_device_record"};
+        data.username=user;
         $.post(url,data,function(json){
             if(json.result_code==0){
                 console.log(JSON.stringify(json));
@@ -700,8 +712,9 @@ var Page = function() {
     }
 
     var initOrderStatisticRecord=function(){
-        var url="../../homestay/servlet_specialty_order_servlet_action";
-        var data={"action":"get_gps_receive_count_by_hour"};
+        var url="../../homestay_servlet_specialty_order_servlet_action";
+        var data={"action":"get_specialty_order_record_by_hour"};
+        data.username=user;
         console.log("init statistic record");
         $.post(url,data,function(json){
             var html = "";

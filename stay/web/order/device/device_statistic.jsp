@@ -15,7 +15,7 @@
     <meta content="" name="description"/>
     <meta content="" name="author"/>
 
-    <%@include file="../../home/frame/frame_style.jsp"%>
+<%--    <%@include file="../../home/frame/frame_style.jsp"%>--%>
 
     <link rel="stylesheet" type="text/css" href="dataTables.bootstrap.css" />
     <link rel="shortcut icon" href="favicon.ico"/>
@@ -24,68 +24,66 @@
 <!-- BEGIN BODY -->
 <body class="page-header-fixed page-quick-sidebar-over-content ">
 <!-- BEGIN HEADER -->
-<%@include file="../../home/frame/frame_header.jsp"%>
+<%--<%@include file="../../home/frame/frame_header.jsp"%>--%>
 <!-- END HEADER -->
 <div class="clearfix">
 </div>
 <!-- BEGIN CONTAINER -->
 <div class="page-container">
     <!-- BEGIN SIDEBAR -->
-    <%@include file="../../home/frame/frame_left_sidebar.jsp"%>
+<%--    <%@include file="../../home/frame/frame_left_sidebar.jsp"%>--%>
     <!-- END SIDEBAR -->
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
         <div class="page-content">
             <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-            <%@include file="../../home/frame/frame_page_header.jsp"%>
+<%--            <%@include file="../../home/frame/frame_page_header.jsp"%>--%>
             <!-- END STYLE CUSTOMIZER -->
             <!-- BEGIN PAGE HEADER-->
             <!------------------------------------页面开始------------------------------------->
-            <h3 class="page-title">
-                设备信息 <small>管理设备数据</small>
-            </h3>
+
             <div class="page-bar">
                 <ul class="page-breadcrumb">
-                    <li>
-                        <i class="fa fa-home"></i>
-                        <a href="index.html">Home</a>
-                        <i class="fa fa-angle-right"></i>
-                    </li>
-                    <li>
-                        <a href="#">Data Tables</a>
-                        <i class="fa fa-angle-right"></i>
-                    </li>
-                    <li>
-                        <a href="#">Basic Datatables</a>
-                    </li>
-                </ul>
-                <div class="page-toolbar">
-                    <div class="btn-group pull-right">
-                        <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
-                            Actions <i class="fa fa-angle-down"></i>
-                        </button>
-                        <ul class="dropdown-menu pull-right" role="menu">
-                            <li>
-                                <a href="#">Action</a>
-                            </li>
-                            <li>
-                                <a href="#">Another action</a>
-                            </li>
-                            <li>
-                                <a href="#">Something else here</a>
-                            </li>
-                            <li class="divider">
-                            </li>
-                            <li>
-                                <a href="#">Separated link</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+<%--                    <li>--%>
+<%--                        <i class="fa fa-home"></i>--%>
+<%--                        <a href="index.html">Home</a>--%>
+<%--                        <i class="fa fa-angle-right"></i>--%>
+<%--                    </li>--%>
+<%--                    <li>--%>
+<%--                        <a href="#">Data Tables</a>--%>
+<%--                        <i class="fa fa-angle-right"></i>--%>
+<%--                    </li>--%>
+<%--                    <li>--%>
+<%--                        <a href="#">Basic Datatables</a>--%>
+<%--                    </li>--%>
+<%--                </ul>--%>
+<%--                <div class="page-toolbar">--%>
+<%--                    <div class="btn-group pull-right">--%>
+<%--                        <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">--%>
+<%--                            Actions <i class="fa fa-angle-down"></i>--%>
+<%--                        </button>--%>
+<%--                        <ul class="dropdown-menu pull-right" role="menu">--%>
+<%--                            <li>--%>
+<%--                                <a href="#">Action</a>--%>
+<%--                            </li>--%>
+<%--                            <li>--%>
+<%--                                <a href="#">Another action</a>--%>
+<%--                            </li>--%>
+<%--                            <li>--%>
+<%--                                <a href="#">Something else here</a>--%>
+<%--                            </li>--%>
+<%--                            <li class="divider">--%>
+<%--                            </li>--%>
+<%--                            <li>--%>
+<%--                                <a href="#">Separated link</a>--%>
+<%--                            </li>--%>
+<%--                        </ul>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
             <!-- END PAGE HEADER-->
             <!-- BEGIN PAGE CONTENT-->
-            <input type="hidden" id="page_id" name="page_id" value="device_statistic"/>
+            <input type="hidden" id="page_id" name="page_id" value="specialty_order_statistic"/>
 
 
             <div class="row">
@@ -125,16 +123,16 @@
     </div>
     <!-- END CONTENT -->
     <!-- BEGIN QUICK SIDEBAR -->
-    <%@include file="../../home/frame/frame_right_sidebar.jsp"%>
+<%--    <%@include file="../../home/frame/frame_right_sidebar.jsp"%>--%>
     <!-- END QUICK SIDEBAR -->
 </div>
 <!-- END CONTAINER -->
 <!-- BEGIN FOOTER -->
-<%@include file="../../home/frame/frame_footer.jsp"%>
+<%--<%@include file="../../home/frame/frame_footer.jsp"%>--%>
 
 <!-- END FOOTER -->
 
-<%@include file="../../home/frame/frame_javascript.jsp"%>
+<%@include file="../home/frame/frame_javascript.jsp"%>
 
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 <script src="../../assets/global/plugins/amcharts/amcharts/amcharts.js" type="text/javascript"></script>
@@ -149,11 +147,47 @@
 <script src="../../assets/global/plugins/amcharts/amstockcharts/amstock.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <script type="text/javascript" src="jquery.dataTables.min.js"></script>
-<script src="device.js"></script>
+<%--<%@ include file="/frame/frame_javascript.jsp" %>--%>
+
+    <script src="/assets/vendor/global/global.min.js"></script>
+    <script src="/assets/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+    <script src="/assets/js/custom.min.js"></script>
+    <script src="/assets/js/dlabnav-init.js"></script>
+    <script src="/assets/js/demo.js"></script>
+    <script>
+        function getUserInfo() {
+            const token = getCookie("token")
+            return JSON.parse(window.atob(token.split('.')[1]))
+        }
+    </script>
+    <script>
+        /**
+         * top menu slider
+         */
+
+        $('#to-profile').attr('href', `/user/user-profile.jsp?id=\${getUserInfo().id}`);
+    </script>
+<script src="../../assets/js/order/specialty_order.js"></script>
 </body>
 <!-- END BODY -->
 
 </html>
 
-<%@include file="device_add_div.jsp"%>
-<%@include file="device_modify_div.jsp"%>
+<%--<script src="/assets/vendor/global/global.min.js"></script>--%>
+<%--<script src="/assets/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>--%>
+<%--<script src="/assets/js/custom.min.js"></script>--%>
+<%--<script src="/assets/js/dlabnav-init.js"></script>--%>
+<%--<script src="/assets/js/demo.js"></script>--%>
+<%--<script>--%>
+<%--    function getUserInfo() {--%>
+<%--        const token = getCookie("token")--%>
+<%--        return JSON.parse(window.atob(token.split('.')[1]))--%>
+<%--    }--%>
+<%--</script>--%>
+<%--<script>--%>
+<%--    /**--%>
+<%--     * top menu slider--%>
+<%--     */--%>
+
+<%--    $('#to-profile').attr('href', `/user/user-profile.jsp?id=\${getUserInfo().id}`);--%>
+<%--</script>--%>
