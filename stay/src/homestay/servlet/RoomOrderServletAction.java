@@ -226,7 +226,7 @@ public class RoomOrderServletAction {
     /*========================================CRUD业务函数 开始========================================*/
     private void getDeviceRecord(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
         SpecialtyOrderDao dao=new SpecialtyOrderDao();
-        dao.getDeviceRecord(data,json);
+        dao.getOrderRecord(data,json);
     }
     private void getOrderRecordFinished(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
         SpecialtyOrderDao dao=new SpecialtyOrderDao();
@@ -253,7 +253,7 @@ public class RoomOrderServletAction {
 
     private void exportDeviceRecord(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException, IOException {
         SpecialtyOrderDao dao=new SpecialtyOrderDao();
-        dao.getDeviceRecord(data,json);
+        dao.getOrderRecord(data,json);
         getExportDeviceRecordToFile(json);
         getExportDeviceRecordToTxt(json);
 //		getExportDeviceRecordToExcel(json);

@@ -66,10 +66,19 @@ public class SpecialtyOrderServletAction extends HttpServlet {
 			json.put("result_code",0);
 			json.put("result_msg","ok");
 			//这几个常规增删改查功能
+			//买家查询订单操作
 			if (action.equals("get_specialty_order_record")) {
 				actionOk=true;
 				try {
-					getDeviceRecord(request, response, json);
+					getOrderRecord(request, response, json);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (action.equals("get_specialty_order_record_seller")) {
+				actionOk=true;
+				try {
+					getOrderRecordSeller(request, response, json);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -82,10 +91,26 @@ public class SpecialtyOrderServletAction extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
+			if (action.equals("get_specialty_order_record_finished_seller")) {
+				actionOk=true;
+				try {
+					getOrderRecordFinishedSeller(request, response, json);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 			if (action.equals("get_specialty_order_record_unfinished")) {
 				actionOk=true;
 				try {
 					getOrderRecordUnfinished(request, response, json);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (action.equals("get_specialty_order_record_unfinished_seller")) {
+				actionOk=true;
+				try {
+					getOrderRecordUnfinishedSeller(request, response, json);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -98,10 +123,26 @@ public class SpecialtyOrderServletAction extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
+			if (action.equals("get_specialty_order_record_up_seller")) {
+				actionOk=true;
+				try {
+					getOrderRecordUpSeller(request, response, json);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 			if (action.equals("get_specialty_order_record_down")) {
 				actionOk=true;
 				try {
 					getOrderRecordDown(request, response, json);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (action.equals("get_specialty_order_record_down_seller")) {
+				actionOk=true;
+				try {
+					getOrderRecordDownSeller(request, response, json);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -114,6 +155,18 @@ public class SpecialtyOrderServletAction extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
+			if(action.equals("get_specialty_order_record_by_hour_seller")){
+				actionOk=true;
+				try {
+					getOrderCountByHourSeller(request, response, json);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+
+			//卖家查询订单操作
+
 			if (action.equals("add_device_record")) {
 				actionOk=true;
 				try {
@@ -136,6 +189,14 @@ public class SpecialtyOrderServletAction extends HttpServlet {
 				actionOk=true;
 				try {
 					deleteDeviceRecord(request, response, json);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (action.equals("delete_specialty_order_record_seller")) {
+				actionOk=true;
+				try {
+					deleteDeviceRecordSeller(request, response, json);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -256,25 +317,45 @@ public class SpecialtyOrderServletAction extends HttpServlet {
 	}
 	/*========================================MySQL HTTP操作通用函数 结束========================================*/
 	/*========================================CRUD业务函数 开始========================================*/
-	private void getDeviceRecord(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
+	private void getOrderRecord(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
 		SpecialtyOrderDao dao=new SpecialtyOrderDao();
-		dao.getDeviceRecord(data,json);
+		dao.getOrderRecord(data,json);
+	}
+	private void getOrderRecordSeller(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
+		SpecialtyOrderDao dao=new SpecialtyOrderDao();
+		dao.getOrderRecordSeller(data,json);
 	}
 	private void getOrderRecordFinished(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
 		SpecialtyOrderDao dao=new SpecialtyOrderDao();
 		dao.getDeviceRecordFinished(data,json);
 	}
+	private void getOrderRecordFinishedSeller(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
+		SpecialtyOrderDao dao=new SpecialtyOrderDao();
+		dao.getDeviceRecordFinishedRecord(data,json);
+	}
 	private void getOrderRecordUnfinished(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
 		SpecialtyOrderDao dao=new SpecialtyOrderDao();
 		dao.getDeviceRecordUnfinished(data,json);
+	}
+	private void getOrderRecordUnfinishedSeller(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
+		SpecialtyOrderDao dao=new SpecialtyOrderDao();
+		dao.getDeviceRecordUnfinishedSeller(data,json);
 	}
 	private void getOrderRecordUp(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
 		SpecialtyOrderDao dao=new SpecialtyOrderDao();
 		dao.getDeviceRecordUp(data,json);
 	}
+	private void getOrderRecordUpSeller(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
+		SpecialtyOrderDao dao=new SpecialtyOrderDao();
+		dao.getDeviceRecordUpSeller(data,json);
+	}
 	private void getOrderRecordDown(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
 		SpecialtyOrderDao dao=new SpecialtyOrderDao();
 		dao.getDeviceRecordDown(data,json);
+	}
+	private void getOrderRecordDownSeller(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
+		SpecialtyOrderDao dao=new SpecialtyOrderDao();
+		dao.getDeviceRecordDownSeller(data,json);
 	}
 	private void modifyDeviceRecord(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
 		SpecialtyOrderDao dao=new SpecialtyOrderDao();
@@ -291,6 +372,11 @@ public class SpecialtyOrderServletAction extends HttpServlet {
 		SpecialtyOrderDao dao=new SpecialtyOrderDao();
 		dao.deleteDeviceRecord(data,json);
 	}
+	private void deleteDeviceRecordSeller(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
+		System.out.println("aa");
+		SpecialtyOrderDao dao=new SpecialtyOrderDao();
+		dao.deleteDeviceRecordSeller(data,json);
+	}
 	private void addDeviceRecord(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
 		SpecialtyOrderDao dao=new SpecialtyOrderDao();
 		dao.addDeviceRecord(data,json);
@@ -300,7 +386,7 @@ public class SpecialtyOrderServletAction extends HttpServlet {
 
 	private void exportDeviceRecord(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException, IOException {
 		SpecialtyOrderDao dao=new SpecialtyOrderDao();
-		dao.getDeviceRecord(data,json);
+		dao.getOrderRecord(data,json);
 		getExportDeviceRecordToFile(json);
 		getExportDeviceRecordToTxt(json);
 		getExportDeviceRecordToExcel(json);
@@ -348,6 +434,10 @@ public class SpecialtyOrderServletAction extends HttpServlet {
 	private void getOrderCountByHour(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, IOException {
 		SpecialtyOrderDao dao=new SpecialtyOrderDao();
 		dao.getOrderCountByHour(data,json);
+	}
+	private void getOrderCountByHourSeller(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, IOException {
+		SpecialtyOrderDao dao=new SpecialtyOrderDao();
+		dao.getOrderCountByHourSeller(data,json);
 	}
 	/*========================================上传文件函数 开始========================================*/
 	private void uploadFile(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {

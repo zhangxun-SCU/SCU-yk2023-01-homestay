@@ -606,6 +606,7 @@
                     <button type="button" class="btn blue" id="export_button" name="export_button">导出订单</button>
                     <button type="button" class="btn blue" id="print_word" name="print_word">打印订单</button>
                     <button type="button" class="btn blue" id="order_statistic" name="order_statistic">统计</button>
+                    <button type="button" class="btn blue" id="order_add" name="order_add">添加</button>
 
                 <%--                    <button type="button" class="btn blue" id="device_statistic" name="device_statistic">统计表</button>--%>
                 </div>
@@ -936,9 +937,9 @@
 <!--**********************************
     Main wrapper end
 ***********************************-->
-<%@ include file="device_modify_div.jsp" %>
+<%@ include file="order_modify_buyer_div.jsp" %>
 <%@ include file="/frame/frame_javascript.jsp" %>
-<%@ include file="device_download_div.jsp" %>
+<%@ include file="order_download_div.jsp" %>
 
 <!--**********************************
     Scripts

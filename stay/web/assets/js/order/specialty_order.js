@@ -65,8 +65,10 @@ var Page = function() {
         $('#query_button').click(function() {onQueryRecord();});
         $('#export_button').click(function() {onExportRecord();});
         $('#print_table_button').click(function() {window.location.href="device_list_print_table.jsp";});
-        $('#order_statistic').click(function() {window.location.href="device_statistic.jsp";});
-        $('#print_word').click(function() {window.location.href="device_list_print_word.jsp";});
+        $('#order_statistic').click(function() {window.location.href="order_statistic.jsp";});
+        $('#print_word').click(function() {window.location.href="order_list_print_word.jsp";});
+        $('#order_add').click(function() {window.location.href="/market/specialty_market.jsp";});
+
     }
 
     var initOrderStatistic=function(){

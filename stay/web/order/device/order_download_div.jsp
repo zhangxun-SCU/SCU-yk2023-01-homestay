@@ -29,7 +29,6 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-<script src="../../assets/js/order/specialty_order.js"></script>
 
 <script src="/assets/vendor/global/global.min.js"></script>
 <script src="/assets/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>

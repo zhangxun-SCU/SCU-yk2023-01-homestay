@@ -43,6 +43,15 @@ public class SpecialtyOrderDao {
 			updateRecord(data,json);
 		}
 	}
+	public void deleteDeviceRecordSeller(Data data, JSONObject json) throws JSONException, SQLException{
+		//构造sql语句，根据传递过来的条件参数
+		String id=data.getParam().has("order_id")?data.getParam().getString("order_id"):null;
+		if(id!=null){
+			String sql="delete from specialty_order where order_id='"+ data.getParam().getString("order_id")+"'";
+			data.getParam().put("sql",sql);
+			updateRecord(data,json);
+		}
+	}
 	public void paySpecialtyOrderRecord(Data data, JSONObject json) throws JSONException, SQLException{
 		//构造sql语句，根据传递过来的条件参数
 		String order_id=data.getParam().has("order_id")?data.getParam().getString("order_id"):null;
@@ -69,6 +78,7 @@ public class SpecialtyOrderDao {
 			sql=sql+" where order_id='"+order_id+"'";
 			data.getParam().put("sql",sql);
 			updateRecord(data,json);
+			showDebug("[modifyDeviceRecord]构造的SQL语句是：" + sql);
 		}
 		if(specialty_name!=null){
 			String sql="update specialty";
@@ -76,12 +86,19 @@ public class SpecialtyOrderDao {
 			sql=sql+" where specialty_id='"+good_id+"'";
 			data.getParam().put("sql",sql);
 			updateRecord(data,json);
+			showDebug("[modifyDeviceRecord]构造的SQL语句是：" + sql);
 		}
 	}
 	/*查询记录*/
-	public void getDeviceRecord(Data data, JSONObject json) throws JSONException, SQLException{
+	public void getOrderRecord(Data data, JSONObject json) throws JSONException, SQLException{
 		//构造sql语句，根据传递过来的查询条件参数
 		String sql=createGetRecordSql(data);			//构造sql语句，根据传递过来的查询条件参数
+		data.getParam().put("sql",sql);
+		queryRecord(data,json);
+	}
+	public void getOrderRecordSeller(Data data, JSONObject json) throws JSONException, SQLException{
+		//构造sql语句，根据传递过来的查询条件参数
+		String sql=createGetRecordSellerSql(data);			//构造sql语句，根据传递过来的查询条件参数
 		data.getParam().put("sql",sql);
 		queryRecord(data,json);
 	}
@@ -91,9 +108,21 @@ public class SpecialtyOrderDao {
 		data.getParam().put("sql",sql);
 		queryRecord(data,json);
 	}
+	public void getDeviceRecordFinishedRecord(Data data, JSONObject json) throws JSONException, SQLException{
+		//构造sql语句，根据传递过来的查询条件参数
+		String sql=createGetRecordSqlFinishedSeller(data);			//构造sql语句，根据传递过来的查询条件参数
+		data.getParam().put("sql",sql);
+		queryRecord(data,json);
+	}
 	public void getDeviceRecordUnfinished(Data data, JSONObject json) throws JSONException, SQLException{
 		//构造sql语句，根据传递过来的查询条件参数
 		String sql=createGetRecordSqlUnfinished(data);			//构造sql语句，根据传递过来的查询条件参数
+		data.getParam().put("sql",sql);
+		queryRecord(data,json);
+	}
+	public void getDeviceRecordUnfinishedSeller(Data data, JSONObject json) throws JSONException, SQLException{
+		//构造sql语句，根据传递过来的查询条件参数
+		String sql=createGetRecordSqlUnfinishedSeller(data);			//构造sql语句，根据传递过来的查询条件参数
 		data.getParam().put("sql",sql);
 		queryRecord(data,json);
 	}
@@ -103,9 +132,21 @@ public class SpecialtyOrderDao {
 		data.getParam().put("sql",sql);
 		queryRecord(data,json);
 	}
+	public void getDeviceRecordUpSeller(Data data, JSONObject json) throws JSONException, SQLException{
+		//构造sql语句，根据传递过来的查询条件参数
+		String sql=createGetRecordSqlUpSeller(data);			//构造sql语句，根据传递过来的查询条件参数
+		data.getParam().put("sql",sql);
+		queryRecord(data,json);
+	}
 	public void getDeviceRecordDown(Data data, JSONObject json) throws JSONException, SQLException{
 		//构造sql语句，根据传递过来的查询条件参数
 		String sql=createGetRecordSqlDown(data);			//构造sql语句，根据传递过来的查询条件参数
+		data.getParam().put("sql",sql);
+		queryRecord(data,json);
+	}
+	public void getDeviceRecordDownSeller(Data data, JSONObject json) throws JSONException, SQLException{
+		//构造sql语句，根据传递过来的查询条件参数
+		String sql=createGetRecordSqlDownSeller(data);			//构造sql语句，根据传递过来的查询条件参数
 		data.getParam().put("sql",sql);
 		queryRecord(data,json);
 	}
@@ -189,11 +230,39 @@ public class SpecialtyOrderDao {
 
 		return sql;
 	}
+	private String createGetRecordSellerSql(Data data) throws JSONException {
+		JSONObject param=data.getParam();
+		String username=data.getParam().has("username")?data.getParam().getString("username"):null;
+		String sql="select * from specialty_order, specialty where specialty_order.good_id=specialty.specialty_id and owner_id='"+username+"'";
+		String order_id=data.getParam().has("order_id")?data.getParam().getString("order_id"):null;
+		if(order_id!=null && (! order_id.isEmpty())){
+			sql=sql+" and order_id like '%"+order_id+"%'";
+		}
+		String specialty_name=data.getParam().has("specialty_name")?data.getParam().getString("specialty_name"):null;
+		if(specialty_name!=null && (! specialty_name.isEmpty())){
+			sql=sql+" and specialty_name like '%"+specialty_name+"%'";
+		}
 
+		return sql;
+	}
 	private String createGetRecordSqlFinished(Data data) throws JSONException {
 		JSONObject param=data.getParam();
 		String username=data.getParam().has("username")?data.getParam().getString("username"):null;
 		String sql="select * from specialty_order, specialty where specialty_order.good_id=specialty.specialty_id and order_status != 0 and buyer_id='"+username+"'";
+		String order_id=data.getParam().has("order_id")?data.getParam().getString("order_id"):null;
+		if(order_id!=null && (! order_id.isEmpty())){
+			sql=sql+" and order_id like '%"+order_id+"%'";
+		}
+		String specialty_name=data.getParam().has("specialty_name")?data.getParam().getString("specialty_name"):null;
+		if(specialty_name!=null && (! specialty_name.isEmpty())){
+			sql=sql+" and specialty_name like '%"+specialty_name+"%'";
+		}
+		return sql;
+	}
+	private String createGetRecordSqlFinishedSeller(Data data) throws JSONException {
+		JSONObject param=data.getParam();
+		String username=data.getParam().has("username")?data.getParam().getString("username"):null;
+		String sql="select * from specialty_order, specialty where specialty_order.good_id=specialty.specialty_id and order_status != 0 and owner_id='"+username+"'";
 		String order_id=data.getParam().has("order_id")?data.getParam().getString("order_id"):null;
 		if(order_id!=null && (! order_id.isEmpty())){
 			sql=sql+" and order_id like '%"+order_id+"%'";
@@ -216,47 +285,20 @@ public class SpecialtyOrderDao {
 		if(specialty_name!=null && (! specialty_name.isEmpty())){
 			sql=sql+" and specialty_name like '%"+specialty_name+"%'";
 		}
-//		String where="";
-//		if(checkParamValid(param,"id")){
-//			where="id="+param.getString("id");
-//		}
-//		if(checkParamValid(param,"id")){
-//			where="id="+param.getString("id");
-//		}
-//		if(checkParamValid(param,"time_from") && checkParamValid(param,"time_to")){
-//			if(!where.isEmpty()){
-//				where=where+" and create_time between '"+param.getString("time_from")+"' and '"+param.getString("time_to")+"'";
-//			}else{
-//				where="create_time between '"+param.getString("time_from")+"' and '"+param.getString("time_to")+"'";
-//			}
-//		}
-//		if(checkParamValid(param,"device_id")){
-//			if(!where.isEmpty()){
-//				where=where+" and device_id = '"+param.getString("device_id")+"'";
-//			}else{
-//				where="device_id ='"+param.getString("device_id")+"'";
-//			}
-//		}
-//		if(checkParamValid(param,"device_type")){
-//			if(!where.isEmpty()){
-//				where=where+" and device_type = '"+param.getString("device_type")+"'";
-//			}else{
-//				where="device_type ='"+param.getString("device_type")+"'";
-//			}
-//		}
-//		if(checkParamValid(param,"device_name")){
-//			if(!where.isEmpty()){
-//				where=where+" and device_name like '%"+param.getString("device_name")+"%'";
-//			}else{
-//				where="device_name like '%"+param.getString("device_name")+"%'";
-//			}
-//		}
-//		if(!where.isEmpty()){
-//			sql=sql+" where "+where;
-//		}
-//		if(checkParamValid(param,"order_by")){
-//			sql=sql+" order by "+param.getString("order_by");
-//		}
+		return sql;
+	}
+	private String createGetRecordSqlUnfinishedSeller(Data data) throws JSONException {
+		JSONObject param=data.getParam();
+		String username=data.getParam().has("username")?data.getParam().getString("username"):null;
+		String sql="select * from specialty_order, specialty where specialty_order.good_id=specialty.specialty_id and order_status = 0 and owner_id='"+username+"'";
+		String order_id=data.getParam().has("order_id")?data.getParam().getString("order_id"):null;
+		if(order_id!=null && (! order_id.isEmpty())){
+			sql=sql+" and order_id like '%"+order_id+"%'";
+		}
+		String specialty_name=data.getParam().has("specialty_name")?data.getParam().getString("specialty_name"):null;
+		if(specialty_name!=null && (! specialty_name.isEmpty())){
+			sql=sql+" and specialty_name like '%"+specialty_name+"%'";
+		}
 		return sql;
 	}
 	private String createGetRecordSqlUp(Data data) throws JSONException {
@@ -274,10 +316,40 @@ public class SpecialtyOrderDao {
 		sql=sql+" order by specialty.price";
 		return sql;
 	}
+	private String createGetRecordSqlUpSeller(Data data) throws JSONException {
+		JSONObject param=data.getParam();
+		String username=data.getParam().has("username")?data.getParam().getString("username"):null;
+		String sql="select * from specialty_order, specialty where specialty_order.good_id=specialty.specialty_id and owner_id='"+username+"'";
+		String order_id=data.getParam().has("order_id")?data.getParam().getString("order_id"):null;
+		if(order_id!=null && (! order_id.isEmpty())){
+			sql=sql+" and order_id like '%"+order_id+"%'";
+		}
+		String specialty_name=data.getParam().has("specialty_name")?data.getParam().getString("specialty_name"):null;
+		if(specialty_name!=null && (! specialty_name.isEmpty())){
+			sql=sql+" and specialty_name like '%"+specialty_name+"%'";
+		}
+		sql=sql+" order by specialty.price";
+		return sql;
+	}
 	private String createGetRecordSqlDown(Data data) throws JSONException {
 		JSONObject param=data.getParam();
 		String username=data.getParam().has("username")?data.getParam().getString("username"):null;
 		String sql="select * from specialty_order, specialty where specialty_order.good_id=specialty.specialty_id and buyer_id='"+username+"'";
+		String order_id=data.getParam().has("order_id")?data.getParam().getString("order_id"):null;
+		if(order_id!=null && (! order_id.isEmpty())){
+			sql=sql+" and order_id like '%"+order_id+"%'";
+		}
+		String specialty_name=data.getParam().has("specialty_name")?data.getParam().getString("specialty_name"):null;
+		if(specialty_name!=null && (! specialty_name.isEmpty())){
+			sql=sql+" and specialty_name like '%"+specialty_name+"%'";
+		}
+		sql=sql+" order by specialty.price DESC";
+		return sql;
+	}
+	private String createGetRecordSqlDownSeller(Data data) throws JSONException {
+		JSONObject param=data.getParam();
+		String username=data.getParam().has("username")?data.getParam().getString("username"):null;
+		String sql="select * from specialty_order, specialty where specialty_order.good_id=specialty.specialty_id and owner_id='"+username+"'";
 		String order_id=data.getParam().has("order_id")?data.getParam().getString("order_id"):null;
 		if(order_id!=null && (! order_id.isEmpty())){
 			sql=sql+" and order_id like '%"+order_id+"%'";
@@ -346,4 +418,49 @@ public class SpecialtyOrderDao {
 		json.put("result_code",resultCode);														//返回0表示正常，不等于0就表示有错误产生，错误代码
 		/*--------------------返回数据 结束--------------------*/
 	}
+	public void getOrderCountByHourSeller(Data data, JSONObject json) throws JSONException {
+		/*--------------------获取变量 开始--------------------*/
+		String username=data.getParam().has("username")?data.getParam().getString("username"):null;
+		String resultMsg = "ok";
+		int resultCode = 0;
+		List jsonList = new ArrayList();
+		Calendar cal=Calendar.getInstance();
+		cal.add(Calendar.DATE,-5);   //yyyy-MM-dd
+		String timeFrom=(new SimpleDateFormat("yyyy-MM-dd 00:00:00")).format(cal.getTime());
+		cal.add(Calendar.DATE,5);   //yyyy-MM-dd
+		String timeTo=(new SimpleDateFormat("yyyy-MM-dd 23:59:59")).format(cal.getTime());
+		int totalGpsActiveCount=0;
+		/*--------------------获取变量 完毕--------------------*/
+		/*--------------------数据操作 开始--------------------*/
+		DB queryDb = new DB("group1");
+		String sql="SELECT DATE_FORMAT(create_date,\"%Y-%m-%d %H\") as time_interval,count(*) as total from specialty_order,specialty ";
+		sql=sql+" where specialty_order.good_id=specialty.specialty_id and owner_id='"+username+"' and create_date between '"+timeFrom+"' and '"+timeTo+"'";
+		sql=sql+" group by DATE_FORMAT(create_date,\"%Y-%m-%d %H\")";
+		showDebug("[getOrderStatistic]构造的SQL语句是：" + sql);
+		try {
+			ResultSet rs = queryDb.executeQuery(sql);
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int fieldCount = rsmd.getColumnCount();
+			while (rs.next()) {
+				HashMap map=new HashMap();
+				map.put("time_interval",rs.getString("time_interval"));
+				map.put("total",rs.getInt("total"));
+				jsonList.add(map);
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			showDebug("[getOrderStatistic]查询数据库出现错误：" + sql);
+			resultCode = 10;
+			resultMsg = "查询数据库出现错误！" + e.getMessage();
+		}
+		queryDb.close();
+		/*--------------------数据操作 结束--------------------*/
+		/*--------------------返回数据 开始--------------------*/
+		json.put("aaData",jsonList);
+		json.put("result_msg",resultMsg);															//如果发生错误就设置成"error"等
+		json.put("result_code",resultCode);														//返回0表示正常，不等于0就表示有错误产生，错误代码
+		/*--------------------返回数据 结束--------------------*/
+	}
 }
+
