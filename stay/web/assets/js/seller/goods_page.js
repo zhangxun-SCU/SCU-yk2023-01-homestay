@@ -44,7 +44,16 @@ $("#add_specialty_button").click((e) => {
         (res) => {
             console.log(JSON.stringify(res));
             if (res.resCode === "00000") {
-                location.reload();
+                new Promise((resolve, reject) => {
+                    swal(
+                        "成功！",
+                        "您成功添加一件商品！",
+                        "success"
+                    )
+                    resolve("ok");
+                }).then((_) => {
+                    window.location.reload();
+                })
             }
         }
     )
@@ -108,7 +117,16 @@ $("#add_homestay_button").click((e) => {
             (res) => {
                 console.log(JSON.stringify(res));
                 if (res.resCode === "00000") {
-                    location.reload();
+                    new Promise((resolve, reject) => {
+                        swal(
+                            "成功！",
+                            "您成功添加一间民宿",
+                            "success"
+                        )
+                        resolve("ok");
+                    }).then((_) => {
+                        window.location.reload();
+                    })
                 }
             }
         )

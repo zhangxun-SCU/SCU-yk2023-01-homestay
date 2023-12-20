@@ -143,10 +143,11 @@ public class SpecialtyDao {
         String specialtyName = data.getParam().getString("specialty_name");
         double price = data.getParam().getDouble("price");
         int num = data.getParam().getInt("num");
-        String imageurl = data.getParam().getString("imageurl");
-        showDebug("[addSpecialty]", "imageurl: " + imageurl);
-        String imagePath = IMAGE_DIR + specialtyId + ".png";
-        base64ToImage(imageurl, imagePath);
+        if (data.getParam().has("imageurl")) {
+            String imageurl = data.getParam().getString("imageurl");
+            String imagePath = IMAGE_DIR + specialtyId + ".png";
+            base64ToImage(imageurl, imagePath);
+        }
         String sql = "Update specialty Set ";
         String values = String.format(
                 "specialty_name='%s', price='%f', num='%d' Where specialty_id='%s'",
