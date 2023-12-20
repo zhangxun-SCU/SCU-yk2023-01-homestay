@@ -56,6 +56,7 @@ function initFeedbackButtons() {
 
 function showReplyModal(fid) {
     console.log(fid);
+    getReply(fid);
     $("#replyModal #replyConfirmButton").click((e) => {
         var reply = $("#reply").val();
         var url = "/feedback";
@@ -81,4 +82,30 @@ function showReplyModal(fid) {
         )
     })
     $("#replyModal").modal("show");
+}
+
+function getReply(fid) {
+    var url = "/feedback";
+    var data = {
+        "actionType": "feedback",
+        "action": "get_feedback",
+        "fid": fid
+    };
+    $.ajaxSettings.async = false;
+    $.post(
+        url,
+        data,
+        (res) => {
+            console.log(res.resCode);
+            if (res.resCode === "00000") {
+                var feedback = res.feedbackList[0];
+                if (feedback.reply !== undefined && feedback.reply !== null && feedback.reply !== "") {
+                    document.querySelector("#reply").innerText = feedback.reply;
+                }else{
+                    document.querySelector("#reply").innerText = "请填写反馈内容...";
+                }
+            }
+        }
+    )
+    $.ajaxSettings.async = true;
 }

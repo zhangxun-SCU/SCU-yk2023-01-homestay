@@ -19,7 +19,7 @@ public class FeedbackDao {
         System.out.println(log);
     }
 
-    public void getFeedback(Data data, JSONObject json) throws SQLException, JSONException {
+    public void getAllFeedback(JSONObject json) throws SQLException, JSONException {
         String resCode = "00000";
         String info = "success";
         DB db = new DB("group1");
@@ -39,7 +39,33 @@ public class FeedbackDao {
                 String key = resMetaData.getColumnName(i + 1);
                 String value = res.getString(key);
                 feedback.put(key, value);
-                showDebug("[getFeedback]", key + ": " + value);
+                showDebug("[getAllFeedback]", key + ": " + value);
+            }
+            feedbackList.add(feedback);
+        }
+        res.close();
+        db.close();
+        json.put("resCode", resCode);
+        json.put("getFeedbackInfo", info);
+        json.put("feedbackList", feedbackList);
+    }
+
+    public void getFeedbackById(String fid, JSONObject json) throws SQLException, JSONException {
+        DB db = new DB("group1");
+        String resCode = "00000";
+        String info = "success";
+        String sql = "Select * From feedback Where fid='" + fid + "'";
+        ResultSet res = db.executeQuery(sql);
+        ResultSetMetaData resMetaData = res.getMetaData();
+        int fieldCount = resMetaData.getColumnCount();
+        List feedbackList = new ArrayList();
+        while (res.next()) {
+            Map feedback = new HashMap();
+            for (int i = 0; i < fieldCount; i++) {
+                String key = resMetaData.getColumnName(i + 1);
+                String value = res.getString(key);
+                feedback.put(key, value);
+                showDebug("[getFeedbackById]", key + ": " + value);
             }
             feedbackList.add(feedback);
         }
@@ -60,7 +86,7 @@ public class FeedbackDao {
         } catch (Exception e) {
             e.printStackTrace();
             resCode = "F0002";
-            info = "fid错误";
+            info = "找不到反馈信息";
         }
         db.close();
         json.put("resCode", resCode);
