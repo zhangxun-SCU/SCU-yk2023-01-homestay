@@ -20,7 +20,7 @@ import org.json.JSONObject;
 public class LoginServlet extends HttpServlet {
 
     private Data data = null;
-    public final static Map<String,String> userIdTokenMap=new ConcurrentHashMap<>();
+    public final static Map<String, String> userIdTokenMap = new ConcurrentHashMap<>();
 
 
     @Override
@@ -34,22 +34,22 @@ public class LoginServlet extends HttpServlet {
             JSONObject resJson = new JSONObject();  /* 响应数据 */
             LoginService loginService = new LoginService();
             VerifyService imgVerifyService = new VerifyService();
-            if(imgVerifyService.checkCode(data, serverCode, resJson)) {
+            if (imgVerifyService.checkCode(data, serverCode, resJson)) {
                 // 图形验证码正确
-                if(loginService.checkLogin(data, serverCode, resJson)){
+                if (loginService.checkLogin(data, serverCode, resJson)) {
                     Cookie cookie = new Cookie("token", resJson.getString("token"));
-                    cookie.setMaxAge(60*60*24);
+                    cookie.setMaxAge(60 * 60 * 24);
 
                     String loginToken = UUID.randomUUID().toString();
                     Cookie cookieLogin = new Cookie("LOGIN_TOKEN", loginToken);
-                    String userId= data.getParam().getString("id");
-                    Cookie userIdCookie=new Cookie("USER_ID",userId);
-                    System.out.println("logintoken:"+loginToken);
+                    String userId = data.getParam().getString("id");
+                    Cookie userIdCookie = new Cookie("USER_ID", userId);
+                    System.out.println("logintoken:" + loginToken);
                     resp.addCookie(cookie);
                     resp.addCookie(cookieLogin);
                     resp.addCookie(userIdCookie);
 
-                    userIdTokenMap.put(userId,loginToken);
+                    userIdTokenMap.put(userId, loginToken);
                 }
             }
             // 返回

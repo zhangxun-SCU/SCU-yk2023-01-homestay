@@ -125,6 +125,8 @@ function showModifyHomestayModal(homestayId) {
         var homestayName = $("#modify_homestay_name").val();
         var location = $("#modify_location").val();
         var lnglat = $("#modify_lnglat").val().split(",");
+        console.log($("#modify_lnglat").val());
+        console.log(lnglat);
         var longitude = lnglat[0];
         var latitude = lnglat[1];
         var data = {
@@ -172,6 +174,7 @@ function getHomestayById(homestayId) {
             console.log(res.resCode);
             if (res.resCode === "00000") {
                 var house = res.house;
+                console.log(house);
                 $("#modify_homestay_name").val(house.house_name);
                 $("#modify_location").val(house.location);
                 $("#modify_lnglat").val(house.latitude + "," + house.longitude);
