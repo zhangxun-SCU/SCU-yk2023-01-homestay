@@ -1,4 +1,3 @@
-
 package homestay.servlet;
 /*
  * 待完成：用MVC模式分开DB和Action操作
@@ -7,7 +6,7 @@ package homestay.servlet;
 
 import homestay.dao.Data;
 import homestay.dao.MySQLDao;
-import homestay.dao.SpecialtyOrderDao;
+import homestay.dao.RoomOrderDao;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -25,13 +24,13 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-
-public class RoomOrderServletAction {
+@WebServlet("/homestay_servlet_room_order_servlet_action")
+public class RoomOrderServletAction extends HttpServlet {
     String module="homestay";
     String sub="servlet";
     Data data=null;
     public void showDebug(String msg){
-        System.out.println("["+(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date())+"]["+module+"/"+sub+"/SpecialtyOrderServletAction]"+msg);
+        System.out.println("["+(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date())+"]["+module+"/"+sub+"/RoomOrderServletAction]"+msg);
     }
     /*
      * 处理顺序：先是service，后根据情况doGet或者doPost
@@ -67,15 +66,24 @@ public class RoomOrderServletAction {
             json.put("result_code",0);
             json.put("result_msg","ok");
             //这几个常规增删改查功能
-            if (action.equals("get_specialty_order_record")) {
+            //买家查询订单操作
+            if (action.equals("get_room_order_record")) {
                 actionOk=true;
                 try {
-                    getDeviceRecord(request, response, json);
+                    getOrderRecord(request, response, json);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-            if (action.equals("get_specialty_order_record_finished")) {
+            if (action.equals("get_room_order_record_seller")) {
+                actionOk=true;
+                try {
+                    getOrderRecordSeller(request, response, json);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (action.equals("get_room_order_record_finished")) {
                 actionOk=true;
                 try {
                     getOrderRecordFinished(request, response, json);
@@ -83,7 +91,15 @@ public class RoomOrderServletAction {
                     e.printStackTrace();
                 }
             }
-            if (action.equals("get_specialty_order_record_unfinished")) {
+            if (action.equals("get_room_order_record_finished_seller")) {
+                actionOk=true;
+                try {
+                    getOrderRecordFinishedSeller(request, response, json);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (action.equals("get_room_order_record_unfinished")) {
                 actionOk=true;
                 try {
                     getOrderRecordUnfinished(request, response, json);
@@ -91,6 +107,66 @@ public class RoomOrderServletAction {
                     e.printStackTrace();
                 }
             }
+            if (action.equals("get_room_order_record_unfinished_seller")) {
+                actionOk=true;
+                try {
+                    getOrderRecordUnfinishedSeller(request, response, json);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (action.equals("get_room_order_record_up")) {
+                actionOk=true;
+                try {
+                    getOrderRecordUp(request, response, json);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (action.equals("get_room_order_record_up_seller")) {
+                actionOk=true;
+                try {
+                    getOrderRecordUpSeller(request, response, json);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (action.equals("get_room_order_record_down")) {
+                actionOk=true;
+                try {
+                    getOrderRecordDown(request, response, json);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (action.equals("get_room_order_record_down_seller")) {
+                actionOk=true;
+                try {
+                    getOrderRecordDownSeller(request, response, json);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if(action.equals("get_room_order_record_by_hour")){
+                actionOk=true;
+                try {
+                    getOrderCountByHour(request, response, json);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if(action.equals("get_room_order_record_by_hour_seller")){
+                actionOk=true;
+                try {
+                    getOrderCountByHourSeller(request, response, json);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+            //卖家查询订单操作
+
             if (action.equals("add_device_record")) {
                 actionOk=true;
                 try {
@@ -109,10 +185,26 @@ public class RoomOrderServletAction {
                     e.printStackTrace();
                 }
             }
-            if (action.equals("delete_specialty_order_record")) {
+            if (action.equals("delete_room_order_record")) {
                 actionOk=true;
                 try {
                     deleteDeviceRecord(request, response, json);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (action.equals("delete_room_order_record_seller")) {
+                actionOk=true;
+                try {
+                    deleteDeviceRecordSeller(request, response, json);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (action.equals("pay_room_order_record")) {
+                actionOk=true;
+                try {
+                    payRoomOrderRecord(request, response, json);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -225,42 +317,87 @@ public class RoomOrderServletAction {
     }
     /*========================================MySQL HTTP操作通用函数 结束========================================*/
     /*========================================CRUD业务函数 开始========================================*/
-    private void getDeviceRecord(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
-        SpecialtyOrderDao dao=new SpecialtyOrderDao();
+    private void getOrderRecord(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
+        RoomOrderDao dao=new RoomOrderDao();
         dao.getOrderRecord(data,json);
     }
+    private void getOrderRecordSeller(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
+        RoomOrderDao dao=new RoomOrderDao();
+        dao.getOrderRecordSeller(data,json);
+    }
     private void getOrderRecordFinished(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
-        SpecialtyOrderDao dao=new SpecialtyOrderDao();
+        RoomOrderDao dao=new RoomOrderDao();
         dao.getDeviceRecordFinished(data,json);
     }
+    private void getOrderRecordFinishedSeller(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
+        RoomOrderDao dao=new RoomOrderDao();
+        dao.getDeviceRecordFinishedRecord(data,json);
+    }
     private void getOrderRecordUnfinished(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
-        SpecialtyOrderDao dao=new SpecialtyOrderDao();
+        RoomOrderDao dao=new RoomOrderDao();
         dao.getDeviceRecordUnfinished(data,json);
     }
+    private void getOrderRecordUnfinishedSeller(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
+        RoomOrderDao dao=new RoomOrderDao();
+        dao.getDeviceRecordUnfinishedSeller(data,json);
+    }
+    private void getOrderRecordUp(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
+        RoomOrderDao dao=new RoomOrderDao();
+        dao.getDeviceRecordUp(data,json);
+    }
+    private void getOrderRecordUpSeller(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
+        RoomOrderDao dao=new RoomOrderDao();
+        dao.getDeviceRecordUpSeller(data,json);
+    }
+    private void getOrderRecordDown(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
+        RoomOrderDao dao=new RoomOrderDao();
+        dao.getDeviceRecordDown(data,json);
+    }
+    private void getOrderRecordDownSeller(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
+        RoomOrderDao dao=new RoomOrderDao();
+        dao.getDeviceRecordDownSeller(data,json);
+    }
     private void modifyDeviceRecord(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
-        SpecialtyOrderDao dao=new SpecialtyOrderDao();
+        RoomOrderDao dao=new RoomOrderDao();
         dao.modifyDeviceRecord(data,json);
     }
+
+    private void payRoomOrderRecord(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
+        System.out.println("aa");
+        RoomOrderDao dao=new RoomOrderDao();
+        dao.payRoomOrderRecord(data,json);
+    }
     private void deleteDeviceRecord(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
-        SpecialtyOrderDao dao=new SpecialtyOrderDao();
+        System.out.println("aa");
+        RoomOrderDao dao=new RoomOrderDao();
         dao.deleteDeviceRecord(data,json);
     }
+    private void deleteDeviceRecordSeller(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
+        System.out.println("aa");
+        RoomOrderDao dao=new RoomOrderDao();
+        dao.deleteDeviceRecordSeller(data,json);
+    }
     private void addDeviceRecord(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
-        SpecialtyOrderDao dao=new SpecialtyOrderDao();
+        RoomOrderDao dao=new RoomOrderDao();
         dao.addDeviceRecord(data,json);
     }
 
     /*========================================CRUD业务函数 结束========================================*/
 
     private void exportDeviceRecord(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException, IOException {
-        SpecialtyOrderDao dao=new SpecialtyOrderDao();
+        RoomOrderDao dao=new RoomOrderDao();
         dao.getOrderRecord(data,json);
         getExportDeviceRecordToFile(json);
         getExportDeviceRecordToTxt(json);
-//		getExportDeviceRecordToExcel(json);
+        getExportDeviceRecordToExcel(json);
         getExportDeviceRecordToPdf(json);
     }
-
+    private void getExportDeviceRecordToExcel(JSONObject json) throws JSONException, IOException {
+        MyExcel me=new MyExcel("C:\\upload\\maintain\\device\\export_room_order.xls");
+        json.put("download_url","/upload/maintain/device/export_room_order.xls");
+        json.put("file_path","C:\\upload\\maintain\\device\\export_room_order.xls");
+        me.exportData(data,json);
+    }
     private void getExportDeviceRecordToPdf(JSONObject json) {
         //exportDeviceRecordToPdf(data,json);
     }
@@ -273,8 +410,8 @@ public class RoomOrderServletAction {
     private void getExportDeviceRecordToFile(JSONObject json) throws JSONException {
         String jsonStr = json.toString();
 //		System.out.println("aaaa");
-        File jsonFile = new File("C:\\upload\\maintain\\device\\export_device.txt");
-        json.put("download_url","/upload/maintain/device/export_device.txt");
+        File jsonFile = new File("C:\\upload\\maintain\\device\\export_room_order.txt");
+        json.put("download_url","/upload/maintain/device/export_room_order.txt");
         try {
             // 文件不存在就创建文件
             if (!jsonFile.exists()) {
@@ -294,9 +431,13 @@ public class RoomOrderServletAction {
 //		json.put("file_path","C:\\upload\\maintain\\device\\export_order.xls");
 //		me.exportData(data,json);
 //	}
-    private void getGpsReceiveCountByHour(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, IOException {
-        SpecialtyOrderDao dao=new SpecialtyOrderDao();
-        //dao.getGpsReceiveCountByHour(data,json);
+    private void getOrderCountByHour(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, IOException {
+        RoomOrderDao dao=new RoomOrderDao();
+        dao.getOrderCountByHour(data,json);
+    }
+    private void getOrderCountByHourSeller(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, IOException {
+        RoomOrderDao dao=new RoomOrderDao();
+        dao.getOrderCountByHourSeller(data,json);
     }
     /*========================================上传文件函数 开始========================================*/
     private void uploadFile(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
@@ -402,7 +543,7 @@ public class RoomOrderServletAction {
     private void saveFileAttachmentRecord(Data data, JSONObject json) throws JSONException, SQLException {
         //这部分需要自己写
         showDebug("[saveFileRecord]收完文件后，传递出来的json是："+json.toString());
-        SpecialtyOrderDao dao=new SpecialtyOrderDao();
+        RoomOrderDao dao=new RoomOrderDao();
         dao.saveUploadFileRecord(json,data);
     }
     /*========================================上传文件函数 结束========================================*/

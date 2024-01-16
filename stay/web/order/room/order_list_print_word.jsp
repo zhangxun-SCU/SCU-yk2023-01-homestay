@@ -82,37 +82,37 @@
   border-left:none;border-bottom:solid windowtext 1.5pt;border-right:none;
   padding:0cm 5.4pt 0cm 5.4pt'>
                 <p class=MsoNormal align=center style='text-align:center'><b><span
-                        lang=EN-US>商品名称</span></b></p>
+                        lang=EN-US>酒店名+房间名</span></b></p>
             </th>
             <th width=138 valign=top style='width:103.7pt;border-top:solid windowtext 1.5pt;
   border-left:none;border-bottom:solid windowtext 1.5pt;border-right:none;
   padding:0cm 5.4pt 0cm 5.4pt'>
                 <p class=MsoNormal align=center style='text-align:center'><b><span
-                        lang=EN-US>商品数量</span></b></p>
+                        lang=EN-US>房间数量</span></b></p>
             </th>
             <th width=138 valign=top style='width:103.7pt;border-top:solid windowtext 1.5pt;
   border-left:none;border-bottom:solid windowtext 1.5pt;border-right:none;
   padding:0cm 5.4pt 0cm 5.4pt'>
                 <p class=MsoNormal align=center style='text-align:center'><b><span
-                        lang=EN-US>商品单价</span></b></p>
+                        lang=EN-US>入住时间</span></b></p>
             </th>
             <th width=138 valign=top style='width:103.7pt;border-top:solid windowtext 1.5pt;
   border-left:none;border-bottom:solid windowtext 1.5pt;border-right:none;
   padding:0cm 5.4pt 0cm 5.4pt'>
                 <p class=MsoNormal align=center style='text-align:center'><b><span
-                        lang=EN-US>商品总价</span></b></p>
+                        lang=EN-US>总价</span></b></p>
             </th>
             <th width=138 valign=top style='width:103.7pt;border-top:solid windowtext 1.5pt;
   border-left:none;border-bottom:solid windowtext 1.5pt;border-right:none;
   padding:0cm 5.4pt 0cm 5.4pt'>
                 <p class=MsoNormal align=center style='text-align:center'><b><span
-                        lang=EN-US>卖家</span></b></p>
+                        lang=EN-US>房主</span></b></p>
             </th>
             <th width=138 valign=top style='width:103.7pt;border-top:solid windowtext 1.5pt;
   border-left:none;border-bottom:solid windowtext 1.5pt;border-right:none;
   padding:0cm 5.4pt 0cm 5.4pt'>
                 <p class=MsoNormal align=center style='text-align:center'><b><span
-                        lang=EN-US>买家</span></b></p>
+                        lang=EN-US>订房人</span></b></p>
             </th>
             <th width=138 valign=top style='width:103.7pt;border-top:solid windowtext 1.5pt;
   border-left:none;border-bottom:solid windowtext 1.5pt;border-right:none;
@@ -203,7 +203,7 @@
 
 <%--<%@include file="../home/frame/frame_javascript.jsp" %>--%>
 <script src="../../assets/js/order/jquery.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="../../assets/js/order/specialty_order.js" defer></script>
+<script type="text/javascript" src="../../assets/js/order/room_order.js" defer></script>
 <input type="hidden" id="page_id" name="page_id" value="print_word">
 </html>
 

@@ -538,7 +538,7 @@ var Page = function() {
         $("#record_add_div").modal("hide");
     }
     var submitModifyRecordDiv=function(){
-        if(confirm("您确定要修改该记录吗？")){
+        if(confirm("您确定要修改该订单记录吗？")){
             var url="../../homestay_servlet_specialty_order_servlet_action";
             var data={};
             data.action="modify_device_record";
@@ -768,7 +768,7 @@ var Page = function() {
                 "balloonText": "<span style='font-size:13px;'>[[title]] in [[category]]:<b>[[value]]</b> [[additional]]</span>",
                 "dashLengthField": "dashLengthColumn",
                 "fillAlphas": 1,
-                "title": "Income",
+                "title": "Order Number",
                 "type": "column",
                 "valueField": "income"
             }, {
@@ -783,7 +783,7 @@ var Page = function() {
                 "bulletBorderThickness": 3,
                 "fillAlphas": 0,
                 "lineAlpha": 1,
-                "title": "Expenses",
+                "title": "Order Number",
                 "valueField": "expenses"
             }],
             "categoryField": "year",

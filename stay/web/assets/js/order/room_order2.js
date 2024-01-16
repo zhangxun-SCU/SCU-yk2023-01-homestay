@@ -14,13 +14,13 @@ var Page = function() {
     /*----------------------------------------入口函数  开始----------------------------------------*/
     var initPageControl=function(){
         pageId=$("#page_id").val();
-        if(pageId=="order_list"){
+        if(pageId=="room_order_list2"){
             initOrderList();
         }
-        if(pageId=="print_word"){
+        if(pageId=="print_word2"){
             initOrderListPrintWordRecord();
         }
-        if(pageId=="specialty_order_statistic"){
+        if(pageId=="specialty_order_statistic2"){
             initOrderStatistic();
         }
     };
@@ -158,11 +158,12 @@ var Page = function() {
     }
     var getOrderRecordList=function(){
         data = {};
-        data.order_id=$("#record_query_setup #order_id").val();
-        data.specialty_name=$("#record_query_setup #specialty_name").val();
-        data.username=user;
+        data.good_id=$("#record_query_setup #good_id").val();
+        data.house_name=$("#record_query_setup #house_name").val();
+        data.room_name=$("#record_query_setup #room_name").val();
+
         console.log(1)
-        $.post("../../"+module+"_"+sub+"_specialty_order_servlet_action?action=get_specialty_order_record",data,function(json){
+        $.post("../../"+module+"_"+sub+"_room_order_servlet_action?action=get_room_order_record",data,function(json){
             console.log(JSON.stringify(json));
             if(json.result_code==0){
                 var list=json.aaData;
@@ -179,15 +180,15 @@ var Page = function() {
                         html=html+"                                                <label class=\"form-check-label\" for=\"customCheckBox2\"></label>";
                         html=html+"                                            </div>";
                         html=html+"                                        </td>";
-                        html=html+"                                        <td><strong>"+record.order_id+"</strong></td>";
-                        html=html+"                                        <td><div class=\"d-flex align-items-center\"><img src=\""+record.imageurl+"\" class=\"rounded-lg me-2\" width=\"24\" alt=\"\"/> <span class=\"w-space-no\">"+record.specialty_name+"</span></div></td>";
+                        html=html+"                                        <td><strong>"+record.good_id+"</strong></td>";
+                        html=html+"                                        <td><div class=\"d-flex align-items-center\"><img src=\""+record.imageurl+"\" class=\"rounded-lg me-2\" width=\"24\" alt=\"\"/> <span class=\"w-space-no\">"+record.house_name+record.room_name+"</span></div></td>";
                         html=html+"                                        <td>"+record.num+"	</td>";
                         html=html+"                                        <td>"+record.price*record.num+"</td>";
                         html=html+"                                        <td><div class=\"d-flex align-items-center\"><i class=\"fa fa-circle text-success me-1\"></i> "+(record.order_status!=0?'已支付':'未支付')+"</div></td>";
                         html=html+"                                        <td>";
                         html=html+"                                            <div class=\"d-flex\">";
-                        html=html+"                                                <a href=\"javascript:Page.onModifyRecord('"+record.order_id+"')\" class=\"btn btn-primary shadow btn-xs sharp me-1\"><i class=\"fas fa-pencil-alt\"></i></a>";
-                        html=html+"                                                <a href=\"javascript:Page.onDeleteRecord('"+record.order_id+"')\" class=\"btn btn-danger shadow btn-xs sharp\"><i class=\"fa fa-trash\"></i></a>";
+                        html=html+"                                                <a href=\"#\" class=\"btn btn-primary shadow btn-xs sharp me-1\"><i class=\"fas fa-pencil-alt\"></i></a>";
+                        html=html+"                                                <a href=\"javascript:Page.onDeleteRecord('"+record.good_id+"')\" class=\"btn btn-danger shadow btn-xs sharp\"><i class=\"fa fa-trash\"></i></a>";
                         html=html+"                                            </div>";
                         html=html+"                                        </td>";
                         html=html+"                                    </tr>";
@@ -300,11 +301,12 @@ var Page = function() {
     var resultList=[];
     var getOrderRecordFinished=function(){
         data = {};
-        data.order_id=$("#record_query_setup #order_id").val();
-        data.specialty_name=$("#record_query_setup #specialty_name").val();
-        data.username=user;
+        data.good_id=$("#record_query_setup #good_id").val();
+        data.house_name=$("#record_query_setup #house_name").val();
+        data.room_name=$("#record_query_setup #room_name").val();
+
         console.log(1)
-        $.post("../../"+module+"_"+sub+"_specialty_order_servlet_action?action=get_specialty_order_record_finished",data,function(json){
+        $.post("../../"+module+"_"+sub+"_room_order_servlet_action?action=get_room_order_record_finished",data,function(json){
             console.log(JSON.stringify(json));
             if(json.result_code==0){
                 var list=json.aaData;
@@ -321,21 +323,21 @@ var Page = function() {
                         html=html+"                                                <label class=\"form-check-label\" for=\"customCheckBox2\"></label>";
                         html=html+"                                            </div>";
                         html=html+"                                        </td>";
-                        html=html+"                                        <td><strong>"+record.order_id+"</strong></td>";
-                        html=html+"                                        <td><div class=\"d-flex align-items-center\"><img src=\"images/avatar/1.jpg\" class=\"rounded-lg me-2\" width=\"24\" alt=\"\"/> <span class=\"w-space-no\">"+record.specialty_name+"</span></div></td>";
+                        html=html+"                                        <td><strong>"+record.good_id+"</strong></td>";
+                        html=html+"                                        <td><div class=\"d-flex align-items-center\"><img src=\""+record.imageurl+"\" class=\"rounded-lg me-2\" width=\"24\" alt=\"\"/> <span class=\"w-space-no\">"+record.house_name+record.room_name+"</span></div></td>";
                         html=html+"                                        <td>"+record.num+"	</td>";
                         html=html+"                                        <td>"+record.price*record.num+"</td>";
                         html=html+"                                        <td><div class=\"d-flex align-items-center\"><i class=\"fa fa-circle text-success me-1\"></i> "+(record.order_status!=0?'已支付':'未支付')+"</div></td>";
                         html=html+"                                        <td>";
                         html=html+"                                            <div class=\"d-flex\">";
-                        html=html+"                                                <a href=\"javascript:Page.onModifyRecord('"+record.order_id+"')\" class=\"btn btn-primary shadow btn-xs sharp me-1\"><i class=\"fas fa-pencil-alt\"></i></a>";
-                        html=html+"                                                <a href=\"javascript:Page.onDeleteRecord('"+record.order_id+"')\" class=\"btn btn-danger shadow btn-xs sharp\"><i class=\"fa fa-trash\"></i></a>";
+                        html=html+"                                                <a href=\"#\" class=\"btn btn-primary shadow btn-xs sharp me-1\"><i class=\"fas fa-pencil-alt\"></i></a>";
+                        html=html+"                                                <a href=\"javascript:Page.onDeleteRecord('"+record.good_id+"')\" class=\"btn btn-danger shadow btn-xs sharp\"><i class=\"fa fa-trash\"></i></a>";
                         html=html+"                                            </div>";
                         html=html+"                                        </td>";
                         html=html+"                                    </tr>";
                     }
                 }
-                $("#order_table_content_finished_div").html(html);
+                $("#order_table_content_div").html(html);
             }
         })
     }
@@ -387,12 +389,12 @@ var Page = function() {
 
     var getOrderRecordUnfinished=function(){
         data = {};
-        data.order_id=$("#record_query_setup #order_id").val();
-        data.specialty_name=$("#record_query_setup #specialty_name").val();
-        data.username=user;
+        data.good_id=$("#record_query_setup #good_id").val();
+        data.house_name=$("#record_query_setup #house_name").val();
+        data.room_name=$("#record_query_setup #room_name").val();
 
         console.log(1)
-        $.post("../../"+module+"_"+sub+"_specialty_order_servlet_action?action=get_specialty_order_record_unfinished",data,function(json){
+        $.post("../../"+module+"_"+sub+"_room_order_servlet_action?action=get_room_order_record_unfinished",data,function(json){
             console.log(JSON.stringify(json));
             if(json.result_code==0){
                 var list=json.aaData;
@@ -409,35 +411,32 @@ var Page = function() {
                         html=html+"                                                <label class=\"form-check-label\" for=\"customCheckBox2\"></label>";
                         html=html+"                                            </div>";
                         html=html+"                                        </td>";
-                        html=html+"                                        <td><strong>"+record.order_id+"</strong></td>";
-                        html=html+"                                        <td><div class=\"d-flex align-items-center\"><img src=\"images/avatar/1.jpg\" class=\"rounded-lg me-2\" width=\"24\" alt=\"\"/> <span class=\"w-space-no\">"+record.specialty_name+"</span></div></td>";
+                        html=html+"                                        <td><strong>"+record.good_id+"</strong></td>";
+                        html=html+"                                        <td><div class=\"d-flex align-items-center\"><img src=\""+record.imageurl+"\" class=\"rounded-lg me-2\" width=\"24\" alt=\"\"/> <span class=\"w-space-no\">"+record.house_name+record.room_name+"</span></div></td>";
                         html=html+"                                        <td>"+record.num+"	</td>";
                         html=html+"                                        <td>"+record.price*record.num+"</td>";
                         html=html+"                                        <td><div class=\"d-flex align-items-center\"><i class=\"fa fa-circle text-success me-1\"></i> "+(record.order_status!=0?'已支付':'未支付')+"</div></td>";
                         html=html+"                                        <td>";
                         html=html+"                                            <div class=\"d-flex\">";
-                        html=html+"                                                <a href=\"javascript:Page.onModifyRecord('"+record.order_id+"')\" class=\"btn btn-primary shadow btn-xs sharp me-1\"><i class=\"fas fa-pencil-alt\"></i></a>";
-                        html=html+"                                                <a href=\"javascript:Page.onDeleteRecord('"+record.order_id+"')\" class=\"btn btn-danger shadow btn-xs sharp\"><i class=\"fa fa-trash\"></i></a>";
+                        html=html+"                                                <a href=\"#\" class=\"btn btn-primary shadow btn-xs sharp me-1\"><i class=\"fas fa-pencil-alt\"></i></a>";
+                        html=html+"                                                <a href=\"javascript:Page.onDeleteRecord('"+record.good_id+"')\" class=\"btn btn-danger shadow btn-xs sharp\"><i class=\"fa fa-trash\"></i></a>";
                         html=html+"                                            </div>";
-                        html=html+"                                        </td>";
-                        html=html+"                                        <td>";
-                        html=html+"                                            <a href=\"javascript:Page.onPayOrder('"+record.order_id+"')\">【支付订单】</a>";
                         html=html+"                                        </td>";
                         html=html+"                                    </tr>";
                     }
                 }
-                $("#order_table_content_unfinished_div").html(html);
+                $("#order_table_content_div").html(html);
             }
         })
     }
     var getOrderRecordUp=function(){
         data = {};
-        data.order_id=$("#record_query_setup #order_id").val();
-        data.specialty_name=$("#record_query_setup #specialty_name").val();
-        data.username=user;
+        data.good_id=$("#record_query_setup #good_id").val();
+        data.house_name=$("#record_query_setup #house_name").val();
+        data.room_name=$("#record_query_setup #room_name").val();
 
         console.log(1)
-        $.post("../../"+module+"_"+sub+"_specialty_order_servlet_action?action=get_specialty_order_record_up",data,function(json){
+        $.post("../../"+module+"_"+sub+"_room_order_servlet_action?action=get_room_order_record_up",data,function(json){
             console.log(JSON.stringify(json));
             if(json.result_code==0){
                 var list=json.aaData;
@@ -454,32 +453,32 @@ var Page = function() {
                         html=html+"                                                <label class=\"form-check-label\" for=\"customCheckBox2\"></label>";
                         html=html+"                                            </div>";
                         html=html+"                                        </td>";
-                        html=html+"                                        <td><strong>"+record.order_id+"</strong></td>";
-                        html=html+"                                        <td><div class=\"d-flex align-items-center\"><img src=\"images/avatar/1.jpg\" class=\"rounded-lg me-2\" width=\"24\" alt=\"\"/> <span class=\"w-space-no\">"+record.specialty_name+"</span></div></td>";
+                        html=html+"                                        <td><strong>"+record.good_id+"</strong></td>";
+                        html=html+"                                        <td><div class=\"d-flex align-items-center\"><img src=\""+record.imageurl+"\" class=\"rounded-lg me-2\" width=\"24\" alt=\"\"/> <span class=\"w-space-no\">"+record.house_name+record.room_name+"</span></div></td>";
                         html=html+"                                        <td>"+record.num+"	</td>";
                         html=html+"                                        <td>"+record.price*record.num+"</td>";
                         html=html+"                                        <td><div class=\"d-flex align-items-center\"><i class=\"fa fa-circle text-success me-1\"></i> "+(record.order_status!=0?'已支付':'未支付')+"</div></td>";
                         html=html+"                                        <td>";
                         html=html+"                                            <div class=\"d-flex\">";
-                        html=html+"                                                <a href=\"javascript:Page.onModifyRecord('"+record.order_id+"')\" class=\"btn btn-primary shadow btn-xs sharp me-1\"><i class=\"fas fa-pencil-alt\"></i></a>";
-                        html=html+"                                                <a href=\"javascript:Page.onDeleteRecord('"+record.order_id+"')\" class=\"btn btn-danger shadow btn-xs sharp\"><i class=\"fa fa-trash\"></i></a>";
+                        html=html+"                                                <a href=\"#\" class=\"btn btn-primary shadow btn-xs sharp me-1\"><i class=\"fas fa-pencil-alt\"></i></a>";
+                        html=html+"                                                <a href=\"javascript:Page.onDeleteRecord('"+record.good_id+"')\" class=\"btn btn-danger shadow btn-xs sharp\"><i class=\"fa fa-trash\"></i></a>";
                         html=html+"                                            </div>";
                         html=html+"                                        </td>";
                         html=html+"                                    </tr>";
                     }
                 }
-                $("#order_table_content_up_div").html(html);
+                $("#order_table_content_div").html(html);
             }
         })
     }
     var getOrderRecordDown=function(){
         data = {};
-        data.order_id=$("#record_query_setup #order_id").val();
-        data.specialty_name=$("#record_query_setup #specialty_name").val();
-        data.username=user;
+        data.good_id=$("#record_query_setup #good_id").val();
+        data.house_name=$("#record_query_setup #house_name").val();
+        data.room_name=$("#record_query_setup #room_name").val();
 
         console.log(1)
-        $.post("../../"+module+"_"+sub+"_specialty_order_servlet_action?action=get_specialty_order_record_down",data,function(json){
+        $.post("../../"+module+"_"+sub+"_room_order_servlet_action?action=get_room_order_record_dowm",data,function(json){
             console.log(JSON.stringify(json));
             if(json.result_code==0){
                 var list=json.aaData;
@@ -496,21 +495,21 @@ var Page = function() {
                         html=html+"                                                <label class=\"form-check-label\" for=\"customCheckBox2\"></label>";
                         html=html+"                                            </div>";
                         html=html+"                                        </td>";
-                        html=html+"                                        <td><strong>"+record.order_id+"</strong></td>";
-                        html=html+"                                        <td><div class=\"d-flex align-items-center\"><img src=\"images/avatar/1.jpg\" class=\"rounded-lg me-2\" width=\"24\" alt=\"\"/> <span class=\"w-space-no\">"+record.specialty_name+"</span></div></td>";
+                        html=html+"                                        <td><strong>"+record.good_id+"</strong></td>";
+                        html=html+"                                        <td><div class=\"d-flex align-items-center\"><img src=\""+record.imageurl+"\" class=\"rounded-lg me-2\" width=\"24\" alt=\"\"/> <span class=\"w-space-no\">"+record.house_name+record.room_name+"</span></div></td>";
                         html=html+"                                        <td>"+record.num+"	</td>";
                         html=html+"                                        <td>"+record.price*record.num+"</td>";
                         html=html+"                                        <td><div class=\"d-flex align-items-center\"><i class=\"fa fa-circle text-success me-1\"></i> "+(record.order_status!=0?'已支付':'未支付')+"</div></td>";
                         html=html+"                                        <td>";
                         html=html+"                                            <div class=\"d-flex\">";
-                        html=html+"                                                <a href=\"javascript:Page.onModifyRecord('"+record.order_id+"')\" class=\"btn btn-primary shadow btn-xs sharp me-1\"><i class=\"fas fa-pencil-alt\"></i></a>";
-                        html=html+"                                                <a href=\"javascript:Page.onDeleteRecord('"+record.order_id+"')\" class=\"btn btn-danger shadow btn-xs sharp\"><i class=\"fa fa-trash\"></i></a>";
+                        html=html+"                                                <a href=\"#\" class=\"btn btn-primary shadow btn-xs sharp me-1\"><i class=\"fas fa-pencil-alt\"></i></a>";
+                        html=html+"                                                <a href=\"javascript:Page.onDeleteRecord('"+record.good_id+"')\" class=\"btn btn-danger shadow btn-xs sharp\"><i class=\"fa fa-trash\"></i></a>";
                         html=html+"                                            </div>";
                         html=html+"                                        </td>";
                         html=html+"                                    </tr>";
                     }
                 }
-                $("#order_table_content_down_div").html(html);
+                $("#order_table_content_div").html(html);
             }
         })
     }

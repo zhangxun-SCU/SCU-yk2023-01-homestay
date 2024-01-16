@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE HTML>
 <html lang="en">
-<input type="hidden" id="page_id" name="page_id" value="order_list"/>
+<input type="hidden" id="page_id" name="page_id" value="room_order_list"/>
 <%--<script src="specialty_order.js"></script>--%>
 <head>
     <meta charset="utf-8">
@@ -619,7 +619,7 @@
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">订单编号</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" placeholder="Enter text" id="op_id" name="op_id">
+                                        <input type="text" class="form-control" placeholder="Enter text" id="good_id" name="good_id">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -669,9 +669,9 @@
                                             </div>
                                         </th>
                                         <th><strong>订单编号</strong></th>
-                                        <th><strong>商品名称</strong></th>
-                                        <th><strong>商品数量</strong></th>
-                                        <th><strong>商品总价</strong></th>
+                                        <th><strong>房间名称</strong></th>
+                                        <th><strong>房间数量</strong></th>
+                                        <th><strong>总价</strong></th>
                                         <th><strong>订单状态</strong></th>
                                         <th><strong></strong></th>
                                     </tr>
@@ -721,9 +721,9 @@
                                             </div>
                                         </th>
                                         <th><strong>订单编号</strong></th>
-                                        <th><strong>商品名称</strong></th>
-                                        <th><strong>商品数量</strong></th>
-                                        <th><strong>商品总价</strong></th>
+                                        <th><strong>房间名称</strong></th>
+                                        <th><strong>房间数量</strong></th>
+                                        <th><strong>总价</strong></th>
                                         <th><strong>订单状态</strong></th>
                                         <th><strong></strong></th>
                                     </tr>
@@ -773,9 +773,9 @@
                                             </div>
                                         </th>
                                         <th><strong>订单编号</strong></th>
-                                        <th><strong>商品名称</strong></th>
-                                        <th><strong>商品数量</strong></th>
-                                        <th><strong>商品总价</strong></th>
+                                        <th><strong>房间名称</strong></th>
+                                        <th><strong>房间数量</strong></th>
+                                        <th><strong>总价</strong></th>
                                         <th><strong>订单状态</strong></th>
                                         <th><strong></strong></th>
                                     </tr>
@@ -825,9 +825,9 @@
                                             </div>
                                         </th>
                                         <th><strong>订单编号</strong></th>
-                                        <th><strong>商品名称</strong></th>
-                                        <th><strong>商品数量</strong></th>
-                                        <th><strong>商品总价</strong></th>
+                                        <th><strong>房间名称</strong></th>
+                                        <th><strong>房间数量</strong></th>
+                                        <th><strong>总价</strong></th>
                                         <th><strong>订单状态</strong></th>
                                         <th><strong></strong></th>
                                     </tr>
@@ -877,14 +877,14 @@
                                             </div>
                                         </th>
                                         <th><strong>订单编号</strong></th>
-                                        <th><strong>商品名称</strong></th>
-                                        <th><strong>商品数量</strong></th>
-                                        <th><strong>商品总价</strong></th>
+                                        <th><strong>房间名称</strong></th>
+                                        <th><strong>房间数量</strong></th>
+                                        <th><strong>总价</strong></th>
                                         <th><strong>订单状态</strong></th>
                                         <th><strong></strong></th>
                                     </tr>
                                     </thead>
-                                    <tbody id="order_table_content_down_div" name="order_table_content_up_div">
+                                    <tbody id="order_table_content_down_div" name="order_table_content_down_div">
                                     <tr>
                                         <td>
                                             <div class="form-check custom-checkbox checkbox-success check-lg me-3">

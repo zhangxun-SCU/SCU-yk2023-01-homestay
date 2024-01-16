@@ -13,23 +13,23 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label">订单ID</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" placeholder="Enter text" id="order_id" name="id">
-                                    <span class="help-block">
-											请填写 </span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">商品ID</label>
-                                <div class="col-md-9">
                                     <input type="text" class="form-control" placeholder="Enter text" id="good_id" name="good_id">
                                     <span class="help-block">
 											请填写 </span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label">商品名称</label>
+                                <label class="col-md-3 control-label">酒店名</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" placeholder="Enter text" id="specialty_name" name="specialty_name">
+                                    <input type="text" class="form-control" placeholder="Enter text" id="house_name" name="house_name">
+                                    <span class="help-block">
+											请填写 </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">房间名</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" placeholder="Enter text" id="room_name" name="room_name">
                                     <span class="help-block">
 											请填写 </span>
                                 </div>
@@ -37,7 +37,7 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label">单价</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" placeholder="Enter text" id="per_price" name="per_price">
+                                    <input type="text" class="form-control" placeholder="Enter text" id="price" name="price">
                                     <span class="help-block">
 											请填写要修改的订单</span>
                                 </div>
