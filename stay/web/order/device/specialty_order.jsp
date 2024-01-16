@@ -6,24 +6,25 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="keywords" content="" />
-    <meta name="author" content="" />
-    <meta name="robots" content="" />
+    <meta name="keywords" content=""/>
+    <meta name="author" content=""/>
+    <meta name="robots" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Invome : Invome Admin  Bootstrap 5 Template" />
-    <meta property="og:title" content="Invome : Invome Admin  Bootstrap 5 Template" />
-    <meta property="og:description" content="Invome : Invome Admin  Bootstrap 5 Template" />
-    <meta property="og:image" content="https://invome.dexignlab.com/xhtml/social-image.png" />
+    <meta name="description" content="Invome : Invome Admin  Bootstrap 5 Template"/>
+    <meta property="og:title" content="Invome : Invome Admin  Bootstrap 5 Template"/>
+    <meta property="og:description" content="Invome : Invome Admin  Bootstrap 5 Template"/>
+    <meta property="og:image" content="https://invome.dexignlab.com/xhtml/social-image.png"/>
     <meta name="format-detection" content="telephone=no">
 
     <!-- PAGE TITLE HERE -->
     <title>Invome Admin Dashboard</title>
 
     <!-- FAVICONS ICON -->
-    <link rel="shortcut icon" type="image/png" href="images/favicon.png" />
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
     <!-- Custom Stylesheet -->
     <link href="../../assets/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
     <link href="../../assets/css/style.css" rel="stylesheet">
+    <link href="../../assets/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
 
 </head>
 
@@ -53,9 +54,13 @@
     ***********************************-->
     <div class="nav-header">
         <a href="index.html" class="brand-logo">
-            <svg class="logo-abbr" width="57" height="57" viewBox="0 0 57 57" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M32.9585 1.84675C30.4961 -0.615584 26.5039 -0.615585 24.0415 1.84675L19.3876 6.50068H12.8059C9.32365 6.50068 6.50071 9.32362 6.50071 12.8059V19.3876L1.84675 24.0415C-0.615584 26.5039 -0.615585 30.4961 1.84675 32.9585L6.50071 37.6124V44.1941C6.50071 47.6763 9.32365 50.4993 12.8059 50.4993H19.3876L24.0415 55.1532C26.5039 57.6156 30.4961 57.6156 32.9585 55.1532L37.6124 50.4993H44.1941C47.6764 50.4993 50.4993 47.6763 50.4993 44.1941V37.6124L55.1532 32.9585C57.6156 30.4961 57.6156 26.5039 55.1532 24.0415L50.4993 19.3876V12.8059C50.4993 9.32362 47.6764 6.50068 44.1941 6.50068H37.6124L32.9585 1.84675Z" fill="url(#paint0_linear)"/>
-                <path class="logo-text" fill-rule="evenodd" clip-rule="evenodd" d="M24.7614 37.345L20.7666 40.3417C20.4005 40.616 19.9111 40.6607 19.5015 40.4553C19.0919 40.2511 18.8333 39.833 18.8333 39.375V17.625C18.8333 16.958 19.3746 16.4167 20.0416 16.4167H36.9583C37.6253 16.4167 38.1666 16.958 38.1666 17.625V39.375C38.1666 39.833 37.9081 40.2511 37.4984 40.4553C37.0888 40.6607 36.5994 40.616 36.2333 40.3417L32.2386 37.345L29.3543 40.2293C28.883 40.7018 28.1169 40.7018 27.6457 40.2293L24.7614 37.345ZM35.75 36.9584V18.8334H21.25V36.9584L24.15 34.7834C24.6309 34.4221 25.3039 34.4704 25.7293 34.8957L28.5 37.6664L31.2707 34.8957C31.696 34.4704 32.3691 34.4221 32.85 34.7834L35.75 36.9584ZM27.2916 28.5H29.7083C30.3753 28.5 30.9166 27.9587 30.9166 27.2917C30.9166 26.6247 30.3753 26.0834 29.7083 26.0834H27.2916C26.6246 26.0834 26.0833 26.6247 26.0833 27.2917C26.0833 27.9587 26.6246 28.5 27.2916 28.5ZM24.875 23.6667H32.125C32.792 23.6667 33.3333 23.1254 33.3333 22.4584C33.3333 21.7914 32.792 21.25 32.125 21.25H24.875C24.208 21.25 23.6666 21.7914 23.6666 22.4584C23.6666 23.1254 24.208 23.6667 24.875 23.6667Z" fill="white"/>
+            <svg class="logo-abbr" width="57" height="57" viewBox="0 0 57 57" fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path d="M32.9585 1.84675C30.4961 -0.615584 26.5039 -0.615585 24.0415 1.84675L19.3876 6.50068H12.8059C9.32365 6.50068 6.50071 9.32362 6.50071 12.8059V19.3876L1.84675 24.0415C-0.615584 26.5039 -0.615585 30.4961 1.84675 32.9585L6.50071 37.6124V44.1941C6.50071 47.6763 9.32365 50.4993 12.8059 50.4993H19.3876L24.0415 55.1532C26.5039 57.6156 30.4961 57.6156 32.9585 55.1532L37.6124 50.4993H44.1941C47.6764 50.4993 50.4993 47.6763 50.4993 44.1941V37.6124L55.1532 32.9585C57.6156 30.4961 57.6156 26.5039 55.1532 24.0415L50.4993 19.3876V12.8059C50.4993 9.32362 47.6764 6.50068 44.1941 6.50068H37.6124L32.9585 1.84675Z"
+                      fill="url(#paint0_linear)"/>
+                <path class="logo-text" fill-rule="evenodd" clip-rule="evenodd"
+                      d="M24.7614 37.345L20.7666 40.3417C20.4005 40.616 19.9111 40.6607 19.5015 40.4553C19.0919 40.2511 18.8333 39.833 18.8333 39.375V17.625C18.8333 16.958 19.3746 16.4167 20.0416 16.4167H36.9583C37.6253 16.4167 38.1666 16.958 38.1666 17.625V39.375C38.1666 39.833 37.9081 40.2511 37.4984 40.4553C37.0888 40.6607 36.5994 40.616 36.2333 40.3417L32.2386 37.345L29.3543 40.2293C28.883 40.7018 28.1169 40.7018 27.6457 40.2293L24.7614 37.345ZM35.75 36.9584V18.8334H21.25V36.9584L24.15 34.7834C24.6309 34.4221 25.3039 34.4704 25.7293 34.8957L28.5 37.6664L31.2707 34.8957C31.696 34.4704 32.3691 34.4221 32.85 34.7834L35.75 36.9584ZM27.2916 28.5H29.7083C30.3753 28.5 30.9166 27.9587 30.9166 27.2917C30.9166 26.6247 30.3753 26.0834 29.7083 26.0834H27.2916C26.6246 26.0834 26.0833 26.6247 26.0833 27.2917C26.0833 27.9587 26.6246 28.5 27.2916 28.5ZM24.875 23.6667H32.125C32.792 23.6667 33.3333 23.1254 33.3333 22.4584C33.3333 21.7914 32.792 21.25 32.125 21.25H24.875C24.208 21.25 23.6666 21.7914 23.6666 22.4584C23.6666 23.1254 24.208 23.6667 24.875 23.6667Z"
+                      fill="white"/>
                 <defs>
                 </defs>
             </svg>
@@ -97,12 +102,32 @@
                 <div class="tab-pane fade active show" id="chat" role="tabpanel">
                     <div class="card mb-sm-3 mb-md-0 contacts_card dlab-chat-user-box">
                         <div class="card-header chat-list-header text-center">
-                            <a href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect fill="#000000" x="4" y="11" width="16" height="2" rx="1"/><rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) " x="4" y="11" width="16" height="2" rx="1"/></g></svg></a>
+                            <a href="javascript:void(0);">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     width="18px" height="18px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect fill="#000000" x="4" y="11" width="16" height="2" rx="1"/>
+                                        <rect fill="#000000" opacity="0.3"
+                                              transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) "
+                                              x="4" y="11" width="16" height="2" rx="1"/>
+                                    </g>
+                                </svg>
+                            </a>
                             <div>
                                 <h6 class="mb-1">Chat List</h6>
                                 <p class="mb-0">Show All</p>
                             </div>
-                            <a href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg></a>
+                            <a href="javascript:void(0);">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     width="18px" height="18px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24"/>
+                                        <circle fill="#000000" cx="5" cy="12" r="2"/>
+                                        <circle fill="#000000" cx="12" cy="12" r="2"/>
+                                        <circle fill="#000000" cx="19" cy="12" r="2"/>
+                                    </g>
+                                </svg>
+                            </a>
                         </div>
                         <div class="card-body contacts_body p-0 dlab-scroll  " id="DLAB_W_Contacts_Body">
                             <ul class="contacts">
@@ -297,18 +322,44 @@
                     <div class="card chat dlab-chat-history-box d-none">
                         <div class="card-header chat-list-header text-center">
                             <a href="javascript:void(0);" class="dlab-chat-history-back">
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><polygon points="0 0 24 0 24 24 0 24"/><rect fill="#000000" opacity="0.3" transform="translate(15.000000, 12.000000) scale(-1, 1) rotate(-90.000000) translate(-15.000000, -12.000000) " x="14" y="7" width="2" height="10" rx="1"/><path d="M3.7071045,15.7071045 C3.3165802,16.0976288 2.68341522,16.0976288 2.29289093,15.7071045 C1.90236664,15.3165802 1.90236664,14.6834152 2.29289093,14.2928909 L8.29289093,8.29289093 C8.67146987,7.914312 9.28105631,7.90106637 9.67572234,8.26284357 L15.6757223,13.7628436 C16.0828413,14.136036 16.1103443,14.7686034 15.7371519,15.1757223 C15.3639594,15.5828413 14.7313921,15.6103443 14.3242731,15.2371519 L9.03007346,10.3841355 L3.7071045,15.7071045 Z" fill="#000000" fill-rule="nonzero" transform="translate(9.000001, 11.999997) scale(-1, -1) rotate(90.000000) translate(-9.000001, -11.999997) "/></g></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     width="18px" height="18px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <polygon points="0 0 24 0 24 24 0 24"/>
+                                        <rect fill="#000000" opacity="0.3"
+                                              transform="translate(15.000000, 12.000000) scale(-1, 1) rotate(-90.000000) translate(-15.000000, -12.000000) "
+                                              x="14" y="7" width="2" height="10" rx="1"/>
+                                        <path d="M3.7071045,15.7071045 C3.3165802,16.0976288 2.68341522,16.0976288 2.29289093,15.7071045 C1.90236664,15.3165802 1.90236664,14.6834152 2.29289093,14.2928909 L8.29289093,8.29289093 C8.67146987,7.914312 9.28105631,7.90106637 9.67572234,8.26284357 L15.6757223,13.7628436 C16.0828413,14.136036 16.1103443,14.7686034 15.7371519,15.1757223 C15.3639594,15.5828413 14.7313921,15.6103443 14.3242731,15.2371519 L9.03007346,10.3841355 L3.7071045,15.7071045 Z"
+                                              fill="#000000" fill-rule="nonzero"
+                                              transform="translate(9.000001, 11.999997) scale(-1, -1) rotate(90.000000) translate(-9.000001, -11.999997) "/>
+                                    </g>
+                                </svg>
                             </a>
                             <div>
                                 <h6 class="mb-1">Chat with Khelesh</h6>
                                 <p class="mb-0 text-success">Online</p>
                             </div>
                             <div class="dropdown">
-                                <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg></a>
+                                <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                         width="18px" height="18px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24"/>
+                                            <circle fill="#000000" cx="5" cy="12" r="2"/>
+                                            <circle fill="#000000" cx="12" cy="12" r="2"/>
+                                            <circle fill="#000000" cx="19" cy="12" r="2"/>
+                                        </g>
+                                    </svg>
+                                </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
-                                    <li class="dropdown-item"><i class="fa fa-user-circle text-primary me-2"></i> View profile</li>
-                                    <li class="dropdown-item"><i class="fa fa-users text-primary me-2"></i> Add to btn-close friends</li>
-                                    <li class="dropdown-item"><i class="fa fa-plus text-primary me-2"></i> Add to group</li>
+                                    <li class="dropdown-item"><i class="fa fa-user-circle text-primary me-2"></i> View
+                                        profile
+                                    </li>
+                                    <li class="dropdown-item"><i class="fa fa-users text-primary me-2"></i> Add to
+                                        btn-close friends
+                                    </li>
+                                    <li class="dropdown-item"><i class="fa fa-plus text-primary me-2"></i> Add to group
+                                    </li>
                                     <li class="dropdown-item"><i class="fa fa-ban text-primary me-2"></i> Block</li>
                                 </ul>
                             </div>
@@ -445,7 +496,8 @@
                             <div class="input-group">
                                 <textarea class="form-control" placeholder="Type your message..."></textarea>
                                 <div class="input-group-append">
-                                    <button type="button" class="btn btn-primary"><i class="fa fa-location-arrow"></i></button>
+                                    <button type="button" class="btn btn-primary"><i class="fa fa-location-arrow"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -454,12 +506,33 @@
                 <div class="tab-pane fade" id="alerts" role="tabpanel">
                     <div class="card mb-sm-3 mb-md-0 contacts_card">
                         <div class="card-header chat-list-header text-center">
-                            <a href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg></a>
+                            <a href="javascript:void(0);">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     width="18px" height="18px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24"/>
+                                        <circle fill="#000000" cx="5" cy="12" r="2"/>
+                                        <circle fill="#000000" cx="12" cy="12" r="2"/>
+                                        <circle fill="#000000" cx="19" cy="12" r="2"/>
+                                    </g>
+                                </svg>
+                            </a>
                             <div>
                                 <h6 class="mb-1">Notications</h6>
                                 <p class="mb-0">Show All</p>
                             </div>
-                            <a href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/><path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" fill="#000000" fill-rule="nonzero"/></g></svg></a>
+                            <a href="javascript:void(0);">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     width="18px" height="18px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24"/>
+                                        <path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z"
+                                              fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                                        <path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z"
+                                              fill="#000000" fill-rule="nonzero"/>
+                                    </g>
+                                </svg>
+                            </a>
                         </div>
                         <div class="card-body contacts_body p-0 dlab-scroll" id="DLAB_W_Contacts_Body1">
                             <ul class="contacts">
@@ -510,12 +583,33 @@
                 <div class="tab-pane fade" id="notes">
                     <div class="card mb-sm-3 mb-md-0 note_card">
                         <div class="card-header chat-list-header text-center">
-                            <a href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect fill="#000000" x="4" y="11" width="16" height="2" rx="1"/><rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) " x="4" y="11" width="16" height="2" rx="1"/></g></svg></a>
+                            <a href="javascript:void(0);">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     width="18px" height="18px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect fill="#000000" x="4" y="11" width="16" height="2" rx="1"/>
+                                        <rect fill="#000000" opacity="0.3"
+                                              transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) "
+                                              x="4" y="11" width="16" height="2" rx="1"/>
+                                    </g>
+                                </svg>
+                            </a>
                             <div>
                                 <h6 class="mb-1">Notes</h6>
                                 <p class="mb-0">Add New Nots</p>
                             </div>
-                            <a href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/><path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" fill="#000000" fill-rule="nonzero"/></g></svg></a>
+                            <a href="javascript:void(0);">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     width="18px" height="18px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24"/>
+                                        <path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z"
+                                              fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                                        <path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z"
+                                              fill="#000000" fill-rule="nonzero"/>
+                                    </g>
+                                </svg>
+                            </a>
                         </div>
                         <div class="card-body contacts_body p-0 dlab-scroll" id="DLAB_W_Contacts_Body2">
                             <ul class="contacts">
@@ -526,8 +620,10 @@
                                             <p>10 Aug 2020</p>
                                         </div>
                                         <div class="ms-auto">
-                                            <a href="javascript:void(0);" class="btn btn-primary btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                                            <a href="javascript:void(0);" class="btn btn-danger btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                            <a href="javascript:void(0);" class="btn btn-primary btn-xs sharp me-1"><i
+                                                    class="fas fa-pencil-alt"></i></a>
+                                            <a href="javascript:void(0);" class="btn btn-danger btn-xs sharp"><i
+                                                    class="fa fa-trash"></i></a>
                                         </div>
                                     </div>
                                 </li>
@@ -538,8 +634,10 @@
                                             <p>10 Aug 2020</p>
                                         </div>
                                         <div class="ms-auto">
-                                            <a href="javascript:void(0);" class="btn btn-primary btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                                            <a href="javascript:void(0);" class="btn btn-danger btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                            <a href="javascript:void(0);" class="btn btn-primary btn-xs sharp me-1"><i
+                                                    class="fas fa-pencil-alt"></i></a>
+                                            <a href="javascript:void(0);" class="btn btn-danger btn-xs sharp"><i
+                                                    class="fa fa-trash"></i></a>
                                         </div>
                                     </div>
                                 </li>
@@ -550,8 +648,10 @@
                                             <p>10 Aug 2020</p>
                                         </div>
                                         <div class="ms-auto">
-                                            <a href="javascript:void(0);" class="btn btn-primary btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                                            <a href="javascript:void(0);" class="btn btn-danger btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                            <a href="javascript:void(0);" class="btn btn-primary btn-xs sharp me-1"><i
+                                                    class="fas fa-pencil-alt"></i></a>
+                                            <a href="javascript:void(0);" class="btn btn-danger btn-xs sharp"><i
+                                                    class="fa fa-trash"></i></a>
                                         </div>
                                     </div>
                                 </li>
@@ -562,8 +662,10 @@
                                             <p>10 Aug 2020</p>
                                         </div>
                                         <div class="ms-auto">
-                                            <a href="javascript:void(0);" class="btn btn-primary btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                                            <a href="javascript:void(0);" class="btn btn-danger btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                            <a href="javascript:void(0);" class="btn btn-primary btn-xs sharp me-1"><i
+                                                    class="fas fa-pencil-alt"></i></a>
+                                            <a href="javascript:void(0);" class="btn btn-danger btn-xs sharp"><i
+                                                    class="fa fa-trash"></i></a>
                                         </div>
                                     </div>
                                 </li>
@@ -579,12 +681,10 @@
     ***********************************-->
 
 
-
-
     <!--**********************************
         Header start
     ***********************************-->
-<%@ include file="/frame/frame_menu.jsp" %>
+    <%@ include file="/frame/frame_menu.jsp" %>
     <!--**********************************
         Sidebar end
     ***********************************-->
@@ -594,18 +694,18 @@
     ***********************************-->
     <div class="content-body">
         <div class="container-fluid">
-<%--            <div class="row page-titles">--%>
-<%--                <ol class="breadcrumb">--%>
-<%--                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Welcome</a></li>--%>
-<%--                    <li class="breadcrumb-item"><a href="javascript:void(0)">Bootstrap</a></li>--%>
-<%--                </ol>--%>
-<%--            </div>--%>
+            <%--            <div class="row page-titles">--%>
+            <%--                <ol class="breadcrumb">--%>
+            <%--                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Welcome</a></li>--%>
+            <%--                    <li class="breadcrumb-item"><a href="javascript:void(0)">Bootstrap</a></li>--%>
+            <%--                </ol>--%>
+            <%--            </div>--%>
             <div class="row">
                 <div class="col-md-6">
                     <button type="button" class="btn blue" id="query_button" name="query_button">查询</button>
                     <button type="button" class="btn blue" id="export_button" name="export_button">导出订单</button>
                     <button type="button" class="btn blue" id="print_word" name="print_word">打印订单</button>
-<%--                    <button type="button" class="btn blue" id="device_statistic" name="device_statistic">统计表</button>--%>
+                    <%--                    <button type="button" class="btn blue" id="device_statistic" name="device_statistic">统计表</button>--%>
                 </div>
             </div>
             <div class="row">
@@ -616,13 +716,15 @@
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">订单编号</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" placeholder="Enter text" id="order_id" name="order_id">
+                                        <input type="text" class="form-control" placeholder="Enter text" id="order_id"
+                                               name="order_id">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">商品名称</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" placeholder="Enter text" id="specialty_name" name="specialty_name">
+                                        <input type="text" class="form-control" placeholder="Enter text"
+                                               id="specialty_name" name="specialty_name">
                                     </div>
                                 </div>
                             </div>
@@ -633,9 +735,15 @@
             <!-- row -->
             <div class="row">
                 <div class="col-md-6">
-                    <button type="button" class="btn blue" id="order_list_all_button" name="order_list_all_button">全部订单</button>
-                    <button type="button" class="btn blue" id="order_list_finished_button" name="order_list_finished_button">已完成订单</button>
-                    <button type="button" class="btn blue" id="order_list_unfinished_button" name="order_list_unfinished_button">待支付订单</button>
+                    <button type="button" class="btn blue" id="order_list_all_button" name="order_list_all_button">
+                        全部订单
+                    </button>
+                    <button type="button" class="btn blue" id="order_list_finished_button"
+                            name="order_list_finished_button">已完成订单
+                    </button>
+                    <button type="button" class="btn blue" id="order_list_unfinished_button"
+                            name="order_list_unfinished_button">待支付订单
+                    </button>
                 </div>
             </div>
 
@@ -652,7 +760,8 @@
                                     <tr>
                                         <th style="width:50px;">
                                             <div class="form-check custom-checkbox checkbox-success check-lg me-3">
-                                                <input type="checkbox" class="form-check-input" id="checkAll" required="">
+                                                <input type="checkbox" class="form-check-input" id="checkAll"
+                                                       required="">
                                                 <label class="form-check-label" for="checkAll"></label>
                                             </div>
                                         </th>
@@ -668,19 +777,31 @@
                                     <tr>
                                         <td>
                                             <div class="form-check custom-checkbox checkbox-success check-lg me-3">
-                                                <input type="checkbox" class="form-check-input" id="customCheckBox2" required="">
+                                                <input type="checkbox" class="form-check-input" id="customCheckBox2"
+                                                       required="">
                                                 <label class="form-check-label" for="customCheckBox2"></label>
                                             </div>
                                         </td>
                                         <td><strong>542</strong></td>
-                                        <td><div class="d-flex align-items-center"><img src="images/avatar/1.jpg" class="rounded-lg me-2" width="24" alt=""/> <span class="w-space-no">Dr. Jackson</span></div></td>
-                                        <td>example@example.com	</td>
+                                        <td>
+                                            <div class="d-flex align-items-center"><img src="images/avatar/1.jpg"
+                                                                                        class="rounded-lg me-2"
+                                                                                        width="24" alt=""/> <span
+                                                    class="w-space-no">Dr. Jackson</span></div>
+                                        </td>
+                                        <td>example@example.com</td>
                                         <td>01 August 2020</td>
-                                        <td><div class="d-flex align-items-center"><i class="fa fa-circle text-success me-1"></i> Successful</div></td>
+                                        <td>
+                                            <div class="d-flex align-items-center"><i
+                                                    class="fa fa-circle text-success me-1"></i> Successful
+                                            </div>
+                                        </td>
                                         <td>
                                             <div class="d-flex">
-                                                <a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                                                <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                                <a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i
+                                                        class="fas fa-pencil-alt"></i></a>
+                                                <a href="#" class="btn btn-danger shadow btn-xs sharp"><i
+                                                        class="fa fa-trash"></i></a>
                                             </div>
                                         </td>
                                     </tr>
@@ -691,7 +812,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row display-none" style ="display:none" id="finished_order_tab">
+            <div class="row display-none" style="display:none" id="finished_order_tab">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
@@ -704,7 +825,8 @@
                                     <tr>
                                         <th style="width:50px;">
                                             <div class="form-check custom-checkbox checkbox-success check-lg me-3">
-                                                <input type="checkbox" class="form-check-input" id="checkAll_2" required="">
+                                                <input type="checkbox" class="form-check-input" id="checkAll_2"
+                                                       required="">
                                                 <label class="form-check-label" for="checkAll"></label>
                                             </div>
                                         </th>
@@ -716,23 +838,36 @@
                                         <th><strong></strong></th>
                                     </tr>
                                     </thead>
-                                    <tbody id="order_table_content_finished_div" name="order_table_content_finished_div">
+                                    <tbody id="order_table_content_finished_div"
+                                           name="order_table_content_finished_div">
                                     <tr>
                                         <td>
                                             <div class="form-check custom-checkbox checkbox-success check-lg me-3">
-                                                <input type="checkbox" class="form-check-input" id="customCheckBox2_2" required="">
+                                                <input type="checkbox" class="form-check-input" id="customCheckBox2_2"
+                                                       required="">
                                                 <label class="form-check-label" for="customCheckBox2"></label>
                                             </div>
                                         </td>
                                         <td><strong>542</strong></td>
-                                        <td><div class="d-flex align-items-center"><img src="images/avatar/1.jpg" class="rounded-lg me-2" width="24" alt=""/> <span class="w-space-no">Dr. Jackson</span></div></td>
-                                        <td>example@example.com	</td>
+                                        <td>
+                                            <div class="d-flex align-items-center"><img src="images/avatar/1.jpg"
+                                                                                        class="rounded-lg me-2"
+                                                                                        width="24" alt=""/> <span
+                                                    class="w-space-no">Dr. Jackson</span></div>
+                                        </td>
+                                        <td>example@example.com</td>
                                         <td>01 August 2020</td>
-                                        <td><div class="d-flex align-items-center"><i class="fa fa-circle text-success me-1"></i> Successful</div></td>
+                                        <td>
+                                            <div class="d-flex align-items-center"><i
+                                                    class="fa fa-circle text-success me-1"></i> Successful
+                                            </div>
+                                        </td>
                                         <td>
                                             <div class="d-flex">
-                                                <a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                                                <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                                <a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i
+                                                        class="fas fa-pencil-alt"></i></a>
+                                                <a href="#" class="btn btn-danger shadow btn-xs sharp"><i
+                                                        class="fa fa-trash"></i></a>
                                             </div>
                                         </td>
                                     </tr>
@@ -743,7 +878,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row display-none" style ="display:none" id="unfinished_order_tab">
+            <div class="row display-none" style="display:none" id="unfinished_order_tab">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
@@ -756,7 +891,8 @@
                                     <tr>
                                         <th style="width:50px;">
                                             <div class="form-check custom-checkbox checkbox-success check-lg me-3">
-                                                <input type="checkbox" class="form-check-input" id="checkAll_3" required="">
+                                                <input type="checkbox" class="form-check-input" id="checkAll_3"
+                                                       required="">
                                                 <label class="form-check-label" for="checkAll"></label>
                                             </div>
                                         </th>
@@ -768,23 +904,36 @@
                                         <th><strong></strong></th>
                                     </tr>
                                     </thead>
-                                    <tbody id="order_table_content_unfinished_div" name="order_table_content_unfinished_div">
+                                    <tbody id="order_table_content_unfinished_div"
+                                           name="order_table_content_unfinished_div">
                                     <tr>
                                         <td>
                                             <div class="form-check custom-checkbox checkbox-success check-lg me-3">
-                                                <input type="checkbox" class="form-check-input" id="customCheckBox2_3" required="">
+                                                <input type="checkbox" class="form-check-input" id="customCheckBox2_3"
+                                                       required="">
                                                 <label class="form-check-label" for="customCheckBox2"></label>
                                             </div>
                                         </td>
                                         <td><strong>542</strong></td>
-                                        <td><div class="d-flex align-items-center"><img src="images/avatar/1.jpg" class="rounded-lg me-2" width="24" alt=""/> <span class="w-space-no">Dr. Jackson</span></div></td>
-                                        <td>example@example.com	</td>
+                                        <td>
+                                            <div class="d-flex align-items-center"><img src="images/avatar/1.jpg"
+                                                                                        class="rounded-lg me-2"
+                                                                                        width="24" alt=""/> <span
+                                                    class="w-space-no">Dr. Jackson</span></div>
+                                        </td>
+                                        <td>example@example.com</td>
                                         <td>01 August 2020</td>
-                                        <td><div class="d-flex align-items-center"><i class="fa fa-circle text-success me-1"></i> Successful</div></td>
+                                        <td>
+                                            <div class="d-flex align-items-center"><i
+                                                    class="fa fa-circle text-success me-1"></i> Successful
+                                            </div>
+                                        </td>
                                         <td>
                                             <div class="d-flex">
-                                                <a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                                                <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                                <a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i
+                                                        class="fas fa-pencil-alt"></i></a>
+                                                <a href="#" class="btn btn-danger shadow btn-xs sharp"><i
+                                                        class="fa fa-trash"></i></a>
                                             </div>
                                         </td>
                                     </tr>
@@ -807,7 +956,8 @@
     ***********************************-->
     <div class="footer">
         <div class="copyright">
-            <p>Copyright © Designed &amp; Developed by <a href="https://dexignlab.com/" target="_blank">DexignLab</a> 2021</p>
+            <p>Copyright © Designed &amp; Developed by <a href="https://dexignlab.com/" target="_blank">DexignLab</a>
+                2021</p>
         </div>
     </div>
     <!--**********************************
@@ -828,16 +978,32 @@
     Main wrapper end
 ***********************************-->
 <%@ include file="device_modify_div.jsp" %>
+<%@ include file="order_comment.jsp" %>
 <!--**********************************
     Scripts
 ***********************************-->
 <!-- Required vendors -->
+<script>
+    function getUserInfo() {
+        const token = getCookie("token")
+        return JSON.parse(window.atob(token.split('.')[1]))
+    }
+</script>
+<script>
+    /**
+     * top menu slider
+     */
+
+    $('#to-profile').attr('href', `/user/user-profile.jsp?id=\${getUserInfo().id}`);
+</script>
 <script src="../../assets/vendor/global/global.min.js"></script>
 <script src="../../assets/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
 <script src="../../assets/js/custom.min.js"></script>
 <script src="../../assets/js/dlabnav-init.js"></script>
 <script src="../../assets/js/demo.js"></script>
 <script src="../../assets/js/styleSwitcher.js"></script>
+<script src="../../assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
+<script src="../../assets/js/plugins-init/sweetalert.init.js"></script>
 <script src="../../assets/js/order/specialty_order.js"></script>
 
 </body>
