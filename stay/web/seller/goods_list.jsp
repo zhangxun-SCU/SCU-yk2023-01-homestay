@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="homestay.utils.UserUtil" %>
+<%@ page import="homestay.entity.User" %>
+<%@ page import="homestay.dao.UserDao" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,7 +33,7 @@
     <link href="../assets/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
     <link href="../assets/vendor/lightgallery/css/lightgallery.min.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/goods/goods_page.css">
+    <link rel="stylesheet" href="../assets/css/seller/goods_page.css">
 
     <!--    &lt;!&ndash; dropify &ndash;&gt;-->
     <!--&lt;!&ndash;    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"/>&ndash;&gt;-->
@@ -93,16 +96,20 @@
                             </div>
                             <div class="profile-info">
                                 <div class="profile-photo">
-                                    <img src="../assets/images/profile/profile.png" class="img-fluid rounded-circle"
+                                    <img src="<%=user.avatarURL%>" class="img-fluid rounded-circle"
                                          alt="">
                                 </div>
                                 <div class="profile-details">
                                     <div class="profile-name px-3 pt-2">
-                                        <h4 class="text-primary mb-0">Mitchell C. Shay</h4>
-                                        <p>UX / UI Designer</p>
+                                        <h4 class="text-primary mb-0">
+                                            <%=user.id%>
+                                        </h4>
+                                        <p>Username</p>
                                     </div>
                                     <div class="profile-email px-2 pt-2">
-                                        <h4 class="text-muted mb-0">info@example.com</h4>
+                                        <h4 class="text-muted mb-0">
+                                            <%=user.email%>
+                                        </h4>
                                         <p>Email</p>
                                     </div>
                                     <div class="ms-auto">
@@ -243,6 +250,6 @@
         return true;
     };
 </script>
-<script src="../assets/js/goods/goods_list.js"></script>
+<script src="../assets/js/seller/goods_list.js"></script>
 </body>
 </html>

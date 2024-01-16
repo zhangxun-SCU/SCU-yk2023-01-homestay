@@ -135,10 +135,13 @@ function showModifyHomestayModal(homestayId) {
             "longitude": longitude,
             "latitude": latitude,
             "location": location,
-            "imageurl": document.querySelector("#modify_homestay_image_preview > img").src
         };
-        // 去除 data:image/*;base64, 的前缀
-        data.imageurl = data.imageurl.substring(data.imageurl.indexOf(",") + 1);
+        var imageurl = document.querySelector("#modify_homestay_image_preview > img").src;
+        if (imageurl.indexOf(",") !== -1) {
+            // 上传新图片后才传这个参数
+            // 去除 data:image/*;base64, 的前缀
+            data.imageurl = imageurl.substring(imageurl.indexOf(",") + 1);
+        }
         console.log(data);
         $.post(
             url,
@@ -295,10 +298,12 @@ function showModifySpecialtyModal(specialtyId) {
             "specialty_name": $("#modify_specialty_name").val(),
             "price": $("#modify_specialty_price").val(),
             "num": $("#modify_specialty_num").val(),
-            "imageurl": document.querySelector("#modify_specialty_image_preview > img").src
         };
-        // 去除 data:image/*;base64, 的前缀
-        data.imageurl = data.imageurl.substring(data.imageurl.indexOf(",") + 1);
+        var imageurl = document.querySelector("#modify_specialty_image_preview > img").src;
+        if (imageurl.indexOf(",") !== -1) {
+            // 去除 data:image/*;base64, 的前缀
+            data.imageurl = imageurl.substring(imageurl.indexOf(",") + 1);
+        }
         console.log(data);
         $.post(
             url,

@@ -145,9 +145,11 @@ public class HomestayDao {
         double longitude = data.getParam().getDouble("longitude");
         double latitude = data.getParam().getDouble("latitude");
         String houseLocation = data.getParam().getString("location");
-        String imageurl = data.getParam().getString("imageurl");
-        String imagePath = IMAGE_DIR + houseId + ".png";
-        base64ToImage(imageurl, imagePath);
+        if (data.getParam().has("imageurl")) {
+            String imageurl = data.getParam().getString("imageurl");
+            String imagePath = IMAGE_DIR + houseId + ".png";
+            base64ToImage(imageurl, imagePath);
+        }
         String sql = "Update house Set ";
         String values = String.format(
                 "house_name='%s', longitude='%f', latitude='%f', location='%s' Where house_id='%s'",

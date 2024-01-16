@@ -23,7 +23,8 @@
     <link href="../assets/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
     <link href="../assets/vendor/lightgallery/css/lightgallery.min.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/goods/goods_page.css">
+    <link href="../assets/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/seller/goods_page.css">
 
 </head>
 
@@ -77,16 +78,20 @@
                             </div>
                             <div class="profile-info">
                                 <div class="profile-photo">
-                                    <img src="../assets/images/profile/profile.png" class="img-fluid rounded-circle"
+                                    <img src="<%=user.avatarURL%>" class="img-fluid rounded-circle"
                                          alt="">
                                 </div>
                                 <div class="profile-details">
                                     <div class="profile-name px-3 pt-2">
-                                        <h4 class="text-primary mb-0">Mitchell C. Shay</h4>
-                                        <p>UX / UI Designer</p>
+                                        <h4 class="text-primary mb-0">
+                                            <%=user.id%>
+                                        </h4>
+                                        <p>Username</p>
                                     </div>
                                     <div class="profile-email px-2 pt-2">
-                                        <h4 class="text-muted mb-0">info@example.com</h4>
+                                        <h4 class="text-muted mb-0">
+                                            <%=user.email%>
+                                        </h4>
                                         <p>Email</p>
                                     </div>
                                     <div class="ms-auto">
@@ -171,7 +176,8 @@
                                                         </div>
                                                         <div class="mb-3 row clearfix">
                                                             <div class="col-sm-10">
-                                                                <button type="button" class="btn btn-primary"
+                                                                <button type="button"
+                                                                        class="btn btn-primary sweet-success"
                                                                         id="add_homestay_button"
                                                                         name="add_homestay_button">
                                                                     发布新民宿
@@ -300,7 +306,9 @@
 <script src="../assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 <script src="../assets/vendor/chart.js/Chart.bundle.min.js"></script>
 <script src="../assets/vendor/lightgallery/js/lightgallery-all.min.js"></script>
-<script src="../assets/js/goods/goods_page.js"></script>
+<script src="../assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
+<script src="../assets/js/plugins-init/sweetalert.init.js"></script>
+<script src="../assets/js/seller/goods_page.js"></script>
 <%-- 地图API --%>
 <%--<script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=vHACkq2zCcvmYIGWtlw8dYbwYHbQj458"></script>--%>
 <script type="text/javascript">
@@ -311,7 +319,7 @@
 <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
 <script type="text/javascript"
         src="https://webapi.amap.com/maps?v=1.4.15&key=89fd825427ce3fbf3dc999e544b50f99&plugin=AMap.Geocoder"></script>
-<script src="../assets/js/goods/location.js"></script>
+<script src="../assets/js/seller/location.js"></script>
 
 </body>
 </html>
