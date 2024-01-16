@@ -30,6 +30,10 @@ public class CartServlet  extends HttpServlet {
             {
                 cs.deleteCartGood(data,json,user_id);
             }
+            else if(action.equals("modify"))
+            {
+                cs.modifyCartGood(data,json,user_id);
+            }
             resp.setContentType("application/json; charset=UTF-8");
             resp.getWriter().println(json);
         } catch (JSONException | IOException e) {
