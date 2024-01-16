@@ -1,3 +1,4 @@
+
 package homestay.servlet;
 /*
  * 待完成：用MVC模式分开DB和Action操作
@@ -226,7 +227,7 @@ public class RoomOrderServletAction {
     /*========================================CRUD业务函数 开始========================================*/
     private void getDeviceRecord(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
         SpecialtyOrderDao dao=new SpecialtyOrderDao();
-        dao.getDeviceRecord(data,json);
+        dao.getOrderRecord(data,json);
     }
     private void getOrderRecordFinished(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
         SpecialtyOrderDao dao=new SpecialtyOrderDao();
@@ -253,7 +254,7 @@ public class RoomOrderServletAction {
 
     private void exportDeviceRecord(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException, IOException {
         SpecialtyOrderDao dao=new SpecialtyOrderDao();
-        dao.getDeviceRecord(data,json);
+        dao.getOrderRecord(data,json);
         getExportDeviceRecordToFile(json);
         getExportDeviceRecordToTxt(json);
 //		getExportDeviceRecordToExcel(json);
@@ -295,7 +296,7 @@ public class RoomOrderServletAction {
 //	}
     private void getGpsReceiveCountByHour(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, IOException {
         SpecialtyOrderDao dao=new SpecialtyOrderDao();
-        dao.getGpsReceiveCountByHour(data,json);
+        //dao.getGpsReceiveCountByHour(data,json);
     }
     /*========================================上传文件函数 开始========================================*/
     private void uploadFile(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
@@ -406,3 +407,4 @@ public class RoomOrderServletAction {
     }
     /*========================================上传文件函数 结束========================================*/
 }
+

@@ -58,8 +58,8 @@ var Page = function() {
         $('#query_button').click(function() {onQueryRecord();});
         $('#export_button').click(function() {onExportRecord();});
         $('#print_table_button').click(function() {window.location.href="device_list_print_table.jsp";});
-        $('#device_statistic').click(function() {window.location.href="device_statistic.jsp";});
-        $('#print_word').click(function() {window.location.href="device_list_print_word.jsp";});
+        $('#device_statistic').click(function() {window.location.href="order_statistic.jsp";});
+        $('#print_word').click(function() {window.location.href="order_list_print_word.jsp";});
     }
     var initOrderAddControlEvent=function(){
         $("#help_button").click(function() {help();});
@@ -652,3 +652,4 @@ var Page = function() {
     }
 }();//Page
 /*================================================================================*/
+
