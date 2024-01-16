@@ -137,11 +137,15 @@ To change this template use File | Settings | File Templates.
                                                 </div>
                                                 <!--Quanatity End-->
                                                 <div class="shopping-cart  mb-2 me-3">
+                                                    <a id="view_comments" class="btn btn-primary" href="javascript:viewComments();"><i
+                                                            class="fa fa-comment me-2"></i>查看评论</a>
+                                                </div>
+                                                <div class="shopping-cart  mb-2 me-3">
                                                     <a id="add_cart" class="btn btn-primary" href="javascript:void();"><i
                                                             class="fa fa-shopping-basket me-2"></i>加入购物车</a>
                                                 </div>
                                                 <div class="shopping-cart  mb-2 me-3" onclick="purChase()">
-                                                    <a id="initOrder"class="btn btn-danger" href="javascript:void();"><i
+                                                    <a id="initOrder" class="btn btn-danger" href="javascript:void();"><i
                                                             class="fa fa-shopping-basket me-2"></i>立即购买</a>
                                                 </div>
                                             </div>
@@ -290,7 +294,9 @@ To change this template use File | Settings | File Templates.
 
     }
 
-
+    function viewComments(){
+        window.location.href = "./specialty_comments.jsp?good_id=" + good_id;
+    }
 
 
 
