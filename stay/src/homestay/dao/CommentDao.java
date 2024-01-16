@@ -23,11 +23,14 @@ public class CommentDao {
         showDebug("updateComment", "update previous comment");
         db = new DB("group1");
         try {
+            String type = data.getParam().getString("type");
             String order_id = data.getParam().getString("order_id");
             int rating = data.getParam().getInt("score");
             String description = data.getParam().getString("description");
+            String table = type.equals("specialty") ? "s_order_comment" : "r_order_comment";
             String sql = String.format(
-                    "Update specialty_order Set score=%d, s_comment='%s' Where order_id='%s'",
+                    "Update %s Set score=%d, comment='%s' Where order_id='%s'",
+                    table,
                     rating,
                     description,
                     order_id
@@ -41,21 +44,24 @@ public class CommentDao {
         }
     }
 
-    public void getCommentById(String order_id, JSONObject json) throws JSONException, SQLException {
+    public void getCommentById(String order_id, String type, JSONObject json) throws JSONException, SQLException {
         String resCode = "00000";
         String info = "success";
         db = new DB("group1");
         try {
+            String table = type.equals("specialty") ? "s_order_comment" : "r_order_comment";
             String sql = String.format(
-                    "Select score, s_comment From specialty_order Where order_id='%s'",
+                    "Select score, comment From %s Where order_id='%s'",
+                    table,
                     order_id
             );
             ResultSet res = db.executeQuery(sql);
             HashMap<String, Object> map = new HashMap();
             while (res.next()) {
                 map.put("score", res.getString("score"));
-                map.put("comment", res.getString("s_comment"));
+                map.put("comment", res.getString("comment"));
             }
+            db.close();
             json.put("resCode", resCode);
             json.put("getCommentInfo", info);
             json.put("comment_info", map);

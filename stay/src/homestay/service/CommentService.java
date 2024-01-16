@@ -16,6 +16,7 @@ public class CommentService {
     public void getComment(Data data, JSONObject json) throws JSONException, SQLException {
         CommentDao dao = new CommentDao();
         String order_id = data.getParam().getString("order_id");
-        dao.getCommentById(order_id, json);
+        String type = data.getParam().getString("type");
+        dao.getCommentById(order_id, type, json);
     }
 }

@@ -631,10 +631,14 @@ var Page = function () {
     function onCommentClick(id) {
         console.log(id);
         getCommentById(id);
-        $("#submit_order_comment").click((e) => {
+        // 防止点击事件累加
+        // 可以使用unbind先解绑事件，再绑定新事件： object.unbind("click").click(...)
+        // 或者使用one("click", ...) 声明只绑定一次
+        $("#submit_order_comment").unbind("click").click((e) => {
             var url = "/order_comment";
             var data = {
                 "action": "update_comment",
+                "type": "specialty",
                 "order_id": id,
                 "score": $("#comment_score").val(),
                 "description": $("#comment_description").val()
@@ -649,6 +653,7 @@ var Page = function () {
                             "",
                             "success");
                         $("#order_comment_div").modal("hide");
+                        // location.reload();
                     }
                 }
             )
@@ -660,6 +665,7 @@ var Page = function () {
         var url = "/order_comment";
         var data = {
             "action": "get_comment",
+            "type": "specialty",
             "order_id": id
         };
         $.post(
@@ -677,10 +683,10 @@ var Page = function () {
                         setStars(0);
                     }
                     if (comment_info.comment !== undefined && comment_info.comment !== null && comment_info.comment !== "") {
-                        var comment = comment_info.comment;
-                        $("#comment_description").html(comment);
+                        console.log(comment_info.comment);
+                        document.querySelector("#comment_description").value = comment_info.comment;
                     } else {
-                        $("#comment_description").html("请留下你的评价...");
+                        document.querySelector("#comment_description").value = "请留下你的评价...";
                     }
                 }
             }
