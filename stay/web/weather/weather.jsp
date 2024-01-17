@@ -808,20 +808,42 @@
         <div class="container-fluid">
             <!-- row -->
             <div class="row">
-                <div class="col-md-6">
-                    <button type="button" class="btn default yellow-stripe" id="add_button" name="add_button">
-                        添加
-                    </button>
-                    <button type="button" class="btn default yellow-stripe" id="query_button" name="query_button">
-                        查询
-                    </button>
-                    <button type="button" class="btn default red-stripe" id="export_button" name="export_button">
-                        导出
-                    </button>
-                    <button type="button" class="btn default purple-stripe" id="print_word_button"
-                            name="print_word_button">
-                        打印Word
-                    </button>
+            <div clss="portlet-body form" id="record_query_setup" name="record_query_setup">
+            <form class="form-horizontal" role="form">
+                <div class="form-body">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">想查询温度的城市</label>
+                        <div class="col-md-9">
+                            <input type="text" id="city" name="city" class="form-control"
+                                   placeholder="Enter text">
+                        </div>
+                        <button type="button" class="btn btn-rounded btn-danger" id="query_button" name="query_button"><span
+                                class="btn-icon-start text-danger"><i class="fa fa-envelope color-danger"></i>
+                                    </span>查询</button>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+            </div>
+            <div class="card">
+                <div class="card-header d-block">
+                    <button type="button" class="btn btn-rounded btn-info" id="add_button" name="add_button"><span
+                            class="btn-icon-start text-info"><i class="fa fa-plus color-info"></i>
+                                    </span>添加</button>
+                    <button type="button" class="btn btn-rounded btn-warning" id="export_button" name="export_button"><span
+                            class="btn-icon-start text-warning"><i class="fa fa-download color-warning"></i>
+                                    </span>导出</button>
+                    <button type="button" class="btn btn-rounded btn-success"id="print_word_button"
+                            name="print_word_button"><span
+                            class="btn-icon-start text-success"><i class="fa fa-upload color-success"></i>
+                                    </span>打印天气数据</button>
+                    <button type="button" class="btn btn-rounded btn-secondary"id="weather_statistic"name="weather_statistic"><span
+                            class="btn-icon-start text-secondary"><i class="fa fa-share-alt color-secondary"></i>
+                                    </span>温度统计</button>
+                    <button type="button" class="btn btn-rounded btn-success"><span
+                            class="btn-icon-start text-success"><i class="fa fa-upload color-success"id="weather_order" name="weather_order"></i>
+                                    </span>排序</button>
                 </div>
             </div>
             <div class="row">
@@ -902,5 +924,6 @@
 </body>
 <%@include file="./weather_add_div.jsp" %>
 <%@include file="./weather_modify_div.jsp" %>
+<%@include file="./weather_download_div.jsp" %>
 </html>
 

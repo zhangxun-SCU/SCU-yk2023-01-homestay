@@ -243,11 +243,11 @@ To change this template use File | Settings | File Templates.
         }
     });
     document.getElementById("need_num").onchange = function () {
-        if (this.value > this.max) {
-            this.value = this.max;
+        if (Number(this.value) > Number(this.max)) {
+            this.value = Number(this.max);
         }
-        if (this.value < 1) {
-            this.value = this.min;
+        if (Number(this.value < 1)) {
+            this.value = Number(this.min);
         }
     };
     var openCart=function(){
@@ -293,6 +293,9 @@ To change this template use File | Settings | File Templates.
         window.location.href="confirm_order.jsp"
 
     }
+    var detailBack = function () {
+        window.history.go(-1);
+    };
 
     function viewComments(){
         window.location.href = "./specialty_comments.jsp?good_id=" + good_id;

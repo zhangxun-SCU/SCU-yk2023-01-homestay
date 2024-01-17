@@ -408,6 +408,7 @@ public class SpecialtyOrderServletAction extends HttpServlet {
         getExportDeviceRecordToExcelSeller(json);
         getExportDeviceRecordToPdf(json);
     }
+
 	private void getExportDeviceRecordToExcel(JSONObject json) throws JSONException, IOException {
 		MyExcel me=new MyExcel("C:\\upload\\maintain\\device\\export_order.xls");
 		json.put("download_url","/upload/maintain/device/export_order.xls");
@@ -420,6 +421,7 @@ public class SpecialtyOrderServletAction extends HttpServlet {
         json.put("file_path","C:\\upload\\maintain\\device\\export_order_seller.xls");
         me.exportData(data,json);
     }
+
 	private void getExportDeviceRecordToPdf(JSONObject json) {
 		//exportDeviceRecordToPdf(data,json);
 	}

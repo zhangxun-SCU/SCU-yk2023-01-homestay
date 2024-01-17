@@ -224,6 +224,9 @@ To change this template use File | Settings | File Templates.
 <script src="../assets/js/demo.js"></script>
 <script src="../assets/js/styleSwitcher.js"></script>
 <script>
+    var cartBack = function () {
+        window.history.go(-1);
+    };
     var todaystr="";
     var tomorowstr="";
     var url = window.location.href;

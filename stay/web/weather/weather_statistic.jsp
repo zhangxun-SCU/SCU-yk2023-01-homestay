@@ -1,14 +1,8 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 86135
-  Date: 2023/12/10
-  Time: 10:26
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,21 +15,18 @@
     <meta property="og:description" content="Invome : Invome Admin  Bootstrap 5 Template" />
     <meta property="og:image" content="https://invome.dexignlab.com/xhtml/social-image.png" />
     <meta name="format-detection" content="telephone=no">
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=B2Lz3CYUZVzjXBhZ0g3MS8wY"></script>
-    <script type="text/javascript" src="../assets/js/GPS/jquery.min.js"></script>
-    <style type="text/css">
-
-    </style>
 
     <!-- PAGE TITLE HERE -->
-    <title>地图查询模块</title>
+    <title>Invome Admin Dashboard</title>
 
     <!-- FAVICONS ICON -->
-    <link rel="shortcut icon" type="image/png" href="../assets/images/favicon.png" />
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png" />
+    <link href="../assets/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
     <link href="../assets/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
 
 </head>
+
 <body>
 
 <!--*******************
@@ -50,6 +41,7 @@
 <!--*******************
     Preloader end
 ********************-->
+
 
 <!--**********************************
     Main wrapper start
@@ -118,7 +110,7 @@
                                 <li class="active dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/1.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/1.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon"></span>
                                         </div>
                                         <div class="user_info">
@@ -130,7 +122,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/2.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/2.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon offline"></span>
                                         </div>
                                         <div class="user_info">
@@ -142,7 +134,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/3.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/3.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon"></span>
                                         </div>
                                         <div class="user_info">
@@ -154,7 +146,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/4.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/4.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon offline"></span>
                                         </div>
                                         <div class="user_info">
@@ -167,7 +159,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/5.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/5.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon offline"></span>
                                         </div>
                                         <div class="user_info">
@@ -179,7 +171,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/1.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/1.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon"></span>
                                         </div>
                                         <div class="user_info">
@@ -191,7 +183,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/2.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/2.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon offline"></span>
                                         </div>
                                         <div class="user_info">
@@ -204,7 +196,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/3.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/3.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon"></span>
                                         </div>
                                         <div class="user_info">
@@ -216,7 +208,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/4.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/4.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon offline"></span>
                                         </div>
                                         <div class="user_info">
@@ -229,7 +221,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/5.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/5.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon offline"></span>
                                         </div>
                                         <div class="user_info">
@@ -241,7 +233,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/1.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/1.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon"></span>
                                         </div>
                                         <div class="user_info">
@@ -253,7 +245,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/2.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/2.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon offline"></span>
                                         </div>
                                         <div class="user_info">
@@ -265,7 +257,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/3.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/3.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon"></span>
                                         </div>
                                         <div class="user_info">
@@ -278,7 +270,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/4.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/4.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon offline"></span>
                                         </div>
                                         <div class="user_info">
@@ -290,7 +282,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/5.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/5.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon offline"></span>
                                         </div>
                                         <div class="user_info">
@@ -324,7 +316,7 @@
                         <div class="card-body msg_card_body dlab-scroll" id="DLAB_W_Contacts_Body3">
                             <div class="d-flex justify-content-start mb-4">
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                                 <div class="msg_cotainer">
                                     Hi, how are you samim?
@@ -337,12 +329,12 @@
                                     <span class="msg_time_send">8:55 AM, Today</span>
                                 </div>
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-start mb-4">
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                                 <div class="msg_cotainer">
                                     I am good too, thank you for your chat template
@@ -355,12 +347,12 @@
                                     <span class="msg_time_send">9:05 AM, Today</span>
                                 </div>
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-start mb-4">
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                                 <div class="msg_cotainer">
                                     I am looking for your next templates
@@ -373,12 +365,12 @@
                                     <span class="msg_time_send">9:10 AM, Today</span>
                                 </div>
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-start mb-4">
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                                 <div class="msg_cotainer">
                                     Bye, see you
@@ -387,7 +379,7 @@
                             </div>
                             <div class="d-flex justify-content-start mb-4">
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                                 <div class="msg_cotainer">
                                     Hi, how are you samim?
@@ -400,12 +392,12 @@
                                     <span class="msg_time_send">8:55 AM, Today</span>
                                 </div>
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-start mb-4">
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                                 <div class="msg_cotainer">
                                     I am good too, thank you for your chat template
@@ -418,12 +410,12 @@
                                     <span class="msg_time_send">9:05 AM, Today</span>
                                 </div>
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-start mb-4">
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                                 <div class="msg_cotainer">
                                     I am looking for your next templates
@@ -436,12 +428,12 @@
                                     <span class="msg_time_send">9:10 AM, Today</span>
                                 </div>
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-start mb-4">
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                                 <div class="msg_cotainer">
                                     Bye, see you
@@ -586,6 +578,9 @@
         Chat box End
     ***********************************-->
 
+
+
+
     <!--**********************************
         Header start
     ***********************************-->
@@ -595,7 +590,7 @@
                 <div class="collapse navbar-collapse justify-content-between">
                     <div class="header-left">
                         <div class="dashboard_bar">
-                            地图查询模块
+                            天气数据统计
                         </div>
 
                     </div>
@@ -628,7 +623,7 @@
                                         <li>
                                             <div class="timeline-panel">
                                                 <div class="media me-2">
-                                                    <img alt="image" width="50" src="../assets/images/avatar/1.jpg">
+                                                    <img alt="image" width="50" src="images/avatar/1.jpg">
                                                 </div>
                                                 <div class="media-body">
                                                     <h6 class="mb-1">Dr sultads Send you Photo</h6>
@@ -661,7 +656,7 @@
                                         <li>
                                             <div class="timeline-panel">
                                                 <div class="media me-2">
-                                                    <img alt="image" width="50" src="../assets/images/avatar/1.jpg">
+                                                    <img alt="image" width="50" src="images/avatar/1.jpg">
                                                 </div>
                                                 <div class="media-body">
                                                     <h6 class="mb-1">Dr sultads Send you Photo</h6>
@@ -803,180 +798,27 @@
         Content body start
     ***********************************-->
     <div class="content-body">
-        <!-- row -->
         <div class="container-fluid">
-            <div>
-                <input id="searchTextField" type="text" size="25" style="width:80%;" onKeyUp="GetFromAddress(this.value)" />
-                <input type="button" class="btn default purple-stripe" value="查询" onClick="GetFromAddress(document.getElementById('searchTextField').value)"  style="width:15%;" />
+            <div class="row page-titles">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">气温</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">变化图</a></li>
+                </ol>
             </div>
-            <div id="apDiv1">
-                <div id="results"></div>
+            <!-- row -->
+
+            <div class="row">
+                <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">温度变化曲线</h4>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="lineChart_3"></canvas>
+                                </div>
+                            </div>
+                </div>
             </div>
-            <div id="container" style="width:99%;height:500px;border:1px solid gray;"></div>
-            <div id="gsfrommap" style="display:none; margin:0 auto; padding:1rem;">
-                <form action="" method="get">
-                    <input type="hidden" name="Lat" id="Lat" value="0" />
-                    <input type="hidden" name="Lng" id="Lng" value="0" />
-                    <input type="button" name="submit" value="确定" class="submit" onClick="getMarker()" />
-                </form>
-            </div>
-            <script type="text/javascript">
-                var rmarkers=[];
-                var map = new BMap.Map("container");
-                map.addControl(new BMap.NavigationControl());               // 添加平移缩放控件
-                map.addControl(new BMap.ScaleControl());                    // 添加比例尺控件
-                map.addControl(new BMap.OverviewMapControl());              //添加缩略地图控件
-                map.addControl(new BMap.MapTypeControl());          //添加地图类型控件
-                map.enableScrollWheelZoom();
-
-                //移动居中
-                //map.addEventListener('touchend', function(){
-                //	var p = map.getCenter();
-                //	document.getElementById('Lat').value=p.lat;
-                //	document.getElementById('Lng').value =p.lng;
-                //	document.getElementById('gsfrommap').style.display='block';
-                //	alert(p.lat+";"+p.lng);
-                //});
-                var offsetY = -12.5;
-                map.centerAndZoom(new BMap.Point(121.475638,31.241245),15);
-
-                var geolocation = new BMap.Geolocation();
-                geolocation.getCurrentPosition(function(r){
-                    if(this.getStatus() === BMAP_STATUS_SUCCESS){
-                        var mk = new BMap.Marker(r.point);
-                        //map.addOverlay(mk);
-                        //将地图中心移动到可视区中点
-                        map.panTo(r.point);
-
-                        map.centerAndZoom(r.point,15);
-                        var centerPixel = map.pointToOverlayPixel(map.getCenter());
-                        //通过设置地图的中心点，使定位点显示在手机上部分区域
-                        map.setCenter(map.overlayPixelToPoint({x:centerPixel.x,y:centerPixel.y+offsetY}));
-                        map.addEventListener('dragend',function(){
-                            //map.clearOverlays();
-                            //获得移动之后地图中心点的像素位置
-                            var pixel = map.pointToOverlayPixel(map.getCenter());
-                            //获得定位图标所在位置在地图上的地理位置，实际上定位图标的像素位置就在地图中心像素位置相应的偏移量处
-                            var Point = map.overlayPixelToPoint({x:pixel.x,y:pixel.y-offsetY});
-                            //var mkn = new BMap.Marker(Point);
-                            console.info(Point);
-                            //获取周围地址信息
-                            getAroundAddress(Point);
-                            //map.addOverlay(mkn);
-                        });
-                    }else {
-                        alert('failed'+this.getStatus());
-                    }
-                });
-
-                //ip定位
-                function myFun(result){
-                    var cityName = result.name;
-                    map.setCenter(cityName);
-                    $('#lselcity .heads').html(cityName);
-                    //alert("当前定位城市:"+cityName);
-                }
-                var myCity = new BMap.LocalCity();
-                myCity.get(myFun);
-                // 创建控件
-                var m_height=(map.getSize().height-24)/2;
-                var m_width=(map.getSize().width-19)/2;
-                // 定义一个控件类,即function
-                function ZoomControl(){
-                    // 默认停靠位置和偏移量
-                    this.defaultAnchor = BMAP_ANCHOR_TOP_LEFT;
-                    this.defaultOffset = new BMap.Size(m_width,m_height);
-                }
-                // 通过JavaScript的prototype属性继承于BMap.Control
-                ZoomControl.prototype = new BMap.Control();
-
-                // 自定义控件必须实现自己的initialize方法,并且将控件的DOM元素返回
-                // 在本方法中创建个div元素作为控件的容器,并将其添加到地图容器中
-                ZoomControl.prototype.initialize = function(map){
-                    // 创建一个DOM元素
-                    var div = document.createElement("div");
-                    //div.innerHTML='aaaa';
-                    // 添加文字说明
-                    // 设置样式
-                    div.style.width = "19px";
-                    div.style.height = "24px";
-                    div.style.cursor = "pointer";
-                    div.style.background="url(./markers_default.png) center no-repeat";
-                    // 绑定事件,点击一次放大两级
-                    div.onclick = function(e){
-                        map.setZoom(map.getZoom() + 2);
-                    }
-                    // 添加DOM元素到地图中
-                    map.getContainer().appendChild(div);
-                    //alert(map.getContainer().style.width);
-                    // 将DOM元素返回
-                    return div;
-                }
-                var myZoomCtrl = new ZoomControl();
-                // 添加到地图当中
-                map.addControl(myZoomCtrl);
-                var options = {
-                    onSearchComplete: function(results){
-                        // 判断状态是否正确
-                        if (local.getStatus() == BMAP_STATUS_SUCCESS){
-                            var rhtm='';
-                            console.info(results);
-                            //s.push('<div style="font-family: arial,sans-serif; border: 1px solid rgb(153, 153, 153); font-size: 12px;">');
-                            //s.push('<div style="background: none repeat scroll 0% 0% rgb(255, 255, 255);">');
-                            rhtm+='<ol style="margin:10px 15px; padding:5px 15px;">';
-                            for (var i = 0; i < results.getCurrentNumPois(); i ++){
-                                var selected = "";
-                                if(i == 0){
-                                    selected = "background-color:#f0f0f0;";
-                                }
-                                var p=results.getPoi(i).point;
-                                rhtm+='<li id="list' + i + '" style="line-height:18px;">';
-                                rhtm+='<a href="javascript:showMarker('+p.lat+','+p.lng+')"><span style="color:#00c;text-decoration:underline">' + results.getPoi(i).title.replace(new RegExp(results.keyword,"g"),'<b>' + results.keyword + '</b>') + '</span></a>';
-                                //rhtm+='<span style="color:#666;"> - ' + results.getPoi(i).address + '</span>';
-                                rhtm+='</li>';
-                            }
-                            rhtm+='</ol>';
-                            document.getElementById("results").innerHTML =rhtm;
-                        }
-                    }
-                };
-                var local = new BMap.LocalSearch(map, options);
-                function GetFromAddress(s){
-                    $('#results').show();
-                    $('#apDiv1').css('z-index','1');
-                    local.search(s);
-                }
-                function showMarker(lat,lng){
-                    $('#results').hide();
-                    var po=new BMap.Point(lng,lat);
-                    document.getElementById('Lat').value=po.lat;
-                    document.getElementById('Lng').value=po.lng;
-                    map.clearOverlays();
-                    //addMarker(po,0);
-                    map.panTo(po);
-                    //alert(lat+";"+lng);
-                    getAroundAddress(po)
-                }
-
-                function getAroundAddress(point){
-                    var lng = $.trim(point.lng);
-                    var lat = $.trim(point.lat);
-                    var url = 'http://api.map.baidu.com/geocoder/v2/?ak=B2Lz3CYUZVzjXBhZ0g3MS8wY&output=json&pois=1&location='+ lat +',' + lng;
-                    $.ajax({
-                        type:'POST',
-                        url:url,
-                        ansyc:false,
-                        dataType:'JSONP',
-                        success:function(data){
-                            console.info(data);
-                        }
-                    })
-
-
-                }
-
-            </script>
-
         </div>
     </div>
     <!--**********************************
@@ -1005,7 +847,6 @@
     ***********************************-->
 
 
-
 </div>
 <!--**********************************
     Main wrapper end
@@ -1016,10 +857,20 @@
 ***********************************-->
 <!-- Required vendors -->
 <script src="../assets/vendor/global/global.min.js"></script>
-<script src="vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+<script src="../assets/vendor/chart.js/Chart.bundle.min.js"></script>
+<!-- Apex Chart -->
+<script src="../assets/vendor/apexchart/apexchart.js"></script>
+
+<script src="../assets/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+
+<!-- Chart ChartJS plugin files -->
+<script src="../assets/vendor/chart.js/Chart.bundle.min.js"></script>
+<script src="../assets/js/plugins-init/chartjs-init.js"></script>
+
 <script src="../assets/js/custom.min.js"></script>
 <script src="../assets/js/dlabnav-init.js"></script>
 <script src="../assets/js/demo.js"></script>
 <script src="../assets/js/styleSwitcher.js"></script>
+
 </body>
 </html>

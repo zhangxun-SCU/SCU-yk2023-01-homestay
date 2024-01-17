@@ -62,6 +62,9 @@ To change this template use File | Settings | File Templates.
 <script src="../assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
 <script src="../assets/vendor/toastr/js/toastr.min.js"></script>
 <script>
+    var cartBack = function () {
+        window.history.go(-1);
+    };
     var cookie=document.cookie;
     var cookie=cookie.split(";")[0]
     var checkgoods=cookie.split("=")[1];

@@ -5,19 +5,13 @@ package homestay.servlet.weather;
  */
 
 import homestay.dao.Data;
-import homestay.dao.WeatherDao;
 import homestay.service.weather.WeatherService;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.*;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,9 +19,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 @WebServlet("/weather")
 public class WeatherServlet extends HttpServlet {
@@ -97,6 +88,8 @@ public class WeatherServlet extends HttpServlet {
                 actionOk = true;
                 try {
                     weatherService.modifyDeviceRecord(data, json);
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

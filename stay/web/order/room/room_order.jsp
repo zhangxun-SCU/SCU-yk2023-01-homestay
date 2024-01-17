@@ -760,7 +760,6 @@
                     <button type="button" class="btn blue" id="order_list_down_button" name="order_list_down_button">
                         订单单价降序
                     </button>
-
                 </div>
             </div>
 
@@ -1133,7 +1132,6 @@
 <%@ include file="/frame/frame_javascript.jsp" %>
 <%@ include file="order_download_div.jsp" %>
 <%@ include file="../device/order_comment.jsp" %>
-
 <!--**********************************
     Scripts
 ***********************************-->

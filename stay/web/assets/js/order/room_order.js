@@ -927,3 +927,4 @@ function setStars(score) {
         }
     }
 }
+

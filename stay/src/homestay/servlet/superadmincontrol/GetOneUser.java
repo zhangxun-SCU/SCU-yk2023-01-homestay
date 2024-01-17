@@ -2,7 +2,7 @@ package homestay.servlet.superadmincontrol;
 
 
 import homestay.bean.UserBean;
-import homestay.service.UserService;
+import homestay.service.user.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

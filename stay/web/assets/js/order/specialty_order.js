@@ -11,6 +11,7 @@ jQuery(document).ready(function () {
 /* ================================================================================ */
 //关于页面的控件生成等操作都放在Page里
 var Page = function () {
+var Page = function() {
     var user = getUserInfo().id;
     /*----------------------------------------入口函数  开始----------------------------------------*/
     var initPageControl = function () {
@@ -408,7 +409,6 @@ var Page = function () {
         data.order_id = $("#record_query_setup #order_id").val();
         data.specialty_name = $("#record_query_setup #specialty_name").val();
         data.username = user;
-
         console.log(1)
         $.post("../../" + module + "_" + sub + "_specialty_order_servlet_action?action=get_specialty_order_record_unfinished", data, function (json) {
             console.log(JSON.stringify(json));
