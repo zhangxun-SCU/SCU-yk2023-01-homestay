@@ -1,9 +1,9 @@
-package homestay.servlet;
+package homestay.servlet.user;
 
 import homestay.dao.Data;
 import homestay.service.verify.EmailService;
 import homestay.service.UploadService;
-import homestay.service.UserService;
+import homestay.service.user.UserService;
 import homestay.service.verify.VerifyService;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.json.JSONException;

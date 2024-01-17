@@ -1,4 +1,4 @@
-package homestay.service;
+package homestay.service.user;
 
 import homestay.bean.UserBean;
 import homestay.dao.Data;

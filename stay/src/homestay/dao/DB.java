@@ -51,8 +51,9 @@ public class DB {
     public ResultSet executeQuery(String sql) throws SQLException {
         ResultSet resultset = null;
         try {
+            System.out.println(statement);
             resultset = statement.executeQuery(sql);
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             e.printStackTrace();
         }
         return resultset;

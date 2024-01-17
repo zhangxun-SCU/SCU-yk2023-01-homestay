@@ -1,6 +1,8 @@
 <%@ page import="homestay.utils.UserUtil" %>
 <%@ page import="homestay.dao.UserDao" %>
 <%@ page import="homestay.entity.User" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="org.json.JSONException" %>
 <%--
   Created by IntelliJ IDEA.
   User: cw
@@ -13,7 +15,23 @@
     // 获取用户信息
     String userId = UserUtil.getUserId(request);
     UserDao userDao = new UserDao();
-    User user = userDao.queryUserByKey("user_id", userId);
+    User user = null;
+    try {
+        user = userDao.queryUserByKey("user_id", userId);
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    } catch (JSONException e) {
+        throw new RuntimeException(e);
+    }
+
+    String userType = "";
+    if(user.permission.equals("low")) {
+        userType = "普通用户";
+    } else if(user.permission.equals("middle")) {
+        userType = "商家用户";
+    } else if(user.permission.equals("superhigh")) {
+        userType = "super manager";
+    }
 %>
 
 <div class="nav-header">
@@ -741,7 +759,7 @@ Sidebar start
                     <div class="d-flex align-items-center sidebar-info">
                         <div>
                             <span class="font-w700 d-block mb-2"><%=user.id%></span>
-                            <small class="text-end font-w400">Super Admin</small>
+                            <small class="text-end font-w400"><%=userType%></small>
                         </div>
                         <i class="fas fa-sort-down ms-4"></i>
                     </div>

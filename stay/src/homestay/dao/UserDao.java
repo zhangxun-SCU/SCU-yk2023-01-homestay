@@ -6,6 +6,7 @@ import homestay.utils.UserUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -55,15 +56,19 @@ public class UserDao {
     }
 
     public void addUser(Data data) throws JSONException {
-        String sql = "INSERT INTO user_account(user_id,user_password,email,avatar)";
+        DB db = new DB("group1");
+        String sql = "INSERT INTO user_account(user_id,user_password,email,avatar,permission)";
         String id = data.getParam().getString("id");
         String email = data.getParam().getString("email");
         String password = UserUtil.encrypt(data.getParam().getString("password"));
         java.util.Date date = new Date();//获得当前时间
         Timestamp createTime = new Timestamp(date.getTime());//将时间转换成Timestamp类型，便于存入到mysql数据库中
-        sql += "VALUES('" + id + "','" + password + "','" + email + "','" + Config.getInstance().getString("default.avatar.url") +"');";
+        sql += "VALUES('" + id + "','" + password + "','" + email + "','" + Config.getInstance().getString("default.avatar.url") + "','" + Config.getInstance().getString("default.permission") + "');";
         System.out.println("addUser sql: " + sql);
-        DB db = new DB("group1");
+        db.executeUpdate(sql);
+        // 添加balance
+        sql = "INSERT INTO user_balance(user_id,balance)";
+        sql += "VALUES('" + id  + "','" + 0 + "');";
         db.executeUpdate(sql);
         db.close();
     }
@@ -109,6 +114,29 @@ public class UserDao {
         System.out.println(sql);
         DB db = new DB("group1");
         db.executeUpdate(sql);
+        db.close();
+    }
+
+    public BigDecimal getUserBalance(String userId) throws SQLException {
+        String sql = "SELECT balance FROM user_balance WHERE user_id='";
+        sql += userId + "';";
+        DB db = new DB("group1");
+        ResultSet rs = db.executeQuery(sql);
+        BigDecimal balance = BigDecimal.valueOf(0);
+        while (rs.next()) {
+            balance = rs.getBigDecimal("balance");
+        }
+        System.out.println(balance);
+        db.close();
+        return balance;
+    }
+
+    public void updateUserBalance(String userId, BigDecimal newValue) {
+        String sql = "UPDATE user_balance";
+        sql += " SET balance='" + newValue  + "' WHERE user_id='" + userId + "'";
+        DB db = new DB("group1");
+        db.executeUpdate(sql);
+        System.out.println(sql);
         db.close();
     }
     public static List<UserBean> getAllUsers() {
