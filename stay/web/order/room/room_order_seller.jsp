@@ -948,7 +948,7 @@
 <!--**********************************
     Main wrapper end
 ***********************************-->
-<%@ include file="order_modify_buyer_div.jsp" %>
+<%@ include file="order_modify_seller_div.jsp" %>
 <%@ include file="/frame/frame_javascript.jsp" %>
 <%@ include file="order_download_div.jsp" %>
 
@@ -962,7 +962,7 @@
 <script src="../../assets/js/dlabnav-init.js"></script>
 <script src="../../assets/js/demo.js"></script>
 <script src="../../assets/js/styleSwitcher.js"></script>
-<script src="../../assets/js/order/room_order.js"></script>
+<script src="../../assets/js/order/room_order_seller.js"></script>
 
 </body>
 </html>

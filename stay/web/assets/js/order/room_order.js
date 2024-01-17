@@ -67,7 +67,7 @@ var Page = function() {
         $('#print_table_button').click(function() {window.location.href="device_list_print_table.jsp";});
         $('#order_statistic').click(function() {window.location.href="order_statistic.jsp";});
         $('#print_word').click(function() {window.location.href="order_list_print_word.jsp";});
-        $('#order_add').click(function() {window.location.href="/market/specialty_market.jsp";});
+        $('#order_add').click(function() {window.location.href="/market/house_market.jsp";});
 
     }
 
@@ -184,6 +184,8 @@ var Page = function() {
                         html=html+"                                        <td><strong>"+record.good_id+"</strong></td>";
                         html=html+"                                        <td><div class=\"d-flex align-items-center\"><img src=\""+record.imageurl+"\" class=\"rounded-lg me-2\" width=\"24\" alt=\"\"/> <span class=\"w-space-no\">"+record.house_name+record.room_name+"</span></div></td>";
                         html=html+"                                        <td>"+record.num+"	</td>";
+                        html=html+"                                        <td>"+record.in_date+"-"+record.out_date+"	</td>";
+
                         html=html+"                                        <td>"+record.price*record.num+"</td>";
                         html=html+"                                        <td><div class=\"d-flex align-items-center\"><i class=\"fa fa-circle text-success me-1\"></i> "+(record.order_status!=0?'已支付':'未支付')+"</div></td>";
                         html=html+"                                        <td>";

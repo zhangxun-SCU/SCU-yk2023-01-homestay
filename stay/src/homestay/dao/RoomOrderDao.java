@@ -234,16 +234,19 @@ public class RoomOrderDao {
     private String createGetRecordSellerSql(Data data) throws JSONException {
         JSONObject param=data.getParam();
         String username=data.getParam().has("username")?data.getParam().getString("username"):null;
-        String sql="select * from specialty_order, specialty where specialty_order.good_id=specialty.specialty_id and owner_id='"+username+"'";
-        String order_id=data.getParam().has("order_id")?data.getParam().getString("order_id"):null;
-        if(order_id!=null && (! order_id.isEmpty())){
-            sql=sql+" and order_id like '%"+order_id+"%'";
+        String sql="select * from deal_order,house,room,room_occupy where deal_order.good_id=room_occupy.op_id and room.house_id=room_occupy.house_id and room.room_id=room_occupy.room_id and house.house_id=room.house_id and owner_id='"+username+"' ";
+        String good_id=data.getParam().has("good_id")?data.getParam().getString("good_id"):null;
+        if(good_id!=null && (! good_id.isEmpty())){
+            sql=sql+" and good_id like '%"+good_id+"%'";
         }
-        String specialty_name=data.getParam().has("specialty_name")?data.getParam().getString("specialty_name"):null;
-        if(specialty_name!=null && (! specialty_name.isEmpty())){
-            sql=sql+" and specialty_name like '%"+specialty_name+"%'";
+        String house_name=data.getParam().has("house_name")?data.getParam().getString("house_name"):null;
+        if(house_name!=null && (! house_name.isEmpty())){
+            sql=sql+" and house_name like '%"+house_name+"%'";
         }
-
+        String room_name=data.getParam().has("room_name")?data.getParam().getString("room_name"):null;
+        if(room_name!=null && (! room_name.isEmpty())){
+            sql=sql+" and room_name like '%"+room_name+"%'";
+        }
         return sql;
     }
     private String createGetRecordSqlFinished(Data data) throws JSONException {
@@ -268,14 +271,19 @@ public class RoomOrderDao {
     private String createGetRecordSqlFinishedSeller(Data data) throws JSONException {
         JSONObject param=data.getParam();
         String username=data.getParam().has("username")?data.getParam().getString("username"):null;
-        String sql="select * from specialty_order, specialty where specialty_order.good_id=specialty.specialty_id and order_status != 0 and owner_id='"+username+"'";
-        String order_id=data.getParam().has("order_id")?data.getParam().getString("order_id"):null;
-        if(order_id!=null && (! order_id.isEmpty())){
-            sql=sql+" and order_id like '%"+order_id+"%'";
+
+        String sql="select * from deal_order,house,room,room_occupy where deal_order.good_id=room_occupy.op_id and room.house_id=room_occupy.house_id and room.room_id=room_occupy.room_id and house.house_id=room.house_id and order_status != 0 and owner_id='"+username+"' ";
+        String good_id=data.getParam().has("good_id")?data.getParam().getString("good_id"):null;
+        if(good_id!=null && (! good_id.isEmpty())){
+            sql=sql+" and good_id like '%"+good_id+"%'";
         }
-        String specialty_name=data.getParam().has("specialty_name")?data.getParam().getString("specialty_name"):null;
-        if(specialty_name!=null && (! specialty_name.isEmpty())){
-            sql=sql+" and specialty_name like '%"+specialty_name+"%'";
+        String house_name=data.getParam().has("house_name")?data.getParam().getString("house_name"):null;
+        if(house_name!=null && (! house_name.isEmpty())){
+            sql=sql+" and house_name like '%"+house_name+"%'";
+        }
+        String room_name=data.getParam().has("room_name")?data.getParam().getString("room_name"):null;
+        if(room_name!=null && (! room_name.isEmpty())){
+            sql=sql+" and room_name like '%"+room_name+"%'";
         }
         return sql;
     }
@@ -301,14 +309,19 @@ public class RoomOrderDao {
     private String createGetRecordSqlUnfinishedSeller(Data data) throws JSONException {
         JSONObject param=data.getParam();
         String username=data.getParam().has("username")?data.getParam().getString("username"):null;
-        String sql="select * from specialty_order, specialty where specialty_order.good_id=specialty.specialty_id and order_status = 0 and owner_id='"+username+"'";
-        String order_id=data.getParam().has("order_id")?data.getParam().getString("order_id"):null;
-        if(order_id!=null && (! order_id.isEmpty())){
-            sql=sql+" and order_id like '%"+order_id+"%'";
+
+        String sql="select * from deal_order,house,room,room_occupy where deal_order.good_id=room_occupy.op_id and room.house_id=room_occupy.house_id and room.room_id=room_occupy.room_id and house.house_id=room.house_id and order_status = 0 and owner_id='"+username+"' ";
+        String good_id=data.getParam().has("good_id")?data.getParam().getString("good_id"):null;
+        if(good_id!=null && (! good_id.isEmpty())){
+            sql=sql+" and good_id like '%"+good_id+"%'";
         }
-        String specialty_name=data.getParam().has("specialty_name")?data.getParam().getString("specialty_name"):null;
-        if(specialty_name!=null && (! specialty_name.isEmpty())){
-            sql=sql+" and specialty_name like '%"+specialty_name+"%'";
+        String house_name=data.getParam().has("house_name")?data.getParam().getString("house_name"):null;
+        if(house_name!=null && (! house_name.isEmpty())){
+            sql=sql+" and house_name like '%"+house_name+"%'";
+        }
+        String room_name=data.getParam().has("room_name")?data.getParam().getString("room_name"):null;
+        if(room_name!=null && (! room_name.isEmpty())){
+            sql=sql+" and room_name like '%"+room_name+"%'";
         }
         return sql;
     }
@@ -335,16 +348,21 @@ public class RoomOrderDao {
     private String createGetRecordSqlUpSeller(Data data) throws JSONException {
         JSONObject param=data.getParam();
         String username=data.getParam().has("username")?data.getParam().getString("username"):null;
-        String sql="select * from specialty_order, specialty where specialty_order.good_id=specialty.specialty_id and owner_id='"+username+"'";
-        String order_id=data.getParam().has("order_id")?data.getParam().getString("order_id"):null;
-        if(order_id!=null && (! order_id.isEmpty())){
-            sql=sql+" and order_id like '%"+order_id+"%'";
+
+        String sql="select * from deal_order,house,room,room_occupy where deal_order.good_id=room_occupy.op_id and room.house_id=room_occupy.house_id and room.room_id=room_occupy.room_id and house.house_id=room.house_id and owner_id='"+username+"' ";
+        String good_id=data.getParam().has("good_id")?data.getParam().getString("good_id"):null;
+        if(good_id!=null && (! good_id.isEmpty())){
+            sql=sql+" and good_id like '%"+good_id+"%'";
         }
-        String specialty_name=data.getParam().has("specialty_name")?data.getParam().getString("specialty_name"):null;
-        if(specialty_name!=null && (! specialty_name.isEmpty())){
-            sql=sql+" and specialty_name like '%"+specialty_name+"%'";
+        String house_name=data.getParam().has("house_name")?data.getParam().getString("house_name"):null;
+        if(house_name!=null && (! house_name.isEmpty())){
+            sql=sql+" and house_name like '%"+house_name+"%'";
         }
-        sql=sql+" order by specialty.price";
+        String room_name=data.getParam().has("room_name")?data.getParam().getString("room_name"):null;
+        if(room_name!=null && (! room_name.isEmpty())){
+            sql=sql+" and room_name like '%"+room_name+"%'";
+        }
+        sql=sql+" order by price";
         return sql;
     }
     private String createGetRecordSqlDown(Data data) throws JSONException {
@@ -370,16 +388,21 @@ public class RoomOrderDao {
     private String createGetRecordSqlDownSeller(Data data) throws JSONException {
         JSONObject param=data.getParam();
         String username=data.getParam().has("username")?data.getParam().getString("username"):null;
-        String sql="select * from specialty_order, specialty where specialty_order.good_id=specialty.specialty_id and owner_id='"+username+"'";
-        String order_id=data.getParam().has("order_id")?data.getParam().getString("order_id"):null;
-        if(order_id!=null && (! order_id.isEmpty())){
-            sql=sql+" and order_id like '%"+order_id+"%'";
+
+        String sql="select * from deal_order,house,room,room_occupy where deal_order.good_id=room_occupy.op_id and room.house_id=room_occupy.house_id and room.room_id=room_occupy.room_id and house.house_id=room.house_id and owner_id='"+username+"' ";
+        String good_id=data.getParam().has("good_id")?data.getParam().getString("good_id"):null;
+        if(good_id!=null && (! good_id.isEmpty())){
+            sql=sql+" and good_id like '%"+good_id+"%'";
         }
-        String specialty_name=data.getParam().has("specialty_name")?data.getParam().getString("specialty_name"):null;
-        if(specialty_name!=null && (! specialty_name.isEmpty())){
-            sql=sql+" and specialty_name like '%"+specialty_name+"%'";
+        String house_name=data.getParam().has("house_name")?data.getParam().getString("house_name"):null;
+        if(house_name!=null && (! house_name.isEmpty())){
+            sql=sql+" and house_name like '%"+house_name+"%'";
         }
-        sql=sql+" order by specialty.price DESC";
+        String room_name=data.getParam().has("room_name")?data.getParam().getString("room_name"):null;
+        if(room_name!=null && (! room_name.isEmpty())){
+            sql=sql+" and room_name like '%"+room_name+"%'";
+        }
+        sql=sql+" order by price DESC";
         return sql;
     }
     public void saveUploadFileRecord(JSONObject json, Data data) throws JSONException, SQLException {
@@ -446,16 +469,16 @@ public class RoomOrderDao {
         int resultCode = 0;
         List jsonList = new ArrayList();
         Calendar cal=Calendar.getInstance();
-        cal.add(Calendar.DATE,-5);   //yyyy-MM-dd
+        cal.add(Calendar.DATE,-100);   //yyyy-MM-dd
         String timeFrom=(new SimpleDateFormat("yyyy-MM-dd 00:00:00")).format(cal.getTime());
-        cal.add(Calendar.DATE,5);   //yyyy-MM-dd
+        cal.add(Calendar.DATE,100);   //yyyy-MM-dd
         String timeTo=(new SimpleDateFormat("yyyy-MM-dd 23:59:59")).format(cal.getTime());
         int totalGpsActiveCount=0;
         /*--------------------获取变量 完毕--------------------*/
         /*--------------------数据操作 开始--------------------*/
         DB queryDb = new DB("group1");
-        String sql="SELECT DATE_FORMAT(create_date,\"%Y-%m-%d %H\") as time_interval,count(*) as total from specialty_order,specialty ";
-        sql=sql+" where specialty_order.good_id=specialty.specialty_id and owner_id='"+username+"' and create_date between '"+timeFrom+"' and '"+timeTo+"'";
+        String sql="SELECT DATE_FORMAT(create_date,\"%Y-%m-%d %H\") as time_interval,count(*) as total from deal_order,house,room,room_occupy where deal_order.good_id=room_occupy.op_id and room.house_id=room_occupy.house_id and room.room_id=room_occupy.room_id and house.house_id=room.house_id ";
+        sql=sql+" and owner_id='"+username+"' and create_date between '"+timeFrom+"' and '"+timeTo+"'";
         sql=sql+" group by DATE_FORMAT(create_date,\"%Y-%m-%d %H\")";
         showDebug("[getOrderStatistic]构造的SQL语句是：" + sql);
         try {

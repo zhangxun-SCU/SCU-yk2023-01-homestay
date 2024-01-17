@@ -223,6 +223,15 @@ public class RoomOrderServletAction extends HttpServlet {
                     e.printStackTrace();
                 }
             }
+            if (action.equals("export_device_record_seller")) {
+                actionOk=true;
+                try {
+                    exportDeviceRecordSeller(request, response, json);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
             if (action.equals("query_record")) {
                 actionOk=true;
                 try {
@@ -387,15 +396,27 @@ public class RoomOrderServletAction extends HttpServlet {
     private void exportDeviceRecord(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException, IOException {
         RoomOrderDao dao=new RoomOrderDao();
         dao.getOrderRecord(data,json);
-        getExportDeviceRecordToFile(json);
-        getExportDeviceRecordToTxt(json);
+//        getExportDeviceRecordToFile(json);
+//        getExportDeviceRecordToTxt(json);
         getExportDeviceRecordToExcel(json);
+        getExportDeviceRecordToPdf(json);
+    }
+    private void exportDeviceRecordSeller(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException, IOException {
+        RoomOrderDao dao=new RoomOrderDao();
+        dao.getOrderRecordSeller(data,json);
+        getExportDeviceRecordToExcelSeller(json);
         getExportDeviceRecordToPdf(json);
     }
     private void getExportDeviceRecordToExcel(JSONObject json) throws JSONException, IOException {
         MyExcel me=new MyExcel("C:\\upload\\maintain\\device\\export_room_order.xls");
         json.put("download_url","/upload/maintain/device/export_room_order.xls");
         json.put("file_path","C:\\upload\\maintain\\device\\export_room_order.xls");
+        me.exportData(data,json);
+    }
+    private void getExportDeviceRecordToExcelSeller(JSONObject json) throws JSONException, IOException {
+        MyExcel me=new MyExcel("C:\\upload\\maintain\\device\\export_room_order_seller.xls");
+        json.put("download_url","/upload/maintain/device/export_room_order_seller.xls");
+        json.put("file_path","C:\\upload\\maintain\\device\\export_room_order_seller.xls");
         me.exportData(data,json);
     }
     private void getExportDeviceRecordToPdf(JSONObject json) {
