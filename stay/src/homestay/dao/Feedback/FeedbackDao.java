@@ -1,5 +1,4 @@
-package homestay.dao.weather;
-
+package homestay.dao.Feedback;
 import homestay.dao.DB;
 import homestay.dao.Data;
 import org.json.JSONException;
@@ -10,11 +9,10 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
-public class WeatherDao {
+public class FeedbackDao {
     private void showDebug(String msg) {
-    System.out.println("[" + (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date()) + "][homestay/dao/DB]" + msg);
-}
+        System.out.println("[" + (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date()) + "][homestay/dao/DB]" + msg);
+    }
 
     private boolean checkParamValid(JSONObject param, String field) throws JSONException {
         boolean ok = false;
@@ -22,76 +20,39 @@ public class WeatherDao {
         return ok;
     }
 
-    /*添加记录*/
-    public void addDeviceRecord(Data data, JSONObject json) throws JSONException, SQLException {
+    /*添加反馈*/
+    public void addFeedback(Data data, JSONObject json) throws JSONException, SQLException {
         //构造sql语句，根据传递过来的条件参数
-        String create_id = data.getParam().has("create_id") ? data.getParam().getString("create_id") : null;
-        String city = data.getParam().has("city") ? data.getParam().getString("city") : null;
-        String temperature = data.getParam().has("temperature") ? data.getParam().getString("temperature") : null;
-        String weather_type = data.getParam().has("weather_type") ? data.getParam().getString("weather_type") : null;
-        String creator = data.getParam().has("creator") ? data.getParam().getString("creator") : null;
-        String wind = data.getParam().has("wind") ? data.getParam().getString("wind") : null;
-        String humidity = data.getParam().has("humidity") ? data.getParam().getString("humidity") : null;
+        String fid = data.getParam().has("fid") ? data.getParam().getString("fid") : null;
+        String user_id = data.getParam().has("user_id") ? data.getParam().getString("user_id") : null;
+        String feedback = data.getParam().has("feedback") ? data.getParam().getString("feedback") : null;
         String create_time = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date());
-        System.out.println(city);
-        if (city != null) {
-            String sql = "insert into weather_file(city, temperature, weather_type, wind,create_id,creator,create_time,humidity)";
-            sql = sql + " values('" + city + "'";
-            sql = sql + " ,'" + temperature + "','" + weather_type + "','" + wind + "','" + create_id + "','" + creator + "','" + create_time+ "','" + humidity+ "')";
+        if (user_id != null) {
+            String sql = "insert into feedback(user_id, feedback, create_time)";
+            sql = sql + " values('" + user_id + "'";
+            sql = sql + " ,'" + feedback + "','" + create_time+ "')";
             System.out.println(sql);
             data.getParam().put("sql", sql);
             updateRecord(data, json);
         }
     }
 
-    /*删除记录*/
-    public void deleteDeviceRecord(Data data, JSONObject json) throws JSONException, SQLException {
+    /*删除反馈*/
+    public void deleteFeedback(Data data, JSONObject json) throws JSONException, SQLException {
         //构造sql语句，根据传递过来的条件参数
-        String id = data.getParam().has("id") ? data.getParam().getString("id") : null;
-        if (id != null) {
-            String sql = "delete from weather_file where id=" + data.getParam().getString("id");
+        String fid = data.getParam().has("fid") ? data.getParam().getString("fid") : null;
+        if (fid != null) {
+            String sql = "delete from feedback where fid=" + data.getParam().getString("fid");
             data.getParam().put("sql", sql);
             updateRecord(data, json);
         }
     }
-
-    /*修改记录*/
-    public void modifyDeviceRecord(Data data, JSONObject json) throws JSONException, SQLException {
-        //构造sql语句，根据传递过来的条件参数
-        String id = data.getParam().has("id") ? data.getParam().getString("id") : null;
-        String city = data.getParam().has("city") ? data.getParam().getString("city") : null;
-        String temperature = data.getParam().has("temperature") ? data.getParam().getString("temperature") : null;
-        String weather_type = data.getParam().has("weather_type") ? data.getParam().getString("weather_type") : null;
-        String creator = data.getParam().has("creator") ? data.getParam().getString("creator") : null;
-        String wind = data.getParam().has("wind") ? data.getParam().getString("wind") : null;
-        String humidity = data.getParam().has("humidity") ? data.getParam().getString("humidity") : null;
-        String create_time = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date());
-        if (id != null) {
-            String sql = "update weather_file";
-            sql = sql + " set city='" + city + "'";
-            sql = sql + " ,temperature='" + temperature + "'";
-            sql = sql + " ,weather_type='" + weather_type + "'";
-            sql = sql + " ,creator='" + creator + "'";
-            sql = sql + " ,wind='" + wind + "'";
-            sql = sql + " ,humidity='" + humidity+ "'";
-            sql = sql + " where id=" + id;
-            System.out.println(sql);
-            data.getParam().put("sql",sql);
-            updateRecord(data,json);
-        }
-    }
-
-    /*查询记录*/
     public void getDeviceRecord(Data data, JSONObject json) throws JSONException, SQLException {
         //构造sql语句，根据传递过来的查询条件参数
         String sql = createGetRecordSql(data);            //构造sql语句，根据传递过来的查询条件参数
         data.getParam().put("sql", sql);
         queryRecord(data, json);
     }
-
-    /*
-     * 这是一个样板的函数，可以拷贝做修改用
-     */
     private void updateRecord(Data data, JSONObject json) throws JSONException, SQLException {
         /*--------------------获取变量 开始--------------------*/
         JSONObject param = data.getParam();
@@ -157,17 +118,17 @@ public class WeatherDao {
 
     private String createGetRecordSql(Data data) throws JSONException {
         JSONObject param=data.getParam();
-        String sql="select * from weather_file";
-        String id=data.getParam().has("id")?data.getParam().getString("id"):null;
-        if(id!=null && (! id.isEmpty())){
-            sql=sql+" where id="+id;
+        String sql="select * from feedback";
+        String fid=data.getParam().has("fid")?data.getParam().getString("fid"):null;
+        if(fid!=null && (! fid.isEmpty())){
+            sql=sql+" where fid="+fid;
         }
-        String city=data.getParam().has("city")?data.getParam().getString("city"):null;
-        if(city!=null && (! city.isEmpty())){
+        String user_id=data.getParam().has("user_id")?data.getParam().getString("user_id"):null;
+        if(user_id!=null && (! user_id.isEmpty())){
             if(sql.indexOf("where")>-1){
-                sql=sql+" and city like '%"+city+"%'";
+                sql=sql+" and user_id like '%"+user_id+"%'";
             }else{
-                sql=sql+" where city like '%"+city+"%'";
+                sql=sql+" where user_id like '%"+user_id+"%'";
             }
         }
         return sql;

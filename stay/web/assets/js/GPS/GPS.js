@@ -10,19 +10,19 @@ var Page = function() {
     /*----------------------------------------入口函数  开始----------------------------------------*/
     var initPageControl=function(){
         pageId=$("#page_id").val();
-        if(pageId=="weather_list"){
+        if(pageId=="GPS_list"){
             initWeatherList();
         }
-        if (pageId == "weather_add") {
+        if (pageId == "GPS_add") {
             initWeatherAdd();
         }
-        if (pageId == "weather_modify") {
+        if (pageId == "GPS_modify") {
             initWeatherModify();
         }
         if(pageId=="print_word"){
             initPrintWord();
         }
-        if (pageId == "weather_modify") {
+        if (pageId == "GPS_modify") {
             initWeatherModify();
         }
     };
@@ -45,13 +45,6 @@ var Page = function() {
     var initPrintWord = function () {
         initPrintWordRecords();
     }
-    var initWeatherStatistic=function () {
-        $.ajaxSettings.async=false;
-        initWeatherStatisticRecord();
-        $.ajaxSettings.async=true;
-        initBarChart();
-
-    }
 
 
     /*------------------------------针对各个页面的入口 结束------------------------------*/
@@ -67,10 +60,9 @@ var Page = function() {
         $('#weather_modify_div #submit_button').click(function() {onModifyDivSubmit();});
         $('#weather_add_div #submit_button').click(function() {onAddDivSubmit();});
         $('#weather_modify_div #cancel_button').click(function() {reback();});
-        $('#record_query_setup #query_button').click(function() {onQueryRecord();});
+        $('#query_button').click(function() {onQueryRecord();});
         $('#export_button').click(function() {onExportRecord();});
-        $('#weather_order').click(function () {onOderRecord();});
-        $('#weather_statistic').click(function() {window.location.href="weather_statistic.jsp";});
+        $('#device_statistic').click(function() {window.location.href="weather_statistic.jsp";});
         $('#print_word_button').click(function() {window.location.href="weather_print_word.jsp";});
     }
     var initWeatherAddControlEvent=function(){
@@ -180,7 +172,7 @@ var Page = function() {
                         html = html + "                                    <td>" +
                             "<a href=\"javascript:Page.onModifyRecord(" + record.id + ")\">【修改记录】</a>" +
                             "<a href=\"javascript:Page.onDeleteRecord(" + record.id + ")\">【删除记录】</a> <br>"
-                            //"<a href=\"javascript:Page.onViewRecord(" + record.id + ")\">【查看记录】</a><br> ";
+                        //"<a href=\"javascript:Page.onViewRecord(" + record.id + ")\">【查看记录】</a><br> ";
                         html = html + "                                </td> ";
                         html=html+"                                    </tr>";
                     }
@@ -208,7 +200,7 @@ var Page = function() {
     var onModifyRecord=function(id){
         //显示出修改前数据
         //window.location.href="device_modify.jsp?id="+id;
-        /*for(var i=0;i<resultList.length;i++){
+        for(var i=0;i<resultList.length;i++){
             if(resultList[i].id==id){
                 $("#weather_modify_div #id").val(resultList[i].id);
                 $("#weather_modify_div #city").val(resultList[i].city);
@@ -218,7 +210,7 @@ var Page = function() {
                 $("#weather_modify_div #humidity").val(resultList[i].humidity);
                 $("#weather_modify_div").modal("hide");
             }
-        }*/
+        }
         $("#weather_modify_div").modal("show");
     }
     var initWeatherFileControlEvent=function(id){
@@ -387,7 +379,6 @@ var Page = function() {
             data.action="modify_device_record";
             data.id=$("#weather_modify_div #id").val();
             data.city=$("#weather_modify_div #city").val();
-            data.weather_type=$("#weather_modify_div #weather_type").val();
             data.temperature=$("#weather_modify_div #temperature").val();
             data.wind=$("#weather_modify_div #wind").val();
             data.humidity=$("#weather_modify_div #humidity").val();
@@ -425,37 +416,7 @@ var Page = function() {
         history.go(-1);
     }
     var onQueryRecord=function(){
-        var data = {};
-        data.city=$("#record_query_setup #city").val();
-        $.post("/weather?action=get_device_record",data,function(json){
-            console.log(JSON.stringify(json));
-            if(json.result_code==0){
-                var list=json.aaData;
-                console.log(list);
-                var html="";
-                if(list!=undefined && list.length>0){
-                    for(var i=0;i<list.length;i++){
-                        var record=list[i];
-                        console.log(record);
-                        html=html+"                                   <tr>";
-                        html=html+"                                        <td><strong>"+record.id+"</strong></td>";
-                        html = html + "                                    <td> "+ record.city + "</td>"
-                        html = html + "                                    <td> "+ record.temperature + "</td>"
-                        html = html + "                                    <td> "+ record.weather_type + "</td>"
-                        html = html + "                                    <td> "+ record.wind +  "</td>"
-                        html = html + "                                    <td> "+ record.humidity + "</td>"
-                        html = html + "                                    <td> "+ record.create_time + "</td>"
-                        html = html + "                                    <td>" +
-                            "<a href=\"javascript:Page.onModifyRecord(" + record.id + ")\">【修改记录】</a>" +
-                            "<a href=\"javascript:Page.onDeleteRecord(" + record.id + ")\">【删除记录】</a> <br>"
-                        //"<a href=\"javascript:Page.onViewRecord(" + record.id + ")\">【查看记录】</a><br> ";
-                        html = html + "                                </td> ";
-                        html=html+"                                    </tr>";
-                    }
-                }
-                $("#weather_table_content_div").html(html);
-            }
-        })
+        initOrderRecordList();
     }
     var onExportRecord=function(){
         console.log("Export Record post");
@@ -579,7 +540,7 @@ var Page = function() {
         })
     }
 
-    var initWeatherStatisticRecord=function(){
+    var initOrderStatisticRecord=function(){
         var url="/weather";
         var data={"action":"get_gps_receive_count_by_hour"};
         console.log("init statistic record");

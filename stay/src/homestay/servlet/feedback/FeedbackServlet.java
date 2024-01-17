@@ -1,7 +1,7 @@
-package homestay.servlet.feedback;
+package homestay.servlet.Feedback;
 
 import homestay.dao.Data;
-import homestay.service.feedback.FeedbackService;
+import homestay.service.Feedback.FeedbackService;
 import org.json.JSONException;
 import org.json.JSONObject;
 
