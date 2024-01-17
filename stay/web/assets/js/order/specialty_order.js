@@ -11,6 +11,7 @@ jQuery(document).ready(function () {
 /* ================================================================================ */
 //关于页面的控件生成等操作都放在Page里
 var Page = function () {
+    var user = getUserInfo().id;
     /*----------------------------------------入口函数  开始----------------------------------------*/
     var initPageControl = function () {
         pageId = $("#page_id").val();
@@ -20,8 +21,11 @@ var Page = function () {
         if (pageId == "print_word") {
             initOrderListPrintWordRecord();
         }
+        if (pageId == "specialty_order_statistic") {
+            initOrderStatistic();
+        }
     };
-
+    var chartData = [];
     /*----------------------------------------入口函数  结束----------------------------------------*/
     var columnsData = undefined;
     var recordResult = undefined;
@@ -64,6 +68,13 @@ var Page = function () {
         $('#order_list_unfinished_button').click(function () {
             onOrderListUnfinished();
         });
+        $('#order_list_up_button').click(function () {
+            onOrderListUp();
+        });
+        $('#order_list_down_button').click(function () {
+            onOrderListDown();
+        });
+
         $('#record_modify_div #submit_button').click(function () {
             onModifyDivSubmit();
         });
@@ -79,12 +90,23 @@ var Page = function () {
         $('#print_table_button').click(function () {
             window.location.href = "device_list_print_table.jsp";
         });
-        $('#device_statistic').click(function () {
-            window.location.href = "device_statistic.jsp";
+        $('#order_statistic').click(function () {
+            window.location.href = "order_statistic.jsp";
         });
         $('#print_word').click(function () {
-            window.location.href = "device_list_print_word.jsp";
+            window.location.href = "order_list_print_word.jsp";
         });
+        $('#order_add').click(function () {
+            window.location.href = "/market/specialty_market.jsp";
+        });
+
+    }
+
+    var initOrderStatistic = function () {
+        $.ajaxSettings.async = false;
+        initOrderStatisticRecord();
+        $.ajaxSettings.async = true;
+        initBarChart();
     }
     var initOrderAddControlEvent = function () {
         $("#help_button").click(function () {
@@ -129,6 +151,7 @@ var Page = function () {
             }
         })
     }
+
     var onAddRecord = function () {
         $("#record_add_div").modal("show");
         //window.location.href="device_add.jsp";
@@ -170,6 +193,8 @@ var Page = function () {
         getOrderRecordList();
         getOrderRecordFinished();
         getOrderRecordUnfinished();
+        getOrderRecordUp();
+        getOrderRecordDown();
     }
     var initOrderMobileRecord = function () {
         getOrderMobileRecord();
@@ -178,7 +203,7 @@ var Page = function () {
         data = {};
         data.order_id = $("#record_query_setup #order_id").val();
         data.specialty_name = $("#record_query_setup #specialty_name").val();
-
+        data.username = user;
         console.log(1)
         $.post("../../" + module + "_" + sub + "_specialty_order_servlet_action?action=get_specialty_order_record", data, function (json) {
             console.log(JSON.stringify(json));
@@ -190,26 +215,7 @@ var Page = function () {
                     for (var i = 0; i < list.length; i++) {
                         var record = list[i];
                         console.log(record);
-                        html = html + "                                   <tr>";
-                        html = html + "                                        <td>";
-                        html = html + "                                            <div class=\"form-check custom-checkbox checkbox-success check-lg me-3\">";
-                        html = html + "                                                <input type=\"checkbox\" class=\"form-check-input\" id=\"customCheckBox2\" required=\"\">";
-                        html = html + "                                                <label class=\"form-check-label\" for=\"customCheckBox2\"></label>";
-                        html = html + "                                            </div>";
-                        html = html + "                                        </td>";
-                        html = html + "                                        <td><strong>" + record.order_id + "</strong></td>";
-                        html = html + "                                        <td><div class=\"d-flex align-items-center\"><img src=\"" + record.imageurl + "\" class=\"rounded-lg me-2\" width=\"24\" alt=\"\"/> <span class=\"w-space-no\">" + record.specialty_name + "</span></div></td>";
-                        html = html + "                                        <td>" + record.num + "	</td>";
-                        html = html + "                                        <td>" + record.price * record.num + "</td>";
-                        html = html + "                                        <td><div class=\"d-flex align-items-center\"><i class=\"fa fa-circle text-success me-1\"></i> " + (record.order_status != 0 ? '已支付' : '未支付') + "</div></td>";
-                        html = html + "                                        <td>";
-                        html = html + "                                            <div class=\"d-flex\">";
-                        html = html + "                                                <a href=\"#\" class=\"btn btn-primary shadow btn-xs sharp me-1\"><i class=\"fas fa-pencil-alt\"></i></a>";
-                        html = html + "                                                <a href=\"javascript:Page.onDeleteRecord('" + record.order_id + "')\" class=\"btn btn-danger shadow btn-xs sharp me-1\"><i class=\"fa fa-trash\"></i></a>";
-                        html = html + "                                                <a href=\"javascript:Page.onComment('" + record.order_id + "')\" class=\"btn btn-info shadow btn-xs sharp\"><i class=\"fa fa-comment\"></i></a>"
-                        html = html + "                                            </div>";
-                        html = html + "                                        </td>";
-                        html = html + "                                    </tr>";
+                        html = updateHTML(record, html);
                     }
                 }
                 $("#order_table_content_div").html(html);
@@ -218,32 +224,49 @@ var Page = function () {
     }
     var onDeleteRecord = function (order_id) {
         if (confirm("您确定要删除这条订单记录吗？")) {
-            if (order_id > -1) {
-                var url = "../../homestay/servlet_specialty_order_servlet_action";
-                var data = {};
-                data.action = "delete_specialty_order_record";
-                data.order_id = order_id;
-                $.post(url, data, function (json) {
-                    if (json.result_code == 0) {
-                        window.location.reload();
-                    }
-                })
-            }
+            var url = "../../homestay_servlet_specialty_order_servlet_action";
+            var data = {};
+            data.action = "delete_specialty_order_record";
+            data.order_id = order_id;
+            console.log(JSON.stringify(data));
+            $.post(url, data, function (json) {
+                if (json.result_code == 0) {
+                    window.location.reload();
+                }
+            })
+
         }
     };
 
     var onModifyRecord = function (order_id) {
         //显示出修改前数据
         //window.location.href="device_modify.jsp?order_id="+order_id;
-        for (var i = 0; i < resultList.length; i++) {
-            if (resultList[i].order_id == order_id) {
-                $("#record_modify_div #order_id").val(resultList[i].order_id);
-                $("#record_modify_div #specialty_name").val(resultList[i].specialty_name);
-                $("#record_modify_div #total_price").val(resultList[i].price * resultList[i].num);
-                $("#record_modify_div").modal("hide");
+        $.post("../../" + module + "_" + sub + "_specialty_order_servlet_action?action=get_specialty_order_record", data, function (json) {
+            console.log(JSON.stringify(json));
+            if (json.result_code == 0) {
+                var list = json.aaData;
+                console.log(list);
+                for (var i = 0; i < list.length; i++) {
+                    if (list[i].order_id == order_id) {
+                        $("#record_modify_div #order_id").val(list[i].order_id);
+                        $("#record_modify_div #good_id").val(list[i].good_id);
+                        $("#record_modify_div #specialty_name").val(list[i].specialty_name);
+                        $("#record_modify_div #per_price").val(list[i].price);
+                        $("#record_modify_div").modal("hide");
+                    }
+                }
+                $("#record_modify_div").modal("show");
             }
-        }
-        $("#record_modify_div").modal("show");
+        })
+        // for(var i=0;i<resultList.length;i++){
+        //     if(resultList[i].order_id==order_id){
+        //         $("#record_modify_div #order_id").val(resultList[i].order_id);
+        //         $("#record_modify_div #specialty_name").val(resultList[i].specialty_name);
+        //         $("#record_modify_div #total_price").val(resultList[i].price*resultList[i].num);
+        //         $("#record_modify_div").modal("hide");
+        //     }
+        // }
+        // $("#record_modify_div").modal("show");
     }
     var initOrderFileControlEvent = function (id) {
         $('#jump_div #upload_button').click(function () {
@@ -305,10 +328,9 @@ var Page = function () {
     var resultList = [];
     var getOrderRecordFinished = function () {
         data = {};
-        data = {};
         data.order_id = $("#record_query_setup #order_id").val();
         data.specialty_name = $("#record_query_setup #specialty_name").val();
-
+        data.username = user;
         console.log(1)
         $.post("../../" + module + "_" + sub + "_specialty_order_servlet_action?action=get_specialty_order_record_finished", data, function (json) {
             console.log(JSON.stringify(json));
@@ -320,25 +342,7 @@ var Page = function () {
                     for (var i = 0; i < list.length; i++) {
                         var record = list[i];
                         console.log(record);
-                        html = html + "                                   <tr>";
-                        html = html + "                                        <td>";
-                        html = html + "                                            <div class=\"form-check custom-checkbox checkbox-success check-lg me-3\">";
-                        html = html + "                                                <input type=\"checkbox\" class=\"form-check-input\" id=\"customCheckBox2\" required=\"\">";
-                        html = html + "                                                <label class=\"form-check-label\" for=\"customCheckBox2\"></label>";
-                        html = html + "                                            </div>";
-                        html = html + "                                        </td>";
-                        html = html + "                                        <td><strong>" + record.order_id + "</strong></td>";
-                        html = html + "                                        <td><div class=\"d-flex align-items-center\"><img src=\"images/avatar/1.jpg\" class=\"rounded-lg me-2\" width=\"24\" alt=\"\"/> <span class=\"w-space-no\">" + record.specialty_name + "</span></div></td>";
-                        html = html + "                                        <td>" + record.num + "	</td>";
-                        html = html + "                                        <td>" + record.price * record.num + "</td>";
-                        html = html + "                                        <td><div class=\"d-flex align-items-center\"><i class=\"fa fa-circle text-success me-1\"></i> " + (record.order_status != 0 ? '已支付' : '未支付') + "</div></td>";
-                        html = html + "                                        <td>";
-                        html = html + "                                            <div class=\"d-flex\">";
-                        html = html + "                                                <a href=\"#\" class=\"btn btn-primary shadow btn-xs sharp me-1\"><i class=\"fas fa-pencil-alt\"></i></a>";
-                        html = html + "                                                <a href=\"javascript:Page.onDeleteRecord(" + record.order_id + ")\" class=\"btn btn-danger shadow btn-xs sharp\"><i class=\"fa fa-trash\"></i></a>";
-                        html = html + "                                            </div>";
-                        html = html + "                                        </td>";
-                        html = html + "                                    </tr>";
+                        html = updateHTML(record, html);
                     }
                 }
                 $("#order_table_content_finished_div").html(html);
@@ -355,27 +359,55 @@ var Page = function () {
     $('#order_list_unfinished_button').click(function () {
         onOrderListUnfinished();
     });
+    $('#order_list_up_button').click(function () {
+        onOrderListUp();
+    });
 
     var onOrderListAll = function () {
         $("#all_order_tab").show();
         $("#finished_order_tab").hide();
         $("#unfinished_order_tab").hide();
+        $("#up_order_tab").hide();
+        $("#down_order_tab").hide();
+
     }
     var onOrderListFinished = function () {
         $("#all_order_tab").hide();
         $("#finished_order_tab").show();
         $("#unfinished_order_tab").hide();
+        $("#up_order_tab").hide();
+        $("#down_order_tab").hide();
+
     }
     var onOrderListUnfinished = function () {
         $("#all_order_tab").hide();
         $("#finished_order_tab").hide();
         $("#unfinished_order_tab").show();
+        $("#up_order_tab").hide();
+        $("#down_order_tab").hide();
+
+    }
+    var onOrderListUp = function () {
+        $("#all_order_tab").hide();
+        $("#finished_order_tab").hide();
+        $("#unfinished_order_tab").hide();
+        $("#up_order_tab").show();
+        $("#down_order_tab").hide();
+
+    }
+    var onOrderListDown = function () {
+        $("#all_order_tab").hide();
+        $("#finished_order_tab").hide();
+        $("#unfinished_order_tab").hide();
+        $("#up_order_tab").hide();
+        $("#down_order_tab").show();
     }
 
     var getOrderRecordUnfinished = function () {
         data = {};
         data.order_id = $("#record_query_setup #order_id").val();
         data.specialty_name = $("#record_query_setup #specialty_name").val();
+        data.username = user;
 
         console.log(1)
         $.post("../../" + module + "_" + sub + "_specialty_order_servlet_action?action=get_specialty_order_record_unfinished", data, function (json) {
@@ -402,12 +434,12 @@ var Page = function () {
                         html = html + "                                        <td><div class=\"d-flex align-items-center\"><i class=\"fa fa-circle text-success me-1\"></i> " + (record.order_status != 0 ? '已支付' : '未支付') + "</div></td>";
                         html = html + "                                        <td>";
                         html = html + "                                            <div class=\"d-flex\">";
-                        html = html + "                                                <a href=\"#\" class=\"btn btn-primary shadow btn-xs sharp me-1\"><i class=\"fas fa-pencil-alt\"></i></a>";
-                        html = html + "                                                <a href=\"javascript:Page.onDeleteRecord(" + record.order_id + ")\" class=\"btn btn-danger shadow btn-xs sharp\"><i class=\"fa fa-trash\"></i></a>";
+                        html = html + "                                                <a href=\"javascript:Page.onModifyRecord('" + record.order_id + "')\" class=\"btn btn-primary shadow btn-xs sharp me-1\"><i class=\"fas fa-pencil-alt\"></i></a>";
+                        html = html + "                                                <a href=\"javascript:Page.onDeleteRecord('" + record.order_id + "')\" class=\"btn btn-danger shadow btn-xs sharp\"><i class=\"fa fa-trash\"></i></a>";
                         html = html + "                                            </div>";
                         html = html + "                                        </td>";
                         html = html + "                                        <td>";
-                        html = html + "                                            <a href=\"javascript:Page.onModifyRecord('" + record.order_id + "')\">【修改记录】</a><a href=\"javascript:Page.onDeleteRecord(" + record.id + ")\">【删除记录】</a>";
+                        html = html + "                                            <a href=\"javascript:Page.onPayOrder('" + record.order_id + "')\">【支付订单】</a>";
                         html = html + "                                        </td>";
                         html = html + "                                    </tr>";
                     }
@@ -416,6 +448,69 @@ var Page = function () {
             }
         })
     }
+    var getOrderRecordUp = function () {
+        data = {};
+        data.order_id = $("#record_query_setup #order_id").val();
+        data.specialty_name = $("#record_query_setup #specialty_name").val();
+        data.username = user;
+
+        console.log(1)
+        $.post("../../" + module + "_" + sub + "_specialty_order_servlet_action?action=get_specialty_order_record_up", data, function (json) {
+            console.log(JSON.stringify(json));
+            if (json.result_code == 0) {
+                var list = json.aaData;
+                console.log(list);
+                var html = "";
+                if (list != undefined && list.length > 0) {
+                    for (var i = 0; i < list.length; i++) {
+                        var record = list[i];
+                        console.log(record);
+                        html = updateHTML(record, html);
+                    }
+                }
+                $("#order_table_content_up_div").html(html);
+            }
+        })
+    }
+    var getOrderRecordDown = function () {
+        data = {};
+        data.order_id = $("#record_query_setup #order_id").val();
+        data.specialty_name = $("#record_query_setup #specialty_name").val();
+        data.username = user;
+
+        console.log(1)
+        $.post("../../" + module + "_" + sub + "_specialty_order_servlet_action?action=get_specialty_order_record_down", data, function (json) {
+            console.log(JSON.stringify(json));
+            if (json.result_code == 0) {
+                var list = json.aaData;
+                console.log(list);
+                var html = "";
+                if (list != undefined && list.length > 0) {
+                    for (var i = 0; i < list.length; i++) {
+                        var record = list[i];
+                        console.log(record);
+                        html = updateHTML(record, html);
+                    }
+                }
+                $("#order_table_content_down_div").html(html);
+            }
+        })
+    }
+    var onPayOrder = function (order_id) {
+        if (confirm("您确定要支付该订单吗？")) {
+            var url = "../../homestay_servlet_specialty_order_servlet_action";
+            var data = {};
+            data.action = "pay_specialty_order_record";
+            data.order_id = order_id;
+            console.log(JSON.stringify(data));
+            $.post(url, data, function (json) {
+                if (json.result_code == 0) {
+                    window.location.reload();
+                }
+            })
+
+        }
+    };
     var onModifyDivSubmit = function () {
         submitModifyRecordDiv();
         $("#record_modify_div").modal("hide");
@@ -425,13 +520,14 @@ var Page = function () {
         $("#record_add_div").modal("hide");
     }
     var submitModifyRecordDiv = function () {
-        if (confirm("您确定要修改该记录吗？")) {
-            var url = "../../homestay/servlet_specialty_order_servlet_action";
+        if (confirm("您确定要修改该订单记录吗？")) {
+            var url = "../../homestay_servlet_specialty_order_servlet_action";
             var data = {};
             data.action = "modify_device_record";
             data.order_id = $("#record_modify_div #order_id").val();
             data.specialty_name = $("#record_modify_div #specialty_name").val();
-            data.total_price = $("#record_modify_div #total_price").val();
+            data.per_price = $("#record_modify_div #per_price").val();
+            data.good_id = $("#record_modify_div #good_id").val();
             $.post(url, data, function (json) {
                 if (json.result_code == 0) {
                     alert("已经完成设备修改。");
@@ -465,8 +561,9 @@ var Page = function () {
     }
     var onExportRecord = function () {
         console.log("Export Record post");
-        var url = "../../homestay/servlet_specialty_order_servlet_action";
+        var url = "../../homestay_servlet_specialty_order_servlet_action";
         var data = {"action": "export_device_record"};
+        data.username = user;
         $.post(url, data, function (json) {
             if (json.result_code == 0) {
                 console.log(JSON.stringify(json));
@@ -482,7 +579,7 @@ var Page = function () {
         $("#page_header").hide();
         $("#page_content").attr("style", "margin-left:0px");
         $("#page_container").attr("style", "margin-top:0px");
-        var url = "../../homestay/servlet_specialty_order_servlet_action";
+        var url = "../../homestay_servlet_specialty_order_servlet_action";
         var data = {"action": "get_device_record"};
         $.post(url, data, function (json) {
             console.log(JSON.stringify(json));
@@ -528,6 +625,7 @@ var Page = function () {
         $("#page_container").attr("style", "margin-top:0px");
         var url = "../../homestay_servlet_specialty_order_servlet_action";
         var data = {"action": "get_specialty_order_record"};
+        data.username = user;
         $.post(url, data, function (json) {
             console.log(JSON.stringify(json));
             var list = json.aaData;
@@ -598,8 +696,9 @@ var Page = function () {
     }
 
     var initOrderStatisticRecord = function () {
-        var url = "../../homestay/servlet_specialty_order_servlet_action";
-        var data = {"action": "get_gps_receive_count_by_hour"};
+        var url = "../../homestay_servlet_specialty_order_servlet_action";
+        var data = {"action": "get_specialty_order_record_by_hour"};
+        data.username = user;
         console.log("init statistic record");
         $.post(url, data, function (json) {
             var html = "";
@@ -637,9 +736,10 @@ var Page = function () {
         $("#submit_order_comment").unbind("click").click((e) => {
             var url = "/order_comment";
             var data = {
-                "action": "update_comment",
                 "type": "specialty",
-                "order_id": id,
+                "action": "update_comment",
+                "specialty_id": id,
+                "user_id": getUserInfo().id,
                 "score": $("#comment_score").val(),
                 "description": $("#comment_description").val()
             };
@@ -664,9 +764,10 @@ var Page = function () {
     function getCommentById(id) {
         var url = "/order_comment";
         var data = {
-            "action": "get_comment",
             "type": "specialty",
-            "order_id": id
+            "action": "get_comment",
+            "specialty_id": id,
+            "user_id": getUserInfo().id
         };
         $.post(
             url,
@@ -718,7 +819,7 @@ var Page = function () {
                 "balloonText": "<span style='font-size:13px;'>[[title]] in [[category]]:<b>[[value]]</b> [[additional]]</span>",
                 "dashLengthField": "dashLengthColumn",
                 "fillAlphas": 1,
-                "title": "Income",
+                "title": "Order Number",
                 "type": "column",
                 "valueField": "income"
             }, {
@@ -733,7 +834,7 @@ var Page = function () {
                 "bulletBorderThickness": 3,
                 "fillAlphas": 0,
                 "lineAlpha": 1,
-                "title": "Expenses",
+                "title": "Order Number",
                 "valueField": "expenses"
             }],
             "categoryField": "year",
@@ -758,6 +859,9 @@ var Page = function () {
         onDeleteRecord: function (id) {
             onDeleteRecord(id);
         },
+        onPayOrder: function (id) {
+            onPayOrder(id);
+        },
         onModifyRecord: function (id) {
             onModifyRecord(id);
         },
@@ -770,6 +874,30 @@ var Page = function () {
     }
 }();//Page
 /*================================================================================*/
+
+function updateHTML(record, html) {
+    html = html + "                                   <tr>";
+    html = html + "                                        <td>";
+    html = html + "                                            <div class=\"form-check custom-checkbox checkbox-success check-lg me-3\">";
+    html = html + "                                                <input type=\"checkbox\" class=\"form-check-input\" id=\"customCheckBox2\" required=\"\">";
+    html = html + "                                                <label class=\"form-check-label\" for=\"customCheckBox2\"></label>";
+    html = html + "                                            </div>";
+    html = html + "                                        </td>";
+    html = html + "                                        <td><strong>" + record.order_id + "</strong></td>";
+    html = html + "                                        <td><div class=\"d-flex align-items-center\"><img src=\"" + record.imageurl + "\" class=\"rounded-lg me-2\" width=\"24\" alt=\"\"/> <span class=\"w-space-no\">" + record.specialty_name + "</span></div></td>";
+    html = html + "                                        <td>" + record.num + "	</td>";
+    html = html + "                                        <td>" + record.price * record.num + "</td>";
+    html = html + "                                        <td><div class=\"d-flex align-items-center\"><i class=\"fa fa-circle text-success me-1\"></i> " + (record.order_status != 0 ? '已支付' : '未支付') + "</div></td>";
+    html = html + "                                        <td>";
+    html = html + "                                            <div class=\"d-flex\">";
+    html = html + "                                                <a href=\"javascript:Page.onModifyRecord('" + record.order_id + "')\" class=\"btn btn-primary shadow btn-xs sharp me-1\"><i class=\"fas fa-pencil-alt\"></i></a>";
+    html = html + "                                                <a href=\"javascript:Page.onDeleteRecord('" + record.order_id + "')\" class=\"btn btn-danger shadow btn-xs sharp me-1\"><i class=\"fa fa-trash\"></i></a>";
+    html = html + "                                                <a href=\"javascript:Page.onComment('" + record.good_id + "')\" class=\"btn btn-info shadow btn-xs sharp\"><i class=\"fa fa-comment\"></i></a>";
+    html = html + "                                            </div>";
+    html = html + "                                        </td>";
+    html = html + "                                    </tr>";
+    return html;
+}
 
 function initRating() {
     var stars = document.querySelectorAll(".stars > li");

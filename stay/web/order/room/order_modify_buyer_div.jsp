@@ -4,34 +4,42 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">设备信息修改</h4>
+                <h4 class="modal-title">订单信息修改</h4>
             </div>
             <div class="modal-body">
                 <div class="portlet-body form">
                     <form class="form-horizontal" role="form">
                         <div class="form-body">
                             <div class="form-group">
-                                <label class="col-md-3 control-label">记录ID</label>
+                                <label class="col-md-3 control-label">订单ID</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" placeholder="Enter text" id="order_id" name="id">
+                                    <input type="text" class="form-control" placeholder="Enter text" id="good_id" name="good_id">
                                     <span class="help-block">
 											请填写 </span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label">设备编号</label>
+                                <label class="col-md-3 control-label">酒店名</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" placeholder="Enter text" id="specialty_name" name="specialty_name">
+                                    <input type="text" class="form-control" placeholder="Enter text" id="house_name" name="house_name">
                                     <span class="help-block">
 											请填写 </span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label">设备名称</label>
+                                <label class="col-md-3 control-label">房间名</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" placeholder="Enter text" id="total_price" name="total_price">
+                                    <input type="text" class="form-control" placeholder="Enter text" id="room_name" name="room_name">
                                     <span class="help-block">
-											请填写要修改的设备名称</span>
+											请填写 </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">单价</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" placeholder="Enter text" id="price" name="price">
+                                    <span class="help-block">
+											请填写要修改的订单</span>
                                 </div>
                             </div>
                         </div>

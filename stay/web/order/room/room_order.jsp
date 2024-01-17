@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE HTML>
 <html lang="en">
-<input type="hidden" id="page_id" name="page_id" value="order_list"/>
+<input type="hidden" id="page_id" name="page_id" value="room_order_list"/>
 <%--<script src="specialty_order.js"></script>--%>
 <head>
     <meta charset="utf-8">
@@ -719,15 +719,22 @@
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">订单编号</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" placeholder="Enter text" id="order_id"
-                                               name="order_id">
+                                        <input type="text" class="form-control" placeholder="Enter text" id="good_id"
+                                               name="good_id">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">商品名称</label>
+                                    <label class="col-md-3 control-label">民宿</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" placeholder="Enter text"
-                                               id="specialty_name" name="specialty_name">
+                                        <input type="text" class="form-control" placeholder="Enter text" id="house_name"
+                                               name="house_name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">房间</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" placeholder="Enter text" id="room_name"
+                                               name="room_name">
                                     </div>
                                 </div>
                             </div>
@@ -776,9 +783,10 @@
                                             </div>
                                         </th>
                                         <th><strong>订单编号</strong></th>
-                                        <th><strong>商品名称</strong></th>
-                                        <th><strong>商品数量</strong></th>
-                                        <th><strong>商品总价</strong></th>
+                                        <th><strong>房间名称</strong></th>
+                                        <th><strong>房间数量</strong></th>
+                                        <th><strong>入住时间</strong></th>
+                                        <th><strong>房间单价</strong></th>
                                         <th><strong>订单状态</strong></th>
                                         <th><strong></strong></th>
                                     </tr>
@@ -841,9 +849,10 @@
                                             </div>
                                         </th>
                                         <th><strong>订单编号</strong></th>
-                                        <th><strong>商品名称</strong></th>
-                                        <th><strong>商品数量</strong></th>
-                                        <th><strong>商品总价</strong></th>
+                                        <th><strong>房间名称</strong></th>
+                                        <th><strong>房间数量</strong></th>
+                                        <th><strong>入住时间</strong></th>
+                                        <th><strong>房间单价</strong></th>
                                         <th><strong>订单状态</strong></th>
                                         <th><strong></strong></th>
                                     </tr>
@@ -907,9 +916,10 @@
                                             </div>
                                         </th>
                                         <th><strong>订单编号</strong></th>
-                                        <th><strong>商品名称</strong></th>
-                                        <th><strong>商品数量</strong></th>
-                                        <th><strong>商品总价</strong></th>
+                                        <th><strong>房间名称</strong></th>
+                                        <th><strong>房间数量</strong></th>
+                                        <th><strong>入住时间</strong></th>
+                                        <th><strong>房间单价</strong></th>
                                         <th><strong>订单状态</strong></th>
                                         <th><strong></strong></th>
                                     </tr>
@@ -973,9 +983,10 @@
                                             </div>
                                         </th>
                                         <th><strong>订单编号</strong></th>
-                                        <th><strong>商品名称</strong></th>
-                                        <th><strong>商品数量</strong></th>
-                                        <th><strong>商品总价</strong></th>
+                                        <th><strong>房间名称</strong></th>
+                                        <th><strong>房间数量</strong></th>
+                                        <th><strong>入住时间</strong></th>
+                                        <th><strong>房间单价</strong></th>
                                         <th><strong>订单状态</strong></th>
                                         <th><strong></strong></th>
                                     </tr>
@@ -1038,14 +1049,15 @@
                                             </div>
                                         </th>
                                         <th><strong>订单编号</strong></th>
-                                        <th><strong>商品名称</strong></th>
-                                        <th><strong>商品数量</strong></th>
-                                        <th><strong>商品总价</strong></th>
+                                        <th><strong>房间名称</strong></th>
+                                        <th><strong>房间数量</strong></th>
+                                        <th><strong>入住时间</strong></th>
+                                        <th><strong>房间单价</strong></th>
                                         <th><strong>订单状态</strong></th>
                                         <th><strong></strong></th>
                                     </tr>
                                     </thead>
-                                    <tbody id="order_table_content_down_div" name="order_table_content_up_div">
+                                    <tbody id="order_table_content_down_div" name="order_table_content_down_div">
                                     <tr>
                                         <td>
                                             <div class="form-check custom-checkbox checkbox-success check-lg me-3">
@@ -1120,25 +1132,12 @@
 <%@ include file="order_modify_buyer_div.jsp" %>
 <%@ include file="/frame/frame_javascript.jsp" %>
 <%@ include file="order_download_div.jsp" %>
-<%@ include file="order_comment.jsp" %>
+<%@ include file="../device/order_comment.jsp" %>
 
 <!--**********************************
     Scripts
 ***********************************-->
 <!-- Required vendors -->
-<script>
-    function getUserInfo() {
-        const token = getCookie("token")
-        return JSON.parse(window.atob(token.split('.')[1]))
-    }
-</script>
-<script>
-    /**
-     * top menu slider
-     */
-
-    $('#to-profile').attr('href', `/user/user-profile.jsp?id=\${getUserInfo().id}`);
-</script>
 <script src="../../assets/vendor/global/global.min.js"></script>
 <script src="../../assets/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
 <script src="../../assets/js/custom.min.js"></script>
@@ -1147,7 +1146,7 @@
 <script src="../../assets/js/styleSwitcher.js"></script>
 <script src="../../assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
 <script src="../../assets/js/plugins-init/sweetalert.init.js"></script>
-<script src="../../assets/js/order/specialty_order.js"></script>
+<script src="../../assets/js/order/room_order.js"></script>
 
 </body>
 </html>
