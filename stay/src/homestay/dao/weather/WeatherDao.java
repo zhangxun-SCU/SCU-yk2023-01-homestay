@@ -1,5 +1,7 @@
-package homestay.dao;
+package homestay.dao.weather;
 
+import homestay.dao.DB;
+import homestay.dao.Data;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,10 +33,12 @@ public class WeatherDao {
         String wind = data.getParam().has("wind") ? data.getParam().getString("wind") : null;
         String humidity = data.getParam().has("humidity") ? data.getParam().getString("humidity") : null;
         String create_time = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date());
-        if (create_id != null && city!= null) {
-            String sql = "insert into weather(city, temperature, weather_type, wind,create_id,creator,create_time,humidity)";
+        System.out.println(city);
+        if (city != null) {
+            String sql = "insert into weather_file(city, temperature, weather_type, wind,create_id,creator,create_time,humidity)";
             sql = sql + " values('" + city + "'";
             sql = sql + " ,'" + temperature + "','" + weather_type + "','" + wind + "','" + create_id + "','" + creator + "','" + create_time+ "','" + humidity+ "')";
+            System.out.println(sql);
             data.getParam().put("sql", sql);
             updateRecord(data, json);
         }
@@ -63,14 +67,15 @@ public class WeatherDao {
         String humidity = data.getParam().has("humidity") ? data.getParam().getString("humidity") : null;
         String create_time = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date());
         if (id != null) {
-            String sql = "update weather";
-            sql = sql + " set =city'" + city + "'";
+            String sql = "update weather_file";
+            sql = sql + " set city='" + city + "'";
             sql = sql + " ,temperature='" + temperature + "'";
             sql = sql + " ,weather_type='" + weather_type + "'";
             sql = sql + " ,creator='" + creator + "'";
             sql = sql + " ,wind='" + wind + "'";
             sql = sql + " ,humidity='" + humidity+ "'";
             sql = sql + " where id=" + id;
+            System.out.println(sql);
             data.getParam().put("sql",sql);
             updateRecord(data,json);
         }
@@ -157,20 +162,12 @@ public class WeatherDao {
         if(id!=null && (! id.isEmpty())){
             sql=sql+" where id="+id;
         }
-        String deviceId=data.getParam().has("device_id")?data.getParam().getString("device_id"):null;
-        if(deviceId!=null && (! deviceId.isEmpty())){
+        String city=data.getParam().has("city")?data.getParam().getString("city"):null;
+        if(city!=null && (! city.isEmpty())){
             if(sql.indexOf("where")>-1){
-                sql=sql+" and device_id like '%"+deviceId+"%'";
+                sql=sql+" and city like '%"+city+"%'";
             }else{
-                sql=sql+" where device_id like '%"+deviceId+"%'";
-            }
-        }
-        String deviceName=data.getParam().has("device_name")?data.getParam().getString("device_name"):null;
-        if(deviceName!=null && (! deviceName.isEmpty())){
-            if(sql.indexOf("where")>-1){
-                sql=sql+" and device_name like '%"+deviceName+"%'";
-            }else{
-                sql=sql+" where device_name like '%"+deviceName+"%'";
+                sql=sql+" where city like '%"+city+"%'";
             }
         }
         return sql;

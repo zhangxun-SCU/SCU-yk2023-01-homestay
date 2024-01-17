@@ -2,15 +2,13 @@
   Created by IntelliJ IDEA.
   User: 86135
   Date: 2023/12/10
-  Time: 11:07
+  Time: 10:26
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,18 +21,21 @@
     <meta property="og:description" content="Invome : Invome Admin  Bootstrap 5 Template" />
     <meta property="og:image" content="https://invome.dexignlab.com/xhtml/social-image.png" />
     <meta name="format-detection" content="telephone=no">
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=B2Lz3CYUZVzjXBhZ0g3MS8wY"></script>
+    <script type="text/javascript" src="../assets/js/GPS/jquery.min.js"></script>
+    <style type="text/css">
+
+    </style>
 
     <!-- PAGE TITLE HERE -->
-    <title>Invome Admin Dashboard</title>
+    <title>地图查询模块</title>
 
     <!-- FAVICONS ICON -->
-    <link rel="shortcut icon" type="image/png" href=".../assets/images/favicon.png" />
+    <link rel="shortcut icon" type="image/png" href="../assets/images/favicon.png" />
     <link href="../assets/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
-    <link href="../assets/vendor/dropzone/dist/dropzone.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
 
 </head>
-
 <body>
 
 <!--*******************
@@ -49,7 +50,6 @@
 <!--*******************
     Preloader end
 ********************-->
-
 
 <!--**********************************
     Main wrapper start
@@ -586,9 +586,6 @@
         Chat box End
     ***********************************-->
 
-
-
-
     <!--**********************************
         Header start
     ***********************************-->
@@ -598,7 +595,7 @@
                 <div class="collapse navbar-collapse justify-content-between">
                     <div class="header-left">
                         <div class="dashboard_bar">
-                            发表评论
+                            地图查询模块
                         </div>
 
                     </div>
@@ -797,187 +794,7 @@
     <!--**********************************
         Sidebar start
     ***********************************-->
-    <div class="dlabnav">
-        <div class="dlabnav-scroll">
-            <div class="dropdown header-profile2 ">
-                <a class="nav-link " href="javascript:void(0);"  role="button" data-bs-toggle="dropdown">
-                    <div class="header-info2 d-flex align-items-center border">
-                        <img src="../assets/images/profile/pic1.jpg" alt=""/>
-                        <div class="d-flex align-items-center sidebar-info">
-                            <div>
-                                <span class="font-w700 d-block mb-2">Eren Yeager</span>
-                                <small class="text-end font-w400">Super Admin</small>
-                            </div>
-                            <i class="fas fa-sort-down ms-4"></i>
-                        </div>
-
-                    </div>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end">
-                    <a href="../assets/app-profile.html" class="dropdown-item ai-icon ">
-                        <svg  xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                        <span class="ms-2">Profile </span>
-                    </a>
-                    <a href="../assets/email-inbox.html" class="dropdown-item ai-icon">
-                        <svg  xmlns="http://www.w3.org/2000/svg" class="text-success" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                        <span class="ms-2">Inbox </span>
-                    </a>
-                    <a href="../assets/login.html" class="dropdown-item ai-icon">
-                        <svg  xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-                        <span class="ms-2">Logout </span>
-                    </a>
-                </div>
-            </div>
-            <ul class="metismenu" id="menu">
-                <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-                    <i class="fas fa-tachometer-alt"></i>
-                    <span class="nav-text">Dashboard</span>
-                </a>
-                    <ul aria-expanded="false">
-                        <li><a href="index.html">Dashboard Light</a></li>
-                        <li><a href="index-2.html">Dashboard Dark</a></li>
-                        <li><a href="wallet-page.html">My Wallet</a></li>
-                        <li><a href="invoices.html">Invoices</a></li>
-                        <li><a href="create-invoices.html">Create Invoices</a></li>
-                        <li><a href="card-center.html">Card-Center</a></li>
-                        <li><a href="transaction-details.html">Transaction</a></li>
-                    </ul>
-
-                </li>
-
-                <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-                    <i class="fas fa-info-circle"></i>
-                    <span class="nav-text">Apps</span>
-                </a>
-                    <ul aria-expanded="false">
-                        <li><a href="../assets/app-profile.html">Profile</a></li>
-                        <li><a href="../assets/post-details.html">Post Details</a></li>
-                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Email</a>
-                            <ul aria-expanded="false">
-                                <li><a href="../assets/email-compose.html">Compose</a></li>
-                                <li><a href="../assets/email-inbox.html">Inbox</a></li>
-                                <li><a href="../assets/email-read.html">Read</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="../assets/app-calender.html">Calendar</a></li>
-                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Shop</a>
-                            <ul aria-expanded="false">
-                                <li><a href="../assets/ecom-product-grid.html">Product Grid</a></li>
-                                <li><a href="../assets/ecom-product-list.html">Product List</a></li>
-                                <li><a href="../assets/ecom-product-detail.html">Product Details</a></li>
-                                <li><a href="../assets/ecom-product-order.html">Order</a></li>
-                                <li><a href="../assets/ecom-checkout.html">Checkout</a></li>
-                                <li><a href="../assets/ecom-invoice.html">Invoice</a></li>
-                                <li><a href="../assets/ecom-customers.html">Customers</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-                    <i class="fas fa-chart-line"></i>
-                    <span class="nav-text">Charts</span>
-                </a>
-                    <ul aria-expanded="false">
-                        <li><a href="../assets/chart-flot.html">Flot</a></li>
-                        <li><a href="../assets/chart-morris.html">Morris</a></li>
-                        <li><a href="../assets/chart-chartjs.html">Chartjs</a></li>
-                        <li><a href="../assets/chart-chartist.html">Chartist</a></li>
-                        <li><a href="../assets/chart-sparkline.html">Sparkline</a></li>
-                        <li><a href="../assets/chart-peity.html">Peity</a></li>
-                    </ul>
-                </li>
-                <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-                    <i class="fab fa-bootstrap"></i>
-                    <span class="nav-text">Bootstrap</span>
-                </a>
-                    <ul aria-expanded="false">
-                        <li><a href="../assets/ui-accordion.html">Accordion</a></li>
-                        <li><a href="../assets/ui-alert.html">Alert</a></li>
-                        <li><a href="../assets/ui-badge.html">Badge</a></li>
-                        <li><a href="../assets/ui-button.html">Button</a></li>
-                        <li><a href="../assets/ui-modal.html">Modal</a></li>
-                        <li><a href="../assets/ui-button-group.html">Button Group</a></li>
-                        <li><a href="../assets/ui-list-group.html">List Group</a></li>
-                        <li><a href="../assets/ui-card.html">Cards</a></li>
-                        <li><a href="../assets/ui-carousel.html">Carousel</a></li>
-                        <li><a href="../assets/ui-dropdown.html">Dropdown</a></li>
-                        <li><a href="../assets/ui-popover.html">Popover</a></li>
-                        <li><a href="../assets/ui-progressbar.html">Progressbar</a></li>
-                        <li><a href="../assets/ui-tab.html">Tab</a></li>
-                        <li><a href="../assets/ui-typography.html">Typography</a></li>
-                        <li><a href="../assets/ui-pagination.html">Pagination</a></li>
-                        <li><a href="../assets/ui-grid.html">Grid</a></li>
-
-                    </ul>
-                </li>
-                <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-                    <i class="fas fa-heart"></i>
-                    <span class="nav-text">Plugins</span>
-                </a>
-                    <ul aria-expanded="false">
-                        <li><a href="../assets/uc-select2.html">Select 2</a></li>
-                        <li><a href="../assets/uc-nestable.html">Nestedable</a></li>
-                        <li><a href="../assets/uc-noui-slider.html">Noui Slider</a></li>
-                        <li><a href="../assets/uc-sweetalert.html">Sweet Alert</a></li>
-                        <li><a href="../assets/uc-toastr.html">Toastr</a></li>
-                        <li><a href="../assets/map-jqvmap.html">Jqv Map</a></li>
-                        <li><a href="../assets/uc-lightgallery.html">Light Gallery</a></li>
-                    </ul>
-                </li>
-                <li><a href="widget-basic.html" class="" aria-expanded="false">
-                    <i class="fas fa-user-check"></i>
-                    <span class="nav-text">Widget</span>
-                </a>
-                </li>
-                <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-                    <i class="fas fa-file-alt"></i>
-                    <span class="nav-text">Forms</span>
-                </a>
-                    <ul aria-expanded="false">
-                        <li><a href="../assets/form-element.html">Form Elements</a></li>
-                        <li><a href="../assets/form-wizard.html">Wizard</a></li>
-                        <li><a href="../assets/form-ckeditor.html">CkEditor</a></li>
-                        <li><a href="form-pickers.html">Pickers</a></li>
-                        <li><a href="form-validation.html">Form Validate</a></li>
-                    </ul>
-                </li>
-                <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-                    <i class="fas fa-table"></i>
-                    <span class="nav-text">Table</span>
-                </a>
-                    <ul aria-expanded="false">
-                        <li><a href="table-bootstrap-basic.html">Bootstrap</a></li>
-                        <li><a href="table-datatable-basic.html">Datatable</a></li>
-                    </ul>
-                </li>
-                <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-                    <i class="fas fa-clone"></i>
-                    <span class="nav-text">Pages</span>
-                </a>
-                    <ul aria-expanded="false">
-                        <li><a href="../assets/page-login.html">Login</a></li>
-                        <li><a href="../assets/page-register.html">Register</a></li>
-                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
-                            <ul aria-expanded="false">
-                                <li><a href="../assets/page-error-400.html">Error 400</a></li>
-                                <li><a href="../assets/page-error-403.html">Error 403</a></li>
-                                <li><a href="../assets/page-error-404.html">Error 404</a></li>
-                                <li><a href="../assets/page-error-500.html">Error 500</a></li>
-                                <li><a href="../assets/page-error-503.html">Error 503</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="../assets/page-lock-screen.html">Lock Screen</a></li>
-                        <li><a href="../assets/empty-page.html">Empty Page</a></li>
-                    </ul>
-                </li>
-            </ul>
-
-            <div class="copyright">
-                <p><strong>Invome Admin Dashboard</strong> © 2021 All Rights Reserved</p>
-                <p class="fs-12">Made with <span class="heart"></span> by DexignLabs</p>
-            </div>
-        </div>
-    </div>
+    <%@include file="../frame/frame_menu.jsp"%>
     <!--**********************************
         Sidebar end
     ***********************************-->
@@ -986,78 +803,179 @@
         Content body start
     ***********************************-->
     <div class="content-body">
+        <!-- row -->
         <div class="container-fluid">
-
-            <div class="row page-titles">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item active"><a href="../assets/feedback-page.jsp">首页</a></li>
-                    <li class="breadcrumb-item">发表评论</li>
-                </ol>
+            <div>
+                <input id="searchTextField" type="text" size="25" style="width:80%;" onKeyUp="GetFromAddress(this.value)" />
+                <input type="button" class="btn default purple-stripe" value="定位" onClick="GetFromAddress(document.getElementById('searchTextField').value)"  style="width:15%;" />
             </div>
-
-            <!-- row -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                                <div class="toolbar mb-4" role="toolbar">
-                                    <div class="btn-group mb-1">
-                                        <button type="button" class="btn btn-primary light px-3"><i class="fa fa-archive"></i></button>
-                                        <button type="button" class="btn btn-primary light px-3"><i class="fa fa-exclamation-circle"></i></button>
-                                        <button type="button" class="btn btn-primary light px-3"><i class="fa fa-trash"></i></button>
-                                    </div>
-                                    <div class="btn-group mb-1">
-                                        <button type="button" class="btn btn-primary light dropdown-toggle px-3" data-bs-toggle="dropdown">
-                                            <i class="fa fa-folder"></i> <b class="caret m-l-5"></b>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript: void(0);">Social</a>
-                                            <a class="dropdown-item" href="javascript: void(0);">Promotions</a>
-                                            <a class="dropdown-item" href="javascript: void(0);">Updates</a>
-                                            <a class="dropdown-item" href="javascript: void(0);">Forums</a>
-                                        </div>
-                                    </div>
-                                    <div class="btn-group mb-1">
-                                        <button type="button" class="btn btn-primary light dropdown-toggle px-3" data-bs-toggle="dropdown">
-                                            <i class="fa fa-tag"></i> <b class="caret m-l-5"></b>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript: void(0);">Updates</a>
-                                            <a class="dropdown-item" href="javascript: void(0);">Social</a>
-                                            <a class="dropdown-item" href="javascript: void(0);">Promotions</a>
-                                            <a class="dropdown-item" href="javascript: void(0);">Forums</a>
-                                        </div>
-                                    </div>
-                                    <div class="btn-group mb-1">
-                                        <button type="button" class="btn btn-primary light dropdown-toggle v" data-bs-toggle="dropdown">More <span class="caret m-l-5"></span>
-                                        </button>
-                                        <div class="dropdown-menu"> <a class="dropdown-item" href="javascript: void(0);">Mark as Unread</a> <a class="dropdown-item" href="javascript: void(0);">Add to Tasks</a>
-                                            <a class="dropdown-item" href="javascript: void(0);">Add Star</a> <a class="dropdown-item" href="javascript: void(0);">Mute</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            <div class="compose-content">
-                                <form action="/messages" method="GET">
-                                    <div class="form-group">
-                                        <input type="name" class="form-control" id="input_name" placeholder="请输入您的用户名" minlength="2" maxlength="10" name="name">
-                                    </div>
-                                    <div class="form-group">
-                                        <textarea class="form-control" id="input_message"placeholder="请输入评论内容" cols="30" rows="10" required minlength="5" maxlength="20" name="message"></textarea>
-                                    </div>
-                                    <button class="btn btn-primary btn-sl-sm me-2" type="button"><span class="me-2"><i class="fa fa-paper-plane"></i></span>发表</button>
-                                    <button class="btn btn-danger light btn-sl-sm" type="button"><span class="me-2"><i class="fa fa-times"></i></span>丢弃</button>
-                                </form>
-                                <h5 class="mb-4"><i class="fa fa-paperclip"></i> Attatchment</h5>
-                                <form action="#" class="dropzone">
-                                    <div class="fallback">
-                                        <input name="file" type="file" multiple />
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div id="apDiv1">
+                <div id="results"></div>
             </div>
+            <div id="container" style="width:99%;height:500px;border:1px solid gray;"></div>
+            <div id="gsfrommap" style="display:none; margin:0 auto; padding:1rem;">
+                <form action="" method="get">
+                    <input type="hidden" name="Lat" id="Lat" value="0" />
+                    <input type="hidden" name="Lng" id="Lng" value="0" />
+                    <input type="button" name="submit" value="确定" class="submit" onClick="getMarker()" />
+                </form>
+            </div>
+            <script type="text/javascript">
+                var rmarkers=[];
+                var map = new BMap.Map("container");
+                map.addControl(new BMap.NavigationControl());               // 添加平移缩放控件
+                map.addControl(new BMap.ScaleControl());                    // 添加比例尺控件
+                map.addControl(new BMap.OverviewMapControl());              //添加缩略地图控件
+                map.addControl(new BMap.MapTypeControl());          //添加地图类型控件
+                map.enableScrollWheelZoom();
+
+                //移动居中
+                //map.addEventListener('touchend', function(){
+                //	var p = map.getCenter();
+                //	document.getElementById('Lat').value=p.lat;
+                //	document.getElementById('Lng').value =p.lng;
+                //	document.getElementById('gsfrommap').style.display='block';
+                //	alert(p.lat+";"+p.lng);
+                //});
+                var offsetY = -12.5;
+                map.centerAndZoom(new BMap.Point(121.475638,31.241245),15);
+
+                var geolocation = new BMap.Geolocation();
+                geolocation.getCurrentPosition(function(r){
+                    if(this.getStatus() === BMAP_STATUS_SUCCESS){
+                        var mk = new BMap.Marker(r.point);
+                        //map.addOverlay(mk);
+                        //将地图中心移动到可视区中点
+                        map.panTo(r.point);
+
+                        map.centerAndZoom(r.point,15);
+                        var centerPixel = map.pointToOverlayPixel(map.getCenter());
+                        //通过设置地图的中心点，使定位点显示在手机上部分区域
+                        map.setCenter(map.overlayPixelToPoint({x:centerPixel.x,y:centerPixel.y+offsetY}));
+                        map.addEventListener('dragend',function(){
+                            //map.clearOverlays();
+                            //获得移动之后地图中心点的像素位置
+                            var pixel = map.pointToOverlayPixel(map.getCenter());
+                            //获得定位图标所在位置在地图上的地理位置，实际上定位图标的像素位置就在地图中心像素位置相应的偏移量处
+                            var Point = map.overlayPixelToPoint({x:pixel.x,y:pixel.y-offsetY});
+                            //var mkn = new BMap.Marker(Point);
+                            console.info(Point);
+                            //获取周围地址信息
+                            getAroundAddress(Point);
+                            //map.addOverlay(mkn);
+                        });
+                    }else {
+                        alert('failed'+this.getStatus());
+                    }
+                });
+
+                //ip定位
+                function myFun(result){
+                    var cityName = result.name;
+                    map.setCenter(cityName);
+                    $('#lselcity .heads').html(cityName);
+                    //alert("当前定位城市:"+cityName);
+                }
+                var myCity = new BMap.LocalCity();
+                myCity.get(myFun);
+                // 创建控件
+                var m_height=(map.getSize().height-24)/2;
+                var m_width=(map.getSize().width-19)/2;
+                // 定义一个控件类,即function
+                function ZoomControl(){
+                    // 默认停靠位置和偏移量
+                    this.defaultAnchor = BMAP_ANCHOR_TOP_LEFT;
+                    this.defaultOffset = new BMap.Size(m_width,m_height);
+                }
+                // 通过JavaScript的prototype属性继承于BMap.Control
+                ZoomControl.prototype = new BMap.Control();
+
+                // 自定义控件必须实现自己的initialize方法,并且将控件的DOM元素返回
+                // 在本方法中创建个div元素作为控件的容器,并将其添加到地图容器中
+                ZoomControl.prototype.initialize = function(map){
+                    // 创建一个DOM元素
+                    var div = document.createElement("div");
+                    //div.innerHTML='aaaa';
+                    // 添加文字说明
+                    // 设置样式
+                    div.style.width = "19px";
+                    div.style.height = "24px";
+                    div.style.cursor = "pointer";
+                    div.style.background="url(./markers_default.png) center no-repeat";
+                    // 绑定事件,点击一次放大两级
+                    div.onclick = function(e){
+                        map.setZoom(map.getZoom() + 2);
+                    }
+                    // 添加DOM元素到地图中
+                    map.getContainer().appendChild(div);
+                    //alert(map.getContainer().style.width);
+                    // 将DOM元素返回
+                    return div;
+                }
+                var myZoomCtrl = new ZoomControl();
+                // 添加到地图当中
+                map.addControl(myZoomCtrl);
+                var options = {
+                    onSearchComplete: function(results){
+                        // 判断状态是否正确
+                        if (local.getStatus() == BMAP_STATUS_SUCCESS){
+                            var rhtm='';
+                            console.info(results);
+                            //s.push('<div style="font-family: arial,sans-serif; border: 1px solid rgb(153, 153, 153); font-size: 12px;">');
+                            //s.push('<div style="background: none repeat scroll 0% 0% rgb(255, 255, 255);">');
+                            rhtm+='<ol style="margin:10px 15px; padding:5px 15px;">';
+                            for (var i = 0; i < results.getCurrentNumPois(); i ++){
+                                var selected = "";
+                                if(i == 0){
+                                    selected = "background-color:#f0f0f0;";
+                                }
+                                var p=results.getPoi(i).point;
+                                rhtm+='<li id="list' + i + '" style="line-height:18px;">';
+                                rhtm+='<a href="javascript:showMarker('+p.lat+','+p.lng+')"><span style="color:#00c;text-decoration:underline">' + results.getPoi(i).title.replace(new RegExp(results.keyword,"g"),'<b>' + results.keyword + '</b>') + '</span></a>';
+                                //rhtm+='<span style="color:#666;"> - ' + results.getPoi(i).address + '</span>';
+                                rhtm+='</li>';
+                            }
+                            rhtm+='</ol>';
+                            document.getElementById("results").innerHTML =rhtm;
+                        }
+                    }
+                };
+                var local = new BMap.LocalSearch(map, options);
+                function GetFromAddress(s){
+                    $('#results').show();
+                    $('#apDiv1').css('z-index','1');
+                    local.search(s);
+                }
+                function showMarker(lat,lng){
+                    $('#results').hide();
+                    var po=new BMap.Point(lng,lat);
+                    document.getElementById('Lat').value=po.lat;
+                    document.getElementById('Lng').value=po.lng;
+                    map.clearOverlays();
+                    //addMarker(po,0);
+                    map.panTo(po);
+                    //alert(lat+";"+lng);
+                    getAroundAddress(po)
+                }
+
+                function getAroundAddress(point){
+                    var lng = $.trim(point.lng);
+                    var lat = $.trim(point.lat);
+                    var url = 'http://api.map.baidu.com/geocoder/v2/?ak=B2Lz3CYUZVzjXBhZ0g3MS8wY&output=json&pois=1&location='+ lat +',' + lng;
+                    $.ajax({
+                        type:'POST',
+                        url:url,
+                        ansyc:false,
+                        dataType:'JSONP',
+                        success:function(data){
+                            console.info(data);
+                        }
+                    })
+
+
+                }
+
+            </script>
 
         </div>
     </div>
@@ -1087,6 +1005,7 @@
     ***********************************-->
 
 
+
 </div>
 <!--**********************************
     Main wrapper end
@@ -1098,12 +1017,9 @@
 <!-- Required vendors -->
 <script src="../assets/vendor/global/global.min.js"></script>
 <script src="vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
-<script src="../assets/vendor/dropzone/dist/dropzone.js"></script>
 <script src="../assets/js/custom.min.js"></script>
 <script src="../assets/js/dlabnav-init.js"></script>
 <script src="../assets/js/demo.js"></script>
 <script src="../assets/js/styleSwitcher.js"></script>
-
 </body>
 </html>
-

@@ -683,7 +683,7 @@ Sidebar start
                 </a>
             </li>
                 <li>
-                    <a href="/GPS/GPS.jsp">
+                    <a href="/GPS/GPS_query.jsp">
                         <i class="fas fa-chart-line"></i>
                         <span class="nav-text">地图导航</span>
                     </a>
