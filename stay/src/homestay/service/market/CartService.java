@@ -65,7 +65,6 @@ public class CartService {
 
             CartDao dao=new CartDao();
             dao.deleteCartGood(user_id,data,json);
-
             json.put("code",0);
         }
         catch (Exception e){
@@ -73,5 +72,18 @@ public class CartService {
             e.printStackTrace();
         }
 
+    }
+
+    public void modifyCartGood(Data data, JSONObject json, String user_id) throws JSONException {
+        try{
+
+            CartDao dao=new CartDao();
+            dao.modifyCartGood(user_id,data,json);
+            json.put("code",0);
+        }
+        catch (Exception e){
+            json.put("code",1);
+            e.printStackTrace();
+        }
     }
 }

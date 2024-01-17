@@ -2,6 +2,7 @@ package homestay.dao.seller;
 
 import homestay.dao.DB;
 import homestay.dao.Data;
+import homestay.entity.Homestay;
 import org.json.JSONException;
 import org.json.JSONObject;
 import sun.misc.BASE64Decoder;
@@ -144,9 +145,11 @@ public class HomestayDao {
         double longitude = data.getParam().getDouble("longitude");
         double latitude = data.getParam().getDouble("latitude");
         String houseLocation = data.getParam().getString("location");
-        String imageurl = data.getParam().getString("imageurl");
-        String imagePath = IMAGE_DIR + houseId + ".png";
-        base64ToImage(imageurl, imagePath);
+        if (data.getParam().has("imageurl")) {
+            String imageurl = data.getParam().getString("imageurl");
+            String imagePath = IMAGE_DIR + houseId + ".png";
+            base64ToImage(imageurl, imagePath);
+        }
         String sql = "Update house Set ";
         String values = String.format(
                 "house_name='%s', longitude='%f', latitude='%f', location='%s' Where house_id='%s'",
@@ -183,5 +186,25 @@ public class HomestayDao {
         }
         json.put("resCode", resCode);
         json.put("deleteHomestayInfo", info);
+    }
+
+    public Homestay queryHomestayById(String homestayId) throws SQLException {
+        DB db = new DB("group1");
+        String sql = "Select * From house Where house_id='" + homestayId + "'";
+        showDebug("[queryHomestayById]", "sql: " + sql);
+        ResultSet res = db.executeQuery(sql);
+        Homestay homestay = new Homestay();
+        while (res.next()) {
+            homestay.house_id = res.getString("house_id");
+            homestay.house_name = res.getString("house_name");
+            homestay.owner_id = res.getString("owner_id");
+            homestay.latitude = res.getDouble("latitude");
+            homestay.longitude = res.getDouble("longitude");
+            homestay.imageurl = res.getString("imageurl");
+            homestay.location = res.getString("location");
+        }
+        res.close();
+        db.close();
+        return homestay;
     }
 }

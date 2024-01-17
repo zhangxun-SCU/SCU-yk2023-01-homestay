@@ -239,11 +239,22 @@ To change this template use File | Settings | File Templates.
                     html=html+"<code>没有库存</code>";
                     }
                     else{
-                        html=html+"<input  type=\"number\" name=\"num\"class=\"form-control input-btn input-number\" value=\""+good.num+"\""+
-                            "min=\"1\"max=\"2\">";
-                        html=html+"</div>";
+                        if(good.max_num<good.num)
+                        {
+                            good.num=good.max_num;
+                            html = html + "<input  type=\"number\" name=\"num\"class=\"form-control input-btn input-number\" value=\"" + good.max_num + "\"" +
+                                "min=1 max=" + good.max_num + " onchange=\"changeNum(this,'" + good.good_id + "')\">";
+                            html = html + "</div>";
+                        }
+                        else{
+                            html = html + "<input  type=\"number\" name=\"num\"class=\"form-control input-btn input-number\" value=\"" + good.num + "\"" +
+                                "min=1 max=" + good.max_num + " onchange=\"changeNum(this,'" + good.good_id + "')\">";
+                            html = html + "</div>";
+                        }
+
                     }
                     html = html + "</td>";
+
                     html = html + "<td>";
                     html = html + "<div class=\"d-flex align-items-center\">";
                     html = html + "<span  class=\"text-warning\" style=\"font-size: 150%;font-weight: bold\">";
@@ -365,6 +376,57 @@ To change this template use File | Settings | File Templates.
                 hideMethod: "fadeOut",
                 tapToDismiss: !1
             })
+        }
+    }
+
+
+    var changeNum = function (e, good_id) {
+
+
+        if (Number(e.value) > Number(e.max)) {
+            e.value = Number(e.max);
+        }
+        var data={"good_id":good_id,"num":e.value,'action':'modify'}
+        $.post('/getCartGood',data,function (json){
+        })
+        for (var i = 0; i < good_list.length; i++) {
+            if (good_list[i].good_id == good_id) {
+                good_list[i].num = Number(e.value);
+                var begin = false;
+                var checked = "";
+                checkgoods = [];
+                total_num = 0;
+                total_cost = 0;
+                for (let doo of document.getElementsByClassName("form-check-input")) {
+                    checked = doo.checked;
+                    if (!begin) {
+                        console.log(checked);
+                        begin = true;
+                        continue;
+                    } else {
+                        if (checked) {
+                            console.log('checked');
+                            var good_id = doo.id.split("k")[1];
+                            var good = "";
+                            for (var i = 0; i < good_list.length; i++) {
+                                if (good_list[i].good_id == good_id) {
+                                    good = good_list[i];
+                                }
+                            }
+                            checkgoods.push(good);
+                            total_num = total_num + Number(good.num);
+                            total_cost = total_cost + Number(good.good_price) * Number(good.num);
+                            document.getElementById("total_num").innerText = total_num;
+                            document.getElementById("total_cost").innerText = total_cost;
+                        } else {
+                            document.getElementById("total_num").innerText = total_num;
+                            document.getElementById("total_cost").innerText = total_cost;
+                        }
+
+                    }
+
+                }
+            }
         }
     }
 </script>
