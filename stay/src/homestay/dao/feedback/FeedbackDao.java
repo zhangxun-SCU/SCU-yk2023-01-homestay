@@ -1,4 +1,4 @@
-package homestay.dao.feedback;
+package homestay.dao.Feedback;
 
 import homestay.dao.DB;
 import homestay.dao.Data;
