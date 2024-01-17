@@ -217,35 +217,35 @@
                                             <div class="my-post-content pt-3">
                                             </div>
                                             <div id="comments_list">
-                                                <div class="card-body pb-3 transaction-details d-flex flex-wrap justify-content-between align-items-center">
-                                                    <div class="user-bx-2 me-3 mb-3">
-                                                        <img src="/upload/house_image/GH1705405506092.png"
-                                                             class="rounded-circle" alt="">
-                                                        <div>
-                                                            <h3 class="fs-20 font-w700">hubert</h3>
-                                                            <span class="font-w400 text-muted fs-12">2024-01-16 23:32:30</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="user-bx-2 d-flex flex-column"
-                                                         style="flex: 0.9; align-items: flex-start;">
-                                                        <div class="mb-2 row">
-                                                            <ul class="stars col-sm-9 float-left" id="stars_0">
-                                                                <li class="me-2" data-score="1"><i
-                                                                        class="fa fa-star"></i></li>
-                                                                <li class="me-2" data-score="2"><i
-                                                                        class="fa fa-star"></i></li>
-                                                                <li class="me-2" data-score="3"><i
-                                                                        class="fa fa-star"></i></li>
-                                                                <li class="me-2" data-score="4"><i
-                                                                        class="fa fa-star"></i></li>
-                                                                <li data-score="5"><i class="fa fa-star"></i></li>
-                                                            </ul>
-                                                        </div>
-                                                        <p class="me-2 mb-2 fs-16 row">
-                                                            aaaaaaaa
-                                                        </p>
-                                                    </div>
-                                                </div>
+<%--                                                <div class="card-body pb-3 transaction-details d-flex flex-wrap justify-content-between align-items-center">--%>
+<%--                                                    <div class="user-bx-2 me-3 mb-3">--%>
+<%--                                                        <img src="/upload/house_image/GH1705405506092.png"--%>
+<%--                                                             class="rounded-circle" alt="">--%>
+<%--                                                        <div>--%>
+<%--                                                            <h3 class="fs-20 font-w700">hubert</h3>--%>
+<%--                                                            <span class="font-w400 text-muted fs-12">2024-01-16 23:32:30</span>--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
+<%--                                                    <div class="user-bx-2 d-flex flex-column"--%>
+<%--                                                         style="flex: 0.9; align-items: flex-start;">--%>
+<%--                                                        <div class="mb-2 row">--%>
+<%--                                                            <ul class="stars col-sm-9 float-left" id="stars_0">--%>
+<%--                                                                <li class="me-2" data-score="1"><i--%>
+<%--                                                                        class="fa fa-star"></i></li>--%>
+<%--                                                                <li class="me-2" data-score="2"><i--%>
+<%--                                                                        class="fa fa-star"></i></li>--%>
+<%--                                                                <li class="me-2" data-score="3"><i--%>
+<%--                                                                        class="fa fa-star"></i></li>--%>
+<%--                                                                <li class="me-2" data-score="4"><i--%>
+<%--                                                                        class="fa fa-star"></i></li>--%>
+<%--                                                                <li data-score="5"><i class="fa fa-star"></i></li>--%>
+<%--                                                            </ul>--%>
+<%--                                                        </div>--%>
+<%--                                                        <p class="me-2 mb-2 fs-16 row">--%>
+<%--                                                            aaaaaaaa--%>
+<%--                                                        </p>--%>
+<%--                                                    </div>--%>
+<%--                                                </div>--%>
                                             </div>
                                         </div>
                                     </div>

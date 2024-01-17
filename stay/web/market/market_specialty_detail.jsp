@@ -137,7 +137,7 @@ To change this template use File | Settings | File Templates.
                                                 </div>
                                                 <!--Quanatity End-->
                                                 <div class="shopping-cart  mb-2 me-3">
-                                                    <a id="view_comments" class="btn btn-primary" href="javascript:viewComments();"><i
+                                                    <a id="view_comments" class="btn btn-info" href="javascript:viewComments();"><i
                                                             class="fa fa-comment me-2"></i>查看评论</a>
                                                 </div>
                                                 <div class="shopping-cart  mb-2 me-3">

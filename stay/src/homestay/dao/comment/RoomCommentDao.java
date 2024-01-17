@@ -111,11 +111,12 @@ public class RoomCommentDao {
         try {
             String sql = String.format(
                     "Select user_account.avatar, user_account.user_id, score, comment, create_time " +
-                            "From r_order_comment Join user_account On r_order_comment.user_id=user_account.user_id" +
+                            "From r_order_comment Join user_account On r_order_comment.user_id=user_account.user_id " +
                             "Where house_id='%s' And room_id='%s'",
                     house_id,
                     room_id
             );
+            showDebug("[getComments]", "sql: " + sql);
             ResultSet res = db.executeQuery(sql);
             ResultSetMetaData resMetaData = res.getMetaData();
             int fieldCount = resMetaData.getColumnCount();
@@ -123,7 +124,7 @@ public class RoomCommentDao {
             while (res.next()) {
                 HashMap<String, Object> map = new HashMap<>();
                 for (int i = 0; i < fieldCount; i++) {
-                    String key = resMetaData.getColumnName(i);
+                    String key = resMetaData.getColumnName(i + 1);
                     String value = res.getString(key);
                     map.put(key, value);
                 }
