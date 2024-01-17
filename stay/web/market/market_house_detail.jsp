@@ -293,8 +293,14 @@ To change this template use File | Settings | File Templates.
                     html=html+"<input id=\"nn"+room.room_id+"\" type=\"number\" name=\"num\"class=\"form-control input-btn input-number\" value=\"1\" min=\"1\"max=\""+room.res_num+"\"onchange=\"if(value>"+room.res_num+") value="+room.res_num+"\">";
                     html = html + "</td>";
                     html = html + "<td>";
+                    html = html + "<div class=\"shopping-cart mb-2\">";
+                    html = html + "<a class=\"btn btn-info view_comments\" onclick=\"viewComments('" + room.room_id + "')\">";
+                    html = html + "<i class=\"fa fa-comment me-2\">";
+                    html = html + "</i>查看评论";
+                    html = html + "</a>";
+                    html = html + "</div>";
                     html=html+"<div class=\"shopping-cart\" onclick=\"purChase("+room.room_id+")\">";
-                    html=html+"<a class=\"btn btn-warning\" href=\"javascript:void();\">";html=html+"<iclass=\"fa fa-shopping-basket me-2\">";html=html+"</i>立即预定";
+                    html=html+"<a class=\"btn btn-warning\" href=\"javascript:void();\">";html=html+"<i class=\"fa fa-shopping-basket me-2\">";html=html+"</i>立即预定";
                     html=html+"</a>";
                     html=html+"</div>";
                     html = html + "</td>";
@@ -366,7 +372,6 @@ To change this template use File | Settings | File Templates.
                     document.getElementById("room_list").innerHTML=html;
 
 
-
                 }
             });
 
@@ -389,9 +394,9 @@ To change this template use File | Settings | File Templates.
         window.location.href="confirm_order_room.jsp";
     }
 
-
-
-
+    function viewComments(room_id) {
+        window.location.href = "./room_comments.jsp?house_id=" + good_id + "&room_id=" + room_id;
+    }
 
 
 
