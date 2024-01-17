@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <!DOCTYPE html>
 <html lang="en">
 <input type="hidden" id="page_id" name="page_id" value="feedback_list"/>
@@ -1041,7 +1040,7 @@
 <script src="../assets/js/dlabnav-init.js"></script>
 <script src="../assets/js/demo.js"></script>
 <script src="../assets/js/styleSwitcher.js"></script>
-<script src="../assets/js/Feedback/add_feedback.js"></script>
+<script src="../assets/js/feedback/add_feedback.js"></script>
 </body>
 <%@ include file="./feedback_add_div.jsp" %>
 </html>

@@ -1,7 +1,7 @@
-package homestay.service.Feedback;
+package homestay.service.feedback;
 
 import homestay.dao.Data;
-import homestay.dao.Feedback.FeedbackDao;
+import homestay.dao.feedback.FeedbackDao;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,5 +30,15 @@ public class FeedbackService {
             String reply = data.getParam().getString("reply");
             dao.replyFeedback(fid, reply, json);
         }
+    }
+
+    public static void deleteFeedback(Data data, JSONObject json) throws JSONException, SQLException {
+        FeedbackDao dao = new FeedbackDao();
+        dao.deleteFeedback(data, json);
+    }
+
+    public static void addFeedback(Data data, JSONObject json) throws JSONException, SQLException {
+        FeedbackDao dao = new FeedbackDao();
+        dao.addFeedback(data, json);
     }
 }

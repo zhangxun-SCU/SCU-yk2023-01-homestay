@@ -11,7 +11,6 @@ jQuery(document).ready(function () {
 /* ================================================================================ */
 //关于页面的控件生成等操作都放在Page里
 var Page = function () {
-var Page = function() {
     var user = getUserInfo().id;
     /*----------------------------------------入口函数  开始----------------------------------------*/
     var initPageControl = function () {
