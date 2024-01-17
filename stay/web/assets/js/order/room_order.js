@@ -186,7 +186,7 @@ var Page = function() {
                         html=html+"                                        <td>"+record.num+"	</td>";
                         html=html+"                                        <td>"+record.in_date+"-"+record.out_date+"	</td>";
 
-                        html=html+"                                        <td>"+record.price*record.num+"</td>";
+                        html=html+"                                        <td>"+record.price+"</td>";
                         html=html+"                                        <td><div class=\"d-flex align-items-center\"><i class=\"fa fa-circle text-success me-1\"></i> "+(record.order_status!=0?'已支付':'未支付')+"</div></td>";
                         html=html+"                                        <td>";
                         html=html+"                                            <div class=\"d-flex\">";
@@ -330,7 +330,9 @@ var Page = function() {
                         html=html+"                                        <td><strong>"+record.good_id+"</strong></td>";
                         html=html+"                                        <td><div class=\"d-flex align-items-center\"><img src=\""+record.imageurl+"\" class=\"rounded-lg me-2\" width=\"24\" alt=\"\"/> <span class=\"w-space-no\">"+record.house_name+record.room_name+"</span></div></td>";
                         html=html+"                                        <td>"+record.num+"	</td>";
-                        html=html+"                                        <td>"+record.price*record.num+"</td>";
+                        html=html+"                                        <td>"+record.in_date+"-"+record.out_date+"	</td>";
+
+                        html=html+"                                        <td>"+record.price+"</td>";
                         html=html+"                                        <td><div class=\"d-flex align-items-center\"><i class=\"fa fa-circle text-success me-1\"></i> "+(record.order_status!=0?'已支付':'未支付')+"</div></td>";
                         html=html+"                                        <td>";
                         html=html+"                                            <div class=\"d-flex\">";
@@ -419,7 +421,9 @@ var Page = function() {
                         html=html+"                                        <td><strong>"+record.good_id+"</strong></td>";
                         html=html+"                                        <td><div class=\"d-flex align-items-center\"><img src=\""+record.imageurl+"\" class=\"rounded-lg me-2\" width=\"24\" alt=\"\"/> <span class=\"w-space-no\">"+record.house_name+record.room_name+"</span></div></td>";
                         html=html+"                                        <td>"+record.num+"	</td>";
-                        html=html+"                                        <td>"+record.price*record.num+"</td>";
+                        html=html+"                                        <td>"+record.in_date+"-"+record.out_date+"	</td>";
+
+                        html=html+"                                        <td>"+record.price+"</td>";
                         html=html+"                                        <td><div class=\"d-flex align-items-center\"><i class=\"fa fa-circle text-success me-1\"></i> "+(record.order_status!=0?'已支付':'未支付')+"</div></td>";
                         html=html+"                                        <td>";
                         html=html+"                                            <div class=\"d-flex\">";
@@ -451,6 +455,7 @@ var Page = function() {
                 var list=json.aaData;
                 console.log(list);
                 var html="";
+
                 if(list!=undefined && list.length>0){
                     for(var i=0;i<list.length;i++){
                         var record=list[i];
@@ -465,7 +470,9 @@ var Page = function() {
                         html=html+"                                        <td><strong>"+record.good_id+"</strong></td>";
                         html=html+"                                        <td><div class=\"d-flex align-items-center\"><img src=\""+record.imageurl+"\" class=\"rounded-lg me-2\" width=\"24\" alt=\"\"/> <span class=\"w-space-no\">"+record.house_name+record.room_name+"</span></div></td>";
                         html=html+"                                        <td>"+record.num+"	</td>";
-                        html=html+"                                        <td>"+record.price*record.num+"</td>";
+                        html=html+"                                        <td>"+record.in_date+"-"+record.out_date+"	</td>";
+
+                        html=html+"                                        <td>"+record.price+"</td>";
                         html=html+"                                        <td><div class=\"d-flex align-items-center\"><i class=\"fa fa-circle text-success me-1\"></i> "+(record.order_status!=0?'已支付':'未支付')+"</div></td>";
                         html=html+"                                        <td>";
                         html=html+"                                            <div class=\"d-flex\">";
@@ -508,7 +515,9 @@ var Page = function() {
                         html=html+"                                        <td><strong>"+record.good_id+"</strong></td>";
                         html=html+"                                        <td><div class=\"d-flex align-items-center\"><img src=\""+record.imageurl+"\" class=\"rounded-lg me-2\" width=\"24\" alt=\"\"/> <span class=\"w-space-no\">"+record.house_name+record.room_name+"</span></div></td>";
                         html=html+"                                        <td>"+record.num+"	</td>";
-                        html=html+"                                        <td>"+record.price*record.num+"</td>";
+                        html=html+"                                        <td>"+record.in_date+"-"+record.out_date+"	</td>";
+
+                        html=html+"                                        <td>"+record.price+"</td>";
                         html=html+"                                        <td><div class=\"d-flex align-items-center\"><i class=\"fa fa-circle text-success me-1\"></i> "+(record.order_status!=0?'已支付':'未支付')+"</div></td>";
                         html=html+"                                        <td>";
                         html=html+"                                            <div class=\"d-flex\">";
@@ -690,7 +699,7 @@ var Page = function() {
                         html=html+"  border-left:none;border-bottom:solid windowtext 1.5pt;border-right:none;";
                         html=html+"  padding:0cm 5.4pt 0cm 5.4pt\">";
                         html=html+"                    <p class=MsoNormal align=center style=\"text-align:center\"><b><span";
-                        html=html+"                            lang=EN-US>"+record.price*record.num+"</span></b></p>";
+                        html=html+"                            lang=EN-US>"+record.price+"</span></b></p>";
                         html=html+"                </th>";
                         html=html+"                <th width=138 valign=top style=\"width:103.7pt;border-top:solid windowtext 1.5pt;";
                         html=html+"  border-left:none;border-bottom:solid windowtext 1.5pt;border-right:none;";

@@ -672,7 +672,7 @@
                                         <th><strong>房间名称</strong></th>
                                         <th><strong>房间数量</strong></th>
                                         <th><strong>入住时间</strong></th>
-                                        <th><strong>总价</strong></th>
+                                        <th><strong>房间单价</strong></th>
                                         <th><strong>订单状态</strong></th>
                                         <th><strong></strong></th>
                                     </tr>
@@ -725,7 +725,7 @@
                                         <th><strong>房间名称</strong></th>
                                         <th><strong>房间数量</strong></th>
                                         <th><strong>入住时间</strong></th>
-                                        <th><strong>总价</strong></th>
+                                        <th><strong>房间单价</strong></th>
                                         <th><strong>订单状态</strong></th>
                                         <th><strong></strong></th>
                                     </tr>
@@ -778,7 +778,7 @@
                                         <th><strong>房间名称</strong></th>
                                         <th><strong>房间数量</strong></th>
                                         <th><strong>入住时间</strong></th>
-                                        <th><strong>总价</strong></th>
+                                        <th><strong>房间单价</strong></th>
                                         <th><strong>订单状态</strong></th>
                                         <th><strong></strong></th>
                                     </tr>
@@ -831,7 +831,7 @@
                                         <th><strong>房间名称</strong></th>
                                         <th><strong>房间数量</strong></th>
                                         <th><strong>入住时间</strong></th>
-                                        <th><strong>总价</strong></th>
+                                        <th><strong>房间单价</strong></th>
                                         <th><strong>订单状态</strong></th>
                                         <th><strong></strong></th>
                                     </tr>
@@ -884,7 +884,7 @@
                                         <th><strong>房间名称</strong></th>
                                         <th><strong>房间数量</strong></th>
                                         <th><strong>入住时间</strong></th>
-                                        <th><strong>总价</strong></th>
+                                        <th><strong>房间单价</strong></th>
                                         <th><strong>订单状态</strong></th>
                                         <th><strong></strong></th>
                                     </tr>
