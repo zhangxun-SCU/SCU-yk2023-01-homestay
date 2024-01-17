@@ -924,5 +924,6 @@
 </body>
 <%@include file="./weather_add_div.jsp" %>
 <%@include file="./weather_modify_div.jsp" %>
+<%@include file="./weather_download_div.jsp" %>
 </html>
 

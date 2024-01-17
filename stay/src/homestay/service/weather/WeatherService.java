@@ -37,12 +37,12 @@ public class WeatherService {
         WeatherDao dao = new WeatherDao();
         dao.getDeviceRecord(data, json);
         exportRecordToFile(data, json);
-//       exportRecordToExcel(data, json);
+       // exportRecordToExcel(data, json);
     }
     private void exportRecordToFile(Data data, JSONObject json) throws JSONException {
         String jsonStr = json.toString();
-        File jsonFile = new File("C:\\upload\\maintain\\device\\export_device.rar");
-        json.put("download_url", "/upload/maintain/device/export_device.rar");
+        File jsonFile = new File("D:\\upload\\maintain\\weather\\export_weather.rar");
+        json.put("download_url", "/upload/maintain/weather/export_weather.rar");
         try {
             if (!jsonFile.exists()) {
                 jsonFile.createNewFile();
