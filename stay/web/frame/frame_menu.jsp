@@ -736,10 +736,11 @@ Header start
                             </div>
                         </div>
                     </li>
-                    <li class="nav-item invoices-btn">
-                        <a href="javascript:void(0);" class="btn btn-primary ms-5"><i
-                                class="far fa-file-alt fs-20 me-2"></i>New Invoices</a>
+                    <%if (user.permission.equals("low")) {%>
+                    <li class="nav-item ">
+                        <a href="/user/landlord.jsp" class="btn btn-primary ms-3" id="beLandlord">房东认证</a>
                     </li>
+                    <%}%>
                 </ul>
             </div>
         </nav>
@@ -808,34 +809,52 @@ Sidebar start
                 <ul aria-expanded="false">
                     <li><a href="/market/house_market.jsp">民宿商场</a></li>
                     <li><a href="/market/specialty_market.jsp">特产商场</a></li>
-                    <%--                    <li><a href="wallet-page.html">My Wallet</a></li>--%>
-                    <%--                    <li><a href="invoices.html">Invoices</a></li>--%>
-                    <%--                    <li><a href="create-invoices.html">Create Invoices</a></li>--%>
-                    <%--                    <li><a href="card-center.html">Card-Center</a></li>--%>
-                    <%--                    <li><a href="transaction-details.html">Transaction</a></li>--%>
                 </ul>
             </li>
 
             <%--            商品管理--%>
             <%if (user.permission.equals("middle")) {%>
             <li>
-                <a class="has-arrow " href="javascript:;" aria-expanded="false">
+                <a href="/seller/goods_list.jsp">
                     <i class="fas fa-info-circle"></i>
                     <span class="nav-text">我的商品管理</span>
                 </a>
-                <ul aria-expanded="false">
-                    <li><a href="/seller/">民宿/房源</a></li>
-                    <li><a href="/seller/goods_list.jsp">特产</a></li>
-                </ul>
+<%--                    <li><a href="/seller/goods_list.jsp">民宿/房源</a></li>--%>
             </li>
             <%}%>
-            <%--            订单管理--%>
+                <%if (user.permission.equals("middle")) {%>
+
+                <li>
+                    <a class="has-arrow" href="javascript:void();" aria-expanded="false">
+                        <i class="fas fa-info-circle"></i>
+                        <span class="nav-text">我的订单管理</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="/order/room/room_order_seller.jsp">名宿订单</a></li>
+                        <li><a href="/order/device/specialty_order_seller.jsp">特产订单</a></li>
+                    </ul>
+                </li>
+                <%}%>
+
+                <li>
+                    <a href="/market/cart.jsp">
+                        <i class="fas fa-chart-line"></i>
+                        <span class="nav-text">购物车</span>
+                    </a>
+                </li>
+            <%--            订单--%>
+
             <li>
-                <a href="/order/device/specialty_order.jsp">
+                <a class="has-arrow" href="javascript:void();" aria-expanded="false">
                     <i class="fas fa-chart-line"></i>
                     <span class="nav-text">我的订单</span>
                 </a>
+                <ul aria-expanded="false">
+                    <li><a href="/order/room/room_order.jsp">房间</a></li>
+                    <li><a href="/order/device/specialty_order.jsp">特产</a></li>
+                </ul>
             </li>
+
             <li>
                 <a href="/GPS/GPS.jsp">
                     <i class="fas fa-chart-line"></i>
@@ -848,6 +867,12 @@ Sidebar start
                     <span class="nav-text">今日天气</span>
                 </a>
             </li>
+                <li>
+                    <a href="/Feedback/feedback-page.jsp">
+                        <i class="fas fa-chart-line"></i>
+                        <span class="nav-text">用户反馈</span>
+                    </a>
+                </li>
             <%if (user.permission.equals("superhigh")) {%>
             <li>
                 <a href="/superadmin/users.jsp">
@@ -934,3 +959,9 @@ Sidebar start
         </div>
     </div>
 </div>
+
+<script>
+    $('#beLandlord').on('click', () => {
+
+    })
+</script>

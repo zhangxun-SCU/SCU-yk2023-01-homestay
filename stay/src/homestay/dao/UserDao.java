@@ -139,6 +139,17 @@ public class UserDao {
         System.out.println(sql);
         db.close();
     }
+
+    public void updateUserPermission(String userId, String newPermission) {
+        String sql = "UPDATE user_account";
+        sql += " SET permission='" + newPermission + "' WHERE user_id='" + userId + "';";
+        DB db = new DB("group1");
+        db.executeUpdate(sql);
+        System.out.println(sql);
+        db.close();
+    }
+
+
     public static List<UserBean> getAllUsers() {
         JSONObject obj = new JSONObject();
         String sql = "SELECT * FROM user_account ";

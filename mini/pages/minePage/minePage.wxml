@@ -1,0 +1,53 @@
+<!--pages/minePage/minePage.wxml-->
+<!-- <import src='template.wxml' /> -->
+<view wx:if="{{isLogin}}">
+  <view class='container'>
+
+    <!--头像名称-->
+    <view class="profile">
+
+      <view>        
+        <image class="avatar" src="{{avatarUrl}}"></image>
+        <view>
+        <view class="profile-item">ID：{{userId}}</view>
+        <view class="profile-item">用户类型：{{permission}}</view>
+        </view>
+      </view>
+      
+    </view>
+
+  </view>
+
+
+
+
+</view>
+
+
+<!--pages/login/login.wxml-->
+<view wx:if="{{!isLogin}}">
+  <view class="content">
+    <view class="account">
+      <view class="title">账号</view>
+      <view class="num"><input bindinput="accountInput" placeholder="用户名/邮箱/手机号" placeholder-style="color:#999999;" /></view>
+    </view>
+    <view class="hr"></view>
+    <view class="account">
+      <view class="title">密码</view>
+      <view class="num"><input bindblur="pwdBlur" placeholder="请输入密码" password placeholder-style="color:#999999;" /></view>
+      <view class="see">
+        <image src="/images/see.gif" style="width:35px;height:30px;"></image>
+      </view>
+    </view>
+    <view class="hr"></view>
+    <button class="btn" disabled="{{disabled}}" type="{{btnstate}}" bindtap="login">登录</button>
+    <view class="login">
+      <view>
+        <image src="/images/wxlogin.gif" style="width:60px;height:40px;"></image>
+      </view>
+      <view>
+        <image src="/images/qqlogin.gif" style="width:70px;height:50px;"></image>
+      </view>
+    </view>
+  </view>
+</view>

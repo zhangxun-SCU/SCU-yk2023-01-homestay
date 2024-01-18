@@ -48,4 +48,38 @@ public class LoginService {
         resJson.put("userType",user.permission);
         return true;
     }
+
+    public Boolean checkLogin(Data data, JSONObject resJson) throws JSONException, SQLException {
+        UserDao dao = new UserDao();
+        String id = data.getParam().getString("id");
+        String inputPassword = UserUtil.encrypt(data.getParam().getString("password"));
+        String auto = "true";
+        User user = dao.queryUserById(id);
+        String realPassword = user.password;
+        if (realPassword == null) {
+            // 没有此用户
+            resJson.put("resCode", "L0002");
+            resJson.put("loginInfo", "error: user does not exist");
+            return false;
+        }
+        System.out.println("inputPassword: " + inputPassword);
+        if (!realPassword.equals(inputPassword)) {
+            // 密码错误
+            resJson.put("resCode", "L0001");
+            resJson.put("loginInfo", "error: password incorrect");
+            return false;
+        }
+        System.out.println("real passwd: " + user.password);
+        resJson.put("resCode", "00000");
+        resJson.put("loginInfo", "success");
+        HashMap<String, Object> claims = new HashMap<String, Object>();
+        claims.put("id", id);
+        claims.put("auto", auto);
+        resJson.put("userId", user.id);
+        resJson.put("userPermission", user.permission);
+        resJson.put("avatar", user.avatarURL);
+        resJson.put("token", JwtUtil.generateJwt(claims, user.password));
+        resJson.put("userType",user.permission);
+        return true;
+    }
 }
