@@ -51,7 +51,7 @@ var Page = (function () {
                         html = html + "                                    <td> " + record.user_id + "</td>"
                         html = html + "                                    <td> " + record.feedback + "</td>"
                         html = html + "                                    <td> " + record.create_time + "</td>"
-                        html = html + "                                    <td><a href=\"javascript:Page.onDeleteRecord('" + record.fid + "')\">【撤回反馈】</a></td>"
+                        html = html + "                                    <td>"+"<a href=\"javascript:Page.onDeleteRecord('" + record.fid + "')\">【撤回反馈】</a></td>"
                         //"<a href=\"javascript:Page.onViewRecord(" + record.id + ")\">【查看记录】</a><br> ";
                         html = html + "                                    </tr>";
                     }
