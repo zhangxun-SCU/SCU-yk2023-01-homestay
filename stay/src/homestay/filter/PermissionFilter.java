@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Objects;
 
-@WebFilter({"/admin/", "/superadmin/"})
+@WebFilter({"/admin/", "/superadmin/", "/seller/"})
 public class PermissionFilter implements Filter {
 
     private final UserDao userDao;
@@ -51,25 +51,25 @@ public class PermissionFilter implements Filter {
         String requestPath = httpRequest.getRequestURI();
 
         // 判断是否需要权限验证
-            String userId =null;
-            String token=null;
+        String userId = null;
+        String token = null;
 
-            for (Cookie cookie : httpRequest.getCookies()) {
-                if ("USER_ID".equals(cookie.getName())) {
-                    userId = cookie.getValue();
-                }
-                if ("LOGIN_TOKEN".equals(cookie.getName())) {
-                    token = cookie.getValue();
-                }
+        for (Cookie cookie : httpRequest.getCookies()) {
+            if ("USER_ID".equals(cookie.getName())) {
+                userId = cookie.getValue();
             }
-            if (userId == null || token == null) {
-                httpResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
-                return;
+            if ("LOGIN_TOKEN".equals(cookie.getName())) {
+                token = cookie.getValue();
             }
-            if (checkUserPermission(userId,token,requestPath)) {
-                // 用户有权限，继续执行请求
-                chain.doFilter(request, response);
-            }
+        }
+        if (userId == null || token == null) {
+            httpResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            return;
+        }
+        if (checkUserPermission(userId, token, requestPath)) {
+            // 用户有权限，继续执行请求
+            chain.doFilter(request, response);
+        }
 
     }
 
@@ -119,10 +119,12 @@ public class PermissionFilter implements Filter {
 
             // 判断 permission 是否为 "high"
             String permission = user.permission;
-            if(requestPath.startsWith("/superadmin")){
+            if (requestPath.startsWith("/superadmin")) {
                 return "superhigh".equals(permission);
-            }else if(requestPath.startsWith("/admin")){
+            } else if (requestPath.startsWith("/admin")) {
                 return "high".equals(permission);
+            } else if (requestPath.startsWith("/seller")) {
+                return "middle".equals(permission);
             }
             return false;
         } catch (SQLException | JSONException e) {
