@@ -822,6 +822,19 @@ Sidebar start
 <%--                    <li><a href="/seller/goods_list.jsp">民宿/房源</a></li>--%>
             </li>
             <%}%>
+                <%if (user.permission.equals("middle")) {%>
+
+                <li>
+                    <a class="has-arrow" href="javascript:void();" aria-expanded="false">
+                        <i class="fas fa-info-circle"></i>
+                        <span class="nav-text">我的订单管理</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="/order/room/room_order_seller.jsp">名宿订单</a></li>
+                        <li><a href="/order/device/specialty_order_seller.jsp">特产订单</a></li>
+                    </ul>
+                </li>
+                <%}%>
 
                 <li>
                     <a href="/market/cart.jsp">
@@ -829,13 +842,19 @@ Sidebar start
                         <span class="nav-text">购物车</span>
                     </a>
                 </li>
-            <%--            订单管理--%>
+            <%--            订单--%>
+
             <li>
-                <a href="/order/device/specialty_order.jsp">
+                <a class="has-arrow" href="javascript:void();" aria-expanded="false">
                     <i class="fas fa-chart-line"></i>
                     <span class="nav-text">我的订单</span>
                 </a>
+                <ul aria-expanded="false">
+                    <li><a href="/order/room/room_order.jsp">房间</a></li>
+                    <li><a href="/order/device/specialty_order.jsp">特产</a></li>
+                </ul>
             </li>
+
             <li>
                 <a href="/GPS/GPS.jsp">
                     <i class="fas fa-chart-line"></i>

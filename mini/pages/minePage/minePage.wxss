@@ -131,3 +131,11 @@ Page {
 .login view{
   margin: 0 auto;
 }
+
+.container {
+  height: 100vh;
+}
+
+.avatar {
+  border-radius: 50%;
+}
