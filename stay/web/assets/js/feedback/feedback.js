@@ -1,111 +1,98 @@
-function onLoadFunction() {
-    getAllFeedbacks();
-}
+document.domain="localhost";
+/*================================================================================*/
+jQuery(document).ready(function() {
+    // initiate layout and plugins
+    Page.init();
+});
+/* ================================================================================ */
+//关于页面的控件生成等操作都放在Page里
+var Page = function() {
+    /*----------------------------------------入口函数  开始----------------------------------------*/
+    var initPageControl = function () {
+        pageId = $("#page_id").val();
+        if (pageId == "feedback_list") {
+            initFeedbackList();
+        }
 
-function getAllFeedbacks() {
-    var url = "/feedback";
-    var data = {
-        "actionType": "feedback",
-        "action": "get_feedback"
     };
-    $.ajaxSettings.async = false;
-    $.post(
-        url,
-        data,
-        (res) => {
-            console.log(res);
-            console.log(res.resCode);
-            if (res.resCode === "00000") {
-                var feedbackList = res.feedbackList;
-                var html = "";
-                for (var i = 0; i < feedbackList.length; i++) {
-                    var feedback = feedbackList[i];
-                    var time = new Date(feedback.feedback_time);
-                    time = time.toDateString();
-                    html += `<div class="media pt-3 pb-3">`;
-                    html += `    <img src="${feedback.avatar}" alt="${feedback.user_id}"`;
-                    html += `         class="me-3 rounded" width="75">`;
-                    html += `        <div class="media-body">`;
-                    html += `            <h5 class="m-b-5">`;
-                    html += `                ${feedback.user_id} <i class="invisible">&nbsp;</i><small class="text-light ml-2">${time}</small>`;
-                    html += `            </h5>`;
-                    html += `            <p class="mb-0 text-muted">`;
-                    html += `                ${feedback.feedback}`;
-                    html += `            </p>`;
-                    html += `        </div>`;
-                    html += `        <button class="btn btn-md btn-primary reply_button" data-id="${feedback.fid}">`;
-                    html += `            <i class="fa fa-comment me-2"></i>`;
-                    html += `            回复反馈`;
-                    html += `        </button>`;
-                    html += `</div>`;
+    var initFeedbackList=function () {
+        initFeedbackListControlEvent();
+        initFeedbackRecordList();
+
+    }
+    var initFeedbackRecordList=function(){
+        getFeedbackRecordList();
+    }
+    var initFeedbackListControlEvent=function(){
+        $('#add_button').click(function() {onAddRecord();});
+        $('#feedback_add_div #submit_button').click(function() {onAddDivSubmit();});
+        $('#feedback_add_div #cancel_button').click(function() {reback();});
+    }
+    var getFeedbackRecordList=function(){
+        data = {};
+
+        $.post("/feedback?action=get_feedback",data,function(json){
+            console.log(JSON.stringify(json));
+            if(json.result_code==0){
+                var list=json.aaData;
+                console.log(list);
+                var html="";
+                if(list!=undefined && list.length>0){
+                    for(var i=0;i<list.length;i++){
+                        var record=list[i];
+                        console.log(record);
+                        html=html+"                                   <tr>";
+                        html=html+"                                        <td><strong>"+record.fid+"</strong></td>";
+                        html = html + "                                    <td> "+ record.user_id + "</td>"
+                        html = html + "                                    <td> "+ record.feedback + "</td>"
+                        html = html + "                                    <td> "+ record.create_time + "</td>"
+                        html = html + "                                    <td>" +
+                            "<a href=\"javascript:Page.onDeleteRecord(" + record.fid + ")\">【撤回反馈】</a> <br>"
+                        //"<a href=\"javascript:Page.onViewRecord(" + record.id + ")\">【查看记录】</a><br> ";
+                        html = html + "                                </td> ";
+                        html=html+"                                    </tr>";
+                    }
                 }
-                $("#feedback_list").html(html);
+                $("#feedback_table_content_div").html(html);
+            }
+        })
+    }
+    var onDeleteRecord = function(fid){
+        if(confirm("您确定要撤回这条反馈吗？")){
+            if(fid>-1){
+                var url="../..//feedback";
+                var data={};
+                data.action="delete_feedback";
+                data.fid=fid;
+                $.post(url,data,function(json){
+                    if(json.result_code==0){
+                        window.location.reload();
+                    }
+                })
             }
         }
-    )
-    $.ajaxSettings.async = true;
-    initFeedbackButtons();
-}
-
-function initFeedbackButtons() {
-    $(".reply_button").click((e) => {
-        var fid = e.target.dataset.id;
-        showReplyModal(fid);
-    })
-}
-
-function showReplyModal(fid) {
-    console.log(fid);
-    getReply(fid);
-    $("#replyModal #replyConfirmButton").click((e) => {
-        var reply = $("#reply").val();
-        var url = "/feedback";
-        var data = {
-            "actionType": "feedback",
-            "action": "reply_feedback",
-            "fid": fid,
-            "reply": reply
-        };
-        console.log(data);
-        $.post(
-            url,
-            data,
-            (res) => {
-                console.log(res.resCode);
-                if (res.resCode === "00000") {
-                    swal("回复成功！",
-                        "",
-                        "success");
-                    $("#replyModal").modal("hide");
-                }
-            }
-        )
-    })
-    $("#replyModal").modal("show");
-}
-
-function getReply(fid) {
-    var url = "/feedback";
-    var data = {
-        "actionType": "feedback",
-        "action": "get_feedback",
-        "fid": fid
     };
-    $.ajaxSettings.async = false;
-    $.post(
-        url,
-        data,
-        (res) => {
-            console.log(res.resCode);
-            if (res.resCode === "00000") {
-                var feedback = res.feedbackList[0];
-                if (feedback.reply !== undefined && feedback.reply !== null && feedback.reply !== "") {
-                    document.querySelector("#reply").innerText = feedback.reply;
-                }else{
-                    document.querySelector("#reply").innerText = "请填写反馈内容...";
-                }
+    var onAddRecord=function(){
+        $("#feedback_add_div").modal("show");
+    }
+    var reback=function () {
+        window.location.href="feedback-page.jsp";
+    }
+    var onAddDivSubmit=function(){
+        submitAddRecordDiv();
+        $("#feedback_add_div").modal("hide");
+    }
+    var submitAddRecordDiv=function(){
+        var url="/feedback";
+        var data={};
+        data.action="add_feedback";
+        data.user_id=$("#feedback_add_div #user_id").val();
+        data.feedback=$("#feedback_add_div #feedback").val();
+        $.post(url,data,function(json){
+            if(json.result_code==0){
+                alert("已经完成了反馈。");
+                window.location.reload();
             }
-        }
-    )
-    $.ajaxSettings.async = true;
+        });
+    }
 }

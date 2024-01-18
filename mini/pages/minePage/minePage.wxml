@@ -1,0 +1,42 @@
+<!--pages/minePage/minePage.wxml-->
+<!-- <import src='template.wxml' /> -->
+
+<view class='loginHeader'>
+     <image src='{{userHead}}' class='userHead' mode='aspectFill' bindtap='previewHead' />
+     <text class='userTitle' bindtap='loginTap'>{{userTitle}}</text>
+</view>
+
+<view class='order'>
+     <view class='item' bindtap='allOrderTap'>
+          <image src='../../res/images/ic_order_all.png' mode='widthFix' class='icon' />
+          <text class='text'>全部订单</text>
+     </view>
+     <view class='vercialLine'>
+     </view>
+     <view class='item' bindtap='todoOrderTap'>
+          <image src='../../res/images/ic_order_book.png' mode='widthFix' class='icon' />
+          <text class='text'>待入住订单</text>
+     </view>
+</view>
+
+<!--pages/login/login.wxml-->
+<view class="content">
+  <view class="account">
+    <view class="title">账号</view>
+    <view class="num"><input bindinput="accountInput" placeholder="用户名/邮箱/手机号" placeholder-style="color:#999999;"/></view>
+  </view>
+  <view class="hr"></view>
+  <view class="account">
+    <view class="title">密码</view>
+    <view class="num"><input bindblur="pwdBlur" placeholder="请输入密码" password placeholder-style="color:#999999;"/></view>
+    <view class="see">
+      <image src="/images/see.gif" style="width:35px;height:30px;"></image>
+    </view>
+  </view>
+<view class="hr"></view>
+<button class="btn" disabled="{{disabled}}" type="{{btnstate}}"bindtap="login">登录</button>
+<view class="login">
+  <view><image src="/images/wxlogin.gif" style="width:60px;height:40px;"></image></view>
+  <view><image src="/images/qqlogin.gif" style="width:70px;height:50px;"></image></view>
+</view>
+</view>
