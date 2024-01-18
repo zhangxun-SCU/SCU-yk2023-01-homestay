@@ -137,11 +137,15 @@ To change this template use File | Settings | File Templates.
                                                 </div>
                                                 <!--Quanatity End-->
                                                 <div class="shopping-cart  mb-2 me-3">
+                                                    <a id="view_comments" class="btn btn-info" href="javascript:viewComments();"><i
+                                                            class="fa fa-comment me-2"></i>查看评论</a>
+                                                </div>
+                                                <div class="shopping-cart  mb-2 me-3">
                                                     <a id="add_cart" class="btn btn-primary" href="javascript:void();"><i
                                                             class="fa fa-shopping-basket me-2"></i>加入购物车</a>
                                                 </div>
-                                                <div class="shopping-cart  mb-2 me-3" onclick="purChase()">
-                                                    <a id="initOrder"class="btn btn-danger" href="javascript:void();"><i
+                                                <div class="shopping-cart  mb-2 me-3">
+                                                    <a id="initOrder" class="btn btn-danger" href="javascript:void();"><i
                                                             class="fa fa-shopping-basket me-2"></i>立即购买</a>
                                                 </div>
                                             </div>
@@ -224,7 +228,6 @@ To change this template use File | Settings | File Templates.
     var url = window.location.href;
     var good_id = url.split('=')[1];
     var data = {"good_id": good_id,"good_type":"specialty"};
-
     data.good_id = good_id;
     console.log(data);
     $.post('/getSpecialtyDetail', data, function (json) {
@@ -236,6 +239,51 @@ To change this template use File | Settings | File Templates.
             document.getElementById("good_num").innerText = json.num;
             document.getElementById("need_num").max = json.num;
             document.getElementById("cart_num").innerText = json.cart_num;
+            if(json.num==0)
+            {
+                document.getElementById("add_cart").disabled = "disabled";
+                document.getElementById("add_cart").className="btn btn-light";
+                document.getElementById("initOrder").disabled = "disabled";
+                document.getElementById("initOrder").className="btn btn-light";
+                document.getElementById("add_cart").onclick = function (){
+                    sweetAlert("无库存", "去看看别的吧~", "error")
+                }
+                document.getElementById("initOrder").onclick = function (){
+                    sweetAlert("无库存", "去看看别的吧~", "error")
+                }
+            }
+            else
+            {
+                document.getElementById("add_cart").onclick = function () {
+                    var good_id = url.split('=')[1];
+                    var good_num = document.getElementById("need_num").value;
+                    var data = {"good_id": good_id, "good_num": good_num};
+                    $.post("/addGood2Cart", data, function (json) {
+                        if (json.code == 0) {
+                            toastr.success("去购物车查看吧~", "添加成功", {
+                                positionClass: "toast-bottom-right",
+                                timeOut: 5e3,
+                                closeButton: !0,
+                                debug: !1,
+                                newestOnTop: !0,
+                                progressBar: !0,
+                                preventDuplicates: !0,
+                                onclick: null,
+                                showDuration: "300",
+                                hideDuration: "1000",
+                                extendedTimeOut: "1000",
+                                showEasing: "swing",
+                                hideEasing: "linear",
+                                showMethod: "fadeIn",
+                                hideMethod: "fadeOut",
+                                tapToDismiss: !1
+                            });
+                            document.getElementById("cart_num").innerText = json.cart_num;
+                        }
+                    })
+                }
+                document.getElementById("initOrder").onclick=purChase();
+            }
         }
     });
     document.getElementById("need_num").onchange = function () {
@@ -249,35 +297,6 @@ To change this template use File | Settings | File Templates.
     var openCart=function(){
         window.location.href="cart.jsp"
     };
-    document.getElementById("add_cart").onclick = function () {
-        var good_id = url.split('=')[1];
-        var good_num = document.getElementById("need_num").value;
-        var data = {"good_id": good_id, "good_num": good_num};
-        $.post("/addGood2Cart", data, function (json) {
-            if (json.code == 0) {
-                toastr.success("去购物车查看吧~", "添加成功", {
-                    positionClass: "toast-bottom-right",
-                    timeOut: 5e3,
-                    closeButton: !0,
-                    debug: !1,
-                    newestOnTop: !0,
-                    progressBar: !0,
-                    preventDuplicates: !0,
-                    onclick: null,
-                    showDuration: "300",
-                    hideDuration: "1000",
-                    extendedTimeOut: "1000",
-                    showEasing: "swing",
-                    hideEasing: "linear",
-                    showMethod: "fadeIn",
-                    hideMethod: "fadeOut",
-                    tapToDismiss: !1
-                });
-                document.getElementById("cart_num").innerText = json.cart_num;
-            }
-        })
-    }
-
     var purChase=function(){
         var checkgoods = [];
         var good={"good_id":good_id,"num":document.getElementById("need_num").value};
@@ -287,13 +306,14 @@ To change this template use File | Settings | File Templates.
         let new_data=new Date(data+6000);
         document.cookie="checkgood="+checkgoodsstring+";expires="+new_data.toUTCString();
         window.location.href="confirm_order.jsp"
-
     }
     var detailBack = function () {
         window.history.go(-1);
     };
 
-
+    function viewComments(){
+        window.location.href = "./specialty_comments.jsp?good_id=" + good_id;
+    }
 
 
 

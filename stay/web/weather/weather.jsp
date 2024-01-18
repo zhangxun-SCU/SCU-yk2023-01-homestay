@@ -812,7 +812,7 @@
             <form class="form-horizontal" role="form">
                 <div class="form-body">
                     <div class="form-group">
-                        <label class="col-md-3 control-label">想查询温度的城市</label>
+                        <label class="col-md-3 control-label">想查询天气数据的城市</label>
                         <div class="col-md-9">
                             <input type="text" id="city" name="city" class="form-control"
                                    placeholder="Enter text">
@@ -840,7 +840,7 @@
                                     </span>打印天气数据</button>
                     <button type="button" class="btn btn-rounded btn-secondary"id="weather_statistic"name="weather_statistic"><span
                             class="btn-icon-start text-secondary"><i class="fa fa-share-alt color-secondary"></i>
-                                    </span>温度统计</button>
+                                    </span>湿度统计</button>
                     <button type="button" class="btn btn-rounded btn-success"><span
                             class="btn-icon-start text-success"><i class="fa fa-upload color-success"id="weather_order" name="weather_order"></i>
                                     </span>排序</button>
@@ -924,5 +924,6 @@
 </body>
 <%@include file="./weather_add_div.jsp" %>
 <%@include file="./weather_modify_div.jsp" %>
+<%@include file="./weather_download_div.jsp" %>
 </html>
 

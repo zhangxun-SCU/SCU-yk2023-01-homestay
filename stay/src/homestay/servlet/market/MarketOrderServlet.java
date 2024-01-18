@@ -48,6 +48,11 @@ public class MarketOrderServlet extends HttpServlet {
         {
             sms.queryHouseOrderByList(data,json,buyer_id);
         }
+        if(action.equals("pay_order"))
+        {
+            sms.payHouseOrder(data,json,buyer_id);
+        }
+
     }
 
     public void querySpecialtyOrder(Data data, JSONObject json,String buyer_id) throws JSONException {
@@ -57,6 +62,9 @@ public class MarketOrderServlet extends HttpServlet {
         {
             sms.querySpecialtyOrderByList(data,json,buyer_id);
         }
-
+        if(action.equals("pay_order"))
+        {
+            sms.paySpecialtyOrder(data, json, buyer_id);
+        }
     }
 }

@@ -203,7 +203,7 @@
 
 <%--<%@include file="../home/frame/frame_javascript.jsp" %>--%>
 <script src="../../assets/js/order/jquery.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="../../assets/js/order/room_order.js" defer></script>
+<script type="text/javascript" src="../../assets/js/order/room_order_seller.js" defer></script>
 <input type="hidden" id="page_id" name="page_id" value="print_word">
 </html>
 

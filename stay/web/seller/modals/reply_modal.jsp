@@ -16,9 +16,10 @@
             </div>
             <div class="modal-body">
                 <form>
-                    <textarea class="form-control" rows="4"
+                    <textarea class="form-control" rows="5"
                               id="reply"
-                              name="reply">回复内容...</textarea>
+                              name="reply"
+                              placeholder="回复内容..."></textarea>
                 </form>
             </div>
             <div class="modal-footer">

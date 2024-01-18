@@ -927,7 +927,7 @@ Sidebar start
             <%--                    <li><a href="table-datatable-basic.html">Datatable</a></li>--%>
             <%--                </ul>--%>
             <%--            </li>--%>
-            <%--            <li><a href="/Feedback/feedback-page.jsp">--%>
+            <%--            <li><a href="/feedback/feedback-page.jsp">--%>
             <%--                <i class="fas fa-clone"></i>--%>
             <%--                <span class="nav-text">问题反馈</span>--%>
             <%--            </a>--%>
