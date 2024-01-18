@@ -51,7 +51,7 @@ var Page = (function () {
                         html = html + "                                    <td> " + record.user_id + "</td>"
                         html = html + "                                    <td> " + record.feedback + "</td>"
                         html = html + "                                    <td> " + record.create_time + "</td>"
-                        html = html + "                                    <td><a href=\"javascript:Page.onDeleteRecord('" + record.fid + "')\">【撤回反馈】</a></td>"
+                        html = html + "                                    <td>" + "<a href=\"javascript:Page.onDeleteRecord('" + record.fid + "')\">【撤回反馈】</a></td>"
                         //"<a href=\"javascript:Page.onViewRecord(" + record.id + ")\">【查看记录】</a><br> ";
                         html = html + "                                    </tr>";
                     }
@@ -61,8 +61,10 @@ var Page = (function () {
         })
     }
     var onDeleteRecord = function (fid) {
+        console.log("delete");
         if (window.confirm("您确定要撤回这条反馈吗？")) {
-            if (fid > -1) {
+            console.log("yes");
+            if (fid !== undefined && fid !== null && fid !== "") {
                 var url = "/feedback";
                 var data = {};
                 data.action = "delete_feedback";
