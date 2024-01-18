@@ -116,7 +116,7 @@ public class PermissionFilter implements Filter {
         try {
             // 查询用户的 permission
             User user = userDao.queryUserById(userId);
-
+            System.out.println("User permission: " + user.permission);
             // 判断 permission 是否为 "high"
             String permission = user.permission;
             if (requestPath.startsWith("/superadmin")) {

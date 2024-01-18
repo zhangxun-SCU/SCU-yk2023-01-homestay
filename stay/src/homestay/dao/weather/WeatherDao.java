@@ -172,4 +172,31 @@ public class WeatherDao {
         }
         return sql;
     }
+
+    public void getWeatherStatistics(Data data, JSONObject json) throws JSONException {
+        int result_code = 0;
+        String result_msg = "ok";
+        DB db = new DB("group1");
+        String city = data.getParam().getString("city");
+        String sql = String.format(
+                "Select humidity, create_time From weather_file Where city='%s' And create_time >= DATE_SUB(NOW(), Interval 7 day) Order By create_time ASC",
+                city
+        );
+        try {
+            ResultSet res = db.executeQuery(sql);
+            ResultSetMetaData resMetaData = res.getMetaData();
+            List list = new ArrayList();
+            while (res.next()) {
+                HashMap map = new HashMap();
+                map.put("create_time", res.getString("create_time"));
+                map.put("humidity", res.getInt("humidity"));
+                list.add(map);
+            }
+            json.put("result_code", result_code);
+            json.put("result_msg", result_msg);
+            json.put("statistics", list);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -8,6 +8,7 @@ import homestay.dao.Data;
 import homestay.service.weather.WeatherService;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -106,6 +107,14 @@ public class WeatherServlet extends HttpServlet {
                 actionOk = true;
                 try {
                     weatherService.exportRecord(data, json);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (action.equals("get_weather_statistics")) {
+                actionOk = true;
+                try {
+                    weatherService.getWeatherStatistics(data, json);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
