@@ -34,6 +34,10 @@ var Page = (function () {
             reback();
         });
     }
+    function getUserInfo() {
+        const token = getCookie("token")
+        return JSON.parse(window.atob(token.split('.')[1]))
+    }
     var getFeedbackRecordList = function () {
         data = {};
 
@@ -46,14 +50,16 @@ var Page = (function () {
                 if (list !== undefined && list.length > 0) {
                     for (var i = 0; i < list.length; i++) {
                         var record = list[i];
-                        html = html + "                                   <tr>";
-                        html = html + "                                        <td><strong>" + record.fid + "</strong></td>";
-                        html = html + "                                    <td> " + record.user_id + "</td>"
-                        html = html + "                                    <td> " + record.feedback + "</td>"
-                        html = html + "                                    <td> " + record.create_time + "</td>"
-                        html = html + "                                    <td>" + "<a href=\"javascript:Page.onDeleteRecord('" + record.fid + "')\">【撤回反馈】</a></td>"
-                        //"<a href=\"javascript:Page.onViewRecord(" + record.id + ")\">【查看记录】</a><br> ";
-                        html = html + "                                    </tr>";
+                        if (record.user_id===getUserInfo().id) {
+                            html = html + "                                   <tr>";
+                            html = html + "                                        <td><strong>" + record.fid + "</strong></td>";
+                            html = html + "                                    <td> " + record.user_id + "</td>"
+                            html = html + "                                    <td> " + record.feedback + "</td>"
+                            html = html + "                                    <td> " + record.create_time + "</td>"
+                            html = html + "                                    <td>" + "<a href=\"javascript:Page.onDeleteRecord('" + record.fid + "')\">【撤回反馈】</a></td>"
+                            //"<a href=\"javascript:Page.onViewRecord(" + record.id + ")\">【查看记录】</a><br> ";
+                            html = html + "                                    </tr>";
+                        }
                     }
                 }
                 $("#feedback_table_content_div").html(html);

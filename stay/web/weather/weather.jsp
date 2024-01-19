@@ -809,20 +809,26 @@
             <!-- row -->
             <div class="row">
             <div clss="portlet-body form" id="record_query_setup" name="record_query_setup">
-            <form class="form-horizontal" role="form">
                 <div class="form-body">
                     <div class="form-group">
                         <label class="col-md-3 control-label">想查询天气数据的城市</label>
-                        <div class="col-md-9">
-                            <input type="text" id="city" name="city" class="form-control"
-                                   placeholder="Enter text">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <input type="text" id="city" name="city" class="form-control"
+                                       placeholder="Enter text">
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-rounded btn-danger"
+                                        id="query_button"
+                                        name="query_button">
+                                                <span class="btn-icon-start text-danger">
+                                                    <i class="fa fa-question color-danger"></i>
+                                                </span>查询
+                                </button>
+                            </div>
                         </div>
-                        <button type="button" class="btn btn-rounded btn-danger" id="query_button" name="query_button"><span
-                                class="btn-icon-start text-danger"><i class="fa fa-envelope color-danger"></i>
-                                    </span>查询</button>
                     </div>
                 </div>
-            </form>
             </div>
         </div>
             </div>
