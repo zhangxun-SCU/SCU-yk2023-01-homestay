@@ -33,4 +33,10 @@ public class HomestayService {
         HomestayDao homestayDao = new HomestayDao();
         homestayDao.deleteHomestay(data, json);
     }
+
+    public void getLocations(Data data, JSONObject json) throws JSONException, SQLException {
+        HomestayDao dao = new HomestayDao();
+        String house_name = data.getParam().getString("house_name");
+        dao.getLocations(house_name, json);
+    }
 }

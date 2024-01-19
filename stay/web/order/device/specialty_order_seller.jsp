@@ -939,6 +939,7 @@
 <%@ include file="order_modify_seller_div.jsp" %>
 <%@ include file="/frame/frame_javascript.jsp" %>
 <%@ include file="order_download_div.jsp" %>
+<%@ include file="order_comment.jsp" %>
 <%--<%@ include file="order_list_print_word_seller.jsp" %>--%>
 
 <!--**********************************

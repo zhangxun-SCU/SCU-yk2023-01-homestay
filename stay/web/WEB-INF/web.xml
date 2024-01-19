@@ -36,6 +36,10 @@
         <filter-name>PermissionFilter</filter-name>
         <url-pattern>/superadmin/*</url-pattern>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>PermissionFilter</filter-name>
+        <url-pattern>/seller/*</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>getUsers</servlet-name>
         <servlet-class>homestay.servlet.superadmincontrol.GetAllUser</servlet-class>
