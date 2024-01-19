@@ -423,7 +423,8 @@ public class RoomOrderServletAction extends HttpServlet {
 
     private void exportDeviceRecord(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException, IOException {
         RoomOrderDao dao = new RoomOrderDao();
-        dao.getOrderRecord(data, json);
+        dao.getOrderRecordExcel(data, json);
+
 //        getExportDeviceRecordToFile(json);
 //        getExportDeviceRecordToTxt(json);
         getExportDeviceRecordToExcel(json);
@@ -432,15 +433,15 @@ public class RoomOrderServletAction extends HttpServlet {
 
     private void exportDeviceRecordSeller(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException, IOException {
         RoomOrderDao dao = new RoomOrderDao();
-        dao.getOrderRecordSeller(data, json);
+        dao.getOrderRecordExcelSeller(data, json);
         getExportDeviceRecordToExcelSeller(json);
         getExportDeviceRecordToPdf(json);
     }
 
     private void getExportDeviceRecordToExcel(JSONObject json) throws JSONException, IOException {
-        MyExcel me = new MyExcel("C:\\upload\\maintain\\device\\export_room_order.xls");
-        json.put("download_url", "/upload/maintain/device/export_room_order.xls");
-        json.put("file_path", "C:\\upload\\maintain\\device\\export_room_order.xls");
+        MyExcel me = new MyExcel("C:\\upload\\maintain\\device\\export_room_order_buyer.xls");
+        json.put("download_url", "/upload/maintain/device/export_room_order_buyer.xls");
+        json.put("file_path", "C:\\upload\\maintain\\device\\export_room_order_buyer.xls");
         me.exportData(data, json);
     }
 

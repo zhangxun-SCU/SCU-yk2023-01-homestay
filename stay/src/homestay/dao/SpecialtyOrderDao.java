@@ -97,6 +97,18 @@ public class SpecialtyOrderDao {
     }
 
     /*查询记录*/
+    public void getOrderRecordExcelBuyer(Data data, JSONObject json) throws JSONException, SQLException {
+        //构造sql语句，根据传递过来的查询条件参数
+        String sql = createGetRecordSqlExcelBuyer(data);            //构造sql语句，根据传递过来的查询条件参数
+        data.getParam().put("sql", sql);
+        queryRecord(data, json);
+    }
+    public void getOrderRecordExcelSeller(Data data, JSONObject json) throws JSONException, SQLException {
+        //构造sql语句，根据传递过来的查询条件参数
+        String sql = createGetRecordSqlExcelSeller(data);            //构造sql语句，根据传递过来的查询条件参数
+        data.getParam().put("sql", sql);
+        queryRecord(data, json);
+    }
     public void getOrderRecord(Data data, JSONObject json) throws JSONException, SQLException {
         //构造sql语句，根据传递过来的查询条件参数
         String sql = createGetRecordSql(data);            //构造sql语句，根据传递过来的查询条件参数
@@ -232,7 +244,34 @@ public class SpecialtyOrderDao {
         json.put("result_code", resultCode);                                                        //返回0表示正常，不等于0就表示有错误产生，错误代码
         /*--------------------返回数据 结束--------------------*/
     }
-
+    private String createGetRecordSqlExcelBuyer(Data data) throws JSONException {
+        JSONObject param = data.getParam();
+        String username = data.getParam().has("username") ? data.getParam().getString("username") : null;
+        String sql = "select order_id,specialty_id,specialty_name,specialty_order.num,specialty_order.price,create_date,buyer_id,order_status,owner_id from specialty_order, specialty where specialty_order.good_id=specialty.specialty_id and buyer_id='" + username + "'";
+        String order_id = data.getParam().has("order_id") ? data.getParam().getString("order_id") : null;
+        if (order_id != null && (!order_id.isEmpty())) {
+            sql = sql + " and order_id like '%" + order_id + "%'";
+        }
+        String specialty_name = data.getParam().has("specialty_name") ? data.getParam().getString("specialty_name") : null;
+        if (specialty_name != null && (!specialty_name.isEmpty())) {
+            sql = sql + " and specialty_name like '%" + specialty_name + "%'";
+        }
+        return sql;
+    }
+    private String createGetRecordSqlExcelSeller(Data data) throws JSONException {
+        JSONObject param = data.getParam();
+        String username = data.getParam().has("username") ? data.getParam().getString("username") : null;
+        String sql = "select order_id,specialty_id,specialty_name,specialty_order.num,specialty_order.price,create_date,buyer_id,order_status,owner_id from specialty_order, specialty where specialty_order.good_id=specialty.specialty_id and owner_id='" + username + "'";
+        String order_id = data.getParam().has("order_id") ? data.getParam().getString("order_id") : null;
+        if (order_id != null && (!order_id.isEmpty())) {
+            sql = sql + " and order_id like '%" + order_id + "%'";
+        }
+        String specialty_name = data.getParam().has("specialty_name") ? data.getParam().getString("specialty_name") : null;
+        if (specialty_name != null && (!specialty_name.isEmpty())) {
+            sql = sql + " and specialty_name like '%" + specialty_name + "%'";
+        }
+        return sql;
+    }
     private String createGetRecordSql(Data data) throws JSONException {
         JSONObject param = data.getParam();
         String username = data.getParam().has("username") ? data.getParam().getString("username") : null;

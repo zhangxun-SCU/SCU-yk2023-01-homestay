@@ -394,7 +394,7 @@ public class SpecialtyOrderServletAction extends HttpServlet {
 
 	private void exportDeviceRecord(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException, IOException {
 		SpecialtyOrderDao dao=new SpecialtyOrderDao();
-		dao.getOrderRecord(data,json);
+        dao.getOrderRecordExcelBuyer(data,json);
 //		getExportDeviceRecordToFile(json);
 //		getExportDeviceRecordToTxt(json);
 		getExportDeviceRecordToExcel(json);
@@ -410,15 +410,15 @@ public class SpecialtyOrderServletAction extends HttpServlet {
     }
 
 	private void getExportDeviceRecordToExcel(JSONObject json) throws JSONException, IOException {
-		MyExcel me=new MyExcel("C:\\upload\\maintain\\device\\export_order.xls");
-		json.put("download_url","/upload/maintain/device/export_order.xls");
-		json.put("file_path","C:\\upload\\maintain\\device\\export_order.xls");
+		MyExcel me=new MyExcel("C:\\upload\\maintain\\device\\export_specialty_order_buyer.xls");
+		json.put("download_url","/upload/maintain/device/export_specialty_order_buyer.xls");
+		json.put("file_path","C:\\upload\\maintain\\device\\export_specialty_order_buyer.xls");
 		me.exportData(data,json);
 	}
     private void getExportDeviceRecordToExcelSeller(JSONObject json) throws JSONException, IOException {
-        MyExcel me=new MyExcel("C:\\upload\\maintain\\device\\export_order_seller.xls");
-        json.put("download_url","/upload/maintain/device/export_order_seller.xls");
-        json.put("file_path","C:\\upload\\maintain\\device\\export_order_seller.xls");
+        MyExcel me=new MyExcel("C:\\upload\\maintain\\device\\export_specialty_order_seller.xls");
+        json.put("download_url","/upload/maintain/device/export_specialty_order_seller.xls");
+        json.put("file_path","C:\\upload\\maintain\\device\\export_specialty_order_seller.xls");
         me.exportData(data,json);
     }
 
