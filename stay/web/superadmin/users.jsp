@@ -25,7 +25,7 @@
     <!-- FAVICONS ICON -->
     <!-- 在<head>标签中添加以下链接 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="shortcut icon" type="image/png" href="images/favicon.png" />
     <link href="./vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
     <link href="./css/style.css" rel="stylesheet">
@@ -1201,12 +1201,22 @@
             <div class="new-user-container">
                 <h2><a href="#" onclick="openNewUserModal()">新建用户</a></h2>
             </div>
+            <div class="new-user-container">
+                <button onclick="printTableData()">打印表格数据</button>
+                <button id="export_btn" onclick="exportData()">导出数据</button>
+                <a href="" style="display: none" id="export_users_url"></a>
+                <button id="statistics_btn" onclick="statistics()">统计数据</button>
+
+            </div>
+            <div class="new-user-container">
+            </div>
             <div class="search-container">
                 <label for="searchInput">按user_id搜索：</label>
                 <div class="input-group">
                     <input type="text" id="searchInput" class="form-control" placeholder="输入user_id">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="button" onclick="searchUsers()">搜索</button>
+
                     </div>
                 </div>
             </div>
@@ -1214,11 +1224,11 @@
             <br>
             <table border="1">
                 <tr>
-                    <th>user_id</th>
-                    <th>user_password</th>
-                    <th>email</th>
-                    <th>permission</th>
-                    <th>priority</th>
+                    <th onclick="sortTable(0)">user_id <i class="fas fa-sort"></i></th>
+                    <th onclick="sortTable(1)">user_password <i class="fas fa-sort"></i></th>
+                    <th onclick="sortTable(2)">email <i class="fas fa-sort"></i></th>
+                    <th onclick="sortTable(3)">permission <i class="fas fa-sort"></i></th>
+                    <th onclick="sortTable(4)">priority <i class="fas fa-sort"></i></th>
                     <th>操作</th>
                 </tr>
                 <c:forEach items="${users}" var="user">
@@ -1294,6 +1304,7 @@
                     </form>
                 </div>
             </div>
+
             <script defer>
                 function openNewUserModal() {
                     document.getElementById("newUserModal").style.display = "block";
@@ -1474,6 +1485,94 @@
                         xhr.send();
                     }
                 }
+                function printTableData() {
+                    var table = document.querySelector("table"); // 获取表格元素
+                    var rows = table.rows; // 获取表格的所有行
+                    var printWindow = window.open('', '_blank');
+                    var data = '<html><head><title>Print Table</title>';
+
+                    // 添加CSS样式
+                    data += '<style>' +
+                        'table {width: 100%; border-collapse: collapse;}' +
+                        'th, td {border: 1px solid black; padding: 10px;}' +
+                        'th {background-color: #f0f0f0;}' +
+                        '</style>';
+
+                    data += '</head><body>';
+                    data += '<table>'; // 创建新的表格
+
+                    // 遍历每一行，获取每一行的数据
+                    for (var i = 0; i < rows.length; i++) {
+                        var cells = rows[i].cells; // 获取当前行的所有单元格
+                        data += '<tr>';
+                        // 遍历每一个单元格，获取单元格的数据
+                        for (var j = 0; j < cells.length; j++) {
+                            // 如果单元格不是 user_password, priority 或 操作 列，则添加到打印数据中
+                            if (j !== 1 && j !== 4 && j !== 5) { // 假设 user_password 是第二列，priority 是第五列，操作是第六列
+                                data += '<td>' + cells[j].innerText + '</td>';
+                            }
+                        }
+                        data += '</tr>';
+                    }
+
+                    data += '</table></body></html>'; // 结束表格标签
+
+                    printWindow.document.write(data); // 写入数据
+                    printWindow.document.close(); // 关闭文档
+                    printWindow.print(); // 打印数据
+                }
+                // 排序功能
+                function sortTable(n) {
+                    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+                    table = document.querySelector("table");
+                    switching = true;
+                    dir = "asc";
+                    while (switching) {
+                        switching = false;
+                        rows = table.rows;
+                        for (i = 1; i < (rows.length - 1); i++) {
+                            shouldSwitch = false;
+                            x = rows[i].getElementsByTagName("TD")[n];
+                            y = rows[i + 1].getElementsByTagName("TD")[n];
+                            if (dir == "asc") {
+                                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                                    shouldSwitch = true;
+                                    break;
+                                }
+                            } else if (dir == "desc") {
+                                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                                    shouldSwitch = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (shouldSwitch) {
+                            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                            switching = true;
+                            switchcount ++;
+                        } else {
+                            if (switchcount == 0 && dir == "asc") {
+                                dir = "desc";
+                                switching = true;
+                            }
+                        }
+                    }
+                }
+
+            </script>
+
+            <script defer>
+                function exportData() {
+                    $.get('/exportUsers', res => {
+                        $('#export_users_url').attr('href', res.url);
+                        $('#export_users_url').attr('download', 'allusers.json');
+                        document.getElementById('export_users_url').click();
+                    })
+                }
+                
+                function statistics() {
+                    window.location.href='/superadmin/statistics.jsp'
+                }
             </script>
     <!--**********************************
         Content body start
@@ -1512,9 +1611,11 @@
 
 
 </div>
-<!--**********************************
-    Main wrapper end
-***********************************-->
+
+
+        <!--**********************************
+            Main wrapper end
+        ***********************************-->
 
 <!--**********************************
     Scripts
@@ -1525,6 +1626,10 @@
 <script src="./js/custom.min.js"></script>
 <script src="./js/dlabnav-init.js"></script>
 <script src="./js/demo.js"></script>
-<script src="./js/styleSwitcher.js"></script>
+        <script src="./../assets/js/utils/throttle.js"></script>
+        <script src="./../assets/js/utils/debounce.js"></script>
+        <script src="./js/styleSwitcher.js"></script>
 </body>
+
+
 </html>

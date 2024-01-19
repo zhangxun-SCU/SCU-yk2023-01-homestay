@@ -1,15 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 86135
-  Date: 2023/12/2
-  Time: 17:45
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <!DOCTYPE html>
 <html lang="en">
-<input type="hidden" id="page_id" name="page_id" value="weather_list"/>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,9 +19,9 @@
 
     <!-- FAVICONS ICON -->
     <link rel="shortcut icon" type="image/png" href="images/favicon.png" />
-    <!-- Custom Stylesheet -->
-    <link href="../assets/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
-    <link href="../assets/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="./vendor/chartist/css/chartist.min.css">
+    <link href="./vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
 
 </head>
 
@@ -59,7 +50,7 @@
         Nav header start
     ***********************************-->
     <div class="nav-header">
-        <a href="../assets/index.html" class="brand-logo">
+        <a href="index.html" class="brand-logo">
             <svg class="logo-abbr" width="57" height="57" viewBox="0 0 57 57" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M32.9585 1.84675C30.4961 -0.615584 26.5039 -0.615585 24.0415 1.84675L19.3876 6.50068H12.8059C9.32365 6.50068 6.50071 9.32362 6.50071 12.8059V19.3876L1.84675 24.0415C-0.615584 26.5039 -0.615585 30.4961 1.84675 32.9585L6.50071 37.6124V44.1941C6.50071 47.6763 9.32365 50.4993 12.8059 50.4993H19.3876L24.0415 55.1532C26.5039 57.6156 30.4961 57.6156 32.9585 55.1532L37.6124 50.4993H44.1941C47.6764 50.4993 50.4993 47.6763 50.4993 44.1941V37.6124L55.1532 32.9585C57.6156 30.4961 57.6156 26.5039 55.1532 24.0415L50.4993 19.3876V12.8059C50.4993 9.32362 47.6764 6.50068 44.1941 6.50068H37.6124L32.9585 1.84675Z" fill="url(#paint0_linear)"/>
                 <path class="logo-text" fill-rule="evenodd" clip-rule="evenodd" d="M24.7614 37.345L20.7666 40.3417C20.4005 40.616 19.9111 40.6607 19.5015 40.4553C19.0919 40.2511 18.8333 39.833 18.8333 39.375V17.625C18.8333 16.958 19.3746 16.4167 20.0416 16.4167H36.9583C37.6253 16.4167 38.1666 16.958 38.1666 17.625V39.375C38.1666 39.833 37.9081 40.2511 37.4984 40.4553C37.0888 40.6607 36.5994 40.616 36.2333 40.3417L32.2386 37.345L29.3543 40.2293C28.883 40.7018 28.1169 40.7018 27.6457 40.2293L24.7614 37.345ZM35.75 36.9584V18.8334H21.25V36.9584L24.15 34.7834C24.6309 34.4221 25.3039 34.4704 25.7293 34.8957L28.5 37.6664L31.2707 34.8957C31.696 34.4704 32.3691 34.4221 32.85 34.7834L35.75 36.9584ZM27.2916 28.5H29.7083C30.3753 28.5 30.9166 27.9587 30.9166 27.2917C30.9166 26.6247 30.3753 26.0834 29.7083 26.0834H27.2916C26.6246 26.0834 26.0833 26.6247 26.0833 27.2917C26.0833 27.9587 26.6246 28.5 27.2916 28.5ZM24.875 23.6667H32.125C32.792 23.6667 33.3333 23.1254 33.3333 22.4584C33.3333 21.7914 32.792 21.25 32.125 21.25H24.875C24.208 21.25 23.6666 21.7914 23.6666 22.4584C23.6666 23.1254 24.208 23.6667 24.875 23.6667Z" fill="white"/>
@@ -84,8 +75,8 @@
     ***********************************-->
 
     <!--**********************************
-        Chat box start
-    ***********************************-->
+Chat box start
+***********************************-->
     <div class="chatbox">
         <div class="chatbox-close"></div>
         <div class="custom-tab-1">
@@ -117,7 +108,7 @@
                                 <li class="active dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/1.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/1.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon"></span>
                                         </div>
                                         <div class="user_info">
@@ -129,7 +120,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/2.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/2.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon offline"></span>
                                         </div>
                                         <div class="user_info">
@@ -141,7 +132,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/3.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/3.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon"></span>
                                         </div>
                                         <div class="user_info">
@@ -153,7 +144,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/4.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/4.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon offline"></span>
                                         </div>
                                         <div class="user_info">
@@ -166,7 +157,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/5.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/5.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon offline"></span>
                                         </div>
                                         <div class="user_info">
@@ -178,7 +169,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/1.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/1.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon"></span>
                                         </div>
                                         <div class="user_info">
@@ -190,7 +181,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/2.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/2.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon offline"></span>
                                         </div>
                                         <div class="user_info">
@@ -203,7 +194,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/3.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/3.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon"></span>
                                         </div>
                                         <div class="user_info">
@@ -215,7 +206,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/4.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/4.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon offline"></span>
                                         </div>
                                         <div class="user_info">
@@ -228,7 +219,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/5.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/5.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon offline"></span>
                                         </div>
                                         <div class="user_info">
@@ -240,7 +231,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/1.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/1.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon"></span>
                                         </div>
                                         <div class="user_info">
@@ -252,7 +243,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/2.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/2.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon offline"></span>
                                         </div>
                                         <div class="user_info">
@@ -264,7 +255,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/3.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/3.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon"></span>
                                         </div>
                                         <div class="user_info">
@@ -277,7 +268,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/4.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/4.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon offline"></span>
                                         </div>
                                         <div class="user_info">
@@ -289,7 +280,7 @@
                                 <li class="dlab-chat-user">
                                     <div class="d-flex bd-highlight">
                                         <div class="img_cont">
-                                            <img src="../assets/images/avatar/5.jpg" class="rounded-circle user_img" alt=""/>
+                                            <img src="images/avatar/5.jpg" class="rounded-circle user_img" alt=""/>
                                             <span class="online_icon offline"></span>
                                         </div>
                                         <div class="user_info">
@@ -323,7 +314,7 @@
                         <div class="card-body msg_card_body dlab-scroll" id="DLAB_W_Contacts_Body3">
                             <div class="d-flex justify-content-start mb-4">
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                                 <div class="msg_cotainer">
                                     Hi, how are you samim?
@@ -336,12 +327,12 @@
                                     <span class="msg_time_send">8:55 AM, Today</span>
                                 </div>
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-start mb-4">
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                                 <div class="msg_cotainer">
                                     I am good too, thank you for your chat template
@@ -354,12 +345,12 @@
                                     <span class="msg_time_send">9:05 AM, Today</span>
                                 </div>
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-start mb-4">
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                                 <div class="msg_cotainer">
                                     I am looking for your next templates
@@ -372,12 +363,12 @@
                                     <span class="msg_time_send">9:10 AM, Today</span>
                                 </div>
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-start mb-4">
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                                 <div class="msg_cotainer">
                                     Bye, see you
@@ -386,7 +377,7 @@
                             </div>
                             <div class="d-flex justify-content-start mb-4">
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                                 <div class="msg_cotainer">
                                     Hi, how are you samim?
@@ -399,12 +390,12 @@
                                     <span class="msg_time_send">8:55 AM, Today</span>
                                 </div>
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-start mb-4">
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                                 <div class="msg_cotainer">
                                     I am good too, thank you for your chat template
@@ -417,12 +408,12 @@
                                     <span class="msg_time_send">9:05 AM, Today</span>
                                 </div>
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-start mb-4">
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                                 <div class="msg_cotainer">
                                     I am looking for your next templates
@@ -435,12 +426,12 @@
                                     <span class="msg_time_send">9:10 AM, Today</span>
                                 </div>
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/2.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-start mb-4">
                                 <div class="img_cont_msg">
-                                    <img src="../assets/images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
+                                    <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt=""/>
                                 </div>
                                 <div class="msg_cotainer">
                                     Bye, see you
@@ -585,9 +576,6 @@
         Chat box End
     ***********************************-->
 
-
-
-
     <!--**********************************
         Header start
     ***********************************-->
@@ -597,7 +585,7 @@
                 <div class="collapse navbar-collapse justify-content-between">
                     <div class="header-left">
                         <div class="dashboard_bar">
-                            天气模块
+                            Chart-Chartist
                         </div>
 
                     </div>
@@ -630,7 +618,7 @@
                                         <li>
                                             <div class="timeline-panel">
                                                 <div class="media me-2">
-                                                    <img alt="image" width="50" src="../assets/images/avatar/1.jpg">
+                                                    <img alt="image" width="50" src="images/avatar/1.jpg">
                                                 </div>
                                                 <div class="media-body">
                                                     <h6 class="mb-1">Dr sultads Send you Photo</h6>
@@ -663,7 +651,7 @@
                                         <li>
                                             <div class="timeline-panel">
                                                 <div class="media me-2">
-                                                    <img alt="image" width="50" src="../assets/images/avatar/1.jpg">
+                                                    <img alt="image" width="50" src="images/avatar/1.jpg">
                                                 </div>
                                                 <div class="media-body">
                                                     <h6 class="mb-1">Dr sultads Send you Photo</h6>
@@ -796,7 +784,187 @@
     <!--**********************************
         Sidebar start
     ***********************************-->
-    <%@include file="../frame/frame_menu.jsp"%>
+    <div class="dlabnav">
+        <div class="dlabnav-scroll">
+            <div class="dropdown header-profile2 ">
+                <a class="nav-link " href="javascript:void(0);"  role="button" data-bs-toggle="dropdown">
+                    <div class="header-info2 d-flex align-items-center border">
+                        <img src="images/profile/pic1.jpg" alt=""/>
+                        <div class="d-flex align-items-center sidebar-info">
+                            <div>
+                                <span class="font-w700 d-block mb-2">Eren Yeager</span>
+                                <small class="text-end font-w400">Super Admin</small>
+                            </div>
+                            <i class="fas fa-sort-down ms-4"></i>
+                        </div>
+
+                    </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end">
+                    <a href="./app-profile.html" class="dropdown-item ai-icon ">
+                        <svg  xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        <span class="ms-2">Profile </span>
+                    </a>
+                    <a href="./email-inbox.html" class="dropdown-item ai-icon">
+                        <svg  xmlns="http://www.w3.org/2000/svg" class="text-success" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        <span class="ms-2">Inbox </span>
+                    </a>
+                    <a href="./login.html" class="dropdown-item ai-icon">
+                        <svg  xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                        <span class="ms-2">Logout </span>
+                    </a>
+                </div>
+            </div>
+            <ul class="metismenu" id="menu">
+                <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                    <ul aria-expanded="false">
+                        <li><a href="index.html">Dashboard Light</a></li>
+                        <li><a href="index-2.html">Dashboard Dark</a></li>
+                        <li><a href="wallet-page.html">My Wallet</a></li>
+                        <li><a href="invoices.html">Invoices</a></li>
+                        <li><a href="create-invoices.html">Create Invoices</a></li>
+                        <li><a href="card-center.html">Card-Center</a></li>
+                        <li><a href="transaction-details.html">Transaction</a></li>
+                    </ul>
+
+                </li>
+
+                <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                    <i class="fas fa-info-circle"></i>
+                    <span class="nav-text">Apps</span>
+                </a>
+                    <ul aria-expanded="false">
+                        <li><a href="./app-profile.html">Profile</a></li>
+                        <li><a href="./post-details.html">Post Details</a></li>
+                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Email</a>
+                            <ul aria-expanded="false">
+                                <li><a href="./email-compose.html">Compose</a></li>
+                                <li><a href="./email-inbox.html">Inbox</a></li>
+                                <li><a href="./email-read.html">Read</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="./app-calender.html">Calendar</a></li>
+                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Shop</a>
+                            <ul aria-expanded="false">
+                                <li><a href="./ecom-product-grid.html">Product Grid</a></li>
+                                <li><a href="./ecom-product-list.html">Product List</a></li>
+                                <li><a href="./ecom-product-detail.html">Product Details</a></li>
+                                <li><a href="./ecom-product-order.html">Order</a></li>
+                                <li><a href="./ecom-checkout.html">Checkout</a></li>
+                                <li><a href="./ecom-invoice.html">Invoice</a></li>
+                                <li><a href="./ecom-customers.html">Customers</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                    <i class="fas fa-chart-line"></i>
+                    <span class="nav-text">Charts</span>
+                </a>
+                    <ul aria-expanded="false">
+                        <li><a href="./chart-flot.html">Flot</a></li>
+                        <li><a href="./chart-morris.html">Morris</a></li>
+                        <li><a href="./chart-chartjs.html">Chartjs</a></li>
+                        <li><a href="./chart-chartist.html">Chartist</a></li>
+                        <li><a href="./chart-sparkline.html">Sparkline</a></li>
+                        <li><a href="./chart-peity.html">Peity</a></li>
+                    </ul>
+                </li>
+                <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                    <i class="fab fa-bootstrap"></i>
+                    <span class="nav-text">Bootstrap</span>
+                </a>
+                    <ul aria-expanded="false">
+                        <li><a href="./ui-accordion.html">Accordion</a></li>
+                        <li><a href="./ui-alert.html">Alert</a></li>
+                        <li><a href="./ui-badge.html">Badge</a></li>
+                        <li><a href="./ui-button.html">Button</a></li>
+                        <li><a href="./ui-modal.html">Modal</a></li>
+                        <li><a href="./ui-button-group.html">Button Group</a></li>
+                        <li><a href="./ui-list-group.html">List Group</a></li>
+                        <li><a href="./ui-card.html">Cards</a></li>
+                        <li><a href="./ui-carousel.html">Carousel</a></li>
+                        <li><a href="./ui-dropdown.html">Dropdown</a></li>
+                        <li><a href="./ui-popover.html">Popover</a></li>
+                        <li><a href="./ui-progressbar.html">Progressbar</a></li>
+                        <li><a href="./ui-tab.html">Tab</a></li>
+                        <li><a href="./ui-typography.html">Typography</a></li>
+                        <li><a href="./ui-pagination.html">Pagination</a></li>
+                        <li><a href="./ui-grid.html">Grid</a></li>
+
+                    </ul>
+                </li>
+                <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                    <i class="fas fa-heart"></i>
+                    <span class="nav-text">Plugins</span>
+                </a>
+                    <ul aria-expanded="false">
+                        <li><a href="./uc-select2.html">Select 2</a></li>
+                        <li><a href="./uc-nestable.html">Nestedable</a></li>
+                        <li><a href="./uc-noui-slider.html">Noui Slider</a></li>
+                        <li><a href="./uc-sweetalert.html">Sweet Alert</a></li>
+                        <li><a href="./uc-toastr.html">Toastr</a></li>
+                        <li><a href="./map-jqvmap.html">Jqv Map</a></li>
+                        <li><a href="./uc-lightgallery.html">Light Gallery</a></li>
+                    </ul>
+                </li>
+                <li><a href="widget-basic.html" class="" aria-expanded="false">
+                    <i class="fas fa-user-check"></i>
+                    <span class="nav-text">Widget</span>
+                </a>
+                </li>
+                <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                    <i class="fas fa-file-alt"></i>
+                    <span class="nav-text">Forms</span>
+                </a>
+                    <ul aria-expanded="false">
+                        <li><a href="./form-element.html">Form Elements</a></li>
+                        <li><a href="./form-wizard.html">Wizard</a></li>
+                        <li><a href="./form-ckeditor.html">CkEditor</a></li>
+                        <li><a href="form-pickers.html">Pickers</a></li>
+                        <li><a href="form-validation.html">Form Validate</a></li>
+                    </ul>
+                </li>
+                <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                    <i class="fas fa-table"></i>
+                    <span class="nav-text">Table</span>
+                </a>
+                    <ul aria-expanded="false">
+                        <li><a href="table-bootstrap-basic.html">Bootstrap</a></li>
+                        <li><a href="table-datatable-basic.html">Datatable</a></li>
+                    </ul>
+                </li>
+                <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                    <i class="fas fa-clone"></i>
+                    <span class="nav-text">Pages</span>
+                </a>
+                    <ul aria-expanded="false">
+                        <li><a href="./page-login.html">Login</a></li>
+                        <li><a href="./page-register.html">Register</a></li>
+                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
+                            <ul aria-expanded="false">
+                                <li><a href="./page-error-400.html">Error 400</a></li>
+                                <li><a href="./page-error-403.html">Error 403</a></li>
+                                <li><a href="./page-error-404.html">Error 404</a></li>
+                                <li><a href="./page-error-500.html">Error 500</a></li>
+                                <li><a href="./page-error-503.html">Error 503</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="./page-lock-screen.html">Lock Screen</a></li>
+                        <li><a href="./empty-page.html">Empty Page</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="copyright">
+                <p><strong>Invome Admin Dashboard</strong> © 2021 All Rights Reserved</p>
+                <p class="fs-12">Made with <span class="heart"></span> by DexignLabs</p>
+            </div>
+        </div>
+    </div>
     <!--**********************************
         Sidebar end
     ***********************************-->
@@ -806,83 +974,30 @@
     ***********************************-->
     <div class="content-body">
         <div class="container-fluid">
+            <div class="row page-titles">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Charts</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Chartist</a></li>
+                </ol>
+            </div>
             <!-- row -->
             <div class="row">
-            <div clss="portlet-body form" id="record_query_setup" name="record_query_setup">
-                <div class="form-body">
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">想查询天气数据的城市</label>
-                        <div class="row">
-                            <div class="col-md-9">
-                                <input type="text" id="city" name="city" class="form-control"
-                                       placeholder="Enter text">
-                            </div>
-                            <div class="col-md-3">
-                                <button type="button" class="btn btn-rounded btn-danger"
-                                        id="query_button"
-                                        name="query_button">
-                                                <span class="btn-icon-start text-danger">
-                                                    <i class="fa fa-question color-danger"></i>
-                                                </span>查询
-                                </button>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Pie chart with custom labels</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div id="pie-chart" class="ct-chart ct-golden-section chartlist-chart"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-            </div>
-            <div class="card">
-                <div class="card-header d-block">
-                    <button type="button" class="btn btn-rounded btn-info" id="add_button" name="add_button"><span
-                            class="btn-icon-start text-info"><i class="fa fa-plus color-info"></i>
-                                    </span>添加</button>
-                    <button type="button" class="btn btn-rounded btn-warning" id="export_button" name="export_button"><span
-                            class="btn-icon-start text-warning"><i class="fa fa-download color-warning"></i>
-                                    </span>导出</button>
-                    <button type="button" class="btn btn-rounded btn-success"id="print_word_button"
-                            name="print_word_button"><span
-                            class="btn-icon-start text-success"><i class="fa fa-upload color-success"></i>
-                                    </span>打印天气数据</button>
-                    <button type="button" class="btn btn-rounded btn-secondary"id="weather_statistic"name="weather_statistic"><span
-                            class="btn-icon-start text-secondary"><i class="fa fa-share-alt color-secondary"></i>
-                                    </span>湿度统计</button>
-                    <button type="button" class="btn btn-rounded btn-success"><span
-                            class="btn-icon-start text-success"><i class="fa fa-upload color-success"id="weather_order" name="weather_order"></i>
-                                    </span>排序</button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">天气数据表</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-responsive-md">
-                                    <thead>
-                                    <tr>
-                                        <th><strong>记录ID</strong></th>
-                                        <th><strong>城市</strong></th>
-                                        <th><strong>温度</strong></th>
-                                        <th><strong>天气</strong></th>
-                                        <th><strong>风力</strong></th>
-                                        <th><strong>湿度</strong></th>
-                                        <th><strong>记录时间</strong></th>
-                                        <th><strong>操作</strong></th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="weather_table_content_div" name="weather_table_content_div">
 
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     <!--**********************************
@@ -920,16 +1035,25 @@
     Scripts
 ***********************************-->
 <!-- Required vendors -->
-<script src="../assets/vendor/global/global.min.js"></script>
-<script src="../assets/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
-<script src="../assets/js/custom.min.js"></script>
-<script src="../assets/js/dlabnav-init.js"></script>
-<script src="../assets/js/demo.js"></script>
-<script src="../assets/js/styleSwitcher.js"></script>
-<script src="../assets/js/weather/weather.js"></script>
-</body>
-<%@include file="./weather_add_div.jsp" %>
-<%@include file="./weather_modify_div.jsp" %>
-<%@include file="./weather_download_div.jsp" %>
-</html>
+<script src="./vendor/global/global.min.js"></script>
+<script src="./vendor/chart.js/Chart.bundle.min.js"></script>
+<!-- Apex Chart -->
+<script src="./vendor/apexchart/apexchart.js"></script>
 
+<!-- Chart Chartist plugin files -->
+<script src="./vendor/chartist/js/chartist.min.js"></script>
+<script src="./vendor/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
+<script src="vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+<script src="./js/plugins-init/chartist-init.js"></script>
+
+<script src="./js/custom.min.js"></script>
+<script src="./js/dlabnav-init.js"></script>
+<script src="./js/demo.js"></script>
+<script src="./js/styleSwitcher.js"></script>
+<script>
+    $.get('/permission_statistics', res => {
+        console.log(res)
+    })
+</script>
+</body>
+</html>
