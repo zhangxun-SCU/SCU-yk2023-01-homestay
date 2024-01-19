@@ -158,6 +158,7 @@
         // 校验图形验证码
         /** 数据校验 **/
         const userLoginData = {};
+        userLoginData.src = "web";
         userLoginData.imgVerifyCode = $('#verify_code').val();
         userLoginData.id = $('#user_id').val();
         userLoginData.password = encrypt($('#user_password').val());

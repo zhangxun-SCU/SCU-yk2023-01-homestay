@@ -25,12 +25,24 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            data = Data.getPageParameters(req, resp);
+            if(data.getParam().getString("src").equals("miniapp")) {
+                doMiniappLogin(req, resp);
+            } else {
+                doWebLogin(req, resp);
+            }
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    protected void doWebLogin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         String id = session.getId();
         try {
             // 图形验证码
             String serverCode = (String) session.getAttribute("SESSION_VERIFY_CODE_" + id);
-            data = Data.getPageParameters(req, resp);
             JSONObject resJson = new JSONObject();  /* 响应数据 */
             LoginService loginService = new LoginService();
             VerifyService imgVerifyService = new VerifyService();
@@ -38,8 +50,7 @@ public class LoginServlet extends HttpServlet {
                 // 图形验证码正确
                 if(loginService.checkLogin(data, serverCode, resJson)){
                     Cookie cookie = new Cookie("token", resJson.getString("token"));
-                    cookie.setMaxAge(60*60*24);
-
+                    cookie.setMaxAge(60*60*24*7);
                     String loginToken = UUID.randomUUID().toString();
                     Cookie cookieLogin = new Cookie("LOGIN_TOKEN", loginToken);
                     String userId= data.getParam().getString("id");
@@ -59,6 +70,37 @@ public class LoginServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
+
+    protected void doMiniappLogin(HttpServletRequest req, HttpServletResponse resp) {
+        try {
+            // 图形验证码
+            JSONObject resJson = new JSONObject();  /* 响应数据 */
+            LoginService loginService = new LoginService();
+            VerifyService imgVerifyService = new VerifyService();
+            System.out.println(11);
+            if(loginService.checkLogin(data, resJson)) {
+                System.out.println(22);
+                Cookie cookie = new Cookie("token", resJson.getString("token"));
+                cookie.setMaxAge(60 * 60 * 24 * 7);
+                String loginToken = UUID.randomUUID().toString();
+                Cookie cookieLogin = new Cookie("LOGIN_TOKEN", loginToken);
+                String userId = data.getParam().getString("id");
+                Cookie userIdCookie = new Cookie("USER_ID", userId);
+                System.out.println("logintoken:" + loginToken);
+                resp.addCookie(cookie);
+                resp.addCookie(cookieLogin);
+                resp.addCookie(userIdCookie);
+                userIdTokenMap.put(userId,loginToken);
+            }
+            // 返回
+            resp.setContentType("application/json; charset=UTF-8");
+            resp.getWriter().println(resJson);
+        } catch (JSONException | SQLException | IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

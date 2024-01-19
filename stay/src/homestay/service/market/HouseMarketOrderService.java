@@ -5,6 +5,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class HouseMarketOrderService {
@@ -34,5 +36,21 @@ public class HouseMarketOrderService {
             json.put("code",1);
             System.out.println("queryspecialtybylist error");
         }
+    }
+
+    public void payHouseOrder(Data data, JSONObject json, String buyer_id) throws JSONException {
+        System.out.println(data.getParam().getString("good_list"));
+        MarketOrderDao dao=new MarketOrderDao();
+        try {
+            double balance=dao.getBalanceByUserId(buyer_id);
+            JSONArray jsonArray=new JSONArray(data.getParam().getString("good_list"));
+            dao.payHouseOrder(balance,jsonArray,json,buyer_id);
+            System.out.println("用户的余额是："+balance);
+        } catch (SQLException | ParseException e) {
+            e.printStackTrace();
+            json.put("code",2);
+            e.printStackTrace();
+        }
+
     }
 }
