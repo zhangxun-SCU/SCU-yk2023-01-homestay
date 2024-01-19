@@ -5,6 +5,7 @@ import homestay.service.verify.EmailService;
 import homestay.service.UploadService;
 import homestay.service.user.UserService;
 import homestay.service.verify.VerifyService;
+import homestay.utils.UserUtil;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,7 +20,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet({"/register", "/reset"})
+@WebServlet({"/register", "/reset", "/export_profile"})
 public class UserServlet extends HttpServlet {
 
 
@@ -100,16 +101,26 @@ public class UserServlet extends HttpServlet {
     protected  void doModifyPassword(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession();
         String id = session.getId();
-        String serverEmailVerifyCode = (String) session.getAttribute("SESSION_EMAIL_VERIFY_CODE_" + id);
-        String serverImgVerifyCOde = (String) session.getAttribute("SESSION_VERIFY_CODE_" + id);
+
         try {
             Data data = Data.getPageParameters(req, resp);
+            String serverEmailVerifyCode = (String) session.getAttribute("SESSION_EMAIL_VERIFY_CODE_" + id);
+            String serverImgVerifyCode = null;
+            String hasImg = data.getParam().getString("img");
+            if(hasImg.equals("true")) {
+                serverImgVerifyCode = (String) session.getAttribute("SESSION_VERIFY_CODE_" + id);
+            }
             JSONObject resJson = new JSONObject();
             UserService userService = new UserService();
             VerifyService imgVerifyService = new VerifyService();
             EmailService emailService = new EmailService();
-            if(imgVerifyService.checkCode(data, serverImgVerifyCOde, resJson)) {
+            if(hasImg.equals("true") && imgVerifyService.checkCode(data, serverImgVerifyCode, resJson)) {
                 // 图形校验通过
+                if(emailService.checkEmailVerifyCode(data, serverEmailVerifyCode, resJson)) {
+                    // 邮箱校验通过
+                    userService.modifyUserInfo(data, resJson);
+                }
+            } else {
                 if(emailService.checkEmailVerifyCode(data, serverEmailVerifyCode, resJson)) {
                     // 邮箱校验通过
                     userService.modifyUserInfo(data, resJson);
@@ -131,5 +142,22 @@ public class UserServlet extends HttpServlet {
         userService.modifyUserAvatar(req, resp, urls, resJson);
         resp.setContentType("application/json; charset=UTF-8");
         resp.getWriter().println(resJson);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            Data data = Data.getPageParameters(req, resp);
+            data.getParam().put("userId", UserUtil.getUserId(req));
+            JSONObject resJson = new JSONObject();
+            UserService userService = new UserService();
+            userService.exportProfile(data, resJson);
+            resp.setContentType("application/json; charset=UTF-8");
+            resp.getWriter().println(resJson);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
