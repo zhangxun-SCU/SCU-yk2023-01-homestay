@@ -12,7 +12,13 @@ import org.json.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -67,6 +73,60 @@ public class UserService {
         dao.updateByKey(id, "avatar", urls.get(0));
         resJson.put("resCode", "00000");
         resJson.put("resetInfo", "success");
+    }
+
+    public void exportProfile(Data data, JSONObject resJson) throws JSONException, SQLException {
+        File txtFile = new File("D:\\upload\\export\\profile.txt");
+        resJson.put("url", "/upload/export/profile.txt");
+        UserDao userDao = new UserDao();
+        User user = userDao.queryUserById(data.getParam().getString("userId"));
+        JSONObject json = new JSONObject();
+        json.put("ID", user.id);
+        json.put("avatar_url", user.avatarURL);
+        json.put("permission", user.permission);
+        json.put("email", user.email);
+        try {
+            if(!txtFile.exists()) {
+                txtFile.createNewFile();
+            }
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(txtFile.getAbsoluteFile()));
+            bufferedWriter.write(json.toString());
+            bufferedWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void exportAllUsers(Data data, JSONObject resJson) throws JSONException {
+        File jsonFile = new File("D:\\upload\\export\\allUsers.json");
+        resJson.put("url", "/upload/export/allUsers.json");
+        List<UserBean> allUsers = UserDao.getAllUsers();
+        JSONObject json = new JSONObject();
+        List<HashMap<String, String>> jsonList = new ArrayList<>();
+        for(UserBean user: allUsers) {
+            HashMap<String, String> userJson = new HashMap<>();
+            userJson.put("userId", user.getUser_id());
+            userJson.put("email", user.getEmail());
+            userJson.put("permission", user.getPermission());
+            jsonList.add(userJson);
+        }
+        json.put("users", jsonList);
+        try {
+            if(!jsonFile.exists()) {
+                jsonFile.createNewFile();
+            }
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(jsonFile.getAbsoluteFile()));
+            bufferedWriter.write(json.toString());
+            bufferedWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void permissionStatistics(Data data, JSONObject resJson) throws SQLException, JSONException {
+        UserDao userDao = new UserDao();
+       List<HashMap<String, Integer>> res = userDao.queryPermissionStatistics();
+        resJson.put("data", res);
     }
     public List<UserBean> getAllUsers() {
 

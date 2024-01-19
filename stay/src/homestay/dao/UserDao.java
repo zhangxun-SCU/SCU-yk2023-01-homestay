@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import homestay.bean.UserBean;
 
@@ -83,26 +84,34 @@ public class UserDao {
         boolean firstModify = true;
         if(id != null) {
             // reset id
-            if(firstModify) {
-                sql += " SET user_id='" + id + "'";
-                firstModify = false;
-            } else {
-                sql += " ,user_id='" + id + "'";
-            }
+            sql += " SET user_id='" + id + "'";
+            firstModify = false;
         }
-        if(password != null) {
-            if(firstModify) {
-                sql += " SET user_password='" + password + "'";
-                firstModify = false;
-            } else {
-                sql += " ,user_password='" + password + "'";
-            }
+        if (firstModify) {
+            sql += " SET user_password='" + password + "'";
+            firstModify = false;
+        } else {
+            sql += " ,user_password='" + password + "'";
         }
         sql += " WHERE email='" + email + "'";
         System.out.println("modify user info sql: " + sql);
         DB db = new DB("group1");
         db.executeUpdate(sql);
         db.close();
+    }
+
+    public List<HashMap<String, Integer>> queryPermissionStatistics() throws SQLException {
+        String sql = "SELECT permission, COUNT(*) AS num FROM user_account GROUP BY permission";
+        DB db = new DB("group1");
+        ResultSet rs =  db.executeQuery(sql);
+        List<HashMap<String, Integer>> list = new ArrayList<>();
+        while (rs.next()) {
+            HashMap<String, Integer> res = new HashMap<>();
+            res.put(rs.getString("permission"), rs.getInt("num"));
+            list.add(res);
+        }
+        db.close();
+        return list;
     }
 
     public void updateByKey(String userId, String key, String value) {
