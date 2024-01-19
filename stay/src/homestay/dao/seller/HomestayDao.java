@@ -207,4 +207,35 @@ public class HomestayDao {
         db.close();
         return homestay;
     }
+
+    public void getLocations(String house_name, JSONObject json) {
+        String resCode = "00000";
+        String info = "success";
+        DB db = new DB("group1");
+        String sql = String.format(
+                "Select * From house Where house_name Like '%%%s%%'",
+                house_name
+        );
+        showDebug("[getLocations]", "sql: " + sql);
+        try {
+            ResultSet res = db.executeQuery(sql);
+            ResultSetMetaData resMetaData = res.getMetaData();
+            int fieldCount = resMetaData.getColumnCount();
+            List list = new ArrayList();
+            while (res.next()) {
+                HashMap map = new HashMap();
+                for (int i = 0; i < fieldCount; i++) {
+                    String key = resMetaData.getColumnName(i + 1);
+                    String value = res.getString(key);
+                    map.put(key, value);
+                }
+                list.add(map);
+            }
+            json.put("resCode", resCode);
+            json.put("getLocationInfo", info);
+            json.put("house_locations", list);
+        } catch (SQLException | JSONException e) {
+            e.printStackTrace();
+        }
+    }
 }

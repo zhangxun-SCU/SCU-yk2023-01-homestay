@@ -85,6 +85,8 @@ public class GoodsServlet extends HttpServlet {
             homestayService.deleteHomestay(data, json);
         } else if (action.equals("modify_homestay")) {
             homestayService.modifyHomestay(data, json);
+        } else if (action.equals("get_locations")) {
+            homestayService.getLocations(data, json);
         } else {
             json.put("resCode", "GH001");
             json.put("Information", "民宿错误操作");
