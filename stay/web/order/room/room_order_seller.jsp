@@ -619,19 +619,19 @@
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">订单编号</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" placeholder="Enter text" id="good_id" name="good_id">
+                                        <input type="text" class="form-control" placeholder="输入待查找订单编号" id="good_id" name="good_id">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">民宿</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" placeholder="Enter text" id="house_name" name="house_name">
+                                        <input type="text" class="form-control" placeholder="Enter text" id="输入待查找民宿名称" name="house_name">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">房间</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" placeholder="Enter text" id="room_name" name="room_name">
+                                        <input type="text" class="form-control" placeholder="输入待查找房间名称" id="room_name" name="room_name">
                                     </div>
                                 </div>
                             </div>

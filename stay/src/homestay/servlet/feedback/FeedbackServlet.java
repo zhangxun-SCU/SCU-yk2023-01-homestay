@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Objects;
 
 @WebServlet("/feedback")
 public class FeedbackServlet extends HttpServlet {
@@ -25,7 +24,7 @@ public class FeedbackServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
-        response.sendRedirect("/seller/feedback.jsp");
+        response.sendRedirect("./Feedback/feedback.jsp");
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,6 +37,11 @@ public class FeedbackServlet extends HttpServlet {
                 feedbackService.getFeedback(data, json);
             } else if (action.equals("reply_feedback")) {
                 feedbackService.updateFeedback(data, json);
+            } else if (action.equals("add_feedback")) {
+                FeedbackService.addFeedback(data, json);
+            } else if (action.equals("delete_feedback")) {
+                showDebug("[doPost]", action);
+                FeedbackService.deleteFeedback(data, json);
             } else {
                 json.put("resCode", "F0001");
             }

@@ -146,4 +146,155 @@ public class MarketOrderDao {
         }
         return specialtyList;
     }
+
+    public double getBalanceByUserId(String buyer_id) throws SQLException {
+        double balance=0;
+        String sql="select balance from user_balance where user_id='"+buyer_id+"'";
+        DB db=new DB("group1");
+        ResultSet res=db.executeQuery(sql);
+        while(res.next())
+        {
+            balance=res.getDouble("balance");
+        }
+        return balance;
+
+
+    }
+
+    public void paySpecialyOrder(double balance, JSONArray jsonArray,JSONObject json,String user_id) throws JSONException, SQLException {
+        double total_cost=0;
+        double[] cost_list=new double[jsonArray.length()];
+        ArrayList<String> user_list=new ArrayList<String>();
+        ArrayList<String> order_list=new ArrayList<String>();
+        for(int i=0;i<jsonArray.length();i++)
+        {
+            order_list.add(jsonArray.getJSONObject(i).getString("order_id"));
+        }
+        DB db=new DB("group1");
+        // judge whether the balance is bigger than the total cost and store the seller_user and cost
+        for(int i=0;i<order_list.size();i++)
+        {
+            int num = 0;
+            double price = 0;
+            String sql="select specialty_order.num,specialty_order.price,owner_id from specialty_order,specialty where good_id=specialty_id and order_id='"+order_list.get(i)+"'";
+            System.out.println("执行的语句是:"+sql);
+            ResultSet res=db.executeQuery(sql);
+            while(res.next())
+            {
+                num=res.getInt("specialty_order.num");
+                price=res.getDouble("specialty_order.price");
+                user_list.add(res.getString("owner_id"));
+            }
+            total_cost+=num*price;
+            cost_list[i]=num*price;
+            if(total_cost>balance)
+            {
+                json.put("code",1);
+                return;
+            }
+        }
+        //update the status of order
+
+        for(int i=0;i<order_list.size();i++)
+        {
+            String sql="update  specialty_order set order_status=1 where order_id='"+order_list.get(i)+"'";
+            System.out.println("执行的语句是:"+sql);
+            db.executeUpdate(sql);
+
+        }
+        //update the balance of seller
+        for(int i=0;i<order_list.size();i++)
+        {
+            String sql="update user_balance set balance=balance+"+cost_list[i]+" where user_id='"+user_list.get(i)+"'";
+            System.out.println("执行的语句是:"+sql);
+            db.executeUpdate(sql);
+        }
+        //update the balance of buyer
+        double rest_balance=balance-total_cost;
+        String sql="update user_balance set balance=balance-"+total_cost+" where user_id='"+user_id+"'";
+        db.executeUpdate(sql);
+        json.put("code",0);
+
+
+
+    }
+
+    public void payHouseOrder(double balance, JSONArray jsonArray, JSONObject json, String buyer_id) throws JSONException, SQLException, ParseException {
+        double total_cost=0;
+        double[] cost_list=new double[jsonArray.length()];
+        int[] range_list=new int[jsonArray.length()];
+        ArrayList<String> user_list=new ArrayList<String>();
+        ArrayList<String> order_list=new ArrayList<String>();
+        for(int i=0;i<jsonArray.length();i++)
+        {
+            order_list.add(jsonArray.getJSONObject(i).getString("order_id"));
+        }
+        DB db=new DB("group1");
+        // judge whether the balance is bigger than the total cost and store the seller_user and cost
+        for(int i=0;i<order_list.size();i++)
+        {
+            int num = 0;
+            double price = 0;
+            String in_date="";
+            String out_date="";
+            int range_day=0;
+            String sql="select deal_order.num,deal_order.price,owner_id,in_date,out_date from deal_order,room_occupy,house where house.house_id=room_occupy.house_id and good_id=op_id and order_id='"+order_list.get(i)+"'";
+            System.out.println("执行的语句是:"+sql);
+            ResultSet res=db.executeQuery(sql);
+            while(res.next())
+            {
+                num=res.getInt("deal_order.num");
+                price=res.getDouble("deal_order.price");
+                user_list.add(res.getString("owner_id"));
+                in_date=res.getString("in_date");
+                out_date=res.getString("out_date");
+            }
+            DateFormat dft = new SimpleDateFormat("yyyy-MM-dd");
+            Date star = dft.parse(in_date);//开始时间
+            Date endDay = dft.parse(out_date);//结束时间
+            Date nextDay = star;
+            int j = 0;
+            while (nextDay.before(endDay)) {//当明天不在结束时间之前是终止循环
+                Calendar cld = Calendar.getInstance();
+                cld.setTime(star);
+                cld.add(Calendar.DATE, 1);
+                star = cld.getTime();
+                //获得下一天日期字符串
+                nextDay = star;
+                j++;
+            }
+            range_day=j;
+            range_list[i]=range_day;
+
+            total_cost+=num*price*range_day;
+            cost_list[i]=num*price*range_day;
+            if(total_cost>balance)
+            {
+                json.put("code",1);
+                return;
+            }
+        }
+        //update the status of order
+
+        for(int i=0;i<order_list.size();i++)
+        {
+            String sql="update  deal_order set order_status=1 where order_id='"+order_list.get(i)+"'";
+            System.out.println("执行的语句是:"+sql);
+            db.executeUpdate(sql);
+
+        }
+        //update the balance of seller
+        for(int i=0;i<order_list.size();i++)
+        {
+            String sql="update user_balance set balance=balance+"+cost_list[i]+" where user_id='"+user_list.get(i)+"'";
+            System.out.println("执行的语句是:"+sql);
+            db.executeUpdate(sql);
+        }
+        //update the balance of buyer
+        double rest_balance=balance-total_cost;
+        String sql="update user_balance set balance=balance-"+total_cost+" where user_id='"+buyer_id+"'";
+        db.executeUpdate(sql);
+        json.put("code",0);
+
+    }
 }

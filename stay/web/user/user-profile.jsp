@@ -1,5 +1,6 @@
 <%@ page import="homestay.dao.Data" %>
-<%@ page import="homestay.entity.User" %><%--
+<%@ page import="homestay.entity.User" %>
+<%@ page import="java.math.BigDecimal" %><%--
   Created by IntelliJ IDEA.
   User: cw
   Date: 2023/12/1
@@ -14,8 +15,7 @@
     <title>Title</title>
     <%@include file="./../frame/frame_style.jsp" %>
     <link href="./../assets/vendor/lightgallery/css/lightgallery.min.css" rel="stylesheet">
-    <link href="./../assets/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
-    <link href="./../assets/css/style.css" rel="stylesheet">
+    <link href="./../assets/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <style>
         #upload_avatar:hover {
 
@@ -40,6 +40,7 @@
         <%
             // 获取访问人信息
             User visited = userDao.queryUserByKey("user_id", visitedId);
+            BigDecimal balance = userDao.getUserBalance(userId);
         %>
     <div class="content-body">
         <div class="container-fluid">
@@ -109,31 +110,29 @@
                 <div class="col-xl-4">
                     <div class="row">
                         <div class="col-xl-12">
+                            <%if (isSelf) {%>
                             <div class="card">
                                 <div class="card-body">
                                     <div class="profile-statistics">
+
                                         <div class="text-center">
                                             <div class="row">
                                                 <div class="col">
-                                                    <h3 class="m-b-0">150</h3><span>钱包余额</span>
-                                                </div>
-                                                <div class="col">
-                                                    <h3 class="m-b-0">140</h3><span>收入</span>
-                                                </div>
-                                                <div class="col">
-                                                    <h3 class="m-b-0">45</h3><span>支出</span>
+                                                    <h3 class="m-b-0"><%=balance%></h3><span>钱包余额</span>
                                                 </div>
                                             </div>
                                             <div class="mt-4 justify-content-around" style="display: flex">
                                                 <a href="javascript:void(0);"
-                                                   class="btn btn-primary mb-1 w-25">充值</a>
+                                                   class="btn btn-primary mb-1 w-25"
+                                                   data-bs-toggle="modal" data-bs-target="#rechargeModal">充值</a>
                                                 <a href="javascript:void(0);" class="btn btn-primary mb-1 w-25"
-                                                   data-bs-toggle="modal" data-bs-target="#sendMessageModal">
+                                                   data-bs-toggle="modal" data-bs-target="#payoutsModal">
                                                     提现</a>
                                             </div>
                                         </div>
+
                                         <!-- Modal -->
-                                        <div class="modal fade" id="sendMessageModal">
+                                        <div class="modal fade" id="payoutsModal">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -144,37 +143,19 @@
                                                     <div class="modal-body">
                                                         <form class="comment-form">
                                                             <div class="row">
-                                                                <div class="col-lg-6">
-                                                                    <div class="mb-3">
-                                                                        <label class="text-black font-w600 form-label">Name
-                                                                            <span class="required">*</span></label>
-                                                                        <input type="text" class="form-control"
-                                                                               value="Author" name="Author"
-                                                                               placeholder="Author">
+                                                                <div class="text-center">
+                                                                    <div class="row">
+                                                                        <div class="col">
+                                                                            <h3 class="m-b-0"><%=balance%></h3><span>钱包余额</span>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-lg-6">
-                                                                    <div class="mb-3">
-                                                                        <label class="text-black font-w600 form-label">Email
-                                                                            <span class="required">*</span></label>
-                                                                        <input type="text" class="form-control"
-                                                                               value="Email" placeholder="Email"
-                                                                               name="Email">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-12">
-                                                                    <div class="mb-3">
-                                                                        <label class="text-black font-w600 form-label">Comment</label>
-                                                                        <textarea rows="8" class="form-control"
-                                                                                  name="comment"
-                                                                                  placeholder="Comment"></textarea>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-12">
+
+                                                                <div class="col-lg-4">
                                                                     <div class="mb-3 mb-0">
-                                                                        <input type="submit" value="Post Comment"
-                                                                               class="submit btn btn-primary"
-                                                                               name="submit">
+                                                                        <input value="确认"
+                                                                               class="btn btn-primary"
+                                                                               name="submit" id="payoutsSubmit">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -186,6 +167,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <%}%>
                         </div>
                         <div class="col-xl-12">
                             <div class="card">
@@ -287,16 +269,16 @@
                             <div class="profile-tab">
                                 <div class="custom-tab-1">
                                     <ul class="nav nav-tabs">
-                                        <li class="nav-item"><a href="#my-posts" data-bs-toggle="tab"
-                                                                class="nav-link active show">Posts</a>
-                                        </li>
+<%--                                        <li class="nav-item"><a href="#my-posts" data-bs-toggle="tab"--%>
+<%--                                                                class="nav-link ">Posts</a>--%>
+<%--                                        </li>--%>
                                         <%if (!isSelf) {%>
-                                        <li class="nav-item"><a href="#about-me" data-bs-toggle="tab" class="nav-link">About
+                                        <li class="nav-item"><a href="#about-me" data-bs-toggle="tab" class="nav-link active show">About
                                             He</a>
                                         </li>
                                         <%}%>
                                         <%if (isSelf) {%>
-                                        <li class="nav-item"><a href="#about-me" data-bs-toggle="tab" class="nav-link">About
+                                        <li class="nav-item"><a href="#about-me" data-bs-toggle="tab" class="nav-link active show">About
                                             Me</a>
                                         </li>
                                         <li class="nav-item"><a href="#profile-settings" data-bs-toggle="tab"
@@ -379,22 +361,25 @@
                                                     <a href="javascript:void(0);" class="btn btn-primary"
                                                        data-bs-toggle="modal" data-bs-target="#postModal">Post</a>
                                                     <!-- Modal -->
-                                                    <div class="modal fade" id="postModal">
-                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal fade" id="rechargeModal">
+                                                        <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title">Post</h5>
+                                                                    <h5 class="modal-title">输入充值金额</h5>
                                                                     <button type="button" class="btn-close"
                                                                             data-bs-dismiss="modal">
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <textarea name="textarea" id="textarea2" cols="30"
-                                                                              rows="5"
-                                                                              class="form-control bg-transparent"
-                                                                              placeholder="Please type what you want...."></textarea>
-                                                                    <a class="btn btn-primary btn-rounded"
-                                                                       href="javascript:void(0)">Post</a>
+                                                                    <div class="basic-form">
+                                                                        <form>
+                                                                            <div class="mb-3">
+                                                                                <input class="form-control" type="text" placeholder="输入充值金额(￥)" id="rechargeInput">
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                    <a class="btn btn-primary btn-rounded" data-bs-dismiss="modal"
+                                                                       href="javascript:void(0)" id="rechargeSubmit">确认充值</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -574,33 +559,6 @@
                                                             </div>
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label class="form-label">Address</label>
-                                                            <input type="text" placeholder="1234 Main St" class="form-control">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Address 2</label>
-                                                            <input type="text" placeholder="Apartment, studio, or floor" class="form-control">
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="mb-3 col-md-6">
-                                                                <label class="form-label">City</label>
-                                                                <input type="text" class="form-control">
-                                                            </div>
-                                                            <div class="mb-3 col-md-4">
-                                                                <label class="form-label">State</label>
-                                                                <select class="form-control default-select wide" id="inputState">
-                                                                    <option selected="">Choose...</option>
-                                                                    <option>Option 1</option>
-                                                                    <option>Option 2</option>
-                                                                    <option>Option 3</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="mb-3 col-md-2">
-                                                                <label class="form-label">Zip</label>
-                                                                <input type="text" class="form-control">
-                                                            </div>
-                                                        </div>
-                                                        <div class="mb-3">
                                                             <div class="form-check custom-checkbox">
                                                                 <input type="checkbox" class="form-check-input" id="gridCheck">
                                                                 <label class="form-check-label form-label" for="gridCheck"> Check me out</label>
@@ -651,6 +609,8 @@
 <script src="/assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 <script src="/assets/vendor/chart.js/Chart.bundle.min.js"></script>
 <script src="/assets/vendor/lightgallery/js/lightgallery-all.min.js"></script>
+<script src="./../assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
+<script src="./../assets/js/plugins-init/sweetalert.init.js"></script>
 <%@include file="/frame/frame_javascript.jsp" %>
 
 <script>
@@ -684,6 +644,45 @@
                 }
             })
         }
+    })
+
+    $('#rechargeInput').on('input', (e) => {
+        e.target.value = e.target.value.replace(/[^\d.]/g, ""); //清除“数字”和“.”以外的字符
+        e.target.value = e.target.value.replace(/\.{2,}/g, "."); //只保留第一个. 清除多余的
+        e.target.value = e.target.value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+        e.target.value = e.target.value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');//只能输入两个小数
+        if (e.target.value.indexOf(".") < 0 && e.target.value !== "") {//以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
+            e.target.value = parseFloat(e.target.value);
+        }
+    });
+
+    $('#rechargeSubmit').on('click', (e) => {
+        let value = $('#rechargeInput').val();
+        if (!value || value == '0' || value == '0.0' || value == '0.00') {
+            sweetAlert({
+                type: "error",
+                title: "充值金额不能为0",
+                text: "请再次尝试",
+                timer: 1e3,
+                showConfirmButton: !1
+            });
+            return;
+        }
+        const data = {};
+        data.rechargeValue = value;
+        data.action = 'recharge';
+        $.post('/balance', data, (res) => {
+            console.log(res)
+            $('#rechargeInput').val(res['newBalance']);
+            swal("success", "充值成功", "success");
+        })
+    });
+    const data = {};
+    data.action = 'payouts';
+    $('#payoutsSubmit').on('click', () => {
+        $.post('/balance', data, (res) => {
+            swal("success", "提现成功", "success");
+        })
     })
 </script>
 

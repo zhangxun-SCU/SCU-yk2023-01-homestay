@@ -52,4 +52,11 @@ public int numCartByUserId(String user_id) throws SQLException {
     String sql="delete from cart where owner_id='"+user_id+"' and good_id='"+data.getParam().getString("good_id")+"'";
     db.executeUpdate(sql);
     }
+
+    public void modifyCartGood(String user_id, Data data, JSONObject json) throws JSONException {
+    DB db=new DB("group1");
+    String sql="update cart set num="+data.getParam().getInt("num")+"  where owner_id='"+user_id+"' and good_id='"+data.getParam().getString("good_id")+"'";
+    System.out.println("执行的SQL语句是"+sql);
+    db.executeUpdate(sql);
+    }
 }

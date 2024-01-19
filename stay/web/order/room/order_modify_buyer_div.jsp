@@ -13,7 +13,7 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label">订单ID</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" placeholder="Enter text" id="good_id" name="good_id">
+                                    <input type="text" class="form-control" placeholder="Enter text" id="good_id" name="good_id" readonly="readonly">
                                     <span class="help-block">
 											请填写 </span>
                                 </div>
@@ -21,7 +21,7 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label">酒店名</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" placeholder="Enter text" id="house_name" name="house_name">
+                                    <input type="text" class="form-control" placeholder="Enter text" id="house_name" name="house_name" readonly="readonly">
                                     <span class="help-block">
 											请填写 </span>
                                 </div>
@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-default" data-bs-dismiss="modal">取消</button>
                 <button type="button" class="btn blue" id="submit_button" name="submit_button">确认修改</button>
             </div>
         </div>

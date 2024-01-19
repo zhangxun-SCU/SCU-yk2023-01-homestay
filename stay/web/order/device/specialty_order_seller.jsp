@@ -618,13 +618,13 @@
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">订单编号</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" placeholder="Enter text" id="order_id" name="order_id">
+                                        <input type="text" class="form-control" placeholder="输入待查找订单编号" id="order_id" name="order_id">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">商品名称</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" placeholder="Enter text" id="specialty_name" name="specialty_name">
+                                        <input type="text" class="form-control" placeholder="输入待查找商品名称" id="specialty_name" name="specialty_name">
                                     </div>
                                 </div>
                             </div>

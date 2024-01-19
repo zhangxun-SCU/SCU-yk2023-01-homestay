@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/homePage/homePage",
+    "pages/minePage/minePage",
+    "pages/select_city/select_city",
+    "pages/orderList/orderList",
+    "pages/searchHotel/searchHotel",
+    "pages/hotelDetail/hotelDetail",
+    "pages/hotelFilter/hotelFilter",
+    "pages/bookHotel/bookHotel",
+    "pages/specialty/specialty"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "backgroundColor": "#00A3FF",
+    "navigationBarBackgroundColor": "#00A3FF",
+    "navigationBarTitleText": "名宿商场",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#333333",
+    "selectedColor": "#00A3FF",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/homePage/homePage",
+        "text": "名宿",
+        "iconPath": "res/images/ic_home_normal.png",
+        "selectedIconPath": "res/images/ic_home_selected.png"
+      },
+      {
+        "pagePath": "pages/specialty/specialty",
+        "text": "特产",
+        "iconPath": "res/images/icon_specity.png",
+        "selectedIconPath": "res/images/icon_specity_select.png"
+      },
+      {
+        "pagePath": "pages/minePage/minePage",
+        "text": "我的",
+        "iconPath": "res/images/ic_mine_normal.png",
+        "selectedIconPath": "res/images/ic_mine_selected.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

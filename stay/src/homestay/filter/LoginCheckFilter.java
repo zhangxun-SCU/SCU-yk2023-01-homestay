@@ -1,7 +1,9 @@
 package homestay.filter;
 
+import homestay.dao.Data;
 import homestay.utils.JwtUtil;
 import homestay.utils.UserUtil;
+import org.json.JSONException;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -12,7 +14,7 @@ import java.io.IOException;
 
 @WebFilter(urlPatterns = "/*")
 //@WebFilter("/*")
-public class LoginCheckFilter implements Filter {
+public class    LoginCheckFilter implements Filter {
 
     private String[] noCheckedPaths = {
             "login",
@@ -34,7 +36,12 @@ public class LoginCheckFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
-
+        String src = "web";
+        try {
+            src = Data.getPageParameters(req, resp).getParam().has("src") ? Data.getPageParameters(req, resp).getParam().getString("src") : "web";
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
         //  先获取token
         String loginJwt = req.getHeader("token");
         if (loginJwt == null) {
@@ -54,7 +61,7 @@ public class LoginCheckFilter implements Filter {
 //        System.out.println("request url:" + url);
         // 处理自动登录
 
-        if(url.equals("/") || url.equals("") || url.contains("login")) {
+        if((url.equals("/") || url.isEmpty() || url.contains("login")) && !src.equals("miniapp")) {
             if(autoLogin(req, resp, loginJwt)) {return;}
         }
         // 通过必要的请求

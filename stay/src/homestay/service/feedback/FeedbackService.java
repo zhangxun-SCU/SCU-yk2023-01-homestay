@@ -31,4 +31,14 @@ public class FeedbackService {
             dao.replyFeedback(fid, reply, json);
         }
     }
+
+    public static void deleteFeedback(Data data, JSONObject json) throws JSONException, SQLException {
+        FeedbackDao dao = new FeedbackDao();
+        dao.deleteFeedback(data, json);
+    }
+
+    public static void addFeedback(Data data, JSONObject json) throws JSONException, SQLException {
+        FeedbackDao dao = new FeedbackDao();
+        dao.addFeedback(data, json);
+    }
 }

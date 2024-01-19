@@ -807,7 +807,7 @@
         <div class="container-fluid">
             <div>
                 <input id="searchTextField" type="text" size="25" style="width:80%;" onKeyUp="GetFromAddress(this.value)" />
-                <input type="button" class="btn default purple-stripe" value="查询" onClick="GetFromAddress(document.getElementById('searchTextField').value)"  style="width:15%;" />
+                <input type="button" class="btn default purple-stripe" value="定位" onClick="GetFromAddress(document.getElementById('searchTextField').value)"  style="width:15%;" />
             </div>
             <div id="apDiv1">
                 <div id="results"></div>
