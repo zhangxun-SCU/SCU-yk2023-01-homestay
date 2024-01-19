@@ -64,8 +64,8 @@
         <div class="container-fluid">
             <div class="row page-titles">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active"><a href="javascript:void(0)">商家</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">民宿与特产管理</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">商品管理</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">发布商品</a></li>
                 </ol>
             </div>
             <!-- row -->

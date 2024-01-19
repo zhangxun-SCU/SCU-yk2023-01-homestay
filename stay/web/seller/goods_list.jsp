@@ -82,8 +82,8 @@
 
             <div class="row page-titles">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active"><a href="javascript:void(0)">App</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Profile</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">商品管理</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">查看商品</a></li>
                 </ol>
             </div>
             <!-- row -->
