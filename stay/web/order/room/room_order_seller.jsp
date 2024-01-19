@@ -951,7 +951,7 @@
 <%@ include file="order_modify_seller_div.jsp" %>
 <%@ include file="/frame/frame_javascript.jsp" %>
 <%@ include file="order_download_div.jsp" %>
-
+<%@ include file="../device/order_comment.jsp" %>
 <!--**********************************
     Scripts
 ***********************************-->

@@ -45,13 +45,14 @@ function geoCode() {
         console.log(address);
         if (status === 'complete' && result.geocodes.length) {
             var lnglat = result.geocodes[0].location
+            console.log(lnglat);
             marker.setPosition(lnglat);
             map.add(marker);
             map.setFitView(marker);
             $("#homestay_lnglat").val(lnglat);
             $("#homestay_location").val(address);
         } else {
-            log.error('根据地址查询位置失败');
+            console.error('根据地址查询位置失败');
         }
     });
 }

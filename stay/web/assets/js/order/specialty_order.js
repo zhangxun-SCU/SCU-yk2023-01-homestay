@@ -875,6 +875,7 @@ var Page = function () {
 /*================================================================================*/
 
 function updateHTML(record, html) {
+    console.log(record.order_status);
     html = html + "                                   <tr>";
     html = html + "                                        <td>";
     html = html + "                                            <div class=\"form-check custom-checkbox checkbox-success check-lg me-3\">";
@@ -886,12 +887,19 @@ function updateHTML(record, html) {
     html = html + "                                        <td><div class=\"d-flex align-items-center\"><img src=\"" + record.imageurl + "\" class=\"rounded-lg me-2\" width=\"24\" alt=\"\"/> <span class=\"w-space-no\">" + record.specialty_name + "</span></div></td>";
     html = html + "                                        <td>" + record.num + "	</td>";
     html = html + "                                        <td>" + record.price * record.num + "</td>";
-    html = html + "                                        <td><div class=\"d-flex align-items-center\"><i class=\"fa fa-circle text-success me-1\"></i> " + (record.order_status != 0 ? '已支付' : '未支付') + "</div></td>";
+    if (record.order_status !== "0") {
+        html = html + "                                        <td><div class=\"d-flex align-items-center\"><i class=\"fa fa-circle text-success me-1\"></i>已支付</div></td>";
+    } else {
+        html = html + "                                        <td><div class=\"d-flex align-items-center\"><i class=\"fa fa-circle text-danger me-1\"></i>未支付</div></td>";
+    }
     html = html + "                                        <td>";
     html = html + "                                            <div class=\"d-flex\">";
     html = html + "                                                <a href=\"javascript:Page.onModifyRecord('" + record.order_id + "')\" class=\"btn btn-primary shadow btn-xs sharp me-1\"><i class=\"fas fa-pencil-alt\"></i></a>";
     html = html + "                                                <a href=\"javascript:Page.onDeleteRecord('" + record.order_id + "')\" class=\"btn btn-danger shadow btn-xs sharp me-1\"><i class=\"fa fa-trash\"></i></a>";
-    html = html + "                                                <a href=\"javascript:Page.onComment('" + record.good_id + "')\" class=\"btn btn-info shadow btn-xs sharp\"><i class=\"fa fa-comment\"></i></a>";
+    if (record.order_status !== "0") {
+        // 已支付的订单才可评论
+        html = html + "                                                <a href=\"javascript:Page.onComment('" + record.good_id + "')\" class=\"btn btn-info shadow btn-xs sharp\"><i class=\"fa fa-comment\"></i></a>";
+    }
     html = html + "                                            </div>";
     html = html + "                                        </td>";
     html = html + "                                    </tr>";
