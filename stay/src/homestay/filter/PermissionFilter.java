@@ -2,7 +2,7 @@ package homestay.filter;
 
 import homestay.dao.UserDao;
 import homestay.entity.User;
-import homestay.servlet.LoginServlet;
+import homestay.utils.UserUtil;
 import org.json.JSONException;
 
 import javax.servlet.*;
@@ -13,15 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Objects;
 
 
 @WebFilter({"/admin/", "/superadmin/", "/seller/"})
-public class APermissionFilter implements Filter {
+public class PermissionFilter implements Filter {
 
     private final UserDao userDao;
 
-    public APermissionFilter() {
+    public PermissionFilter() {
         this.userDao = new UserDao();
     }
 
@@ -37,7 +36,7 @@ public class APermissionFilter implements Filter {
 
         // 获取用户 ID，这里假设用户 ID 存储在 session 中
         HttpSession session = httpRequest.getSession();
-        String userId = (String) session.getAttribute("user_id");
+//        String userId = (String) session.getAttribute("user_id");
 
         /*
 
@@ -52,18 +51,15 @@ public class APermissionFilter implements Filter {
         String requestPath = httpRequest.getRequestURI();
 
         // 判断是否需要权限验证
-        String token = null;
 
-        for (Cookie cookie : httpRequest.getCookies()) {
-            if ("USER_ID".equals(cookie.getName())) {
-                userId = cookie.getValue();
-            }
-            if ("LOGIN_TOKEN".equals(cookie.getName())) {
-                token = cookie.getValue();
-            }
-        }
-        System.out.println(checkUserPermission(userId, token, requestPath));
-        if (checkUserPermission(userId, token, requestPath)) {
+//        for (Cookie cookie : httpRequest.getCookies()) {
+//            if ("USER_ID".equals(cookie.getName())) {
+//                userId = cookie.getValue();
+//            }
+//        }
+        String userId = UserUtil.getUserId(httpRequest);
+        System.out.println(checkUserPermission(userId, requestPath));
+        if (checkUserPermission(userId, requestPath)) {
             // 用户有权限，继续执行请求
             chain.doFilter(request, response);
         }
@@ -95,7 +91,7 @@ public class APermissionFilter implements Filter {
 //        //return path.contains("/seller/");
 //    }
 
-    private boolean checkUserPermission(String userId, String token, String requestPath) {
+    private boolean checkUserPermission(String userId, String requestPath) {
         // 根据 userId 去数据库或其他地方检查用户的权限，根据实际需求实现
         // 这里仅作示例，检查 permission 是否为 "high"，是的话就认为有权限
 //        String expectedToken = LoginServlet.userIdTokenMap.get(userId);

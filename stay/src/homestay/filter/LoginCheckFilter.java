@@ -111,7 +111,7 @@ public class    LoginCheckFilter implements Filter {
                 try {
                     System.out.println(UserUtil.getUserId(req) + "auto login:" + auto);
                     JwtUtil.parseJwt(jwt);
-                    resp.sendRedirect("/seller/goods_list.jsp");
+                    resp.sendRedirect("/market/house_market.jsp");
                     return true;
                 } catch (Exception e) {
                     return false;

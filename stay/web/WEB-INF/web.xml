@@ -14,7 +14,7 @@
     </servlet-mapping>
     <filter>
         <filter-name>PermissionFilter</filter-name>
-        <filter-class>homestay.filter.APermissionFilter</filter-class>
+        <filter-class>homestay.filter.PermissionFilter</filter-class>
     </filter>
     <!--    <filter>-->
     <!--        <filter-name>SellerFilter</filter-name>-->
