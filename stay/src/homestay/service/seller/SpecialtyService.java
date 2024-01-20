@@ -33,4 +33,14 @@ public class SpecialtyService {
         SpecialtyDao dao = new SpecialtyDao();
         dao.deleteSpecialty(data, json);
     }
+
+    public void getStatistics(Data data, JSONObject json) throws JSONException {
+        SpecialtyDao dao = new SpecialtyDao();
+        if (data.getParam().has("limit")) {
+            dao.getTopSales(data, json);
+        } else {
+            String owner_id = data.getParam().getString("owner_id");
+            dao.getTotalSalesInPastWeek(owner_id, json);
+        }
+    }
 }
