@@ -37,7 +37,7 @@ public class APermissionFilter implements Filter {
 
         // 获取用户 ID，这里假设用户 ID 存储在 session 中
         HttpSession session = httpRequest.getSession();
-//        String userId = (String) session.getAttribute("user_id");
+        String userId = (String) session.getAttribute("user_id");
 
         /*
 
@@ -52,34 +52,20 @@ public class APermissionFilter implements Filter {
         String requestPath = httpRequest.getRequestURI();
 
         // 判断是否需要权限验证
-        String userId = null;
         String token = null;
 
         for (Cookie cookie : httpRequest.getCookies()) {
             if ("USER_ID".equals(cookie.getName())) {
                 userId = cookie.getValue();
             }
-            if (userId == null || token == null) {
-                httpResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
-                return;
+            if ("LOGIN_TOKEN".equals(cookie.getName())) {
+                token = cookie.getValue();
             }
-            System.out.println(checkUserPermission(userId, token, requestPath));
-            if (checkUserPermission(userId, token, requestPath)) {
-                // 用户有权限，继续执行请求
-                chain.doFilter(request, response);
-                if ("LOGIN_TOKEN".equals(cookie.getName())) {
-                    token = cookie.getValue();
-                }
-            }
-            if (userId == null || token == null) {
-                httpResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
-                return;
-            }
-            if (checkUserPermission(userId, token, requestPath)) {
-                // 用户有权限，继续执行请求
-                chain.doFilter(request, response);
-            }
-
+        }
+        System.out.println(checkUserPermission(userId, token, requestPath));
+        if (checkUserPermission(userId, token, requestPath)) {
+            // 用户有权限，继续执行请求
+            chain.doFilter(request, response);
         }
     }
 
@@ -112,7 +98,7 @@ public class APermissionFilter implements Filter {
     private boolean checkUserPermission(String userId, String token, String requestPath) {
         // 根据 userId 去数据库或其他地方检查用户的权限，根据实际需求实现
         // 这里仅作示例，检查 permission 是否为 "high"，是的话就认为有权限
-        String expectedToken = LoginServlet.userIdTokenMap.get(userId);
+//        String expectedToken = LoginServlet.userIdTokenMap.get(userId);
 
 //        if (!Objects.equals(token, expectedToken)) {
 //            return false;
@@ -128,9 +114,9 @@ public class APermissionFilter implements Filter {
             if (requestPath.startsWith("/superadmin")) {
                 return "superhigh".equals(permission);
             } else if (requestPath.startsWith("/admin")) {
-                return "high".equals(permission);
+                return "high".equals(permission) || "superhigh".equals(permission);
             } else if (requestPath.startsWith("/seller")) {
-                return "middle".equals(permission);
+                return "middle".equals(permission) || "high".equals(permission) || "superhigh".equals(permission);
             }
             return false;
         } catch (SQLException | JSONException e) {
@@ -140,28 +126,28 @@ public class APermissionFilter implements Filter {
         }
     }
 
-    private boolean isSuperAdministrator(String userId, String token) {
-        // 根据 userId 去数据库或其他地方检查用户是否为超级管理员，根据实际需求实现
-        // 这里仅作示例，检查 userType 是否为 "superhigh"
-        // 这里仅作示例，检查 permission 是否为 "high"，是的话就认为有权限
-        String expectedToken = LoginServlet.userIdTokenMap.get(userId);
-
-//        if (!Objects.equals(token, expectedToken)) {
+//    private boolean isSuperAdministrator(String userId, String token) {
+//        // 根据 userId 去数据库或其他地方检查用户是否为超级管理员，根据实际需求实现
+//        // 这里仅作示例，检查 userType 是否为 "superhigh"
+//        // 这里仅作示例，检查 permission 是否为 "high"，是的话就认为有权限
+//        String expectedToken = LoginServlet.userIdTokenMap.get(userId);
+//
+////        if (!Objects.equals(token, expectedToken)) {
+////            return false;
+////        }
+//        try {
+//            // 查询用户的 permission
+//            User user = userDao.queryUserById(userId);
+//
+//            // 判断 permission 是否为 "high"
+//            String permission = user.permission;
+//            return "superhigh".equals(permission);
+//        } catch (SQLException | JSONException e) {
+//            // 处理异常，可以抛出或记录到日志
+//            e.printStackTrace();
 //            return false;
 //        }
-        try {
-            // 查询用户的 permission
-            User user = userDao.queryUserById(userId);
-
-            // 判断 permission 是否为 "high"
-            String permission = user.permission;
-            return "superhigh".equals(permission);
-        } catch (SQLException | JSONException e) {
-            // 处理异常，可以抛出或记录到日志
-            e.printStackTrace();
-            return false;
-        }
-    }
+//    }
 
     @Override
     public void destroy() {
