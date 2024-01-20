@@ -16,11 +16,11 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 @WebFilter({"/admin/", "/superadmin/"})
-public class PermissionFilter implements Filter {
+public class APermissionFilter implements Filter {
 
     private final UserDao userDao;
 
-    public PermissionFilter() {
+    public APermissionFilter() {
         this.userDao = new UserDao();
     }
 
@@ -66,6 +66,7 @@ public class PermissionFilter implements Filter {
                 httpResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
                 return;
             }
+            System.out.println(checkUserPermission(userId,token,requestPath));
             if (checkUserPermission(userId,token,requestPath)) {
                 // 用户有权限，继续执行请求
                 chain.doFilter(request, response);
@@ -109,9 +110,9 @@ public class PermissionFilter implements Filter {
         // 这里仅作示例，检查 permission 是否为 "high"，是的话就认为有权限
         String expectedToken = LoginServlet.userIdTokenMap.get(userId);
 
-        if (!Objects.equals(token, expectedToken)) {
-            return false;
-        }
+//        if (!Objects.equals(token, expectedToken)) {
+//            return false;
+//        }
 
         try {
             // 查询用户的 permission
@@ -119,6 +120,7 @@ public class PermissionFilter implements Filter {
 
             // 判断 permission 是否为 "high"
             String permission = user.permission;
+            System.out.println(permission);                                                      
             if(requestPath.startsWith("/superadmin")){
                 return "superhigh".equals(permission);
             }else if(requestPath.startsWith("/admin")){

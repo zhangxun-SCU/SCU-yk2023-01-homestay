@@ -828,7 +828,7 @@ Sidebar start
 
                 <li>
                     <a href="/market/cart.jsp">
-                        <i class="fas fa-chart-line"></i>
+                        <i class="fas fa-heart"></i>
                         <span class="nav-text">购物车</span>
                     </a>
                 </li>
@@ -836,33 +836,38 @@ Sidebar start
 
             <li>
                 <a class="has-arrow" href="javascript:void();" aria-expanded="false">
-                    <i class="fas fa-chart-line"></i>
+                    <i class="fas fa-file-alt"></i>
                     <span class="nav-text">我的订单</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="/order/room/room_order.jsp">房间</a></li>
+                    <li>
+                        <a href="/order/room/room_order.jsp">房间</a>
+                    </li>
                     <li><a href="/order/device/specialty_order.jsp">特产</a></li>
                 </ul>
             </li>
 
             <li>
                 <a href="/GPS/GPS.jsp">
-                    <i class="fas fa-chart-line"></i>
+                    <i class="fas fa-map"></i>
                     <span class="nav-text">地图导航</span>
                 </a>
             </li>
             <li>
                 <a href="/weather/weather.jsp">
-                    <i class="fas fa-chart-line"></i>
+                    <i class="fas fa-cloud"></i>
                     <span class="nav-text">今日天气</span>
                 </a>
             </li>
+                <%if (user.permission.equals("superhigh") || user.permission.equals("high")) {%>
                 <li>
                     <a href="/Feedback/feedback-page.jsp">
-                        <i class="fas fa-chart-line"></i>
+                        <i class="fas fa-info-circle"></i>
                         <span class="nav-text">用户反馈</span>
                     </a>
                 </li>
+                <%}%>
+
             <%if (user.permission.equals("superhigh")) {%>
             <li>
                 <a href="/superadmin/users.jsp">

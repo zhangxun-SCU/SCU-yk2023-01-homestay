@@ -1,5 +1,6 @@
 package homestay.servlet;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -22,14 +23,18 @@ public class LoginServlet extends HttpServlet {
     private Data data = null;
     public final static Map<String,String> userIdTokenMap=new ConcurrentHashMap<>();
 
+//    private final ServletContext context = this.getServletContext();
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             data = Data.getPageParameters(req, resp);
             if(data.getParam().getString("src").equals("miniapp")) {
+//                context.log("login: user: " + data.getParam().getString("userId") + "from web browser");
                 doMiniappLogin(req, resp);
             } else {
+//                context.log("login: user: " + data.getParam().getString("userId") + "from web miniapp");
                 doWebLogin(req, resp);
             }
         } catch (JSONException e) {
