@@ -137,7 +137,7 @@
     <%@include file="/frame/frame_footer.jsp" %>
     <%--  footer end  --%>
 </div>
-<%@ include file="../seller/modals/reply_modal.jsp" %>
+<%@ include file="modals/reply_modal.jsp" %>
 <%--  script start  --%>
 
 <%@include file="/frame/frame_javascript.jsp" %>

@@ -1,6 +1,7 @@
 package homestay.servlet.seller;
 
 import homestay.dao.Data;
+import homestay.service.seller.ExportService;
 import homestay.service.seller.HomestayService;
 import homestay.service.seller.RoomService;
 import homestay.service.seller.SpecialtyService;
@@ -43,6 +44,9 @@ public class GoodsServlet extends HttpServlet {
                 dispatchHomestayAction(request, response, json);
             } else if (actionType.equals("room")) {
                 dispatchRoomAction(request, response, json);
+            } else if (actionType.equals("export")) {
+                ExportService exportService = new ExportService();
+                exportService.exportData(data, json);
             } else {
                 json.put("resCode", "G0001");
                 json.put("Information", "错误操作");

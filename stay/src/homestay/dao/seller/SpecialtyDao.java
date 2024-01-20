@@ -196,7 +196,7 @@ public class SpecialtyDao {
                             "From specialty_order " +
                             "Join specialty On specialty.specialty_id=specialty_order.good_id " +
                             "Where specialty.owner_id='%s') A " +
-                            "Where create_date >= DATE_SUB(NOW(), Interval 7 day) Group By date Order By date DESC",
+                            "Where create_date >= DATE_SUB(NOW(), Interval 7 day) Group By date Order By date ASC",
                     owner_id
             );
             ResultSet res = db.executeQuery(sql);
@@ -208,6 +208,8 @@ public class SpecialtyDao {
                 map.put("date", res.getString("date"));
                 list.add(map);
             }
+            res.close();
+            db.close();
             json.put("resCode", resCode);
             json.put("getTotalSalesInfo", info);
             json.put("sales", list);
@@ -242,6 +244,8 @@ public class SpecialtyDao {
                 map.put("total_sale", res.getInt("total_sale"));
                 list.add(map);
             }
+            res.close();
+            db.close();
             json.put("resCode", resCode);
             json.put("getTopSalesInfo", info);
             json.put("sales", list);

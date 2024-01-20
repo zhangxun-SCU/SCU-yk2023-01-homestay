@@ -1,3 +1,8 @@
+function onloadFunction() {
+    getStatistics();
+    getExportURL();
+}
+
 let draw = Chart.controllers.line.__super__.draw; //draw shadow
 
 function getStatistics() {
@@ -185,5 +190,23 @@ function drawTopSales(labels, data, type) {
             }
         });
     }
+}
+
+function getExportURL() {
+    let url = "/seller";
+    let data = {
+        "actionType": "export",
+        "owner_id": getUserInfo().id
+    };
+    $.post(
+        url,
+        data,
+        (res) => {
+            if (res.resCode === "00000") {
+                console.log(res);
+                document.getElementById("download").href = res.download_path;
+            }
+        }
+    )
 }
 
