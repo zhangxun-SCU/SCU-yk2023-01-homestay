@@ -65,33 +65,49 @@ function getAllHomestays() {
 }
 
 function initHomestayButtons() {
-    var detailButtons = document.querySelectorAll(".detail_homestay_button");
-    for (var i = 0; i < detailButtons.length; i++) {
-        var button = detailButtons[i];
-        button.addEventListener("click", (e) => {
-            var homestayId = e.target.dataset.id;
-            console.log(homestayId);
-            window.location.href = `/seller/house_detail.jsp?house_id=${homestayId}`;
-        })
-    }
+    $(".detail_homestay_button").unbind("click").click((e) => {
+        var homestayId = e.target.dataset.id;
+        console.log(homestayId);
+        window.location.href = `/seller/house_detail.jsp?house_id=${homestayId}`;
+    })
 
-    var deleteButtons = document.querySelectorAll(".delete_homestay_button");
-    for (var i = 0; i < deleteButtons.length; i++) {
-        var button = deleteButtons[i];
-        button.addEventListener("click", (e) => {
-            var homestayId = e.target.dataset.id;
-            showDeleteHomestayModal(homestayId);
-        })
-    }
+    $(".delete_homestay_button").unbind("click").click((e) => {
+        var homestayId = e.target.dataset.id;
+        showDeleteHomestayModal(homestayId);
+    })
 
-    var modifyButtons = document.querySelectorAll(".modify_homestay_button");
-    for (var i = 0; i < modifyButtons.length; i++) {
-        var button = modifyButtons[i];
-        button.addEventListener("click", (e) => {
-            var homestayId = e.target.dataset.id;
-            showModifyHomestayModal(homestayId);
-        })
-    }
+    $(".modify_homestay_button").unbind("click").click((e) => {
+        var homestayId = e.target.dataset.id;
+        showModifyHomestayModal(homestayId);
+    })
+
+    // var detailButtons = document.querySelectorAll(".detail_homestay_button");
+    // for (var i = 0; i < detailButtons.length; i++) {
+    //     var button = detailButtons[i];
+    //     button.addEventListener("click", (e) => {
+    //         var homestayId = e.target.dataset.id;
+    //         console.log(homestayId);
+    //         window.location.href = `/seller/house_detail.jsp?house_id=${homestayId}`;
+    //     })
+    // }
+
+    // var deleteButtons = document.querySelectorAll(".delete_homestay_button");
+    // for (var i = 0; i < deleteButtons.length; i++) {
+    //     var button = deleteButtons[i];
+    //     button.addEventListener("click", (e) => {
+    //         var homestayId = e.target.dataset.id;
+    //         showDeleteHomestayModal(homestayId);
+    //     })
+    // }
+
+    // var modifyButtons = document.querySelectorAll(".modify_homestay_button");
+    // for (var i = 0; i < modifyButtons.length; i++) {
+    //     var button = modifyButtons[i];
+    //     button.addEventListener("click", (e) => {
+    //         var homestayId = e.target.dataset.id;
+    //         showModifyHomestayModal(homestayId);
+    //     })
+    // }
 }
 
 function showDeleteHomestayModal(homestayId) {
@@ -245,23 +261,33 @@ function getAllSpecialty() {
 }
 
 function initSpecialtyButtons() {
-    var deleteButtons = document.querySelectorAll(".delete_specialty_button");
-    for (var i = 0; i < deleteButtons.length; i++) {
-        var button = deleteButtons[i];
-        button.addEventListener("click", (e) => {
-            var specialtyId = e.currentTarget.parentNode.nextElementSibling.value;
-            showDeleteSpecialtyModal(specialtyId);
-        });
-    }
+    $(".delete_specialty_button").unbind("click").click((e) => {
+        var specialtyId = e.currentTarget.parentNode.nextElementSibling.value;
+        showDeleteSpecialtyModal(specialtyId);
+    })
 
-    var modifyButtons = document.querySelectorAll(".modify_specialty_button");
-    for (var i = 0; i < modifyButtons.length; i++) {
-        var button = modifyButtons[i];
-        button.addEventListener("click", (e) => {
-            var specialtyId = e.currentTarget.parentNode.nextElementSibling.value;
-            showModifySpecialtyModal(specialtyId);
-        });
-    }
+    $(".modify_specialty_button").unbind("click").click((e) => {
+        var specialtyId = e.currentTarget.parentNode.nextElementSibling.value;
+        showModifySpecialtyModal(specialtyId);
+    })
+
+    // var deleteButtons = document.querySelectorAll(".delete_specialty_button");
+    // for (var i = 0; i < deleteButtons.length; i++) {
+    //     var button = deleteButtons[i];
+    //     button.addEventListener("click", (e) => {
+    //         var specialtyId = e.currentTarget.parentNode.nextElementSibling.value;
+    //         showDeleteSpecialtyModal(specialtyId);
+    //     });
+    // }
+    //
+    // var modifyButtons = document.querySelectorAll(".modify_specialty_button");
+    // for (var i = 0; i < modifyButtons.length; i++) {
+    //     var button = modifyButtons[i];
+    //     button.addEventListener("click", (e) => {
+    //         var specialtyId = e.currentTarget.parentNode.nextElementSibling.value;
+    //         showModifySpecialtyModal(specialtyId);
+    //     });
+    // }
 }
 
 function showDeleteSpecialtyModal(specialtyId) {

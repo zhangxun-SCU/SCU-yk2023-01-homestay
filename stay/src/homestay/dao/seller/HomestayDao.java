@@ -252,7 +252,7 @@ public class HomestayDao {
                             "Join room Using(house_id, room_id) " +
                             "Join house Using(house_id) " +
                             "Where house.owner_id='%s' And deal_order.order_status=1) A " +
-                            "Where create_date Between DATE_SUB(NOW(), Interval 7 day) And NOW() Group By date Order By date DESC;",
+                            "Where create_date Between DATE_SUB(NOW(), Interval 7 day) And NOW() Group By date Order By date ASC;",
                     owner_id
             );
             showDebug("[getTotalSalesInPastWeek]", "sql: " + sql);
@@ -265,6 +265,8 @@ public class HomestayDao {
                 map.put("date", res.getString("date"));
                 list.add(map);
             }
+            res.close();
+            db.close();
             json.put("resCode", resCode);
             json.put("getTotalSalesInfo", info);
             json.put("sales", list);
@@ -302,6 +304,8 @@ public class HomestayDao {
                 map.put("total_sale", res.getInt("total_sale"));
                 list.add(map);
             }
+            res.close();
+            db.close();
             json.put("resCode", resCode);
             json.put("getTopSalesInfo", info);
             json.put("sales", list);

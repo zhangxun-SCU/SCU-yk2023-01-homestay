@@ -1,10 +1,11 @@
 <%--
   Created by IntelliJ IDEA.
   User: HP
-  Date: 2023/12/1
-  Time: 16:14
+  Date: 2024/1/20
+  Time: 20:24
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="homestay.utils.UserUtil" %>
 <%@ page import="homestay.entity.User" %>
@@ -44,7 +45,7 @@
 
 </head>
 
-<body onload="onLoadFunction();">
+<body onload="onloadFunction();">
 
 <!--*******************
     Preloader start
@@ -83,7 +84,7 @@
             <div class="row page-titles">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active"><a href="javascript:void(0)">商品管理</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">查看商品</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">销量统计</a></li>
                 </ol>
             </div>
             <!-- row -->
@@ -120,13 +121,6 @@
                                             </span>
                                             发布新商品
                                         </button>
-                                        <button type="button" class="btn btn-rounded btn-primary"
-                                                onclick="window.location.href='./statistics.jsp'">
-                                            <span class="btn-icon-start text-primary">
-                                                <i class="fa fa-chart-line color-info"></i>
-                                            </span>
-                                            销量统计
-                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -142,25 +136,60 @@
                                 <div class="custom-tab-1">
                                     <ul class="nav nav-tabs">
                                         <li class="nav-item">
-                                            <a href="#homestays-post" data-bs-toggle="tab"
-                                               class="nav-link active show">民宿</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#specialty-post" data-bs-toggle="tab"
-                                               class="nav-link">特产</a>
+                                            <a href="#statistics" data-bs-toggle="tab"
+                                               class="nav-link active show">销售量统计</a>
                                         </li>
                                     </ul>
                                     <div class="tab-content">
-                                        <div id="homestays-post" class="tab-pane fade active show">
-                                            <div class="my-post-content pt-3">
-                                            </div>
-                                            <div id="homestay_list">
-                                            </div>
-                                        </div>
-                                        <div id="specialty-post" class="tab-pane fade">
-                                            <div class="my-post-content pt-3">
-                                            </div>
-                                            <div class="row" id="specialty_list">
+                                        <div id="statistics" class="tab-pane fade active show">
+                                            <a href="#"
+                                               class="btn btn-rounded btn-success mb-2 m-2"
+                                               id="download">
+                                                <span class="btn-icon-start text-success">
+                                                    <i class="fa fa-file-excel color-danger"></i>
+                                                </span>导出数据为Excel
+                                            </a>
+                                            <div class="row">
+                                                <div class="col-xl-6 col-lg-12 col-sm-12">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h4 class="card-title">最近一周特产总销量变化</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <canvas id="specialty_total_sales"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-12 col-sm-12">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h4 class="card-title">特产销量TOP</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <canvas id="specialty_top_sales"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-12 col-sm-12">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h4 class="card-title">最近一周民宿预订数量变化</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <canvas id="homestay_total_sales"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-12 col-sm-12">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h4 class="card-title">民宿热度TOP</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <canvas id="homestay_top_sales"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -214,51 +243,10 @@
 <script src="../assets/vendor/chart.js/Chart.bundle.min.js"></script>
 <script src="../assets/vendor/lightgallery/js/lightgallery-all.min.js"></script>
 
-<%-- 地图 --%>
-<script type="text/javascript">
-    window._AMapSecurityConfig = {
-        securityJsCode: 'd71806b25af8ceba503a3b358b33694b',
-    }
-</script>
-<script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
-<script type="text/javascript"
-        src="https://webapi.amap.com/maps?v=1.4.15&key=89fd825427ce3fbf3dc999e544b50f99&plugin=AMap.Geocoder"></script>
-<script type="text/javascript">
-    var map = new AMap.Map("map_container", {
-        resizeEnable: true
-    });
+<!-- Chart ChartJS plugin files -->
+<script src="../assets/vendor/chart.js/Chart.bundle.min.js"></script>
+<%--<script src="../assets/js/plugins-init/chartjs-init.js"></script>--%>
+<script src="../assets/js/seller/statistics.js"></script>
 
-    var geocoder = new AMap.Geocoder({
-        city: "全国", //城市设为北京，默认：“全国”
-    });
-
-    var marker = new AMap.Marker();
-
-    function geoCode() {
-        var address = document.getElementById('modify_location').value;
-        geocoder.getLocation(address, function (status, result) {
-            console.log(address);
-            if (status === 'complete' && result.geocodes.length) {
-                var lnglat = result.geocodes[0].location;
-                marker.setPosition(lnglat);
-                map.add(marker);
-                map.setFitView(marker);
-                $("#modify_lnglat").val(lnglat);
-            } else {
-                console.log('根据地址查询位置失败');
-            }
-        });
-    }
-
-    document.getElementById("geo").onclick = geoCode;
-    document.getElementById('modify_location').onkeydown = function (e) {
-        if (e.keyCode === 13) {
-            geoCode();
-            return false;
-        }
-        return true;
-    };
-</script>
-<script src="../assets/js/seller/goods_list.js"></script>
 </body>
 </html>

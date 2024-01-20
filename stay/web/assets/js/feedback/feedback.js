@@ -20,14 +20,19 @@ function getAllFeedbacks() {
                 var html = "";
                 for (var i = 0; i < feedbackList.length; i++) {
                     var feedback = feedbackList[i];
-                    var time = new Date(feedback.feedback_time);
+                    var time = new Date(feedback.create_time);
                     time = time.toDateString();
                     html += `<div class="media pt-3 pb-3">`;
                     html += `    <img src="${feedback.avatar}" alt="${feedback.user_id}"`;
                     html += `         class="me-3 rounded" width="75">`;
                     html += `        <div class="media-body">`;
                     html += `            <h5 class="m-b-5">`;
-                    html += `                ${feedback.user_id} <i class="invisible">&nbsp;</i><small class="text-light ml-2">${time}</small>`;
+                    html += `                ${feedback.user_id} <i class="invisible">&nbsp;</i><small class="text-light ml-2">${time}</small>&nbsp;`;
+                    if (feedback.reply !== undefined && feedback.reply !== null && feedback.reply !== "") {
+                        html += `<small><i class="fa fa-circle text-success me-1"></i>已回复</small>`;
+                    } else {
+                        html += `<small><i class="fa fa-circle text-danger me-1"></i>未回复</small>`;
+                    }
                     html += `            </h5>`;
                     html += `            <p class="mb-0 text-muted">`;
                     html += `                ${feedback.feedback}`;
@@ -101,8 +106,8 @@ function getReply(fid) {
                 var feedback = res.feedbackList[0];
                 if (feedback.reply !== undefined && feedback.reply !== null && feedback.reply !== "") {
                     document.querySelector("#reply").innerText = feedback.reply;
-                }else{
-                    document.querySelector("#reply").innerText = "请填写反馈内容...";
+                } else {
+                    document.querySelector("#reply").innerText = "请填写回复内容...";
                 }
             }
         }
