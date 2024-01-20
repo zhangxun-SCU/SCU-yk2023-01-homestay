@@ -847,9 +847,6 @@
                     <button type="button" class="btn btn-rounded btn-secondary"id="weather_statistic"name="weather_statistic"><span
                             class="btn-icon-start text-secondary"><i class="fa fa-share-alt color-secondary"></i>
                                     </span>湿度统计</button>
-                    <button type="button" class="btn btn-rounded btn-success"><span
-                            class="btn-icon-start text-success"><i class="fa fa-upload color-success"id="weather_order" name="weather_order"></i>
-                                    </span>排序</button>
                 </div>
             </div>
             <div class="row">

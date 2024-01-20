@@ -15,12 +15,13 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Objects;
 
+
 @WebFilter({"/admin/", "/superadmin/", "/seller/"})
-public class PermissionFilter implements Filter {
+public class APermissionFilter implements Filter {
 
     private final UserDao userDao;
 
-    public PermissionFilter() {
+    public APermissionFilter() {
         this.userDao = new UserDao();
     }
 
@@ -58,24 +59,28 @@ public class PermissionFilter implements Filter {
             if ("USER_ID".equals(cookie.getName())) {
                 userId = cookie.getValue();
             }
-            if ("LOGIN_TOKEN".equals(cookie.getName())) {
-                token = cookie.getValue();
+            if (userId == null || token == null) {
+                httpResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                return;
             }
-        }
-        if (userId == null || token == null) {
-            httpResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            return;
-        }
-        if (checkUserPermission(userId, token, requestPath)) {
-            // 用户有权限，继续执行请求
-            chain.doFilter(request, response);
-        }
+            System.out.println(checkUserPermission(userId, token, requestPath));
+            if (checkUserPermission(userId, token, requestPath)) {
+                // 用户有权限，继续执行请求
+                chain.doFilter(request, response);
+                if ("LOGIN_TOKEN".equals(cookie.getName())) {
+                    token = cookie.getValue();
+                }
+            }
+            if (userId == null || token == null) {
+                httpResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                return;
+            }
+            if (checkUserPermission(userId, token, requestPath)) {
+                // 用户有权限，继续执行请求
+                chain.doFilter(request, response);
+            }
 
-    }
-
-    @Override
-    public void destroy() {
-        // 销毁代码（如果有需要）
+        }
     }
 
 //    private boolean isPathRequiringPermission(String path) {
@@ -119,6 +124,7 @@ public class PermissionFilter implements Filter {
             System.out.println("User permission: " + user.permission);
             // 判断 permission 是否为 "high"
             String permission = user.permission;
+
             if (requestPath.startsWith("/superadmin")) {
                 return "superhigh".equals(permission);
             } else if (requestPath.startsWith("/admin")) {
@@ -133,7 +139,6 @@ public class PermissionFilter implements Filter {
             return false;
         }
     }
-
 
     private boolean isSuperAdministrator(String userId, String token) {
         // 根据 userId 去数据库或其他地方检查用户是否为超级管理员，根据实际需求实现
@@ -158,4 +163,8 @@ public class PermissionFilter implements Filter {
         }
     }
 
+    @Override
+    public void destroy() {
+
+    }
 }

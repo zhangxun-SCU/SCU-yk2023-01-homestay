@@ -45,14 +45,14 @@
                                 <div class="text-center mb-3">
                                     <a href="/index.html"><img src="./../assets/images/logo-full.png" alt=""></a>
                                 </div>
-                                <h4 class="text-center mb-4">Sign in your account</h4>
+                                <h4 class="text-center mb-4">登录您的账号</h4>
                                 <form>
                                     <div class="mb-3">
-                                        <label class="mb-1" for="user_id"><strong>id</strong></label>
+                                        <label class="mb-1" for="user_id"><strong>ID</strong></label>
                                         <input type="text" class="form-control" id="user_id">
                                     </div>
                                     <div class="mb-3">
-                                        <label class="mb-1" for="user_password"><strong>Password</strong></label>
+                                        <label class="mb-1" for="user_password"><strong>密码</strong></label>
                                         <input type="password" class="form-control" value="Password" id="user_password">
                                     </div>
                                     <div class="row d-flex">
@@ -70,23 +70,21 @@
                                         <div class="mb-3">
                                             <div class="form-check custom-checkbox ms-1">
                                                 <input type="checkbox" class="form-check-input" id="remember_me">
-                                                <label class="form-check-label" for="remember_me">Remember my
-                                                    preference</label>
+                                                <label class="form-check-label" for="remember_me">记住我</label>
                                             </div>
                                         </div>
                                         <div class="mb-3">
-                                            <a href="/user/forgot-password.html">Forgot Password?</a>
+                                            <a href="/user/forgot-password.html"> 忘记密码?</a>
                                         </div>
                                     </div>
                                     <div class="text-center">
                                         <button class="btn btn-primary btn-block disabled" id="login_btn" type="button">
-                                            Sign Me In
+                                            登录
                                         </button>
                                     </div>
                                 </form>
                                 <div class="new-account mt-3">
-                                    <p>Don't have an account? <a class="text-primary" href="/user/register.jsp">Sign
-                                        up</a>
+                                    <p>没有账号? <a class="text-primary" href="/user/register.jsp">注册</a>
                                     </p>
                                 </div>
                             </div>

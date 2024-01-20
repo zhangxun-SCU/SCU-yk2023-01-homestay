@@ -3,6 +3,8 @@
 <%@ page import="homestay.dao.UserDao" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
+
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -32,38 +34,68 @@
     <head>
         <title>User Management</title>
         <style>
-
             body {
                 font-family: 'Arial', sans-serif;
                 background-color: #f4f4f4;
                 margin: 20px;
             }
+
             .container {
                 max-width: 800px;
                 margin: 0 auto;
             }
 
-            .new-user-container, .search-container {
+            .content-body {
+                background: linear-gradient(to right, #f0f0f0, #ffffff);
+            }
+
+            .new-user-container,
+            .search-container {
                 padding: 20px;
                 border-radius: 8px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
                 margin-bottom: 20px;
-                background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
-                /* 使用线性渐变实现淡雅、柔和、渐变绿色，可以根据需要调整颜色值 */
+                background-color: #ffffff; /* 设置为白色 */
             }
 
-            .new-user-container h2 a {
-                color: #ffffff;
-                text-decoration: none;
-                background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
-                padding: 10px 20px;
-                border-radius: 5px;
-                transition: background 0.3s ease;
+            .new-user-container button {
+                background-color: #007bff;
+                color: #fff;
+                padding: 10px 15px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                margin-right: 10px;
+                transition: background-color 0.3s ease;
             }
 
-            .new-user-container h2 a:hover {
-                background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%);
+            .new-user-container button:hover {
+                background-color: #0056b3;
+                color: #fff;
             }
+
+            .new-user-container button:first-child {
+                background-color: #007bff;
+                border: none; /* 移除边框 */
+                border-radius: 4px; /* 添加圆角 */
+                padding: 10px 20px; /* 调整按钮内边距 */
+                transition: background-color 0.3s ease, color 0.3s ease; /* 添加过渡效果 */
+            }
+
+            .new-user-container button:first-child:hover {
+                /* background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%); */
+                background-color: #0056b3; /* 将颜色设置为深蓝色 */
+                color: #fff; /* 修改悬停时的文本颜色 */
+            }
+
+            /* 添加悬停效果至所有按钮 */
+            button:hover,
+            .submit-button:hover,
+            .edit-button:hover,
+            .delete-button:hover {
+                background-color: #0056b3;
+            }
+
             label {
                 font-weight: bold;
                 display: block;
@@ -79,19 +111,6 @@
                 box-sizing: border-box;
             }
 
-            button {
-                background-color: #007bff;
-                color: #fff;
-                padding: 10px 15px;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-            }
-
-            button:hover {
-                background-color: #0056b3;
-            }
-
             table {
                 border-collapse: collapse;
                 width: 100%;
@@ -100,15 +119,19 @@
                 background-color: #fff;
             }
 
-            th, td {
+            th,
+            td {
                 padding: 15px;
                 text-align: left;
                 border-bottom: 1px solid #ddd;
-                border-right: 1px solid #ddd; /* 增加右边框，用于分隔单元格 */
+                border-right: 1px solid #ddd;
             }
-            th:last-child, td:last-child {
-                border-right: none; /* 移除最后一个单元格的右边框 */
+
+            th:last-child,
+            td:last-child {
+                border-right: none;
             }
+
             th {
                 background-color: #0ebb51;
                 color: white;
@@ -117,6 +140,7 @@
             tr:hover {
                 background-color: #f5f5f5;
             }
+
             a {
                 text-decoration: none;
                 color: #007BFF;
@@ -125,6 +149,7 @@
             a:hover {
                 text-decoration: underline;
             }
+
             .modal {
                 display: none;
                 position: fixed;
@@ -154,7 +179,8 @@
                 cursor: pointer;
             }
 
-            .close:hover, .close:focus {
+            .close:hover,
+            .close:focus {
                 color: black;
                 text-decoration: none;
             }
@@ -163,7 +189,9 @@
                 margin-bottom: 15px;
             }
 
-            select, input[type="text"], input[type="submit"] {
+            select,
+            input[type="text"],
+            input[type="submit"] {
                 padding: 10px;
                 width: calc(100% - 22px);
                 box-sizing: border-box;
@@ -186,41 +214,9 @@
             .submit-button:hover {
                 background-color: #0056b3;
             }
-            /* Style to hide the modal */
-            .modal {
-                display: none;
-                position: fixed;
-                z-index: 1;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                overflow: auto;
-                background-color: rgba(0,0,0,0.4);
-            }
 
-            .modal-content {
-                background-color: #fefefe;
-                margin: 15% auto;
-                padding: 20px;
-                border: 1px solid #888;
-                width: 60%;
-            }
-
-            .close {
-                color: #aaa;
-                float: right;
-                font-size: 28px;
-                font-weight: bold;
-                cursor: pointer;
-            }
-
-            .close:hover,
-            .close:focus {
-                color: black;
-            }
-
-            .edit-button, .delete-button {
+            .edit-button,
+            .delete-button {
                 padding: 8px 16px;
                 border: none;
                 border-radius: 4px;
@@ -228,29 +224,17 @@
             }
 
             .edit-button {
-                background-color: #4CAF50; /* Green */
+                background-color: #4CAF50;
                 color: white;
                 margin-right: 5px;
             }
 
             .delete-button {
-                background-color: #f44336; /* Red */
+                background-color: #f44336;
                 color: white;
-            }
-            .submit-button {
-                background-color: #007BFF;
-                color: white;
-                border: none;
-                padding: 10px 15px;
-                border-radius: 4px;
-                cursor: pointer;
-                transition: background-color 0.3s ease; /* Add smooth transition effect */
-            }
-
-            .submit-button:hover {
-                background-color: #0056b3;
             }
         </style>
+
     </head>
 </head>
 <body>
@@ -1198,29 +1182,28 @@
 
     <div class="content-body">
         <div class="container-fluid">
-            <div class="new-user-container">
-                <h2><a href="#" onclick="openNewUserModal()">新建用户</a></h2>
+<%--            <div class="new-user-container">--%>
+<%--                <h2><a href="#" onclick="openNewUserModal()">新建用户</a></h2>--%>
+<%--            </div>--%>
+
+    <div class="search-container">
+        <label for="searchInput">按user_id搜索：</label>
+        <div class="input-group">
+            <input type="text" id="searchInput" class="form-control" placeholder="输入user_id">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button" onclick="searchUsers()">搜索</button>
             </div>
+        </div>
+    </div>
             <div class="new-user-container">
+                <button onclick="openNewUserModal()">新建用户</button>
                 <button onclick="printTableData()">打印表格数据</button>
                 <button id="export_btn" onclick="exportData()">导出数据</button>
                 <a href="" style="display: none" id="export_users_url"></a>
                 <button id="statistics_btn" onclick="statistics()">统计数据</button>
-
             </div>
-            <div class="new-user-container">
-            </div>
-            <div class="search-container">
-                <label for="searchInput">按user_id搜索：</label>
-                <div class="input-group">
-                    <input type="text" id="searchInput" class="form-control" placeholder="输入user_id">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="button" onclick="searchUsers()">搜索</button>
-
-                    </div>
-                </div>
-            </div>
-
+<%--            <div class="new-user-container">--%>
+<%--            </div>--%>
             <br>
             <table border="1">
                 <tr>
@@ -1228,7 +1211,7 @@
                     <th onclick="sortTable(1)">user_password <i class="fas fa-sort"></i></th>
                     <th onclick="sortTable(2)">email <i class="fas fa-sort"></i></th>
                     <th onclick="sortTable(3)">permission <i class="fas fa-sort"></i></th>
-                    <th onclick="sortTable(4)">priority <i class="fas fa-sort"></i></th>
+<%--                    <th onclick="sortTable(4)">priority <i class="fas fa-sort"></i></th>--%>
                     <th>操作</th>
                 </tr>
                 <c:forEach items="${users}" var="user">
@@ -1237,9 +1220,9 @@
                         <td>${user.user_password}</td>
                         <td>${user.email}</td>
                         <td>${user.permission}</td>
-                        <td>${user.priority}</td>
+<%--                        <td>${user.priority}</td>--%>
                         <td>
-                            <button class="edit-button" onclick="openModal('${user.user_id}', '${user.user_password}', '${user.email}', '${user.permission}', '${user.priority}')">修改</button>
+                            <button class="edit-button" onclick="openModal('${user.user_id}', '${user.user_password}', '${user.email}', '${user.permission}')">修改</button>
                             <button class="delete-button" onclick="deleteUser('${user.user_id}')">删除</button>
                         </td>
                     </tr>
@@ -1273,10 +1256,10 @@
                                 <option value="low">低级权限</option>
                             </select>
                         </div>
-                        <div class="form-input">
-                            <label for="priority">xxx：</label>
-                            <input type="text" name="priority" id="priority">
-                        </div>
+<%--                        <div class="form-input">--%>
+<%--                            <label for="priority">xxx：</label>--%>
+<%--                            <input type="text" name="priority" id="priority">--%>
+<%--                        </div>--%>
                         <input type="submit" value="提交" class="submit-button">
                     </form>
                 </div>
@@ -1299,13 +1282,22 @@
                                 <option value="low">低级权限: low</option>
                             </select>
                         </div>
-                        <div class="form-input">新 priority：<input type="text" name="priority" id="modal_priority"></div>
+<%--                        <div class="form-input">新 priority：<input type="text" name="priority" id="modal_priority"></div>--%>
                         <input type="submit" value="提交" class="submit-button">
                     </form>
                 </div>
             </div>
 
             <script defer>
+                document.addEventListener("DOMContentLoaded", function () {
+                    // 在这里调用获取和显示数据的函数
+                    searchUsers();
+                });
+
+                $(document).ready(function () {
+                    // 在这里调用获取和显示数据的函数
+                    searchUsers();
+                });
                 function openNewUserModal() {
                     document.getElementById("newUserModal").style.display = "block";
                 }
@@ -1320,7 +1312,7 @@
                     document.getElementById("modal_user_password").value = userPassword;
                     document.getElementById("modal_email").value = email;
                     document.getElementById("modal_permission").value = permission;
-                    document.getElementById("modal_priority").value = priority;
+                    // document.getElementById("modal_priority").value = priority;
 
                     // 在模态框打开时检查 permission 的值
                     checkPermission(permission);
@@ -1375,40 +1367,34 @@
                 }
                 function searchUsers() {
                     var searchValue = document.getElementById("searchInput").value;
-                    // 你可以修改以下URL以匹配你的Servlet映射
                     var searchUrl = "/searchUser?user_id=" + searchValue;
 
-                    // 执行AJAX请求以获取搜索结果
                     var xhr = new XMLHttpRequest();
                     xhr.onreadystatechange = function () {
                         if (xhr.readyState === 4) {
                             if (xhr.status === 200) {
-                                // 假设响应是用户的JSON数组
                                 var users = JSON.parse(xhr.responseText);
-
-                                // 清空现有表格
                                 var table = document.querySelector("table");
                                 table.innerHTML = ""; // 清除现有行
 
                                 // 创建表头行
                                 var headerRow = table.insertRow(0);
-
-                                // 创建表头单元格
-                                var headerCells = ["user_id", "user_password", "email", "permission", "priority", "操作"];
+                                var headerCells = ["user_id", "user_password", "email", "permission", "操作"];
                                 for (var i = 0; i < headerCells.length; i++) {
                                     var headerCell = document.createElement("th");
-                                    headerCell.innerHTML = headerCells[i];
+                                    headerCell.innerHTML = headerCells[i] + ' <i class="fas fa-sort"></i>';
+                                    headerCell.onclick = function () {
+                                        sortTable(i);
+                                    };
                                     headerRow.appendChild(headerCell);
                                 }
 
-                                // 使用搜索结果填充表格
+                                // 用搜索结果填充表格
                                 for (var i = 0; i < users.length; i++) {
                                     var user = users[i];
-
-                                    // 创建表格行
                                     var row = table.insertRow(i + 1);
 
-                                    // 创建表格单元格并填充数据
+                                    // 在表格单元格中填充数据
                                     var userIdCell = row.insertCell(0);
                                     userIdCell.innerHTML = user.user_id;
 
@@ -1421,18 +1407,14 @@
                                     var permissionCell = row.insertCell(3);
                                     permissionCell.innerHTML = user.permission;
 
-                                    var priorityCell = row.insertCell(4);
-                                    priorityCell.innerHTML = user.priority;
-
-                                    var operationCell = row.insertCell(5);
-
                                     // 添加适当的操作按钮或链接
+                                    var operationCell = row.insertCell(4);
                                     if (user.permission !== 'superhigh') {
                                         var editButton = document.createElement("button");
                                         editButton.innerHTML = "修改";
                                         editButton.className = "edit-button";
                                         editButton.onclick = function () {
-                                            openModal(user.user_id, user.user_password, user.email, user.permission, user.priority);
+                                            openModal(user.user_id, user.user_password, user.email, user.permission);
                                         };
                                         operationCell.appendChild(editButton);
 
@@ -1449,13 +1431,63 @@
                                     }
                                 }
                             } else {
-                                console.error("Failed to fetch search results. Status: " + xhr.status);
+                                console.error("获取搜索结果失败。状态：" + xhr.status);
                             }
                         }
                     };
                     xhr.open("GET", searchUrl, true);
                     xhr.send();
                 }
+
+                function sortTable(columnIndex) {
+                    var table, rows, switching, i, x, y, shouldSwitch;
+                    table = document.querySelector("table");
+                    switching = true;
+
+                    while (switching) {
+                        switching = false;
+                        rows = table.rows;
+
+                        for (i = 1; i < (rows.length - 1); i++) {
+                            shouldSwitch = false;
+                            x = rows[i].getElementsByTagName("td")[columnIndex];
+                            y = rows[i + 1].getElementsByTagName("td")[columnIndex];
+
+                            // 根据权限的高、中、低进行排序
+                            if (columnIndex === 3) {
+                                var xValue = getPermissionValue(x.innerHTML);
+                                var yValue = getPermissionValue(y.innerHTML);
+
+                                if (xValue > yValue) {
+                                    shouldSwitch = true;
+                                    break;
+                                }
+                            } else {
+                                // 对于其他列，按字母顺序排序
+                                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                                    shouldSwitch = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (shouldSwitch) {
+                            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                            switching = true;
+                        }
+                    }
+                }
+
+                function getPermissionValue(permission) {
+                    // 定义权限的排序顺序
+                    var order = { 'low': 1, 'middle': 2, 'high': 3 };
+
+                    // 返回权限的排序值
+                    return order[permission.toLowerCase()] || 0;
+                }
+
+
+
                 function deleteUser(userId) {
                     // 假设你想要确认删除，你可以使用 `confirm` 函数
                     var isConfirmed = confirm("确定要删除该用户吗？");

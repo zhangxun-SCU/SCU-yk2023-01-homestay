@@ -28,7 +28,7 @@ public class UserDao {
             user.id = rs.getString("user_id");
             user.password = rs.getString("user_password");
             user.email = rs.getString("email");
-            user.priority =  rs.getString("priority");
+//            user.priority =  rs.getString("priority");
             user.permission = rs.getString("permission");
             user.avatarURL = rs.getString("avatar");
         }
@@ -47,7 +47,7 @@ public class UserDao {
             user.id = rs.getString("user_id");
             user.password = rs.getString("user_password");
             user.email = rs.getString("email");
-            user.priority =  rs.getString("priority");
+//            user.priority =  rs.getString("priority");
             user.permission = rs.getString("permission");
             user.avatarURL = rs.getString("avatar");
         }
@@ -161,32 +161,39 @@ public class UserDao {
 
     public static List<UserBean> getAllUsers() {
         JSONObject obj = new JSONObject();
-        String sql = "SELECT * FROM user_account ";
+        String sql = "SELECT * FROM user_account WHERE user_id <> 'admin'";
         System.out.println("queryUserByKey sql: " + sql);
-        List<UserBean> result=new ArrayList<>();
+        List<UserBean> result = new ArrayList<>();
         DB db = new DB("group1");
+
         try {
             ResultSet rs = db.executeQuery(sql);
-            while (rs.next()) {
-                UserBean  user = new UserBean ();
-                user.setUser_id(rs.getString("user_id"));
-                user.setUser_password(rs.getString("user_password"));
-                user.setEmail(rs.getString("email"));
-                user.setPermission(rs.getString("permission"));
-                user.setPriority(rs.getString("priority"));
-                result.add(user);
+
+            if (rs != null) {  // 在迭代之前检查 ResultSet 是否为 null
+                while (rs.next()) {
+                    UserBean user = new UserBean();
+                    user.setUser_id(rs.getString("user_id"));
+                    user.setUser_password(rs.getString("user_password"));
+                    user.setEmail(rs.getString("email"));
+                    user.setPermission(rs.getString("permission"));
+//                user.setPriority(rs.getString("priority"));
+                    result.add(user);
+                }
+                rs.close();
             }
-            rs.close();
+
             db.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
         return result;
     }
 
+
     public void addNewUser(UserBean user) {
         JSONObject obj = new JSONObject();
-        String sql = "INSERT INTO user_account (user_id, user_password, email, permission,priority) VALUES (?, ?, ?, ?,?)";
+        String sql = "INSERT INTO user_account (user_id, user_password, email, permission) VALUES (?, ?, ?, ?)";
         System.out.println("addNewUser sql: " + sql);
         DB db = new DB("group1");
 
@@ -199,7 +206,7 @@ public class UserDao {
             preparedStatement.setString(2, user.getUser_password());
             preparedStatement.setString(3, user.getEmail());
             preparedStatement.setString(4, user.getPermission());
-            preparedStatement.setString(5, user.getPriority());
+//            preparedStatement.setString(5, user.getPriority());
             // 执行 SQL 查询
             preparedStatement.executeUpdate();
 
@@ -250,7 +257,7 @@ public class UserDao {
         UserBean user = new UserBean();
 
         // SQL 查询语句，从名为 "user_account" 的表中选择所有列的数据
-        String sql = "SELECT * FROM user_account WHERE user_id = ?";
+        String sql = "SELECT * FROM user_account WHERE user_id = ? ";
         System.out.println("getUserById sql: " + sql);
 
         // 创建一个数据库连接对象
@@ -291,7 +298,7 @@ public class UserDao {
     }
 
     public void updateUserById(UserBean user) {
-        String sql = "UPDATE user_account SET user_password = ?, email = ?, permission = ?, priority = ? WHERE user_id = ?";
+        String sql = "UPDATE user_account SET user_password = ?, email = ?, permission = ? WHERE user_id = ?";
         DB db = new DB("group1");
 
         try {
@@ -306,8 +313,8 @@ public class UserDao {
 
             // 设置其他参数
             preparedStatement.setString(3, user.getPermission());
-            preparedStatement.setString(4, user.getPriority());
-            preparedStatement.setString(5, user.getUser_id());
+            preparedStatement.setString(4, user.getUser_id());  // 修正为第四个参数
+
             System.out.println("updateUserById sql: " + sql);
             // 执行 SQL 查询
             preparedStatement.executeUpdate();
@@ -322,12 +329,13 @@ public class UserDao {
     }
 
 
+
     public List<UserBean> searchUsersByUserId(String searchUserId) {
         // 创建一个空的 User 列表，用于存储查询结果
         List<UserBean> users = new ArrayList<>();
 
         // SQL 查询语句，从名为 "user_account" 的表中选择所有列的数据
-        String sql = "SELECT * FROM user_account WHERE user_id LIKE ?";
+        String sql = "SELECT * FROM user_account WHERE user_id LIKE ? AND user_id <> 'admin'";
         System.out.println("searchUsersByUserId sql: " + sql);
 
         // 创建一个数据库连接对象
@@ -351,7 +359,7 @@ public class UserDao {
                 user.setUser_password(rs.getString("user_password"));
                 user.setEmail(rs.getString("email"));
                 user.setPermission(rs.getString("permission"));
-                user.setPriority(rs.getString("priority"));
+//                user.setPriority(rs.getString("priority"));
 
                 // 将用户添加到列表中
                 users.add(user);

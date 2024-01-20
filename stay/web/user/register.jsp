@@ -44,14 +44,14 @@
                                 <div class="text-center mb-3">
                                     <a href="/index.html"><img src="./../assets/images/logo-full.png" alt=""></a>
                                 </div>
-                                <h4 class="text-center mb-4">Sign up your account</h4>
+                                <h4 class="text-center mb-4">注册账号</h4>
                                 <form>
                                     <div class="mb-3">
-                                        <label class="mb-1"><strong>Username</strong></label>
+                                        <label class="mb-1"><strong>ID</strong></label>
                                         <input type="text" class="form-control" placeholder="username" id="register_id">
                                     </div>
                                     <div class="mb-3">
-                                        <label class="mb-1"><strong>Email</strong></label>
+                                        <label class="mb-1"><strong>邮箱</strong></label>
                                         <input type="email" class="form-control" placeholder="hello@example.com"
                                                id="register_email">
                                     </div>
@@ -68,7 +68,7 @@
                                         </div>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="mb-1"><strong>Password</strong></label>
+                                        <label class="mb-1"><strong>密码</strong></label>
                                         <input type="password" class="form-control" value="Password"
                                                id="register_password">
                                     </div>
@@ -84,12 +84,12 @@
                                     </div>
                                     <div class="text-center mt-4">
                                         <button class="btn btn-primary btn-block disabled" id="register_btn"
-                                                type="button">Sign me up
+                                                type="button">注册账号
                                         </button>
                                     </div>
                                 </form>
                                 <div class="new-account mt-3">
-                                    <p>Already have an account? <a class="text-primary" href="/user/login.jsp">Sign in</a>
+                                    <p>已经有账号了? <a class="text-primary" href="/user/login.jsp">登录</a>
                                     </p>
                                 </div>
                             </div>

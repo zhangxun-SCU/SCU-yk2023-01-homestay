@@ -74,7 +74,7 @@ public class    LoginCheckFilter implements Filter {
             req.getRequestDispatcher("/user/login.jsp").forward(req, resp);
             return;
         }
-        System.out.println("loginJwt: " + loginJwt);
+//        System.out.println("loginJwt: " + loginJwt);
 //        校验
         try {
             JwtUtil.parseJwt(loginJwt);
