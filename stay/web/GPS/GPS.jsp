@@ -20,7 +20,7 @@
     <meta property="og:description" content="Invome : Invome Admin  Bootstrap 5 Template"/>
     <meta property="og:image" content="https://invome.dexignlab.com/xhtml/social-image.png"/>
     <meta name="format-detection" content="telephone=no">
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=B2Lz3CYUZVzjXBhZ0g3MS8wY"></script>
+    <link href="../assets/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <script type="text/javascript" src="../assets/js/GPS/jquery.min.js"></script>
     <style>
         div#map {
@@ -32,13 +32,10 @@
         }
 
         div.query-info {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            z-index: 100;
-            padding: 5px;
+            padding: 10px;
             border-radius: 5px;
             border: solid 1px lightskyblue;
+            text-align: center;
         }
     </style>
 
@@ -56,12 +53,7 @@
 <!--*******************
     Preloader start
 ********************-->
-<div id="preloader">
-    <div class="lds-ripple">
-        <div></div>
-        <div></div>
-    </div>
-</div>
+<%@ include file="/frame/frame_preloader.jsp" %>
 <!--*******************
     Preloader end
 ********************-->
@@ -71,60 +63,60 @@
 ***********************************-->
 <div id="main-wrapper">
 
-    <!--**********************************
-        Nav header start
-    ***********************************-->
-    <div class="nav-header">
-        <a href="index.html" class="brand-logo">
-            <svg class="logo-abbr" width="57" height="57" viewBox="0 0 57 57" fill="none"
-                 xmlns="http://www.w3.org/2000/svg">
-                <path d="M32.9585 1.84675C30.4961 -0.615584 26.5039 -0.615585 24.0415 1.84675L19.3876 6.50068H12.8059C9.32365 6.50068 6.50071 9.32362 6.50071 12.8059V19.3876L1.84675 24.0415C-0.615584 26.5039 -0.615585 30.4961 1.84675 32.9585L6.50071 37.6124V44.1941C6.50071 47.6763 9.32365 50.4993 12.8059 50.4993H19.3876L24.0415 55.1532C26.5039 57.6156 30.4961 57.6156 32.9585 55.1532L37.6124 50.4993H44.1941C47.6764 50.4993 50.4993 47.6763 50.4993 44.1941V37.6124L55.1532 32.9585C57.6156 30.4961 57.6156 26.5039 55.1532 24.0415L50.4993 19.3876V12.8059C50.4993 9.32362 47.6764 6.50068 44.1941 6.50068H37.6124L32.9585 1.84675Z"
-                      fill="url(#paint0_linear)"/>
-                <path class="logo-text" fill-rule="evenodd" clip-rule="evenodd"
-                      d="M24.7614 37.345L20.7666 40.3417C20.4005 40.616 19.9111 40.6607 19.5015 40.4553C19.0919 40.2511 18.8333 39.833 18.8333 39.375V17.625C18.8333 16.958 19.3746 16.4167 20.0416 16.4167H36.9583C37.6253 16.4167 38.1666 16.958 38.1666 17.625V39.375C38.1666 39.833 37.9081 40.2511 37.4984 40.4553C37.0888 40.6607 36.5994 40.616 36.2333 40.3417L32.2386 37.345L29.3543 40.2293C28.883 40.7018 28.1169 40.7018 27.6457 40.2293L24.7614 37.345ZM35.75 36.9584V18.8334H21.25V36.9584L24.15 34.7834C24.6309 34.4221 25.3039 34.4704 25.7293 34.8957L28.5 37.6664L31.2707 34.8957C31.696 34.4704 32.3691 34.4221 32.85 34.7834L35.75 36.9584ZM27.2916 28.5H29.7083C30.3753 28.5 30.9166 27.9587 30.9166 27.2917C30.9166 26.6247 30.3753 26.0834 29.7083 26.0834H27.2916C26.6246 26.0834 26.0833 26.6247 26.0833 27.2917C26.0833 27.9587 26.6246 28.5 27.2916 28.5ZM24.875 23.6667H32.125C32.792 23.6667 33.3333 23.1254 33.3333 22.4584C33.3333 21.7914 32.792 21.25 32.125 21.25H24.875C24.208 21.25 23.6666 21.7914 23.6666 22.4584C23.6666 23.1254 24.208 23.6667 24.875 23.6667Z"
-                      fill="white"/>
-                <defs>
-                </defs>
-            </svg>
-            <div class="brand-title">
-                <h2 class="">inv<span>ome</span></h2>
-                <span class="brand-sub-title">Invoicing Admin</span>
+    <%--    <!--**********************************--%>
+    <%--        Nav header start--%>
+    <%--    ***********************************-->--%>
+    <%--    <div class="nav-header">--%>
+    <%--        <a href="index.html" class="brand-logo">--%>
+    <%--            <svg class="logo-abbr" width="57" height="57" viewBox="0 0 57 57" fill="none"--%>
+    <%--                 xmlns="http://www.w3.org/2000/svg">--%>
+    <%--                <path d="M32.9585 1.84675C30.4961 -0.615584 26.5039 -0.615585 24.0415 1.84675L19.3876 6.50068H12.8059C9.32365 6.50068 6.50071 9.32362 6.50071 12.8059V19.3876L1.84675 24.0415C-0.615584 26.5039 -0.615585 30.4961 1.84675 32.9585L6.50071 37.6124V44.1941C6.50071 47.6763 9.32365 50.4993 12.8059 50.4993H19.3876L24.0415 55.1532C26.5039 57.6156 30.4961 57.6156 32.9585 55.1532L37.6124 50.4993H44.1941C47.6764 50.4993 50.4993 47.6763 50.4993 44.1941V37.6124L55.1532 32.9585C57.6156 30.4961 57.6156 26.5039 55.1532 24.0415L50.4993 19.3876V12.8059C50.4993 9.32362 47.6764 6.50068 44.1941 6.50068H37.6124L32.9585 1.84675Z"--%>
+    <%--                      fill="url(#paint0_linear)"/>--%>
+    <%--                <path class="logo-text" fill-rule="evenodd" clip-rule="evenodd"--%>
+    <%--                      d="M24.7614 37.345L20.7666 40.3417C20.4005 40.616 19.9111 40.6607 19.5015 40.4553C19.0919 40.2511 18.8333 39.833 18.8333 39.375V17.625C18.8333 16.958 19.3746 16.4167 20.0416 16.4167H36.9583C37.6253 16.4167 38.1666 16.958 38.1666 17.625V39.375C38.1666 39.833 37.9081 40.2511 37.4984 40.4553C37.0888 40.6607 36.5994 40.616 36.2333 40.3417L32.2386 37.345L29.3543 40.2293C28.883 40.7018 28.1169 40.7018 27.6457 40.2293L24.7614 37.345ZM35.75 36.9584V18.8334H21.25V36.9584L24.15 34.7834C24.6309 34.4221 25.3039 34.4704 25.7293 34.8957L28.5 37.6664L31.2707 34.8957C31.696 34.4704 32.3691 34.4221 32.85 34.7834L35.75 36.9584ZM27.2916 28.5H29.7083C30.3753 28.5 30.9166 27.9587 30.9166 27.2917C30.9166 26.6247 30.3753 26.0834 29.7083 26.0834H27.2916C26.6246 26.0834 26.0833 26.6247 26.0833 27.2917C26.0833 27.9587 26.6246 28.5 27.2916 28.5ZM24.875 23.6667H32.125C32.792 23.6667 33.3333 23.1254 33.3333 22.4584C33.3333 21.7914 32.792 21.25 32.125 21.25H24.875C24.208 21.25 23.6666 21.7914 23.6666 22.4584C23.6666 23.1254 24.208 23.6667 24.875 23.6667Z"--%>
+    <%--                      fill="white"/>--%>
+    <%--                <defs>--%>
+    <%--                </defs>--%>
+    <%--            </svg>--%>
+    <%--            <div class="brand-title">--%>
+    <%--                <h2 class="">inv<span>ome</span></h2>--%>
+    <%--                <span class="brand-sub-title">Invoicing Admin</span>--%>
 
-            </div>
+    <%--            </div>--%>
 
-        </a>
-        <div class="nav-control">
-            <div class="hamburger">
-                <span class="line"></span><span class="line"></span><span class="line"></span>
-            </div>
-        </div>
-    </div>
-    <!--**********************************
-        Nav header end
-    ***********************************-->
+    <%--        </a>--%>
+    <%--        <div class="nav-control">--%>
+    <%--            <div class="hamburger">--%>
+    <%--                <span class="line"></span><span class="line"></span><span class="line"></span>--%>
+    <%--            </div>--%>
+    <%--        </div>--%>
+    <%--    </div>--%>
+    <%--    <!--**********************************--%>
+    <%--        Nav header end--%>
+    <%--    ***********************************-->--%>
 
-    <!--**********************************
-        Header start
-    ***********************************-->
-    <div class="header">
-        <div class="header-content">
-            <nav class="navbar navbar-expand">
-                <div class="collapse navbar-collapse justify-content-between">
-                    <div class="header-left">
-                        <div class="dashboard_bar">
-                            地图查询模块
-                        </div>
-                    </div>
-                    <ul class="navbar-nav header-right">
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </div>
+    <%--    <!--**********************************--%>
+    <%--        Header start--%>
+    <%--    ***********************************-->--%>
+    <%--    <div class="header">--%>
+    <%--        <div class="header-content">--%>
+    <%--            <nav class="navbar navbar-expand">--%>
+    <%--                <div class="collapse navbar-collapse justify-content-between">--%>
+    <%--                    <div class="header-left">--%>
+    <%--                        <div class="dashboard_bar">--%>
+    <%--                            地图查询模块--%>
+    <%--                        </div>--%>
+    <%--                    </div>--%>
+    <%--                    <ul class="navbar-nav header-right">--%>
+    <%--                    </ul>--%>
+    <%--                </div>--%>
+    <%--            </nav>--%>
+    <%--        </div>--%>
+    <%--    </div>--%>
 
-    <!--**********************************
-        Header end ti-comment-alt
-    ***********************************-->
+    <%--    <!--**********************************--%>
+    <%--        Header end ti-comment-alt--%>
+    <%--    ***********************************-->--%>
 
     <!--**********************************
         Sidebar start
@@ -148,12 +140,12 @@
             </div>
 
             <div class="row mb-2">
-                <div class="col-md-9">
+                <div class="col-md-6">
                     <input type="text" id="house" name="house" class="form-control"
                            placeholder="请输入民宿名称...">
                 </div>
-                <div class="col-md-3">
-                    <button type="button" class="btn btn-rounded btn-danger sweet-wrong"
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-rounded btn-danger sweet-wrong sweet-success"
                             id="query_button"
                             name="query_button">
                             <span class="btn-icon-start text-danger">
@@ -161,11 +153,13 @@
                             </span>定位
                     </button>
                 </div>
+                <div class="col-md-4">
+                    <div class="query-info bg-white">
+                        共查询到<i id="query_num">0</i>家民宿
+                    </div>
+                </div>
             </div>
             <div id="map">
-                <div class="query-info bg-white">
-                    共查询到<i id="query_num">0</i>家民宿
-                </div>
                 <div id="map_container" class="col-sm-12">
                 </div>
             </div>
@@ -179,12 +173,7 @@
     <!--**********************************
         Footer start
     ***********************************-->
-    <div class="footer">
-        <div class="copyright">
-            <p>Copyright © Designed &amp; Developed by <a href="https://dexignlab.com/" target="_blank">DexignLab</a>
-                2021</p>
-        </div>
-    </div>
+    <%@ include file="/frame/frame_footer.jsp" %>
     <!--**********************************
         Footer end
     ***********************************-->
@@ -213,6 +202,9 @@
 <script src="../assets/js/dlabnav-init.js"></script>
 <script src="../assets/js/demo.js"></script>
 <script src="../assets/js/styleSwitcher.js"></script>
+
+<script src="../assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
+<%--<script src="../assets/js/plugins-init/sweetalert.init.js"></script>--%>
 
 <%-- 地图API --%>
 <script type="text/javascript">
@@ -275,12 +267,17 @@
         })
     }
 
-    $("#query_button").one("click", (e) => {
+    $("#query_button").click((e) => {
         let url = "/seller";
+        let house_name = $("#house").val();
+        if (house_name === undefined || house_name === null || house_name === "") {
+            sweetAlert("Error", "请先输入要查询的民宿名称！", "error");
+            return;
+        }
         let data = {
             "actionType": "homestay",
             "action": "get_locations",
-            "house_name": $("#house").val()
+            "house_name": house_name
         };
         console.log(data);
         $.ajaxSettings.async = false;
@@ -292,9 +289,14 @@
                 if (res.resCode === "00000") {
                     let list = res.house_locations;
                     console.log(list);
-                    for (let i = 0; i < list.length; i++) {
-                        let house = list[i];
-                        addMarker(house);
+                    if (list.length !== 0) {
+                        for (let i = 0; i < list.length; i++) {
+                            let house = list[i];
+                            addMarker(house);
+                        }
+                        sweetAlert("Success", "一共为您查询到" + Number(list.length) + "家类似民宿", "success");
+                    } else {
+                        sweetAlert("Error", "没有查询到类似的民宿", "error");
                     }
                     $("#query_num").html(Number(list.length));
                 }

@@ -472,7 +472,7 @@ To change this template use File | Settings | File Templates.
                 console.log(lnglat);
                 marker.setPosition(lnglat);
                 map.add(marker);
-                map.setFitView(marker);
+                map.setZoomAndCenter(15, marker.getPosition());
             } else {
                 console.error('根据地址查询位置失败');
             }

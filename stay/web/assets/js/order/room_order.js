@@ -436,7 +436,7 @@ var Page = function () {
                         html = html + "                                        <td>" + record.num + "	</td>";
                         html = html + "                                        <td>" + record.in_date + "-" + record.out_date + "	</td>";
                         html = html + "                                        <td>" + record.price + "</td>";
-                        html = html + "                                        <td><div class=\"d-flex align-items-center\"><i class=\"fa fa-circle text-success me-1\"></i> " + (record.order_status != 0 ? '已支付' : '未支付') + "</div></td>";
+                        html = html + "                                        <td><div class=\"d-flex align-items-center\"><i class=\"fa fa-circle text-danger me-1\"></i>未支付</div></td>";
                         html = html + "                                        <td>";
                         html = html + "                                            <div class=\"d-flex\">";
                         html = html + "                                                <a href=\"javascript:Page.onModifyRecord('" + record.good_id + "')\" class=\"btn btn-primary shadow btn-xs sharp me-1\"><i class=\"fas fa-pencil-alt\"></i></a>";

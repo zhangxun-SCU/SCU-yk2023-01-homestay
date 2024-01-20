@@ -5,7 +5,6 @@ document.domain = "localhost";
 jQuery(document).ready(function () {
     // initiate layout and plugins
     Page.init();
-    initRating();
     console.log(1001)
 });
 /* ================================================================================ */
@@ -426,7 +425,7 @@ var Page = (function () {
                         html = html + "                                        <td><div class=\"d-flex align-items-center\"><img src=\"images/avatar/1.jpg\" class=\"rounded-lg me-2\" width=\"24\" alt=\"\"/> <span class=\"w-space-no\">" + record.specialty_name + "</span></div></td>";
                         html = html + "                                        <td>" + record.num + "	</td>";
                         html = html + "                                        <td>" + record.price * record.num + "</td>";
-                        html = html + "                                        <td><div class=\"d-flex align-items-center\"><i class=\"fa fa-circle text-success me-1\"></i> " + (record.order_status != 0 ? '已支付' : '未支付') + "</div></td>";
+                        html = html + "                                        <td><div class=\"d-flex align-items-center\"><i class=\"fa fa-circle text-danger me-1\"></i>未支付</div></td>";
                         html = html + "                                        <td>";
                         html = html + "                                            <div class=\"d-flex\">";
                         html = html + "                                                <a href=\"javascript:Page.onModifyRecord('" + record.order_id + "')\" class=\"btn btn-primary shadow btn-xs sharp me-1\"><i class=\"fas fa-pencil-alt\"></i></a>";
@@ -792,7 +791,6 @@ var Page = (function () {
         onModifyRecord: function (id) {
             onModifyRecord(id);
         },
-
         onViewRecord: function (id) {
             onViewRecord(id);
         }
@@ -822,37 +820,8 @@ function updateHTML(record, html) {
     html = html + "                                            <div class=\"d-flex\">";
     html = html + "                                                <a href=\"javascript:Page.onModifyRecord('" + record.order_id + "')\" class=\"btn btn-primary shadow btn-xs sharp me-1\"><i class=\"fas fa-pencil-alt\"></i></a>";
     html = html + "                                                <a href=\"javascript:Page.onDeleteRecord('" + record.order_id + "')\" class=\"btn btn-danger shadow btn-xs sharp me-1\"><i class=\"fa fa-trash\"></i></a>";
-    if (record.order_status !== "0") {
-        // 已支付的订单才可评论
-        html = html + "                                                <a href=\"javascript:Page.onComment('" + record.good_id + "')\" class=\"btn btn-info shadow btn-xs sharp\"><i class=\"fa fa-comment\"></i></a>";
-    }
     html = html + "                                            </div>";
     html = html + "                                        </td>";
     html = html + "                                    </tr>";
     return html;
-}
-
-function initRating() {
-    var stars = document.querySelectorAll(".stars > li");
-    for (var i = 0; i < 5; i++) {
-        var star = stars[i];
-        star.addEventListener("mouseover", (event) => {
-            var score = event.currentTarget.dataset.score;
-            $("#comment_score").val(Number(score));
-            setStars(score);
-        })
-    }
-}
-
-function setStars(score) {
-    var stars = document.querySelectorAll(".stars > li");
-    for (var j = 0; j < 5; j++) {
-        var t_star = stars[j];
-        var t_score = t_star.dataset.score;
-        if (t_score <= score) {
-            t_star.style.color = "orange";
-        } else {
-            t_star.style.color = "black";
-        }
-    }
 }
