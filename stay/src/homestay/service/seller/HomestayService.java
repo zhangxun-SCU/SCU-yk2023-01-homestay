@@ -2,6 +2,7 @@ package homestay.service.seller;
 
 import homestay.dao.Data;
 import homestay.dao.seller.HomestayDao;
+import homestay.dao.seller.SpecialtyDao;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,5 +39,15 @@ public class HomestayService {
         HomestayDao dao = new HomestayDao();
         String house_name = data.getParam().getString("house_name");
         dao.getLocations(house_name, json);
+    }
+
+    public void getStatistics(Data data, JSONObject json) throws JSONException {
+        HomestayDao dao = new HomestayDao();
+        if (data.getParam().has("limit")) {
+            dao.getTopSales(data, json);
+        } else {
+            String owner_id = data.getParam().getString("owner_id");
+            dao.getTotalSalesInPastWeek(owner_id, json);
+        }
     }
 }

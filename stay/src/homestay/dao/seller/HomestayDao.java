@@ -238,4 +238,75 @@ public class HomestayDao {
             e.printStackTrace();
         }
     }
+
+    public void getTotalSalesInPastWeek(String owner_id, JSONObject json) {
+        DB db = new DB("group1");
+        String resCode = "00000";
+        String info = "success";
+        try {
+            String sql = String.format(
+                    "Select SUM(num) As total_sale, DATE(create_date) As date " +
+                            "From (Select deal_order.num, deal_order.create_date " +
+                            "From deal_order " +
+                            "Join room_occupy On deal_order.good_id=room_occupy.op_id " +
+                            "Join room Using(house_id, room_id) " +
+                            "Join house Using(house_id) " +
+                            "Where house.owner_id='%s' And deal_order.order_status=1) A " +
+                            "Where create_date Between DATE_SUB(NOW(), Interval 7 day) And NOW() Group By date Order By date DESC;",
+                    owner_id
+            );
+            showDebug("[getTotalSalesInPastWeek]", "sql: " + sql);
+            ResultSet res = db.executeQuery(sql);
+            ResultSetMetaData resMetaData = res.getMetaData();
+            List list = new ArrayList();
+            while (res.next()) {
+                HashMap map = new HashMap();
+                map.put("total_sale", res.getInt("total_sale"));
+                map.put("date", res.getString("date"));
+                list.add(map);
+            }
+            json.put("resCode", resCode);
+            json.put("getTotalSalesInfo", info);
+            json.put("sales", list);
+        } catch (SQLException | JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getTopSales(Data data, JSONObject json) {
+        DB db = new DB("group1");
+        String resCode = "00000";
+        String info = "success";
+        try {
+            String owner_id = data.getParam().getString("owner_id");
+            int limit = data.getParam().getInt("limit");
+            String sql = String.format(
+                    "Select house_id, house_name, SUM(num) As total_sale " +
+                            "From (Select house.house_id, house.house_name, deal_order.num " +
+                            "From deal_order " +
+                            "Join room_occupy On deal_order.good_id=room_occupy.op_id " +
+                            "Join room Using(house_id, room_id) " +
+                            "Join house Using(house_id) " +
+                            "Where house.owner_id='%s' And deal_order.order_status=1) A Group By house_id Order By total_sale DESC Limit %d;",
+                    owner_id,
+                    limit
+            );
+            showDebug("[getTopSales]", "sql: " + sql);
+            ResultSet res = db.executeQuery(sql);
+            ResultSetMetaData resMetaData = res.getMetaData();
+            List list = new ArrayList();
+            while (res.next()) {
+                HashMap map = new HashMap();
+                map.put("id", res.getString("house_id"));
+                map.put("name", res.getString("house_name"));
+                map.put("total_sale", res.getInt("total_sale"));
+                list.add(map);
+            }
+            json.put("resCode", resCode);
+            json.put("getTopSalesInfo", info);
+            json.put("sales", list);
+        } catch (SQLException | JSONException e) {
+            e.printStackTrace();
+        }
+    }
 }

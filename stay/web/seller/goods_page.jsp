@@ -86,13 +86,13 @@
                                         <h4 class="text-primary mb-0">
                                             <%=user.id%>
                                         </h4>
-                                        <p>Username</p>
+                                        <p>用户名</p>
                                     </div>
                                     <div class="profile-email px-2 pt-2">
                                         <h4 class="text-muted mb-0">
                                             <%=user.email%>
                                         </h4>
-                                        <p>Email</p>
+                                        <p>邮箱地址</p>
                                     </div>
                                     <div class="ms-auto">
                                         <button type="button" class="btn btn-rounded btn-primary"

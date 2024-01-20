@@ -191,7 +191,12 @@ public class SpecialtyDao {
         String info = "success";
         try {
             String sql = String.format(
-                    "Select SUM(num) As total_sale, DATE(create_date) As date From (Select specialty_order.num, specialty_order.create_date From specialty_order Join specialty On specialty.specialty_id=specialty_order.good_id Where specialty.owner_id='%s') A Where create_date >= DATE_SUB(NOW(), Interval 7 day) Group By date",
+                    "Select SUM(num) As total_sale, DATE(create_date) As date " +
+                            "From (Select specialty_order.num, specialty_order.create_date " +
+                            "From specialty_order " +
+                            "Join specialty On specialty.specialty_id=specialty_order.good_id " +
+                            "Where specialty.owner_id='%s') A " +
+                            "Where create_date >= DATE_SUB(NOW(), Interval 7 day) Group By date Order By date DESC",
                     owner_id
             );
             ResultSet res = db.executeQuery(sql);
@@ -223,16 +228,17 @@ public class SpecialtyDao {
                             "From (Select specialty.specialty_id, specialty.specialty_name, specialty_order.num, specialty_order.order_status " +
                             "From specialty Join specialty_order On specialty.specialty_id=specialty_order.good_id " +
                             "Where owner_id='%s' And order_status=1) A " +
-                            "Group By specialty_id Order By total_sale DESC;",
-                    owner_id
+                            "Group By specialty_id Order By total_sale DESC limit %d;",
+                    owner_id,
+                    limit
             );
             ResultSet res = db.executeQuery(sql);
             ResultSetMetaData resMetaData = res.getMetaData();
             List list = new ArrayList();
             while (res.next()) {
                 HashMap map = new HashMap();
-                map.put("specialty_id", res.getString("specialty_id"));
-                map.put("specialty_name", res.getString("specialty_name"));
+                map.put("id", res.getString("specialty_id"));
+                map.put("name", res.getString("specialty_name"));
                 map.put("total_sale", res.getInt("total_sale"));
                 list.add(map);
             }

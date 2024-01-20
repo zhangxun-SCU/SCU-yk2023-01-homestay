@@ -1,6 +1,7 @@
 function onLoadFunction() {
     getAllHomestays();
     getAllSpecialty();
+    getStatistics();
 }
 
 function getAllHomestays() {
