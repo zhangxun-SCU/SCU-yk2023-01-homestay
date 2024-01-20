@@ -82,8 +82,8 @@
 
             <div class="row page-titles">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active"><a href="javascript:void(0)">App</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Profile</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">商品管理</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">查看商品</a></li>
                 </ol>
             </div>
             <!-- row -->
@@ -104,13 +104,13 @@
                                         <h4 class="text-primary mb-0">
                                             <%=user.id%>
                                         </h4>
-                                        <p>Username</p>
+                                        <p>用户名</p>
                                     </div>
                                     <div class="profile-email px-2 pt-2">
                                         <h4 class="text-muted mb-0">
                                             <%=user.email%>
                                         </h4>
-                                        <p>Email</p>
+                                        <p>邮箱地址</p>
                                     </div>
                                     <div class="ms-auto">
                                         <button type="button" class="btn btn-rounded btn-primary"
@@ -136,15 +136,19 @@
                                     <ul class="nav nav-tabs">
                                         <li class="nav-item">
                                             <a href="#homestays-post" data-bs-toggle="tab"
-                                               class="nav-link active show">民宿</a>
+                                               class="nav-link">民宿</a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="#specialty-post" data-bs-toggle="tab"
                                                class="nav-link">特产</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a href="#statistics" data-bs-toggle="tab"
+                                               class="nav-link active show">销售量统计</a>
+                                        </li>
                                     </ul>
                                     <div class="tab-content">
-                                        <div id="homestays-post" class="tab-pane fade active show">
+                                        <div id="homestays-post" class="tab-pane fade">
                                             <div class="my-post-content pt-3">
                                             </div>
                                             <div id="homestay_list">
@@ -154,6 +158,50 @@
                                             <div class="my-post-content pt-3">
                                             </div>
                                             <div class="row" id="specialty_list">
+                                            </div>
+                                        </div>
+                                        <div id="statistics" class="tab-pane fade active show">
+                                            <div class="row">
+                                                <div class="col-xl-6 col-lg-12 col-sm-12">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h4 class="card-title">最近一周特产总销量变化</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <canvas id="specialty_total_sales"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-12 col-sm-12">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h4 class="card-title">特产销量TOP</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <canvas id="specialty_top_sales"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-12 col-sm-12">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h4 class="card-title">最近一周民宿预订数量变化</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <canvas id="homestay_total_sales"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-12 col-sm-12">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h4 class="card-title">民宿热度TOP</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <canvas id="homestay_top_sales"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -206,6 +254,13 @@
 <script src="../assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 <script src="../assets/vendor/chart.js/Chart.bundle.min.js"></script>
 <script src="../assets/vendor/lightgallery/js/lightgallery-all.min.js"></script>
+
+<!-- Chart ChartJS plugin files -->
+<script src="../assets/vendor/chart.js/Chart.bundle.min.js"></script>
+<%--<script src="../assets/js/plugins-init/chartjs-init.js"></script>--%>
+<script src="../assets/js/seller/statistics.js"></script>
+
+<%-- 地图 --%>
 <script type="text/javascript">
     window._AMapSecurityConfig = {
         securityJsCode: 'd71806b25af8ceba503a3b358b33694b',

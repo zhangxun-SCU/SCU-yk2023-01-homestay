@@ -184,4 +184,69 @@ public class SpecialtyDao {
         json.put("resCode", resCode);
         json.put("deleteSpecialtyInfo", info);
     }
+
+    public void getTotalSalesInPastWeek(String owner_id, JSONObject json) {
+        DB db = new DB("group1");
+        String resCode = "00000";
+        String info = "success";
+        try {
+            String sql = String.format(
+                    "Select SUM(num) As total_sale, DATE(create_date) As date " +
+                            "From (Select specialty_order.num, specialty_order.create_date " +
+                            "From specialty_order " +
+                            "Join specialty On specialty.specialty_id=specialty_order.good_id " +
+                            "Where specialty.owner_id='%s') A " +
+                            "Where create_date >= DATE_SUB(NOW(), Interval 7 day) Group By date Order By date DESC",
+                    owner_id
+            );
+            ResultSet res = db.executeQuery(sql);
+            ResultSetMetaData resMetaData = res.getMetaData();
+            List list = new ArrayList();
+            while (res.next()) {
+                HashMap map = new HashMap();
+                map.put("total_sale", res.getInt("total_sale"));
+                map.put("date", res.getString("date"));
+                list.add(map);
+            }
+            json.put("resCode", resCode);
+            json.put("getTotalSalesInfo", info);
+            json.put("sales", list);
+        } catch (SQLException | JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getTopSales(Data data, JSONObject json) {
+        DB db = new DB("group1");
+        String resCode = "00000";
+        String info = "success";
+        try {
+            String owner_id = data.getParam().getString("owner_id");
+            int limit = data.getParam().getInt("limit");
+            String sql = String.format(
+                    "Select specialty_id, specialty_name, SUM(num) As total_sale " +
+                            "From (Select specialty.specialty_id, specialty.specialty_name, specialty_order.num, specialty_order.order_status " +
+                            "From specialty Join specialty_order On specialty.specialty_id=specialty_order.good_id " +
+                            "Where owner_id='%s' And order_status=1) A " +
+                            "Group By specialty_id Order By total_sale DESC limit %d;",
+                    owner_id,
+                    limit
+            );
+            ResultSet res = db.executeQuery(sql);
+            ResultSetMetaData resMetaData = res.getMetaData();
+            List list = new ArrayList();
+            while (res.next()) {
+                HashMap map = new HashMap();
+                map.put("id", res.getString("specialty_id"));
+                map.put("name", res.getString("specialty_name"));
+                map.put("total_sale", res.getInt("total_sale"));
+                list.add(map);
+            }
+            json.put("resCode", resCode);
+            json.put("getTopSalesInfo", info);
+            json.put("sales", list);
+        } catch (SQLException | JSONException e) {
+            e.printStackTrace();
+        }
+    }
 }

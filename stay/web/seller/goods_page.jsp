@@ -64,8 +64,8 @@
         <div class="container-fluid">
             <div class="row page-titles">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active"><a href="javascript:void(0)">App</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Profile</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">商品管理</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">发布商品</a></li>
                 </ol>
             </div>
             <!-- row -->
@@ -86,13 +86,13 @@
                                         <h4 class="text-primary mb-0">
                                             <%=user.id%>
                                         </h4>
-                                        <p>Username</p>
+                                        <p>用户名</p>
                                     </div>
                                     <div class="profile-email px-2 pt-2">
                                         <h4 class="text-muted mb-0">
                                             <%=user.email%>
                                         </h4>
-                                        <p>Email</p>
+                                        <p>邮箱地址</p>
                                     </div>
                                     <div class="ms-auto">
                                         <button type="button" class="btn btn-rounded btn-primary"

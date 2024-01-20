@@ -9,6 +9,7 @@ Time: 15:00
 To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Title</title>
@@ -17,7 +18,12 @@ To change this template use File | Settings | File Templates.
     <link rel="stylesheet" href="../assets/vendor/toastr/css/toastr.min.css">
     <link href="../assets/vendor/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
     <link href="../assets/vendor/clockpicker/css/bootstrap-clockpicker.min.css" rel="stylesheet">
-
+    <style>
+        a#location:hover{
+            color: skyblue;
+            cursor: pointer;
+        }
+    </style>
 
 
 </head>
@@ -115,8 +121,13 @@ To change this template use File | Settings | File Templates.
 
                                                 </span>
                                             </p>
-                                            <p>位置:<span class="item"></span></p>
-                                            <p id ="location"></p>
+                                            <p>
+                                                位置:
+                                                <span class="item">
+                                                    <a id="location" onclick="viewLocation();">
+                                                    </a>
+                                                </span>
+                                            </p>
                                             <p>Product tags:&nbsp;&nbsp;
                                                 <span class="badge badge-success light">bags</span>
                                                 <span class="badge badge-success light">clothes</span>
@@ -171,6 +182,9 @@ To change this template use File | Settings | File Templates.
         </div>
     </div>
 </div>
+
+<%@ include file="house_location.jsp" %>
+
 <%--  script start  --%>
 <%@include file="../frame/frame_javascript.jsp"%>
 <%--  script end  --%>
@@ -223,6 +237,17 @@ To change this template use File | Settings | File Templates.
 <script src="../assets/js/dlabnav-init.js"></script>
 <script src="../assets/js/demo.js"></script>
 <script src="../assets/js/styleSwitcher.js"></script>
+
+<%-- 地图API --%>
+<script type="text/javascript">
+    window._AMapSecurityConfig = {
+        securityJsCode: 'd71806b25af8ceba503a3b358b33694b',
+    }
+</script>
+<script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+<script type="text/javascript"
+        src="https://webapi.amap.com/maps?v=1.4.15&key=89fd825427ce3fbf3dc999e544b50f99&plugin=AMap.Geocoder"></script>
+
 <script>
     var cartBack = function () {
         window.history.go(-1);
@@ -233,6 +258,7 @@ To change this template use File | Settings | File Templates.
     var good_id = url.split('=')[1];
     var data;
     var room_list;
+    let address;
 
     $.post('/getTime',{},function (json) {
         console.log(JSON.stringify(json));
@@ -260,6 +286,7 @@ To change this template use File | Settings | File Templates.
                 document.getElementById("first").src = json.main_image;
                 document.getElementById("location").innerText=json.location;
                 room_list=json.room_list;
+                address = json.location;
                 var html="";
                 for(var i=0;i<room_list.length;i++)
                 {
@@ -419,14 +446,38 @@ To change this template use File | Settings | File Templates.
         window.location.href = "./room_comments.jsp?house_id=" + good_id + "&room_id=" + room_id;
     }
 
+    let map = new AMap.Map("map_container", {
+        resizeEnable: true
+    });
+    let geocoder = new AMap.Geocoder({
+        city: "全国"
+    });
+    let marker = new AMap.Marker();
 
+    function viewLocation() {
+        new Promise((resolve, reject) => {
+            acquireLocation();
+            resolve("ok");
+        }).then((_) => {
+            $("#locationModalCenter").modal("show");
+        })
+    }
 
-
-
-
-
-
-
+    function acquireLocation() {
+        geocoder.getLocation(address, function (status, result) {
+            console.log(address);
+            if (status === 'complete' && result.geocodes.length) {
+                console.log("complete");
+                var lnglat = result.geocodes[0].location
+                console.log(lnglat);
+                marker.setPosition(lnglat);
+                map.add(marker);
+                map.setZoomAndCenter(15, marker.getPosition());
+            } else {
+                console.error('根据地址查询位置失败');
+            }
+        })
+    }
 </script>
 
 </html>

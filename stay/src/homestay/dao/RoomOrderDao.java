@@ -95,6 +95,18 @@ public class RoomOrderDao {
     }
 
     /*查询记录*/
+    public void getOrderRecordExcel(Data data, JSONObject json) throws JSONException, SQLException {
+        //构造sql语句，根据传递过来的查询条件参数
+        String sql = createGetRecordSqlExcel(data);            //构造sql语句，根据传递过来的查询条件参数
+        data.getParam().put("sql", sql);
+        queryRecord(data, json);
+    }
+    public void getOrderRecordExcelSeller(Data data, JSONObject json) throws JSONException, SQLException {
+        //构造sql语句，根据传递过来的查询条件参数
+        String sql = createGetRecordSqlExcelSeller(data);            //构造sql语句，根据传递过来的查询条件参数
+        data.getParam().put("sql", sql);
+        queryRecord(data, json);
+    }
     public void getOrderRecord(Data data, JSONObject json) throws JSONException, SQLException {
         //构造sql语句，根据传递过来的查询条件参数
         String sql = createGetRecordSql(data);            //构造sql语句，根据传递过来的查询条件参数
@@ -230,7 +242,42 @@ public class RoomOrderDao {
         json.put("result_code", resultCode);                                                        //返回0表示正常，不等于0就表示有错误产生，错误代码
         /*--------------------返回数据 结束--------------------*/
     }
-
+    private String createGetRecordSqlExcel(Data data) throws JSONException {
+        JSONObject param = data.getParam();
+        String username = data.getParam().has("username") ? data.getParam().getString("username") : null;
+        String sql="SELECT DISTINCT deal_order.*, room_occupy.house_id, room_occupy.room_id, room_occupy.in_date,room_occupy.out_date, house.house_name, room.room_name FROM deal_order JOIN room_occupy ON deal_order.good_id = room_occupy.op_id JOIN room USING(house_id, room_id) JOIN house USING(house_id) WHERE buyer_id ='"+username +"' ";
+        String good_id = data.getParam().has("good_id") ? data.getParam().getString("good_id") : null;
+        if (good_id != null && (!good_id.isEmpty())) {
+            sql = sql + " and good_id like '%" + good_id + "%'";
+        }
+        String house_name = data.getParam().has("house_name") ? data.getParam().getString("house_name") : null;
+        if (house_name != null && (!house_name.isEmpty())) {
+            sql = sql + " and house_name like '%" + house_name + "%'";
+        }
+        String room_name = data.getParam().has("room_name") ? data.getParam().getString("room_name") : null;
+        if (room_name != null && (!room_name.isEmpty())) {
+            sql = sql + " and room_name like '%" + room_name + "%'";
+        }
+        return sql;
+    }
+    private String createGetRecordSqlExcelSeller(Data data) throws JSONException {
+        JSONObject param = data.getParam();
+        String username = data.getParam().has("username") ? data.getParam().getString("username") : null;
+        String sql="SELECT DISTINCT deal_order.*, room_occupy.house_id, room_occupy.room_id, room_occupy.in_date,room_occupy.out_date, house.house_name, room.room_name FROM deal_order JOIN room_occupy ON deal_order.good_id = room_occupy.op_id JOIN room USING(house_id, room_id) JOIN house USING(house_id) WHERE owner_id ='"+username +"' ";
+        String good_id = data.getParam().has("good_id") ? data.getParam().getString("good_id") : null;
+        if (good_id != null && (!good_id.isEmpty())) {
+            sql = sql + " and good_id like '%" + good_id + "%'";
+        }
+        String house_name = data.getParam().has("house_name") ? data.getParam().getString("house_name") : null;
+        if (house_name != null && (!house_name.isEmpty())) {
+            sql = sql + " and house_name like '%" + house_name + "%'";
+        }
+        String room_name = data.getParam().has("room_name") ? data.getParam().getString("room_name") : null;
+        if (room_name != null && (!room_name.isEmpty())) {
+            sql = sql + " and room_name like '%" + room_name + "%'";
+        }
+        return sql;
+    }
     private String createGetRecordSql(Data data) throws JSONException {
         JSONObject param = data.getParam();
         String username = data.getParam().has("username") ? data.getParam().getString("username") : null;

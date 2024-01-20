@@ -33,12 +33,14 @@ public class WeatherService {
         WeatherDao dao = new WeatherDao();
         dao.addDeviceRecord(data, json);
     }
+
     public void exportRecord(Data data, JSONObject json) throws JSONException, SQLException, IOException {
         WeatherDao dao = new WeatherDao();
         dao.getDeviceRecord(data, json);
         exportRecordToFile(data, json);
-       // exportRecordToExcel(data, json);
+        // exportRecordToExcel(data, json);
     }
+
     private void exportRecordToFile(Data data, JSONObject json) throws JSONException {
         String jsonStr = json.toString();
         File jsonFile = new File("D:\\upload\\maintain\\weather\\export_weather.rar");
@@ -54,6 +56,11 @@ public class WeatherService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void getWeatherStatistics(Data data, JSONObject json) throws JSONException {
+        WeatherDao dao = new WeatherDao();
+        dao.getWeatherStatistics(data, json);
     }
 
 //    private void exportRecordToExcel(Data data, JSONObject json) throws JSONException, IOException {

@@ -35,20 +35,27 @@ public class MyExcel {
         }
         /////////////////////////////////////////////////////////
         JSONArray array=json.getJSONArray("aaData");
-        for(int i=1;i<array.length();i++){
+        for(int i=1;i<=array.length();i++){
             //创建HSSFRow对象
             HSSFRow row=sheet.createRow(i);
 
             int j=0;
             HashMap<String,String> record=(HashMap<String, String>) array.get(i-1);
-            for(HashMap.Entry<String,String>entry:record.entrySet()){
-                System.out.println("key="+entry.getKey()+"---value"+entry.getValue());
-                //创建HSSFCell对象
-                HSSFCell cell=row.createCell(j);
-                //设置单元格的值
-                cell.setCellValue(entry.getValue());
-                j++;
+            for(j = 0; j < arrayTitle.length(); j++){
+                String key = arrayTitle.getString(j);
+                String value = record.get(key);
+                System.out.println("[exportData]key: " + key + " value: " + value);
+                HSSFCell cell = row.createCell(j);
+                cell.setCellValue(value);
             }
+//            for(HashMap.Entry<String,String>entry:record.entrySet()){
+//                System.out.println("key="+entry.getKey()+"---value"+entry.getValue());
+//                //创建HSSFCell对象
+//                HSSFCell cell=row.createCell(j);
+//                //设置单元格的值
+//                cell.setCellValue(entry.getValue());
+//                j++;
+//            }
         }
         //输出Excel文件
         FileOutputStream output=new FileOutputStream(json.getString("file_path"));

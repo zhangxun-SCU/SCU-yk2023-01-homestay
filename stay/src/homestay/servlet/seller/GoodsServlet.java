@@ -67,6 +67,8 @@ public class GoodsServlet extends HttpServlet {
             specialtyService.deleteSpecialty(data, json);
         } else if (action.equals("modify_specialty")) {
             specialtyService.modifySpeicialty(data, json);
+        } else if (action.equals("get_statistics")) {
+            specialtyService.getStatistics(data, json);
         } else {
             json.put("resCode", "GS001");
             json.put("Information", "特产错误操作");
@@ -85,6 +87,10 @@ public class GoodsServlet extends HttpServlet {
             homestayService.deleteHomestay(data, json);
         } else if (action.equals("modify_homestay")) {
             homestayService.modifyHomestay(data, json);
+        } else if (action.equals("get_locations")) {
+            homestayService.getLocations(data, json);
+        } else if (action.equals("get_statistics")) {
+            homestayService.getStatistics(data, json);
         } else {
             json.put("resCode", "GH001");
             json.put("Information", "民宿错误操作");
