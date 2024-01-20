@@ -981,6 +981,7 @@
                                         <th><strong>反馈ID</strong></th>
                                         <th><strong>用户ID</strong></th>
                                         <th><strong>反馈内容</strong></th>
+                                        <th><strong>回复反馈</strong></th>
                                         <th><strong>反馈时间</strong></th>
                                         <th><strong>操作</strong></th>
                                         <th></th>
