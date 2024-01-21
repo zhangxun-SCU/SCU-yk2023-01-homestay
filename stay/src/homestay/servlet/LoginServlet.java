@@ -6,13 +6,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 import homestay.dao.Data;
+import homestay.dao.UserDao;
+import homestay.entity.User;
 import homestay.service.LoginService;
 import homestay.service.verify.VerifyService;
+import homestay.utils.JwtUtil;
+import homestay.utils.UserUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -33,11 +38,23 @@ public class LoginServlet extends HttpServlet {
             if(data.getParam().getString("src").equals("miniapp")) {
 //                context.log("login: user: " + data.getParam().getString("userId") + "from web browser");
                 doMiniappLogin(req, resp);
-            } else {
+            }  else if(data.getParam().getString("src").equals("miniapp_auto")) {
+                UserDao userDao = new UserDao();
+                User user = userDao.queryUserById(UserUtil.getUserId(req));
+                JSONObject resJson = new JSONObject();
+                resJson.put("resCode", "00000");
+                resJson.put("loginInfo", "success");
+                resJson.put("userId", user.id);
+                resJson.put("userPermission", user.permission);
+                resJson.put("avatar", user.avatarURL);
+                resJson.put("userType",user.permission);
+                resp.setContentType("application/json; charset=UTF-8");
+                resp.getWriter().println(resJson);
+            }  else {
 //                context.log("login: user: " + data.getParam().getString("userId") + "from web miniapp");
                 doWebLogin(req, resp);
             }
-        } catch (JSONException e) {
+        } catch (JSONException | SQLException e) {
             throw new RuntimeException(e);
         }
     }
