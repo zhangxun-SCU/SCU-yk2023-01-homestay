@@ -406,7 +406,9 @@ To change this template use File | Settings | File Templates.
                         html = html + "</a>";
                         html = html + "</div>";
                         html=html+"<div class=\"shopping-cart\" onclick=\"purChase("+room.room_id+")\">";
-                        html=html+"<a class=\"btn btn-warning\" href=\"javascript:void();\">";html=html+"<iclass=\"fa fa-shopping-basket me-2\">";html=html+"</i>立即预定";
+                        html=html+"<a class=\"btn btn-warning\" href=\"javascript:void();\">";
+                        html=html+"<i class=\"fa fa-shopping-basket me-2\">";
+                        html=html+"</i>立即预定";
                         html=html+"</a>";
                         html=html+"</div>";
                         html = html + "</td>";

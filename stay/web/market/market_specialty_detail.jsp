@@ -282,7 +282,16 @@ To change this template use File | Settings | File Templates.
                         }
                     })
                 }
-                document.getElementById("initOrder").onclick=purChase();
+                document.getElementById("initOrder").onclick=function(){
+                    var checkgoods = [];
+                    var good={"good_id":good_id,"num":document.getElementById("need_num").value};
+                    checkgoods.push(good);
+                    var checkgoodsstring = JSON.stringify(checkgoods);
+                    let data=new Date().getTime();
+                    let new_data=new Date(data+6000);
+                    document.cookie="checkgood="+checkgoodsstring+";expires="+new_data.toUTCString();
+                    window.location.href="confirm_order.jsp"
+                };
             }
         }
     });
