@@ -61,7 +61,7 @@ public class    LoginCheckFilter implements Filter {
 //        System.out.println("request url:" + url);
         // 处理自动登录
 
-        if((url.equals("/") || url.isEmpty() || url.contains("login")) && !src.equals("miniapp")) {
+        if((url.equals("/") || url.isEmpty() || url.contains("login")) && !src.startsWith("miniapp")) {
             if(autoLogin(req, resp, loginJwt)) {return;}
         }
         // 通过必要的请求
