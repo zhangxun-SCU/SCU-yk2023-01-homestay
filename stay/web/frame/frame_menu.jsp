@@ -542,7 +542,7 @@ Header start
                     </div>
 
                 </div>
-<%--                <ul class="navbar-nav header-right">--%>
+                <ul class="navbar-nav header-right">
 <%--                    <li class="nav-item d-flex align-items-center">--%>
 <%--                        <div class="input-group search-area">--%>
 <%--                            <input type="text" class="form-control" placeholder="Search here...">--%>
@@ -736,12 +736,12 @@ Header start
 <%--                            </div>--%>
 <%--                        </div>--%>
 <%--                    </li>--%>
-<%--                    <%if (user.permission.equals("low")) {%>--%>
-<%--                    <li class="nav-item ">--%>
-<%--                        <a href="/user/landlord.jsp" class="btn btn-primary ms-3" id="beLandlord">房东认证</a>--%>
-<%--                    </li>--%>
-<%--                    <%}%>--%>
-<%--                </ul>--%>
+                    <%if (user.permission.equals("low")) {%>
+                    <li class="nav-item ">
+                        <a href="/user/landlord.jsp" class="btn btn-primary ms-3" id="beLandlord">房东认证</a>
+                    </li>
+                    <%}%>
+                </ul>
             </div>
         </nav>
     </div>
@@ -859,11 +859,18 @@ Sidebar start
                     <span class="nav-text">今日天气</span>
                 </a>
             </li>
-                <%if (user.permission.equals("superhigh") || user.permission.equals("high")) {%>
                 <li>
                     <a href="/Feedback/feedback-page.jsp">
                         <i class="fas fa-info-circle"></i>
                         <span class="nav-text">用户反馈</span>
+                    </a>
+                </li>
+
+                <%if (user.permission.equals("superhigh") || user.permission.equals("high")) {%>
+                <li>
+                    <a href="/Feedback/feedback.jsp">
+                        <i class="fas fa-info-circle"></i>
+                        <span class="nav-text">管理/回复反馈</span>
                     </a>
                 </li>
                 <%}%>
