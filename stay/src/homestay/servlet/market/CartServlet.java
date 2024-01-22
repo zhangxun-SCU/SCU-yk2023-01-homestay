@@ -34,6 +34,18 @@ public class CartServlet  extends HttpServlet {
             {
                 cs.modifyCartGood(data,json,user_id);
             }
+            else if(action.equals("search_name"))
+            {
+                cs.queryByName(data,json,user_id);
+            }
+            else if(action.equals("export"))
+            {
+                cs.exportCartGood(user_id,json);
+            }
+            else if(action.equals("sta"))
+            {
+                cs.staCartGood(user_id,json);
+            }
             resp.setContentType("application/json; charset=UTF-8");
             resp.getWriter().println(json);
         } catch (JSONException | IOException e) {

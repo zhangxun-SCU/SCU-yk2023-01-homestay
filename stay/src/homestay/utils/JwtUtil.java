@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class JwtUtil {
     private static String signKey = "ScuStay";
-    private static Long expire = 43200000L;
+    private static Long expire = 43200000L * 7;
 
     public static String generateJwt(HashMap<String, Object> claims, String secret) {
         String jwt = Jwts.builder()
