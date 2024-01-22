@@ -511,9 +511,18 @@
     const uploadAvatar = $('#upload_avatar');
     const submitBtn = $('#submit_btn');
     const sendEmailBtn = $('#verify_btn');
-    $("#set-password,#upload_avatar,#verify_code").on('keyup', debounce(() => {
+    $("#set-password,#verify_code").on('keyup', debounce(() => {
         console.log(passwordSet());
-        if(passwordSet() || avatarSet() && verifySet()) {
+        if(avatarSet() || passwordSet() && verifySet()) {
+            submitBtn.removeClass('disabled');
+        } else {
+            submitBtn.addClass('disabled');
+        }
+    }, 500));
+
+    $("#upload_avatar").on('change', debounce(() => {
+        console.log(passwordSet());
+        if(avatarSet() || passwordSet() && verifySet()) {
             submitBtn.removeClass('disabled');
         } else {
             submitBtn.addClass('disabled');
@@ -548,6 +557,7 @@
                 contentType: false,
                 success(res) {
                     console.log(res)
+                    swal("success", "头像更换", "success");
                     $('#upload_avatar').attr('src', res.urls[0]);
                     $('#profile_avatar').attr('src', res.urls[0]);
                 }
@@ -565,14 +575,14 @@
             $.post("/reset", data, (res) => {
                 console.log(res);
                 if (res.resCode === '00000') {
-                    swal("success", "重置成功", "success");
+                    swal("success", "信息重置成功", "success");
                     if($("#gridCheck").is(":checked")) {
                         $.get('/logout');
                     }
                 } else {
                     sweetAlert({
                         type: "error",
-                        title: "重置失败",
+                        title: "信息重置失败",
                         text: "请再次尝试",
                         timer: 1e3,
                         showConfirmButton: !1
@@ -642,7 +652,7 @@
         $.get('/export_profile', res => {
             console.log(res);
             $('#export_url').attr('href', res.url);
-            $('#export_url').attr('download', "profile.txt");
+            $('#export_url').attr('download', "profile.json");
             document.getElementById("export_url").click();
         });
     }
