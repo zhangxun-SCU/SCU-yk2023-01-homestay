@@ -2,6 +2,7 @@ package homestay.service.market;
 
 import homestay.dao.DB;
 import homestay.dao.Data;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -127,5 +128,46 @@ public class DriveService {
         json.put("ho_m12",ho_m12);
 
 
+    }
+
+    public void getXunData(Data data, JSONObject json) throws SQLException, JSONException {
+        DB db=new DB("group1");
+        int[] time=new int[24];
+        int[] h_num=new int[24];
+        double[] h_cost=new double[24];
+        int[] s_num=new int[24];
+        double[] s_cost=new double[24];
+        double[] t_cost=new double[24];
+        for(int i=0;i<24;i++)
+        {
+            int num=0;
+            double price=0;
+            ResultSet rs=db.executeQuery("select num,num*price from deal_order where hour(create_date)="+(i+1));
+            while (rs.next())
+            {
+                num=rs.getInt(1);
+                price=rs.getDouble(2);
+            }
+            h_num[i]=num;
+            h_cost[i]=price;
+            rs=db.executeQuery("select num,num*price from specialty_order where hour(create_date)="+(i+1));
+            while (rs.next())
+            {
+                num=rs.getInt(1);
+                price=rs.getDouble(2);
+            }
+
+            s_num[i]=num;
+            s_cost[i]=price;
+            t_cost[i]=s_cost[i]+h_cost[i];
+
+            time[i]=i+1;
+        }
+        json.put("time",time);
+        json.put("h_num",h_num);
+        json.put("h_cost",h_cost);
+        json.put("s_num",s_num);
+        json.put("s_cost",s_cost);
+        json.put("t_cost",t_cost);
     }
 }

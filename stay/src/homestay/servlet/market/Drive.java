@@ -25,7 +25,10 @@ public class Drive extends HttpServlet {
             {
                 ds.getSunData(data,json);
             }
-
+            if(action.equals("xun"))
+            {
+                ds.getXunData(data,json);
+            }
             resp.setContentType("application/json; charset=UTF-8");
             resp.getWriter().println(json);
         } catch (JSONException | IOException | SQLException e) {

@@ -35,6 +35,7 @@
                         <div class="col-xl-6">
                             <button class="btn  btn-success"onclick="ascPrice()">价格升序</button>
                             <button class="btn btn-success" onclick="descPrice()">价格降序</button>
+                            <button class="btn btn-success" onclick="toDrive()">驾驶舱</button>
                         </div>
                     </div>
                 </div>
@@ -236,6 +237,9 @@ var ascPrice=function()
         }
         good_list.sort(up);
         init();
+    }
+    var toDrive=function(){
+    window.location.href='statistic_driver.html';
     }
 
 
