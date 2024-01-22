@@ -127,6 +127,13 @@
                                             </span>
                                             销量统计
                                         </button>
+                                        <button type="button" class="btn btn-rounded btn-primary"
+                                                onclick="window.location.href='./visualization/index.jsp'">
+                                            <span class="btn-icon-start text-primary">
+                                                <i class="fa fa-chart-area color-info"></i>
+                                            </span>
+                                            大数据统计
+                                        </button>
                                     </div>
                                 </div>
                             </div>
