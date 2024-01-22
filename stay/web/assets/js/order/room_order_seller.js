@@ -444,6 +444,9 @@ var Page = function () {
                         html = html + "                                                <a href=\"javascript:Page.onDeleteRecord('" + record.good_id + "')\" class=\"btn btn-danger shadow btn-xs sharp\"><i class=\"fa fa-trash\"></i></a>";
                         html = html + "                                            </div>";
                         html = html + "                                        </td>";
+                        html = html + "                                        <td>";
+                        html = html + "                                            <a href=\"javascript:Page.onPayOrder('" + record.good_id + "')\">【支付订单】</a>";
+                        html = html + "                                        </td>";
                         html = html + "                                    </tr>";
                     }
                 }
