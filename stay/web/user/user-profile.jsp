@@ -380,6 +380,7 @@
                                                     </div>
                                                 </div>
                                                 <button class="btn btn-primary" id="export_btn" type="button">导出个人信息</button>
+                                                <a href="" id="export_url" style="display: none;"></a>
                                             </div>
                                         </div>
 
