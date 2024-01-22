@@ -420,10 +420,6 @@
 	$(".shu5").numScroll();
 	$(".shu6").numScroll();
 
-	/*$(".num2").numScroll({
-		time:5000
-	});*/
-
     var data={"action":"sun"}
     $.post('/getDriveData',data,function (json) {
         document.getElementById("a").innerText=json.cost_house;
@@ -431,7 +427,6 @@
         document.getElementById("c").innerText=json.cost_all;
         document.getElementById("d").innerText=(json.cost_specialty/json.cost_all*100).toFixed(2)+"%";
         document.getElementById("e").innerText=(json.cost_house/json.cost_all*100).toFixed(2)+"%";
-
         document.getElementById("a1").innerText=json.num_room_order;
         document.getElementById("a2").innerText=json.num_specialty_order;
         document.getElementById("a3").innerText=json.num_room_order+json.num_specialty_order;
@@ -440,6 +435,5 @@
         document.getElementById("a6").innerText=json.cost_house+json.cost_specialty;
     })
 </script>
-
 </body>
 </html>
