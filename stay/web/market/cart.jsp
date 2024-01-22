@@ -29,7 +29,28 @@ To change this template use File | Settings | File Templates.
                     <li class="breadcrumb-item active" onclick="cartBack()"><a>返回</a></li>
                 </ol>
             </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="input-group search-area " >
+                                <input type="text" class="form-control" placeholder="输入搜索的商品名" id="search_name">
+                                <span class="input-group-text" onclick="searchSpecialtyByName()"><a href="javascript:void(0)"><i class="flaticon-381-search-2"></i></a></span>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6">
+                            <button class="btn  btn-success"onclick="ascPrice()">价格升序</button>
+                            <button class="btn btn-success" onclick="descPrice()">价格降序</button>
+                            <button class="btn btn-success" onclick="exportExel()">导出为Excel</button>
+                            <button class="btn btn-success" onclick="toPrint()">打印</button>
+                            <button class="btn btn-success" onclick="toStatistic()">统计</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
+
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
@@ -141,6 +162,7 @@ To change this template use File | Settings | File Templates.
 <script src="../assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
 <script src="../assets/vendor/toastr/js/toastr.min.js"></script>
 <script>
+
     var checkgoods = [];
     var good_list = "";
     var total_cost = 0;
@@ -429,5 +451,206 @@ To change this template use File | Settings | File Templates.
             }
         }
     }
+    var init=function () {
+        var html="";
+        for (var i = 0; i < good_list.length; i++) {
+            var good = good_list[i];
+            html = html + "<tr>";
+            html = html + "<td>";
+            html = html + "<div class=\"form-check custom-checkbox checkbox-success check-lg me-3\">";
+            if(good.max_num==0)
+            {
+                html = html + "<code style='position:relative; left:-20px'>x</code>";
+            }
+            else{
+                html = html + "<input type=\"checkbox\" class=\"form-check-input\" id=\"ck" + good.good_id + "\" required=\"\" onclick=\"chooseGood('" + good.good_id + "')\">";
+            }
+            html = html + "<label class=\"form-check-label\" for=\"customCheckBox2\">";
+            html = html + "</label>";
+            html = html + "</div>";
+            html = html + "</td>";
+            html = html + "<td>";
+            html = html + "<img src=\"" + good.main_image + "\" class=\"rounded-lg me-2\" width=\"120\" alt=\"\"style=\"aspect-ratio: 1;\">";
+            html = html + "</td>";
+            html = html + "<td>";
+            html = html + "<div class=\"d-flex align-items-center\">";
+            html = html + "<span class=\"w-space-no\">";
+            html = html + good.good_name;
+            html = html + "</span>";
+            html = html + "</div>";
+            html = html + "</td>";
+            html = html + "<td>";
+            html = html + "<span  class=\"text-warning\" style=\"font-size: 130%;font-weight: bold\">";
+            html = html + good.good_price;
+            html = html + "</span>";
+            html = html + "</td>";
+            html = html + "<td>";
+            html=html+"<div class=\"col-2 px-0  mb-2 me-3\" style='width: 80px'>";
+            if(good.max_num==0)
+            {
+                html=html+"<code>没有库存</code>";
+            }
+            else{
+                if(good.max_num<good.num)
+                {
+                    good.num=good.max_num;
+                    html = html + "<input  type=\"number\" name=\"num\"class=\"form-control input-btn input-number\" value=\"" + good.max_num + "\"" +
+                        "min=1 max=" + good.max_num + " onchange=\"changeNum(this,'" + good.good_id + "')\">";
+                    html = html + "</div>";
+                }
+                else{
+                    html = html + "<input  type=\"number\" name=\"num\"class=\"form-control input-btn input-number\" value=\"" + good.num + "\"" +
+                        "min=1 max=" + good.max_num + " onchange=\"changeNum(this,'" + good.good_id + "')\">";
+                    html = html + "</div>";
+                }
+
+            }
+            html = html + "</td>";
+            html = html + "<td>";
+            html = html + "<div class=\"d-flex align-items-center\">";
+            html = html + "<span  class=\"text-warning\" style=\"font-size: 150%;font-weight: bold\">";
+            html = html + good.num * good.good_price;
+            html = html + "</span>";
+            html = html + "<span  class=\"text-warning\" style=\"font-size: 150%;font-weight: bold\">￥</span>";
+            html = html + "</div>";
+            html = html + "</td>";
+            html = html + "<td>";
+            html = html + "<div class=\"d-flex\">";
+            html = html + "<a  class=\"btn btn-danger shadow btn-xs sharp\" onclick=\"deleteCartGood('" + good.good_id + "')\">";
+            html = html + "<i class=\"fa fa-trash\">";
+            html = html + "</i>";
+            html = html + "</a>";
+            html = html + "</div>";
+            html = html + "</td>";
+            html = html + "</tr>";
+
+        }
+        document.getElementById("good_list").innerHTML = html;
+    }
+    var ascPrice=function()
+    {
+        function up(x, y) {
+            return x.good_price - y.good_price
+        }
+        good_list.sort(up);
+        init();
+    }
+    var descPrice=function()
+    {
+        console.log("4");
+        function up(x, y) {
+            return y.good_price - x.good_price
+        }
+        good_list.sort(up);
+        init();
+    }
+    var searchSpecialtyByName=function () {
+        var search_name=document.getElementById("search_name").value;
+        let data2 = {"action": "search_name","search_name":search_name};
+        $.post('/getCartGood', data2, function (json) {
+            if (json.code == 0) {
+                var html = "";
+                good_list = json.good_list;
+                console.log(JSON.stringify(good_list));
+                for (var i = 0; i < good_list.length; i++) {
+                    var good = good_list[i];
+                    html = html + "<tr>";
+                    html = html + "<td>";
+                    html = html + "<div class=\"form-check custom-checkbox checkbox-success check-lg me-3\">";
+                    if(good.max_num==0)
+                    {
+                        html = html + "<code style='position:relative; left:-20px'>x</code>";
+                    }
+                    else{
+                        html = html + "<input type=\"checkbox\" class=\"form-check-input\" id=\"ck" + good.good_id + "\" required=\"\" onclick=\"chooseGood('" + good.good_id + "')\">";
+                    }
+                    html = html + "<label class=\"form-check-label\" for=\"customCheckBox2\">";
+                    html = html + "</label>";
+                    html = html + "</div>";
+                    html = html + "</td>";
+                    html = html + "<td>";
+                    html = html + "<img src=\"" + good.main_image + "\" class=\"rounded-lg me-2\" width=\"120\" alt=\"\"style=\"aspect-ratio: 1;\">";
+                    html = html + "</td>";
+                    html = html + "<td>";
+                    html = html + "<div class=\"d-flex align-items-center\">";
+                    html = html + "<span class=\"w-space-no\">";
+                    html = html + good.good_name;
+                    html = html + "</span>";
+                    html = html + "</div>";
+                    html = html + "</td>";
+                    html = html + "<td>";
+                    html = html + "<span  class=\"text-warning\" style=\"font-size: 130%;font-weight: bold\">";
+                    html = html + good.good_price;
+                    html = html + "</span>";
+                    html = html + "</td>";
+                    html = html + "<td>";
+                    html=html+"<div class=\"col-2 px-0  mb-2 me-3\" style='width: 80px'>";
+                    if(good.max_num==0)
+                    {
+                        html=html+"<code>没有库存</code>";
+                    }
+                    else{
+                        if(good.max_num<good.num)
+                        {
+                            good.num=good.max_num;
+                            html = html + "<input  type=\"number\" name=\"num\"class=\"form-control input-btn input-number\" value=\"" + good.max_num + "\"" +
+                                "min=1 max=" + good.max_num + " onchange=\"changeNum(this,'" + good.good_id + "')\">";
+                            html = html + "</div>";
+                        }
+                        else{
+                            html = html + "<input  type=\"number\" name=\"num\"class=\"form-control input-btn input-number\" value=\"" + good.num + "\"" +
+                                "min=1 max=" + good.max_num + " onchange=\"changeNum(this,'" + good.good_id + "')\">";
+                            html = html + "</div>";
+                        }
+
+                    }
+                    html = html + "</td>";
+
+                    html = html + "<td>";
+                    html = html + "<div class=\"d-flex align-items-center\">";
+                    html = html + "<span  class=\"text-warning\" style=\"font-size: 150%;font-weight: bold\">";
+                    html = html + good.num * good.good_price;
+                    html = html + "</span>";
+                    html = html + "<span  class=\"text-warning\" style=\"font-size: 150%;font-weight: bold\">￥</span>";
+                    html = html + "</div>";
+                    html = html + "</td>";
+                    html = html + "<td>";
+                    html = html + "<div class=\"d-flex\">";
+                    html = html + "<a  class=\"btn btn-danger shadow btn-xs sharp\" onclick=\"deleteCartGood('" + good.good_id + "')\">";
+                    html = html + "<i class=\"fa fa-trash\">";
+                    html = html + "</i>";
+                    html = html + "</a>";
+                    html = html + "</div>";
+                    html = html + "</td>";
+                    html = html + "</tr>";
+
+                }
+
+                document.getElementById("good_list").innerHTML = html;
+
+            }
+        });
+    }
+    var exportExel=function () {
+        $.post('/getCartGood',{"action":"export"},function(json)
+        {
+            if(json.code==0)
+            {
+                window.location.href=json.url;
+            }
+
+        })
+
+    }
+    var toPrint=function()
+    {
+        window.location.href='cart_print.jsp';
+    }
+    var toStatistic=function()
+    {
+        window.location.href='sim_statistic.jsp'
+    }
 </script>
+
+
 </html>

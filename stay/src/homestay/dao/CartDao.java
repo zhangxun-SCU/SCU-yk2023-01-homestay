@@ -59,4 +59,25 @@ public int numCartByUserId(String user_id) throws SQLException {
     System.out.println("执行的SQL语句是"+sql);
     db.executeUpdate(sql);
     }
+
+    public JSONArray querGoodByName(String search_name, String user_id) throws SQLException, JSONException {
+        String sql = "SELECT * FROM cart,specialty where cart.owner_id='"+user_id+"' and good_id=specialty_id and specialty_name like '%"+search_name+"%'" ;
+        System.out.println("querySpecialty sql: " + sql);
+        DB db = new DB("group1");
+        JSONArray  specialtyList=new JSONArray();
+        ResultSet rs = db.executeQuery(sql);
+        while (rs.next()) {
+            JSONObject tpSpecialty=new JSONObject();
+            tpSpecialty.put("good_id",rs.getString("specialty_id"));
+            tpSpecialty.put("good_price",rs.getString("price"));
+            tpSpecialty.put("main_image",rs.getString("imageurl"));
+            tpSpecialty.put("good_name",rs.getString("specialty_name"));
+            tpSpecialty.put("max_num",rs.getInt("specialty.num"));
+            tpSpecialty.put("num",rs.getInt(3));
+            specialtyList.put(tpSpecialty);
+        }
+        rs.close();
+        db.close();
+        return specialtyList;
+    }
 }
