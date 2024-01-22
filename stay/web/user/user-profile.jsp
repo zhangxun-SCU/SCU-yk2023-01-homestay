@@ -571,7 +571,7 @@
         data.email = $('#set-email').val();
         data.emailVerifyCode = $('#verify_code').val();
         console.log(data);
-        if(data.resetPassword !== '') {
+        if($('#set-password').val() !== '') {
             $.post("/reset", data, (res) => {
                 console.log(res);
                 if (res.resCode === '00000') {
