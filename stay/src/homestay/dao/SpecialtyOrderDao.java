@@ -448,9 +448,9 @@ public class SpecialtyOrderDao {
         int resultCode = 0;
         List jsonList = new ArrayList();
         Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, -5);   //yyyy-MM-dd
+        cal.add(Calendar.DATE, -50);   //yyyy-MM-dd
         String timeFrom = (new SimpleDateFormat("yyyy-MM-dd 00:00:00")).format(cal.getTime());
-        cal.add(Calendar.DATE, 5);   //yyyy-MM-dd
+        cal.add(Calendar.DATE, 50);   //yyyy-MM-dd
         String timeTo = (new SimpleDateFormat("yyyy-MM-dd 23:59:59")).format(cal.getTime());
         int totalGpsActiveCount = 0;
         /*--------------------获取变量 完毕--------------------*/

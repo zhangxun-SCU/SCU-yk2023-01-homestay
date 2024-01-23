@@ -525,7 +525,7 @@ var Page = (function () {
             data.good_id = $("#record_modify_seller_div #good_id").val();
             $.post(url, data, function (json) {
                 if (json.result_code == 0) {
-                    alert("已经完成设备修改。");
+                    alert("已经完成订单修改。");
                     window.location.reload();
                 }
             });

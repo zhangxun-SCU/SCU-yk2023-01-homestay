@@ -180,7 +180,7 @@ var Page = function () {
             data.device_name = $("#device_name").val();
             $.post(url, data, function (json) {
                 if (json.result_code == 0) {
-                    alert("已经完成设备修改。");
+                    alert("已经完成订单修改。");
                     window.location.href = "device_list.jsp";
                 }
             });

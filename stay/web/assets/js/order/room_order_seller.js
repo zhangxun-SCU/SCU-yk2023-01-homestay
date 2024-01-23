@@ -536,7 +536,7 @@ var Page = function () {
             data.price = $("#record_modify_div #price").val();
             $.post(url, data, function (json) {
                 if (json.result_code == 0) {
-                    alert("已经完成设备修改。");
+                    alert("已经完成订单修改。");
                     window.location.reload();
                 }
             });
