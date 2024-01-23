@@ -1041,7 +1041,7 @@
 <script src="../assets/js/dlabnav-init.js"></script>
 <script src="../assets/js/demo.js"></script>
 <script src="../assets/js/styleSwitcher.js"></script>
-<script src="../assets/js/feedback/add_feedback.js"></script>
+<script src="../assets/js/dashboard/add_feedback.js"></script>
 </body>
 <%@ include file="./feedback_add_div.jsp" %>
 </html>

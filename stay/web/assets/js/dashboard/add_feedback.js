@@ -1,4 +1,4 @@
-//document.domain = "localhost";
+document.domain = "localhost";
 /*================================================================================*/
 jQuery(document).ready(function () {
     // initiate layout and plugins
