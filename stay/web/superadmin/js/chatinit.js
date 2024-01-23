@@ -1,10 +1,10 @@
 $.get('/permission_statistics', res => {
     console.log(res)
     const statData = {};
-    statData.high = res.data[1].high;
-    statData.low = res.data[2].low;
-    statData.middle = res.data[3].middle;
-    statData.superhigh = res.data[4].superhigh;
+    // statData.high = res.data[0].high;
+    statData.low = res.data[1].low;
+    statData.middle = res.data[2].middle;
+    statData.superhigh = res.data[3].superhigh;
     (function ($) {
         "use strict"
 
@@ -28,10 +28,10 @@ $.get('/permission_statistics', res => {
 
             var pieChart = function () {
                 //Pie chart with custom labels
-
+                console.log("stata", statData)
                 var data = {
-                    labels: ['user', 'seller', 'manager', 'supermanager'],
-                    series: [statData.low, statData.middle, statData.high, statData.superhigh]
+                    labels: ['user', 'seller', 'supermanager'],
+                    series: [statData.low, statData.middle, statData.superhigh]
                 };
 
                 var options = {
@@ -68,11 +68,13 @@ $.get('/permission_statistics', res => {
                 },
 
                 load: function () {
+                    console.log("load")
                     setChartWidth();
                     pieChart();
                 },
 
                 resize: function () {
+                    console.log("resize")
                     setChartWidth();
                     pieChart();
                 }
@@ -99,4 +101,3 @@ $.get('/permission_statistics', res => {
     })($);
 
 })
-

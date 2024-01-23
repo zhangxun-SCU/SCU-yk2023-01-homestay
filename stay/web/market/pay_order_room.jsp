@@ -287,7 +287,7 @@ To change this template use File | Settings | File Templates.
     });
 
     var goSpecialtyOrder = function () {
-        window.location.href = '/order/device/room_order.jsp'
+        window.location.href = '/order/room/room_order.jsp'
     }
 </script>
 </html>
