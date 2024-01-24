@@ -1,4 +1,4 @@
-<%--
+<%@ page import="homestay.utils.Config" %><%--
   Created by IntelliJ IDEA.
   User: cw
   Date: 2023/12/3
@@ -27,9 +27,9 @@
 
     <!-- FAVICONS ICON -->
     <link rel="shortcut icon" type="image/png" href="./../assets/images/favicon.png"/>
-    <link href="./../assets/css/style.css" rel="stylesheet">
-    <link href="./../assets/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
-    <link href="./../assets/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="../assets/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="../assets/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
 
 </head>
 
@@ -43,7 +43,7 @@
                         <div class="col-xl-12">
                             <div class="auth-form">
                                 <div class="text-center mb-3">
-                                    <a href="/index.html"><img src="./../assets/images/logo-full.png" alt=""></a>
+                                    <a href="/index.html"><img src="../assets/images/logo-full.png" alt=""></a>
                                 </div>
                                 <h4 class="text-center mb-4">登录您的账号</h4>
                                 <form>
@@ -74,7 +74,7 @@
                                             </div>
                                         </div>
                                         <div class="mb-3">
-                                            <a href="/user/forgot-password.html"> 忘记密码?</a>
+                                            <a href="./forgot-password.jsp"> 忘记密码?</a>
                                         </div>
                                     </div>
                                     <div class="text-center">
@@ -84,7 +84,7 @@
                                     </div>
                                 </form>
                                 <div class="new-account mt-3">
-                                    <p>没有账号? <a class="text-primary" href="/user/register.jsp">注册</a>
+                                    <p>没有账号? <a class="text-primary" href="./register.jsp">注册</a>
                                     </p>
                                 </div>
                             </div>
@@ -101,23 +101,23 @@
     Scripts
 ***********************************-->
 <!-- Required vendors -->
-<script src="./../assets/vendor/global/global.min.js"></script>
-<script src="./../assets/js/custom.min.js"></script>
-<script src="./../assets/js/dlabnav-init.js"></script>
-<script src="./../assets/js/styleSwitcher.js"></script>
+<script src="../assets/vendor/global/global.min.js"></script>
+<script src="../assets/js/custom.min.js"></script>
+<script src="../assets/js/dlabnav-init.js"></script>
+<script src="../assets/js/styleSwitcher.js"></script>
 
-<script src="./../assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
-<script src="./../assets/js/plugins-init/sweetalert.init.js"></script>
+<script src="../assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
+<script src="../assets/js/plugins-init/sweetalert.init.js"></script>
 
-<script src="./../assets/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+<script src="../assets/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
 
-<script src="./../assets/js/md5.min.js"></script>
-<script src="./../assets/js/axios.min.js"></script>
+<script src="../assets/js/md5.min.js"></script>
+<script src="../assets/js/axios.min.js"></script>
 
-<script src="./../assets/js/utils/throttle.js"></script>
-<script src="./../assets/js/utils/debounce.js"></script>
-<script src="./../assets/js/utils/storage.js"></script>
-<script src="./../assets/js/utils/encrypt.js"></script>
+<script src="../assets/js/utils/throttle.js"></script>
+<script src="../assets/js/utils/debounce.js"></script>
+<script src="../assets/js/utils/storage.js"></script>
+<script src="../assets/js/utils/encrypt.js"></script>
 <script>
 
 
@@ -138,7 +138,7 @@
     function flushVerifyCode() {
         axios({
             type: 'get',
-            url: '/verify',
+            url: '<%=Config.getInstance().getString("default.urlheader")%>/verify',
             responseType: 'arraybuffer',
         }).then(res => {
             $('#verify_code_img').attr('src', "data:image/png;base64," +
@@ -162,7 +162,7 @@
         userLoginData.password = encrypt($('#user_password').val());
         userLoginData.rememberMe = $('#remember_me').get(0).checked;
         console.log("user login data", userLoginData);
-        $.post("/login", userLoginData, res => {
+        $.post("<%=Config.getInstance().getString("default.urlheader")%>/login", userLoginData, res => {
             if (res.resCode === "L0001") {
                 sweetAlert({
                     type: "error",
@@ -186,11 +186,11 @@
                 const userInfo = JSON.parse(window.atob(res.token.split('.')[1]));
                 storage.set("user_info", userInfo, userInfo.exp * 14);
                 if(res.userType==='low'||res.userType==='middle')
-                    window.location.href = "/market/house_market.jsp"
+                    window.location.href = "../market/house_market.jsp"
                 else if(res.userType==='high')
-                    window.location.href = "/admin/empty-page.html"//管理员
+                    window.location.href = "../admin/empty-page.html"//管理员
                 else
-                    window.location.href = "/superadmin/users.jsp"//超级管理员
+                    window.location.href = "../superadmin/users.jsp"//超级管理员
             }
         });
     }
