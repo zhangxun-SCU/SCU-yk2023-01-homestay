@@ -76,7 +76,7 @@ var Page = (function () {
         if (window.confirm("您确定要撤回这条反馈吗？")) {
             console.log("yes");
             if (fid !== undefined && fid !== null && fid !== "") {
-                var url = "/feedback";
+                var url = getUrlHead() +"/feedback";
                 var data = {};
                 data.action = "delete_feedback";
                 data.fid = fid;
@@ -99,7 +99,7 @@ var Page = (function () {
         $("#feedback_add_div").modal("hide");
     }
     var submitAddRecordDiv = function () {
-        var url = "/feedback";
+        var url = getUrlHead() +"/feedback";
         var data = {};
         data.action = "add_feedback";
         data.user_id = $("#feedback_add_div #user_id").val();
