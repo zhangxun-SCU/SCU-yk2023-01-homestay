@@ -30,10 +30,7 @@ To change this template use File | Settings | File Templates.
 </script>
 <script type="text/javascript" src="../assets/js/weather/js/echarts.min.js"></script>
 <script language="JavaScript" src="../assets/js/weather/js/js.js"></script>
-<body>
-<div class="canvas" style="opacity: .2">
-    <iframe frameborder="0" src="../assets/js/weather/js/index.html" style="width: 100%; height: 100%"></iframe>
-</div>
+<body onload="onLoadFunction();">
 <div class="loading">
     <div class="loadbox"> <img src="../assets/js/weather/images/loading.gif"> 页面加载中... </div>
 </div>
@@ -79,11 +76,16 @@ To change this template use File | Settings | File Templates.
             </div>
         </li>
         <li>
-            <div class="boxall" style="height:3.4rem">
-                <div class="alltitle">湿度曲线</div>
-                <div class="allnav" id="echart4"></div>
+        <li>
+            <div class="boxall" style="height: 5.2rem">
+                <div class="alltitle">实时天气数据</div>
+                <div class="wrap">
+                    <div id="weather_table_content_div">
+                    </div>
+                </div>
                 <div class="boxfoot"></div>
             </div>
+        </li>
 
         </li>
     </ul>
@@ -93,7 +95,54 @@ To change this template use File | Settings | File Templates.
 
 <script type="text/javascript" src="../assets/js/weather/js/china.js"></script>
 <script type="text/javascript" src="../assets/js/weather/js/area_echarts.js"></script>
+<script type="text/javascript">
+    function onLoadFunction() {
+        getWeatherRecordList();
+    }
+    function getWeatherRecordList() {
+        data = {};
+        console.log(1)
+        $.post("/weather?action=get_device_record",data,function(json){
+            console.log(JSON.stringify(json));
+            if(json.result_code==0){
+                var list=json.aaData;
+                console.log(list);
+                let html = "<ul>";
+                if(list!=undefined && list.length>0){
+                    for(var i=0;i<list.length;i++){
+                        var record=list[i];
+                        console.log(record);
+                        html += `<li>`
+                        html += `    <p>${record.city}天气${record.weather_type}温度 ${record.temperature}</p>`
+                        html += `</li>`
+                    }
+                    html += "</ul>"
+                }
+                $("#weather_table_content_div").html(html);
 
+            }
+        })
+        initOrdersScroll();
+    }
+    function initOrdersScroll() {
+        var html = $("#weather_table_content_div ul").html()
+        $("#weather_table_content_div ul").append(html)
+        var ls = $("#weather_table_content_div ul > li").length / 2 + 1
+        console.log($("#weather_table_content_div ul > li").length)
+        console.log(ls);
+        i = 0
+        ref = setInterval(function () {
+            i++
+            if (i === ls) {
+                i = 1
+                $("#weather_table_content_div ul").css({marginTop: 0})
+                $("#weather_table_content_div ul").animate({marginTop: -'.52' * i + 'rem'}, 1000)
+            }
+            $("#weather_table_content_div ul").animate({marginTop: -'.52' * i + 'rem'}, 1000)
+        }, 2400);
+    }
+
+</script>
 
 </body>
 </html>
