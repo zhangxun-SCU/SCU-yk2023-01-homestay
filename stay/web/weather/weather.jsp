@@ -72,7 +72,7 @@
                         <div class="row">
                             <div class="col-md-9">
                                 <input type="text" id="city" name="city" class="form-control"
-                                       placeholder="Enter text">
+                                      >
                             </div>
                             <div class="col-md-3">
                                 <button type="button" class="btn btn-rounded btn-danger"

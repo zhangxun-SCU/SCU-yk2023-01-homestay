@@ -19,14 +19,14 @@
                             <label class="col-md-3 control-label">温度</label>
                             <div class="col-md-9">
                                 <input type="text" id="temperature" name="temperature" class="form-control"
-                                       placeholder="Enter text">
+                                       >
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label">天气</label>
                             <div class="col-md-9">
                                 <input type="text" id="weather_type" name="weather_type" class="form-control"
-                                       placeholder="Enter text">
+                                       >
                             </div>
                         </div>
                         <div class="form-group">
