@@ -15,7 +15,7 @@
 <%@include file="../frame/frame_preloader.jsp"%>
 <%--  preloader end  --%>
 <div id="main-wrapper">
-    <%@ include file="/frame/frame_menu.jsp" %>
+    <%@ include file="../frame/frame_menu.jsp" %>
 
     <div class="content-body">
         <div class="container-fluid">

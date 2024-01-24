@@ -3,6 +3,7 @@
 <%@ page import="homestay.entity.User" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="org.json.JSONException" %>
+<%@ page import="homestay.utils.Config" %>
 <%--
   Created by IntelliJ IDEA.
   User: cw
@@ -777,7 +778,7 @@ Sidebar start
                     </svg>
                     <span class="ms-2">个人简介 </span>
                 </a>
-                <a href="/logout" class="dropdown-item ai-icon">
+                <a href="<%=Config.getInstance().getString("default.urlheader")%>/logout" class="dropdown-item ai-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18"
                          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                          stroke-linejoin="round">
@@ -962,8 +963,3 @@ Sidebar start
     </div>
 </div>
 
-<script>
-    $('#beLandlord').on('click', () => {
-
-    })
-</script>
