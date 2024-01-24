@@ -153,7 +153,10 @@
                                             </div>
                                         </div>
                                         <div id="specialty-post" class="tab-pane fade">
-                                            <div class="my-post-content pt-3">
+                                            <div class="my-post-content pt-3 mb-2">
+                                                <button class="btn btn-dribbble" id="specialty_price_order_button">
+                                                    按售价排序
+                                                </button>
                                             </div>
                                             <div class="row" id="specialty_list">
                                             </div>

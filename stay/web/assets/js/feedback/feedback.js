@@ -1,13 +1,17 @@
 function onLoadFunction() {
-    getAllFeedbacks();
+    getAllFeedbacks("");
+    initControlButtons();
 }
 
-function getAllFeedbacks() {
+function getAllFeedbacks(order) {
     var url = getUrlHead() + "/feedback";
     var data = {
         "actionType": "feedback",
         "action": "get_feedback"
     };
+    if (order !== "") {
+        data.order = order;
+    }
     $.ajaxSettings.async = false;
     $.post(
         url,
@@ -113,4 +117,10 @@ function getReply(fid) {
         }
     )
     $.ajaxSettings.async = true;
+}
+
+function initControlButtons() {
+    $("#time_order_button").click((e) => {
+        getAllFeedbacks("DESC");
+    })
 }

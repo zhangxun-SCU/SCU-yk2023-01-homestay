@@ -1,10 +1,11 @@
 function onLoadFunction() {
-    getAllHomestays();
-    getAllSpecialty();
-    getStatistics();
+    getAllHomestays("");
+    getAllSpecialty("");
+    // getStatistics();
+    initControlButtons();
 }
 
-function getAllHomestays() {
+function getAllHomestays(order) {
     var owner = getUserInfo().id;
     var url = getUrlHead() + "/seller";
     var data = {
@@ -12,6 +13,9 @@ function getAllHomestays() {
         "action": "get_homestay",
         "username": owner
     };
+    if (order !== "") {
+        data.order = order;
+    }
     console.log(data);
     $.ajaxSettings.async = false;
     $.post(
@@ -183,7 +187,7 @@ $("#modify_homestay_image").change((input_event) => {
     }
 })
 
-function getAllSpecialty() {
+function getAllSpecialty(order) {
     var owner = getUserInfo().id;
     var url = getUrlHead() + "/seller";
     var data = {
@@ -191,6 +195,9 @@ function getAllSpecialty() {
         "action": "get_specialty",
         "username": owner
     };
+    if (order !== "") {
+        data.order = order;
+    }
     $.ajaxSettings.async = false;
     $.post(
         url,
@@ -336,3 +343,9 @@ $("#modify_specialty_image").change((input_event) => {
         document.querySelector("#modify_specialty_image").value = "";
     }
 })
+
+function initControlButtons() {
+    $("#specialty_price_order_button").click((e) => {
+        getAllSpecialty("DESC");
+    })
+}

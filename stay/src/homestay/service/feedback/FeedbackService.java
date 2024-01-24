@@ -16,7 +16,7 @@ public class FeedbackService {
     public void getFeedback(Data data, JSONObject json) throws SQLException, JSONException {
         FeedbackDao dao = new FeedbackDao();
         if (!data.getParam().has("fid")) {
-            dao.getAllFeedback(json);
+            dao.getAllFeedback(data, json);
         } else {
             String fid = data.getParam().getString("fid");
             dao.getFeedbackById(fid, json);

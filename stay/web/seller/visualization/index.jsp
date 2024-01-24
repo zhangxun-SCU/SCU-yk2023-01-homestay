@@ -208,12 +208,13 @@
                     document.querySelector("#specialty_today").innerHTML = res.specialty_today;
                     document.querySelector("#specialty_yesterday").innerHTML = res.specialty_yesterday;
                     let specialty_increment = ((Number(res.specialty_today) - Number(res.specialty_yesterday)) / Number(res.specialty_yesterday) * 100).toFixed(2);
-                    document.querySelector("#specialty_increment").innerHTML = `\${specialty_increment}%`;
+                    console.log(specialty_increment);
+                    document.querySelector("#specialty_increment").innerHTML = specialty_increment + "%";
 
                     document.querySelector("#house_today").innerHTML = res.house_today;
                     document.querySelector("#house_yesterday").innerHTML = res.house_yesterday;
                     let house_increment = ((Number(res.house_today) - Number(res.house_yesterday)) / Number(res.house_yesterday) * 100).toFixed(2);
-                    document.querySelector("#house_increment").innerHTML = `\${house_increment}%`;
+                    document.querySelector("#house_increment").innerHTML = house_increment + "%";
                 }
             }
         )
