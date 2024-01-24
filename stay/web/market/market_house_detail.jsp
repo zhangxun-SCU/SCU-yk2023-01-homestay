@@ -35,7 +35,7 @@ To change this template use File | Settings | File Templates.
 <%--  preloader end  --%>
 <div id="main-wrapper">
     <%--  top-menu start  --%>
-        <%@ include file="/frame/frame_menu.jsp" %>
+        <%@ include file="../frame/frame_menu.jsp" %>
 
     <div class="content-body">
         <div class="container-fluid">

@@ -21,7 +21,7 @@
     <meta property="og:image" content="https://invome.dexignlab.com/xhtml/social-image.png"/>
     <meta name="format-detection" content="telephone=no">
     <title>Title</title>
-    <%@include file="/frame/frame_style.jsp" %>
+    <%@include file="../frame/frame_style.jsp" %>
     <style>
         .stars {
             display: flex;
@@ -37,11 +37,11 @@
 <body onload="onloadFunction();">
 
 <%--  preloader start  --%>
-<%@include file="/frame/frame_preloader.jsp" %>
+<%@include file="../frame/frame_preloader.jsp" %>
 <%--  preloader end  --%>
 <div id="main-wrapper">
     <%--  menu start  --%>
-    <%@include file="/frame/frame_menu.jsp" %>
+    <%@include file="../frame/frame_menu.jsp" %>
     <%--  end  --%>
 
     <div class="content-body">
@@ -270,12 +270,12 @@
     </div>
 
     <%--  footer start  --%>
-    <%@include file="/frame/frame_footer.jsp" %>
+    <%@include file="../frame/frame_footer.jsp" %>
     <%--  footer end  --%>
 </div>
 <%--  script start  --%>
 
-<%@include file="/frame/frame_javascript.jsp" %>
+<%@include file="../frame/frame_javascript.jsp" %>
 <script type="text/javascript">
     function onloadFunction() {
         var url = window.location.href;

@@ -42,12 +42,7 @@
 <!--*******************
     Preloader start
 ********************-->
-<div id="preloader">
-    <div class="lds-ripple">
-        <div></div>
-        <div></div>
-    </div>
-</div>
+<%@include file="../frame/frame_preloader.jsp" %>
 <!--*******************
     Preloader end
 ********************-->
