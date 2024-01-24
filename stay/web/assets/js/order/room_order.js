@@ -96,7 +96,7 @@ var Page = function () {
             window.location.href = "order_list_print_word.jsp";
         });
         $('#order_add').click(function () {
-            window.location.href = "/market/house_market.jsp";
+            window.location.href = getUrlHead()+"/market/house_market.jsp";
         });
 
     }
@@ -136,7 +136,7 @@ var Page = function () {
         var data = {};
         data.action = "get_specialty_order_record";
         data.id = id;
-        $.post("../../" + module + "_" + sub + "_specialty_order_servlet_action", data, function (json) {
+        $.post(getUrlHead() + "/homestay_servlet_specialty_order_servlet_action", data, function (json) {
             console.log(JSON.stringify(json));
             if (json.result_code == 0) {
                 var list = json.aaData;
@@ -172,7 +172,7 @@ var Page = function () {
     var submitModifyRecord = function () {
         if (confirm("您确定要修改该记录吗？")) {
             var id = getUrlParam("id");
-            var url = getUrlHead() + "/homestay_servlet_specialty_order_servlet_action";
+            var url = getUrlHead() + "/homestay_servlet_room_order_servlet_action";
             var data = {};
             data.action = "modify_device_record";
             data.id = id;
@@ -206,7 +206,7 @@ var Page = function () {
         data.username = user;
 
         console.log(1)
-        $.post("../../" + module + "_" + sub + "_room_order_servlet_action?action=get_room_order_record", data, function (json) {
+        $.post(getUrlHead() + "/homestay_servlet_room_order_servlet_action?action=get_room_order_record", data, function (json) {
             console.log(JSON.stringify(json));
             if (json.result_code == 0) {
                 var list = json.aaData;
@@ -242,7 +242,7 @@ var Page = function () {
     var onModifyRecord = function (good_id) {
         //显示出修改前数据
         //window.location.href="device_modify.jsp?order_id="+order_id;
-        $.post("../../" + module + "_" + sub + "_room_order_servlet_action?action=get_room_order_record", data, function (json) {
+        $.post(getUrlHead() + "/homestay_servlet_room_order_servlet_action?action=get_room_order_record", data, function (json) {
             console.log(JSON.stringify(json));
             if (json.result_code == 0) {
                 var list = json.aaData;
@@ -335,7 +335,7 @@ var Page = function () {
         data.username = user;
 
         console.log(1)
-        $.post("../../" + module + "_" + sub + "_room_order_servlet_action?action=get_room_order_record_finished", data, function (json) {
+        $.post(getUrlHead() + "/homestay_servlet_room_order_servlet_action?action=get_room_order_record_finished", data, function (json) {
             console.log(JSON.stringify(json));
             if (json.result_code == 0) {
                 var list = json.aaData;
@@ -414,7 +414,7 @@ var Page = function () {
         data.username = user;
 
         console.log(1)
-        $.post("../../" + module + "_" + sub + "_room_order_servlet_action?action=get_room_order_record_unfinished", data, function (json) {
+        $.post(getUrlHead() + "/homestay_servlet_room_order_servlet_action?action=get_room_order_record_unfinished", data, function (json) {
             console.log(JSON.stringify(json));
             if (json.result_code == 0) {
                 var list = json.aaData;
@@ -461,7 +461,7 @@ var Page = function () {
         data.username = user;
 
         console.log(1)
-        $.post("../../" + module + "_" + sub + "_room_order_servlet_action?action=get_room_order_record_up", data, function (json) {
+        $.post(getUrlHead() + "/homestay_servlet_room_order_servlet_action?action=get_room_order_record_up", data, function (json) {
             console.log(JSON.stringify(json));
             if (json.result_code == 0) {
                 var list = json.aaData;
@@ -487,7 +487,7 @@ var Page = function () {
         data.username = user;
 
         console.log(1)
-        $.post("../../" + module + "_" + sub + "_room_order_servlet_action?action=get_room_order_record_down", data, function (json) {
+        $.post(getUrlHead() + "/homestay_servlet_room_order_servlet_action?action=get_room_order_record_down", data, function (json) {
             console.log(JSON.stringify(json));
             if (json.result_code == 0) {
                 var list = json.aaData;

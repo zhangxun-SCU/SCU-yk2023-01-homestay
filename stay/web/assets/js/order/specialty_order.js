@@ -97,7 +97,7 @@ var Page = function () {
             window.location.href = "order_list_print_word.jsp";
         });
         $('#order_add').click(function () {
-            window.location.href = "/market/specialty_market.jsp";
+            window.location.href = getUrlHead()+"/market/specialty_market.jsp";
         });
 
     }
@@ -137,7 +137,7 @@ var Page = function () {
         var data = {};
         data.action = "get_specialty_order_record";
         data.id = id;
-        $.post("../../" + module + "_" + sub + "_specialty_order_servlet_action", data, function (json) {
+        $.post(getUrlHead()+"/homestay_servlet_specialty_order_servlet_action", data, function (json) {
             console.log(JSON.stringify(json));
             if (json.result_code == 0) {
                 var list = json.aaData;
@@ -205,7 +205,7 @@ var Page = function () {
         data.specialty_name = $("#record_query_setup #specialty_name").val();
         data.username = user;
         console.log(1)
-        $.post("../../" + module + "_" + sub + "_specialty_order_servlet_action?action=get_specialty_order_record", data, function (json) {
+        $.post(getUrlHead()+"/homestay_servlet_specialty_order_servlet_action?action=get_specialty_order_record", data, function (json) {
             console.log(JSON.stringify(json));
             if (json.result_code == 0) {
                 var list = json.aaData;
@@ -241,7 +241,7 @@ var Page = function () {
     var onModifyRecord = function (order_id) {
         //显示出修改前数据
         //window.location.href="device_modify.jsp?order_id="+order_id;
-        $.post("../../" + module + "_" + sub + "_specialty_order_servlet_action?action=get_specialty_order_record", data, function (json) {
+        $.post(getUrlHead()+"/homestay_servlet_specialty_order_servlet_action?action=get_specialty_order_record", data, function (json) {
             console.log(JSON.stringify(json));
             if (json.result_code == 0) {
                 var list = json.aaData;
@@ -454,7 +454,7 @@ var Page = function () {
         data.username = user;
 
         console.log(1)
-        $.post("../../" + module + "_" + sub + "_specialty_order_servlet_action?action=get_specialty_order_record_up", data, function (json) {
+        $.post(getUrlHead()+"/homestay_servlet_specialty_order_servlet_action?action=get_specialty_order_record_up", data, function (json) {
             console.log(JSON.stringify(json));
             if (json.result_code == 0) {
                 var list = json.aaData;
@@ -478,7 +478,7 @@ var Page = function () {
         data.username = user;
 
         console.log(1)
-        $.post("../../" + module + "_" + sub + "_specialty_order_servlet_action?action=get_specialty_order_record_down", data, function (json) {
+        $.post(getUrlHead()+"/homestay_servlet_specialty_order_servlet_action?action=get_specialty_order_record_down", data, function (json) {
             console.log(JSON.stringify(json));
             if (json.result_code == 0) {
                 var list = json.aaData;
