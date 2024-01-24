@@ -49,9 +49,9 @@ public class RoomOrderDao {
 
     public void deleteDeviceRecordSeller(Data data, JSONObject json) throws JSONException, SQLException {
         //构造sql语句，根据传递过来的条件参数
-        String id = data.getParam().has("order_id") ? data.getParam().getString("order_id") : null;
+        String id = data.getParam().has("good_id") ? data.getParam().getString("good_id") : null;
         if (id != null) {
-            String sql = "delete from specialty_order where order_id='" + data.getParam().getString("order_id") + "'";
+            String sql = "delete from deal_order where good_id='" + data.getParam().getString("good_id") + "'";
             data.getParam().put("sql", sql);
             updateRecord(data, json);
         }
@@ -104,6 +104,18 @@ public class RoomOrderDao {
     public void getOrderRecordExcelSeller(Data data, JSONObject json) throws JSONException, SQLException {
         //构造sql语句，根据传递过来的查询条件参数
         String sql = createGetRecordSqlExcelSeller(data);            //构造sql语句，根据传递过来的查询条件参数
+        data.getParam().put("sql", sql);
+        queryRecord(data, json);
+    }
+    public void getOrderRecordAll(Data data, JSONObject json) throws JSONException, SQLException {
+        //构造sql语句，根据传递过来的查询条件参数
+        String sql = createGetRecordSqlAll(data);            //构造sql语句，根据传递过来的查询条件参数
+        data.getParam().put("sql", sql);
+        queryRecord(data, json);
+    }
+    public void getOrderRecordAllStatistics(Data data, JSONObject json) throws JSONException, SQLException {
+        //构造sql语句，根据传递过来的查询条件参数
+        String sql = createGetRecordSqlAllStatistics(data);            //构造sql语句，根据传递过来的查询条件参数
         data.getParam().put("sql", sql);
         queryRecord(data, json);
     }
@@ -276,6 +288,16 @@ public class RoomOrderDao {
         if (room_name != null && (!room_name.isEmpty())) {
             sql = sql + " and room_name like '%" + room_name + "%'";
         }
+        return sql;
+    }
+    private String createGetRecordSqlAll(Data data) throws JSONException {
+        JSONObject param = data.getParam();
+        String sql="SELECT DISTINCT deal_order.*, room_occupy.house_id, room_occupy.room_id, room_occupy.in_date,room_occupy.out_date, house.house_name, room.room_name FROM deal_order JOIN room_occupy ON deal_order.good_id = room_occupy.op_id JOIN room USING(house_id, room_id) JOIN house USING(house_id)  ";
+        return sql;
+    }
+    private String createGetRecordSqlAllStatistics(Data data) throws JSONException {
+        JSONObject param = data.getParam();
+        String sql = "select sum(price) as total_income, count(*) as total_sales   from deal_order,house,room,room_occupy where deal_order.good_id=room_occupy.op_id and room.house_id=room_occupy.house_id and room.room_id=room_occupy.room_id and house.house_id=room.house_id  ";
         return sql;
     }
     private String createGetRecordSql(Data data) throws JSONException {
