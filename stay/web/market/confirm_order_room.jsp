@@ -87,7 +87,7 @@ To change this template use File | Settings | File Templates.
     var goodlist=JSON.parse(checkgoods);
     var data = {"good_list":"["+checkgoods+"]","action":"query_by_list","good_type":"house"};
     console.log(JSON.stringify(data));
-    $.post('/specialtyMarket', data, function (json) {
+    $.post('<%=Config.getInstance().getString("default.urlheader")%>/specialtyMarket', data, function (json) {
         if (json.code == 0) {
             var html = "";
             order_list = json.good_list;

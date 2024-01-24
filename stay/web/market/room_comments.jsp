@@ -123,7 +123,7 @@
         // 获取所有评论信息
         $.ajaxSettings.async = false;
         $.post(
-            "/order_comment",
+            "<%=Config.getInstance().getString("default.urlheader")%>/order_comment",
             {
                 "type": "room",
                 "action": "get_comment",

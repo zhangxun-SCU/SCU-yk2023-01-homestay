@@ -230,7 +230,7 @@ To change this template use File | Settings | File Templates.
     var data = {"good_id": good_id,"good_type":"specialty"};
     data.good_id = good_id;
     console.log(data);
-    $.post('/getSpecialtyDetail', data, function (json) {
+    $.post('<%=Config.getInstance().getString("default.urlheader")%>/getSpecialtyDetail', data, function (json) {
         if (json.code == 0) {
             console.log(JSON.stringify(json));
             document.getElementById("good_name").innerText = json.good_name;
@@ -258,7 +258,7 @@ To change this template use File | Settings | File Templates.
                     var good_id = url.split('=')[1];
                     var good_num = document.getElementById("need_num").value;
                     var data = {"good_id": good_id, "good_num": good_num};
-                    $.post("/addGood2Cart", data, function (json) {
+                    $.post("<%=Config.getInstance().getString("default.urlheader")%>/addGood2Cart", data, function (json) {
                         if (json.code == 0) {
                             toastr.success("去购物车查看吧~", "添加成功", {
                                 positionClass: "toast-bottom-right",

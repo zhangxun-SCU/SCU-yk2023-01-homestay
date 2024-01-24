@@ -284,7 +284,7 @@
 
         data.good_id = good_id;
         console.log(data);
-        $.post('/getSpecialtyDetail', data, function (json) {
+        $.post('<%=Config.getInstance().getString("default.urlheader")%>/getSpecialtyDetail', data, function (json) {
             if (json.code === 0) {
                 console.log(JSON.stringify(json));
                 document.getElementById("good_name").innerText = json.good_name;
@@ -298,7 +298,7 @@
         // 获取所有评论信息
         $.ajaxSettings.async = false;
         $.post(
-            "/order_comment",
+            "<%=Config.getInstance().getString("default.urlheader")%>/order_comment",
             {
                 "type": "specialty",
                 "action": "get_comment",
