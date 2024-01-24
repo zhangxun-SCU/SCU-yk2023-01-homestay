@@ -64,7 +64,7 @@
                 <div class="col-xl-6 col-xxl-12">
                     <div class="card">
                         <div class="card-header d-block">
-                            <button type="button" class="btn btn-primary">我要反馈</button>
+                            <button type="button" class="btn btn-primary"id="add_button" name="add_button">我要反馈</button>
                             <button type="button" class="btn btn-rounded btn-success"id="print_word_button"
                                     name="print_word_button"><span
                                     class="btn-icon-start text-success"><i class="fa fa-upload color-success"></i>
@@ -134,4 +134,5 @@
 <script src="../assets/js/dashboard/add_feedback.js"></script>
 </body>
 <%@ include file="./feedback_add_div.jsp" %>
+<%@include file="./feedack_print_word.jsp"%>
 </html>
