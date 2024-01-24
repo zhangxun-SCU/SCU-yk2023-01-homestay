@@ -70,7 +70,7 @@ public class GoodsServlet extends HttpServlet {
         } else if (action.equals("delete_specialty")) {
             specialtyService.deleteSpecialty(data, json);
         } else if (action.equals("modify_specialty")) {
-            specialtyService.modifySpeicialty(data, json);
+            specialtyService.modifySpecialty(data, json);
         } else if (action.equals("get_statistics")) {
             specialtyService.getStatistics(data, json);
         } else {
