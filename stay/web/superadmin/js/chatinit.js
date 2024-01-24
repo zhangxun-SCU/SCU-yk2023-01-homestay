@@ -101,4 +101,3 @@ $.get('/permission_statistics', res => {
     })($);
 
 })
-

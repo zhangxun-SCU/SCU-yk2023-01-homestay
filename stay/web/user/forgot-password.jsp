@@ -1,8 +1,8 @@
-<%@ page import="homestay.utils.Config" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: cw
-  Date: 2023/12/3
-  Time: 14:19
+  Date: 2024/1/24
+  Time: 17:23
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -26,10 +26,10 @@
     <title>Invome Admin Dashboard</title>
 
     <!-- FAVICONS ICON -->
-    <link rel="shortcut icon" type="image/png" href="../assets/images/favicon.png"/>
-    <link href="../assets/css/style.css" rel="stylesheet">
-    <link href="../assets/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
-    <link href="../assets/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="./../assets/images/favicon.png"/>
+    <link href="./../assets/css/style.css" rel="stylesheet">
+    <link href="./../assets/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="./../assets/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
 </head>
 
 <body class="vh-100">
@@ -42,56 +42,53 @@
                         <div class="col-xl-12">
                             <div class="auth-form">
                                 <div class="text-center mb-3">
-                                    <a href="../index.html"><img src="./../assets/images/logo-full.png" alt=""></a>
+                                    <a href="index.html"><img src="./../assets/images/logo-full.png" alt=""></a>
                                 </div>
-                                <h4 class="text-center mb-4">注册账号</h4>
+                                <h4 class="text-center mb-4">忘记密码</h4>
                                 <form>
                                     <div class="mb-3">
-                                        <label class="mb-1"><strong>ID</strong></label>
-                                        <input type="text" class="form-control" placeholder="username" id="register_id">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="mb-1"><strong>邮箱</strong></label>
+                                        <label><strong>邮箱</strong></label>
                                         <input type="email" class="form-control" placeholder="hello@example.com"
-                                               id="register_email">
+                                               id="reset_email">
                                     </div>
                                     <div class="row d-flex">
                                         <div class="mb-3">
                                             <label class="mb-1"><strong>邮件验证码</strong></label>
                                             <div class="d-flex justify-content-between">
                                                 <input type="text" class="form-control w-75" id="email_verify_code">
-                                                <button type="button" class="btn light btn-primary disabled"
-                                                        id="send_email_btn">
+                                                <button type="button" class="btn light btn-primary disabled" id="send_email_btn">
                                                     发送
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="mb-1"><strong>密码</strong></label>
+                                        <label class="mb-1" for="reset_password"><strong>密码</strong></label>
                                         <input type="password" class="form-control" value="Password"
-                                               id="register_password">
+                                               id="reset_password">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="mb-1"
+                                               for="repeat_reset_password"><strong>确认密码</strong></label>
+                                        <input type="password" class="form-control" value="Password"
+                                               id="repeat_reset_password">
                                     </div>
                                     <div class="row d-flex">
                                         <div class="mb-3">
                                             <label class="mb-1" for="verify_code"><strong>验证码</strong></label>
                                             <div style="display: flex; justify-content: space-between; flex: 1">
-                                                <input type="text" class="form-control w-75" id="verify_code"
-                                                       placeholder="请输入右侧验证码 ">
+                                                <input type="text" class="form-control" style="width: 75%;"
+                                                       id="verify_code" placeholder="请输入右侧验证码 ">
                                                 <img src="" alt="verify_code" id="verify_code_img" class="img-preview"/>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="text-center mt-4">
-                                        <button class="btn btn-primary btn-block disabled" id="register_btn"
-                                                type="button">注册账号
+                                    <div class="text-center">
+                                        <button class="btn btn-primary btn-block disabled" type="button"
+                                                id="reset_password_btn">提交
                                         </button>
                                     </div>
                                 </form>
-                                <div class="new-account mt-3">
-                                    <p>已经有账号了? <a class="text-primary" href="./login.jsp">登录</a>
-                                    </p>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -101,28 +98,29 @@
     </div>
 </div>
 
+
 <!--**********************************
-	Scripts
+    Scripts
 ***********************************-->
 <!-- Required vendors -->
-<script src="../assets/vendor/global/global.min.js"></script>
-<script src="../assets/js/custom.min.js"></script>
-<script src="../assets/js/dlabnav-init.js"></script>
-<script src="../assets/js/styleSwitcher.js"></script>
+<script src="./../assets/vendor/global/global.min.js"></script>
+<script src="./../assets/js/custom.min.js"></script>
+<script src="./../assets/js/dlabnav-init.js"></script>
+<script src="./../assets/js/styleSwitcher.js"></script>
 
-<script src="../assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
-<script src="../assets/js/plugins-init/sweetalert.init.js"></script>
-<script src="../assets/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+<script src="./../assets/js/axios.min.js"></script>
+<script src="./../assets/js/md5.min.js"></script>
 
 
-<script src="../assets/js/axios.min.js"></script>
-<script src="../assets/js/md5.min.js"></script>
+<script src="./../assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
+<script src="./../assets/js/plugins-init/sweetalert.init.js"></script>
 
 <script src="../assets/js/utils/throttle.js"></script>
-<script src="../assets/js/utils/debounce.js"></script>
-<script src="../assets/js/utils/encrypt.js"></script>
-<script>
+<script src="./../assets/js/utils/debounce.js"></script>
+<script src="./../assets/js/utils/encrypt.js"></script>
 
+
+<script>
     /**
      *  事件绑定
      */
@@ -131,30 +129,27 @@
         sendEmail();
     });
     $('#verify_code_img').on('click', throttle(flushVerifyCode, 10000));
-    $('#register_btn').on('click', register);
-    $('#register_id,#register_password,#register_email,#email_verify_code,#verify_code').on('keyup', debounce(() => {
-        if (idInput() && passwordInput() && emailInput() && emailVerifyCodeINput() && imgVerifyInput()) {
-            $('#register_btn').removeClass('disabled');
+    let resetPasswordBtn = $("#reset_password_btn");
+    resetPasswordBtn.on('click', submitReset);
+    // 输入校验
+    $('#reset_email,#email_verify_code,#reset_password,#repeat_reset_password,#verify_code').on('keyup', debounce(() => {
+        if (emailInput() && passwordInput() && repeatPasswordInput() && emailVerifyCodeInput() && imgVerifyInput()) {
+            resetPasswordBtn.removeClass('disabled');
         } else {
-            $('#register_btn').addClass('disabled');
+            resetPasswordBtn.addClass('disabled');
         }
-        console.log(111);
     }, 200));
-    $('#register_email').on('keyup', debounce(() => {
-        if (emailInput()) {
+    $("#reset_email").on('keyup', debounce(() => {
+        if(emailInput()) {
             sendEmailBtn.removeClass('disabled');
         } else {
             sendEmailBtn.addClass('disabled');
         }
     }, 200));
-
-    /**
-     * 图形验证码
-     */
-    function flushVerifyCode() {
+    function flushVerifyCode() {  // 图形验证码
         axios({
             type: 'get',
-            url: '<%=Config.getInstance().getString("default.urlheader")%>/verify',
+            url: '/verify',
             responseType: 'arraybuffer',
         }).then(res => {
             $('#verify_code_img').attr('src', "data:image/png;base64," +
@@ -164,17 +159,15 @@
                     }, '')
                 ));
         })
-    }
+    };
     flushVerifyCode();
 
 
-    /**
-     * 邮件验证码
-     */
-    function sendEmail() {
+    function sendEmail() {  // 邮件验证码
         let waitTime = 60;
-        let userEmail = $('#register_email').val();
-        $.get(`<%=Config.getInstance().getString("default.urlheader")%>/email?email=\${userEmail}`, (res) => {
+        let userEmail = $('#reset_email').val();
+        console.log(userEmail);
+        $.get(`/email?email=\${userEmail}`, (res) => {
             console.log("sendEmailRes");
             sendEmailBtn.addClass("disabled");
             sendEmailBtn.text(waitTime);
@@ -183,48 +176,34 @@
                 if (waitTime < 0) {
                     clearInterval(sendEmailTimer);
                     sendEmailBtn.removeClass('disabled')
-                    sendEmailBtn.text("test");
+                    sendEmailBtn.text("发送");
                 }
             }, 1000);
         });
     }
 
-    /**
-     * 注册
-     */
-    function register() {
-        // 校验图形验证码
-        const userRegisterData = {};
-        userRegisterData.action = "register"
-        userRegisterData.imgVerifyCode = $('#verify_code').val();
-        userRegisterData.id = $('#register_id').val();
-        userRegisterData.email = $('#register_email').val();
-        userRegisterData.password = encrypt($('#register_password').val());
-        userRegisterData.emailVerifyCode = $('#email_verify_code').val();
-        console.log(userRegisterData)
-        $.post('<%=Config.getInstance().getString("default.urlheader")%>/register', userRegisterData, res => {
-            console.log('register res', res);
-            if (res.resCode === "V0001") {
+    function submitReset() {
+        // 先校验图形验证码
+        const data = {};
+        data.action = "modifyPassword";
+        data.img = true;
+        data.imgVerifyCode = $('#verify_code').val();
+        data.email = $('#reset_email').val();
+        data.resetPassword = encrypt($('#reset_password').val())
+        data.emailVerifyCode = $('#email_verify_code').val();
+        $.post('/reset', data, res => {
+            console.log(res);
+            if(res.resCode === '00000') {
+                swal("success", "重置成功", "success");
+                window.location.href = '/user/login.jsp';
+            } else if(resCode === 'S0001') {
                 sweetAlert({
                     type: "error",
-                    title: "图形验证码错误",
+                    title: "重置失败",
                     text: "请再次尝试",
                     timer: 1e3,
                     showConfirmButton: !1
                 });
-            } else if (res.resCode === "R0001") {
-                // id已被占用
-            } else if (res.resCode === "R0002") {
-                sweetAlert({
-                    type: "error",
-                    title: "账户已存在",
-                    text: "请直接登录",
-                    timer: 1e3,
-                    showConfirmButton: !1
-                });
-            } else if(res.resCode === "00000") {
-                swal("success", "注册成功", "请登录");
-                window.location.href = '../user/login.jsp'
             }
         })
     }
@@ -232,29 +211,32 @@
     /**
      * 输入校验
      */
-    function idInput() {
-        if ($('#register_id').val() === '') {
+    function emailInput() {
+        if ($('#reset_email').val() === '') {
+            return false;
+        }
+        return true;
+    }
+
+    function emailVerifyCodeInput() {
+        if ($('#email_verify_code').val() === '') {
             return false;
         }
         return true;
     }
 
     function passwordInput() {
-        if ($('#register_password').val() === '') {
+        if ($('#reset_password').val() === '') {
             return false;
         }
         return true;
     }
 
-    function emailInput() {
-        if ($('#register_email').val() === '') {
+    function repeatPasswordInput() {
+        if ($('#repeat_reset_password').val() === '') {
             return false;
         }
-        return true;
-    }
-
-    function emailVerifyCodeINput() {
-        if ($('#email_verify_code').val() === '') {
+        if ($('#repeat_reset_password').val() !== $('#reset_password').val()) {
             return false;
         }
         return true;
