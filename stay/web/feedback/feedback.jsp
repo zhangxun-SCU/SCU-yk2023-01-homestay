@@ -21,18 +21,18 @@
     <meta property="og:image" content="https://invome.dexignlab.com/xhtml/social-image.png"/>
     <meta name="format-detection" content="telephone=no">
     <title>Title</title>
-    <%@include file="/frame/frame_style.jsp" %>
+    <%@include file="../frame/frame_style.jsp" %>
     <link href="../assets/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
 
 </head>
 <body onload="onLoadFunction();">
 
 <%--  preloader start  --%>
-<%@include file="/frame/frame_preloader.jsp" %>
+<%@include file="../frame/frame_preloader.jsp" %>
 <%--  preloader end  --%>
 <div id="main-wrapper">
     <%--  menu start  --%>
-    <%@include file="/frame/frame_menu.jsp" %>
+    <%@include file="../frame/frame_menu.jsp" %>
     <%--  end  --%>
 
     <!--**********************************
@@ -134,13 +134,13 @@
     ***********************************-->
 
     <%--  footer start  --%>
-    <%@include file="/frame/frame_footer.jsp" %>
+    <%@include file="../frame/frame_footer.jsp" %>
     <%--  footer end  --%>
 </div>
 <%@ include file="modals/reply_modal.jsp" %>
 <%--  script start  --%>
 
-<%@include file="/frame/frame_javascript.jsp" %>
+<%@include file="../frame/frame_javascript.jsp" %>
 <script src="../assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
 <script src="../assets/js/plugins-init/sweetalert.init.js"></script>
 <script src="../assets/js/feedback/feedback.js"></script>

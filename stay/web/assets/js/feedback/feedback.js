@@ -3,7 +3,7 @@ function onLoadFunction() {
 }
 
 function getAllFeedbacks() {
-    var url = "/feedback";
+    var url = getUrlHead() + "/feedback";
     var data = {
         "actionType": "feedback",
         "action": "get_feedback"
@@ -64,7 +64,7 @@ function showReplyModal(fid) {
     getReply(fid);
     $("#replyModal #replyConfirmButton").click((e) => {
         var reply = $("#reply").val();
-        var url = "/feedback";
+        var url = getUrlHead() + "/feedback";
         var data = {
             "actionType": "feedback",
             "action": "reply_feedback",
@@ -90,7 +90,7 @@ function showReplyModal(fid) {
 }
 
 function getReply(fid) {
-    var url = "/feedback";
+    var url = getUrlHead() + "/feedback";
     var data = {
         "actionType": "feedback",
         "action": "get_feedback",
