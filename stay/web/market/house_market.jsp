@@ -15,7 +15,7 @@
 <%@include file="../frame/frame_preloader.jsp"%>
 <%--  preloader end  --%>
 <div id="main-wrapper">
-    <%@ include file="/frame/frame_menu.jsp" %>
+    <%@ include file="../frame/frame_menu.jsp" %>
 
     <div class="content-body">
         <div class="container-fluid">
@@ -78,7 +78,7 @@
     var searchSpecialtyByName =function(){
         var search_name=document.getElementById("search_name").value;
         var data = {"search_name":search_name,"action":"query_by_name","good_type":"house"};
-        $.post('/houseMarket', data, function (json) {
+        $.post('<%=Config.getInstance().getString("default.urlheader")%>/houseMarket', data, function (json) {
             console.log(JSON.stringify(json));
             if (json.code == 0) {
                 good_list = json.good_list;
@@ -139,7 +139,7 @@
         document.getElementById("good_list").innerHTML = html;
 
     };
-    $.post('/houseMarket', data, function (json) {
+    $.post('<%=Config.getInstance().getString("default.urlheader")%>/houseMarket', data, function (json) {
         console.log(JSON.stringify(json));
         if (json.code == 0) {
             good_list = json.good_list;
@@ -151,7 +151,7 @@
 
 var MarketGoodDetail = function (good_id) {
     var data = {"good_id": good_id};
-    window.location.href = "/market/market_house_detail.jsp?good_id=" + good_id;
+    window.location.href = "market_house_detail.jsp?good_id=" + good_id;
 }
 
 var ascPrice=function()

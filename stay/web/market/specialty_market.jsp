@@ -98,7 +98,7 @@
     var searchSpecialtyByName =function(){
         var search_name=document.getElementById("search_name").value;
         var data = {"search_name":search_name,"action":"query_by_name","good_type":"specialty"};
-        $.post('/specialtyMarket',data,function(json){
+        $.post('<%=Config.getInstance().getString("default.urlheader")%>/specialtyMarket',data,function(json){
             if(json.code==0){
                 good_list = json.good_list;
                 console.log(JSON.stringify(json))
@@ -205,7 +205,7 @@
         document.getElementById("good_list").innerHTML = html;
 
     };
-    $.post('/specialtyMarket', data, function (json) {
+    $.post('<%=Config.getInstance().getString("default.urlheader")%>/specialtyMarket', data, function (json) {
         if (json.code == 0) {
             good_list = json.good_list;
             console.log(JSON.stringify(json))
@@ -217,7 +217,7 @@
 
 var MarketGoodDetail = function (good_id) {
     var data = {"good_id": good_id};
-    window.location.href = "/market/market_specialty_detail.jsp?good_is=" + good_id;
+    window.location.href = "market_specialty_detail.jsp?good_is=" + good_id;
 }
 var openCart=function(){
     window.location.href="cart.jsp"

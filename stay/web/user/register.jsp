@@ -1,4 +1,4 @@
-<%--
+<%@ page import="homestay.utils.Config" %><%--
   Created by IntelliJ IDEA.
   User: cw
   Date: 2023/12/3
@@ -26,10 +26,10 @@
     <title>Invome Admin Dashboard</title>
 
     <!-- FAVICONS ICON -->
-    <link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
-    <link href="./../assets/css/style.css" rel="stylesheet">
-    <link href="./../assets/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
-    <link href="./../assets/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="../assets/images/favicon.png"/>
+    <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="../assets/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="../assets/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
 </head>
 
 <body class="vh-100">
@@ -42,7 +42,7 @@
                         <div class="col-xl-12">
                             <div class="auth-form">
                                 <div class="text-center mb-3">
-                                    <a href="/index.html"><img src="./../assets/images/logo-full.png" alt=""></a>
+                                    <a href="../index.html"><img src="./../assets/images/logo-full.png" alt=""></a>
                                 </div>
                                 <h4 class="text-center mb-4">注册账号</h4>
                                 <form>
@@ -89,7 +89,7 @@
                                     </div>
                                 </form>
                                 <div class="new-account mt-3">
-                                    <p>已经有账号了? <a class="text-primary" href="/user/login.jsp">登录</a>
+                                    <p>已经有账号了? <a class="text-primary" href="./login.jsp">登录</a>
                                     </p>
                                 </div>
                             </div>
@@ -105,22 +105,22 @@
 	Scripts
 ***********************************-->
 <!-- Required vendors -->
-<script src="./../assets/vendor/global/global.min.js"></script>
-<script src="./../assets/js/custom.min.js"></script>
-<script src="./../assets/js/dlabnav-init.js"></script>
-<script src="./../assets/js/styleSwitcher.js"></script>
+<script src="../assets/vendor/global/global.min.js"></script>
+<script src="../assets/js/custom.min.js"></script>
+<script src="../assets/js/dlabnav-init.js"></script>
+<script src="../assets/js/styleSwitcher.js"></script>
 
-<script src="./../assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
-<script src="./../assets/js/plugins-init/sweetalert.init.js"></script>
-<script src="./../assets/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+<script src="../assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
+<script src="../assets/js/plugins-init/sweetalert.init.js"></script>
+<script src="../assets/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
 
 
-<script src="./../assets/js/axios.min.js"></script>
-<script src="./../assets/js/md5.min.js"></script>
+<script src="../assets/js/axios.min.js"></script>
+<script src="../assets/js/md5.min.js"></script>
 
 <script src="../assets/js/utils/throttle.js"></script>
-<script src="./../assets/js/utils/debounce.js"></script>
-<script src="./../assets/js/utils/encrypt.js"></script>
+<script src="../assets/js/utils/debounce.js"></script>
+<script src="../assets/js/utils/encrypt.js"></script>
 <script>
 
     /**
@@ -154,7 +154,7 @@
     function flushVerifyCode() {
         axios({
             type: 'get',
-            url: '/verify',
+            url: '<%=Config.getInstance().getString("default.urlheader")%>/verify',
             responseType: 'arraybuffer',
         }).then(res => {
             $('#verify_code_img').attr('src', "data:image/png;base64," +
@@ -174,7 +174,7 @@
     function sendEmail() {
         let waitTime = 60;
         let userEmail = $('#register_email').val();
-        $.get(`/email?email=\${userEmail}`, (res) => {
+        $.get(`<%=Config.getInstance().getString("default.urlheader")%>/email?email=\${userEmail}`, (res) => {
             console.log("sendEmailRes");
             sendEmailBtn.addClass("disabled");
             sendEmailBtn.text(waitTime);
@@ -202,7 +202,7 @@
         userRegisterData.password = encrypt($('#register_password').val());
         userRegisterData.emailVerifyCode = $('#email_verify_code').val();
         console.log(userRegisterData)
-        $.post('/register', userRegisterData, res => {
+        $.post('<%=Config.getInstance().getString("default.urlheader")%>/register', userRegisterData, res => {
             console.log('register res', res);
             if (res.resCode === "V0001") {
                 sweetAlert({
@@ -224,7 +224,7 @@
                 });
             } else if(res.resCode === "00000") {
                 swal("success", "注册成功", "请登录");
-                window.location.href = '/user/login.jsp'
+                window.location.href = '../user/login.jsp'
             }
         })
     }

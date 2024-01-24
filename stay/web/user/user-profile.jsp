@@ -1,6 +1,7 @@
 <%@ page import="homestay.dao.Data" %>
 <%@ page import="homestay.entity.User" %>
-<%@ page import="java.math.BigDecimal" %><%--
+<%@ page import="java.math.BigDecimal" %>
+<%@ page import="homestay.utils.Config" %><%--
   Created by IntelliJ IDEA.
   User: cw
   Date: 2023/12/1
@@ -13,7 +14,7 @@
 <html>
 <head>
     <title>Title</title>
-    <%@include file="./../frame/frame_style.jsp" %>
+    <%@include file="../frame/frame_style.jsp" %>
     <link href="./../assets/vendor/lightgallery/css/lightgallery.min.css" rel="stylesheet">
     <link href="./../assets/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <style>
@@ -25,11 +26,11 @@
 <body>
 
 <%--  preloader start  --%>
-<%@include file="./../frame/frame_preloader.jsp" %>
+<%@include file="../frame/frame_preloader.jsp" %>
 <%--  preloader end  --%>
 <div id="main-wrapper">
     <%--  top-menu start  --%>
-        <%@include file="/frame/frame_menu.jsp"%>
+        <%@include file="../frame/frame_menu.jsp"%>
     <%--  slider end  --%>
         <%
             // 判断是否是自己
@@ -175,7 +176,7 @@
                                     <div class="profile-blog">
                                         <h5 class="text-primary d-inline">Today Highlights</h5>
                                         <img src="./../assets/images/profile/1.jpg" alt="" class="img-fluid mt-4 mb-4 w-100">
-                                        <h4><a href="post-details.html" class="text-black">Darwin Creative Agency
+                                        <h4><a href="#" class="text-black">Darwin Creative Agency
                                             Theme</a></h4>
                                         <p class="mb-0">A small river named Duden flows by their place and supplies it
                                             with the necessary regelialia. It is a paradisematic country, in which
@@ -495,16 +496,16 @@
 
     </div>
 <%--  script start--%>
-<script src="/assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-<script src="/assets/vendor/chart.js/Chart.bundle.min.js"></script>
-<script src="/assets/vendor/lightgallery/js/lightgallery-all.min.js"></script>
-<script src="./../assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
-<script src="./../assets/js/plugins-init/sweetalert.init.js"></script>
-<script src="./../assets/js/utils/throttle.js"></script>
-<script src="./../assets/js/utils/debounce.js"></script>
-<script src="./../assets/js/md5.min.js"></script>
-<script src="./../assets/js/utils/encrypt.js"></script>
-<%@include file="/frame/frame_javascript.jsp" %>
+<script src="../assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+<script src="../assets/vendor/chart.js/Chart.bundle.min.js"></script>
+<script src="../assets/vendor/lightgallery/js/lightgallery-all.min.js"></script>
+<script src="../assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
+<script src="../assets/js/plugins-init/sweetalert.init.js"></script>
+<script src="../assets/js/utils/throttle.js"></script>
+<script src="../assets/js/utils/debounce.js"></script>
+<script src="../assets/js/md5.min.js"></script>
+<script src="../assets/js/utils/encrypt.js"></script>
+<%@include file="../frame/frame_javascript.jsp" %>
 
 <script>
     const uploadAvatarBtn = $('#upload_avatar_btn');
@@ -550,7 +551,7 @@
             const formData = new FormData();
             formData.append("avatar", file);
             $.ajax({
-                url: '/reset',
+                url: '<%=Config.getInstance().getString("default.urlheader")%>/reset',
                 type: 'POST',
                 data: formData,
                 processData: false,  // 不处理数据
@@ -572,12 +573,12 @@
         data.emailVerifyCode = $('#verify_code').val();
         console.log(data);
         if($('#set-password').val() !== '') {
-            $.post("/reset", data, (res) => {
+            $.post("<%=Config.getInstance().getString("default.urlheader")%>/reset", data, (res) => {
                 console.log(res);
                 if (res.resCode === '00000') {
                     swal("success", "信息重置成功", "success");
                     if($("#gridCheck").is(":checked")) {
-                        $.get('/logout');
+                        $.get('<%=Config.getInstance().getString("default.urlheader")%>/logout');
                     }
                 } else {
                     sweetAlert({
@@ -617,7 +618,7 @@
         const data = {};
         data.rechargeValue = value;
         data.action = 'recharge';
-        $.post('/balance', data, (res) => {
+        $.post('<%=Config.getInstance().getString("default.urlheader")%>/balance', data, (res) => {
             console.log(res)
             $('#rechargeInput').val(res['newBalance']);
             swal("success", "充值成功", "success");
@@ -626,7 +627,7 @@
     const data = {};
     data.action = 'payouts';
     $('#payoutsSubmit').on('click', () => {
-        $.post('/balance', data, (res) => {
+        $.post('<%=Config.getInstance().getString("default.urlheader")%>/balance', data, (res) => {
             swal("success", "提现成功", "success");
         })
     });
@@ -634,7 +635,7 @@
     $('#verify_btn').on('click', () => {
         let waitTime = 60;
         let userEmail = $('#set-email').val();
-        $.get(`/email?email=\${userEmail}`, (res) => {
+        $.get(`<%=Config.getInstance().getString("default.urlheader")%>/email?email=\${userEmail}`, (res) => {
             console.log("sendEmailRes");
             sendEmailBtn.addClass("disabled");
             sendEmailBtn.text(waitTime);
@@ -649,7 +650,7 @@
         });
     })
     const exportFile = () => {
-        $.get('/export_profile', res => {
+        $.get('<%=Config.getInstance().getString("default.urlheader")%>/export_profile', res => {
             console.log(res);
             $('#export_url').attr('href', res.url);
             $('#export_url').attr('download', "profile.json");

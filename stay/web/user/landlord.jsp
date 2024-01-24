@@ -1,4 +1,4 @@
-<%--
+<%@ page import="homestay.utils.Config" %><%--
   Created by IntelliJ IDEA.
   User: cw
   Date: 2023/12/3
@@ -26,10 +26,10 @@
     <title>Invome Admin Dashboard</title>
 
     <!-- FAVICONS ICON -->
-    <link rel="shortcut icon" type="image/png" href="./../assets/images/favicon.png"/>
-    <link href="./../assets/css/style.css" rel="stylesheet">
-    <link href="./../assets/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
-    <link href="./../assets/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="../assets/images/favicon.png"/>
+    <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="../assets/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="../assets/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
 
 </head>
 
@@ -43,7 +43,7 @@
                         <div class="col-xl-12">
                             <div class="auth-form">
                                 <div class="text-center mb-3">
-                                    <a href="/index.html"><img src="./../assets/images/logo-full.png" alt=""></a>
+                                    <a href="../index.html"><img src="../assets/images/logo-full.png" alt=""></a>
                                 </div>
                                 <h4 class="text-center mb-4">房东认证</h4>
                                 <form>
@@ -85,23 +85,23 @@
     Scripts
 ***********************************-->
 <!-- Required vendors -->
-<script src="./../assets/vendor/global/global.min.js"></script>
-<script src="./../assets/js/custom.min.js"></script>
-<script src="./../assets/js/dlabnav-init.js"></script>
-<script src="./../assets/js/styleSwitcher.js"></script>
+<script src="../assets/vendor/global/global.min.js"></script>
+<script src="../assets/js/custom.min.js"></script>
+<script src="../assets/js/dlabnav-init.js"></script>
+<script src="../assets/js/styleSwitcher.js"></script>
 
-<script src="./../assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
-<script src="./../assets/js/plugins-init/sweetalert.init.js"></script>
+<script src="../assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
+<script src="../assets/js/plugins-init/sweetalert.init.js"></script>
 
-<script src="./../assets/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+<script src="../assets/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
 
-<script src="./../assets/js/md5.min.js"></script>
-<script src="./../assets/js/axios.min.js"></script>
+<script src="../assets/js/md5.min.js"></script>
+<script src="../assets/js/axios.min.js"></script>
 
-<script src="./../assets/js/utils/throttle.js"></script>
-<script src="./../assets/js/utils/debounce.js"></script>
-<script src="./../assets/js/utils/storage.js"></script>
-<script src="./../assets/js/utils/encrypt.js"></script>
+<script src="../assets/js/utils/throttle.js"></script>
+<script src="../assets/js/utils/debounce.js"></script>
+<script src="../assets/js/utils/storage.js"></script>
+<script src="../assets/js/utils/encrypt.js"></script>
 <script>
 
 
@@ -122,7 +122,7 @@
     function flushVerifyCode() {
         axios({
             type: 'get',
-            url: '/verify',
+            url: '<%=Config.getInstance().getString("default.urlheader")%>/verify',
             responseType: 'arraybuffer',
         }).then(res => {
             $('#verify_code_img').attr('src', "data:image/png;base64," +
@@ -143,7 +143,7 @@
         userLoginData.imgVerifyCode = $('#verify_code').val();
         userLoginData.id = $('#user_id').val();
         userLoginData.password = encrypt($('#user_password').val());
-        $.post("/landlord", userLoginData, res => {
+        $.post("<%=Config.getInstance().getString("default.urlheader")%>/landlord", userLoginData, res => {
             if (res.resCode === "L0001") {
                 sweetAlert({
                     type: "error",
@@ -162,7 +162,7 @@
                 });
             } else if (res.resCode === '00000') {
                 swal("success", "认证成功", "success");
-                window.location.href = "/seller/goods_list.jsp"
+                window.location.href = "../seller/goods_list.jsp"
             }
         });
     }

@@ -72,7 +72,7 @@ function drawStatisticLine(labels, data) {
 drawStatisticLine();
 
 $("#city_button").click((e) => {
-    let url = "/weather";
+    let url = getUrlHead() + "/weather";
     let city = $("#city").val();
     if (city !== undefined && city !== null && city !== "") {
         let data = {
@@ -86,6 +86,7 @@ $("#city_button").click((e) => {
             url,
             data,
             (res) => {
+                console.log(res);
                 if (res.result_code === 0) {
                     console.log(res.result_msg);
                     let list = res.statistics;

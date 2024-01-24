@@ -120,11 +120,11 @@
 </div>
 
 </body>
-<script src="/assets/vendor/global/global.min.js"></script>
-<script src="/assets/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
-<script src="/assets/js/custom.min.js"></script>
-<script src="/assets/js/dlabnav-init.js"></script>
-<script src="/assets/js/demo.js"></script>
+<script src="../assets/vendor/global/global.min.js"></script>
+<script src="../assets/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+<script src="../assets/js/custom.min.js"></script>
+<script src="../assets/js/dlabnav-init.js"></script>
+<script src="../assets/js/demo.js"></script>
 <script type="text/javascript" src="../assets/js/weather/weather.js"></script>
 <input type="hidden" id="page_id" name="page_id" value="print_word">
 </html>

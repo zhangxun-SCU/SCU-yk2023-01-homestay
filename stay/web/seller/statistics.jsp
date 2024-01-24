@@ -69,7 +69,7 @@
     <!--**********************************
         Nav header start
     ***********************************-->
-    <%@ include file="/frame/frame_menu.jsp" %>
+    <%@ include file="../frame/frame_menu.jsp" %>
     <!--**********************************
         Sidebar end
     ***********************************-->
@@ -209,7 +209,7 @@
     <!--**********************************
         Footer start
     ***********************************-->
-    <%@ include file="/frame/frame_footer.jsp" %>
+    <%@ include file="../frame/frame_footer.jsp" %>
     <!--**********************************
         Footer end
     ***********************************-->
@@ -237,7 +237,7 @@
 <!--**********************************
     Scripts
 ***********************************-->
-<%@ include file="/frame/frame_javascript.jsp" %>
+<%@ include file="../frame/frame_javascript.jsp" %>
 <!-- Required vendors -->
 <script src="../assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 <script src="../assets/vendor/chart.js/Chart.bundle.min.js"></script>

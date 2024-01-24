@@ -218,7 +218,7 @@ To change this template use File | Settings | File Templates.
     document.getElementById("check_cart").style.width = "100%";
     var queryAll = function () {
         let data2 = {"action": "query"};
-        $.post('/getCartGood', data2, function (json) {
+        $.post('<%=Config.getInstance().getString("default.urlheader")%>/getCartGood', data2, function (json) {
             if (json.code == 0) {
                 var html = "";
                 good_list = json.good_list;
@@ -310,7 +310,7 @@ To change this template use File | Settings | File Templates.
             data = {"action": "delete", "good_id": tp_id};
             console.log(data);
             document.getElementById("delete_cart").style.display = "none";
-            $.post('/getCartGood', data, function (json) {
+            $.post('<%=Config.getInstance().getString("default.urlheader")%>/getCartGood', data, function (json) {
                     if (json.code == 0) {
                         queryAll();
                         for (var i = 0; i < checkgoods.length; i++) {
@@ -409,7 +409,7 @@ To change this template use File | Settings | File Templates.
             e.value = Number(e.max);
         }
         var data={"good_id":good_id,"num":e.value,'action':'modify'}
-        $.post('/getCartGood',data,function (json){
+        $.post('<%=Config.getInstance().getString("default.urlheader")%>/getCartGood',data,function (json){
         })
         for (var i = 0; i < good_list.length; i++) {
             if (good_list[i].good_id == good_id) {
@@ -547,7 +547,7 @@ To change this template use File | Settings | File Templates.
     var searchSpecialtyByName=function () {
         var search_name=document.getElementById("search_name").value;
         let data2 = {"action": "search_name","search_name":search_name};
-        $.post('/getCartGood', data2, function (json) {
+        $.post('<%=Config.getInstance().getString("default.urlheader")%>/getCartGood', data2, function (json) {
             if (json.code == 0) {
                 var html = "";
                 good_list = json.good_list;
@@ -632,7 +632,7 @@ To change this template use File | Settings | File Templates.
         });
     }
     var exportExel=function () {
-        $.post('/getCartGood',{"action":"export"},function(json)
+        $.post('<%=Config.getInstance().getString("default.urlheader")%>/getCartGood',{"action":"export"},function(json)
         {
             if(json.code==0)
             {

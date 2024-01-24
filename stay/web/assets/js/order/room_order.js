@@ -96,7 +96,7 @@ var Page = function () {
             window.location.href = "order_list_print_word.jsp";
         });
         $('#order_add').click(function () {
-            window.location.href = "/market/house_market.jsp";
+            window.location.href = getUrlHead()+"/market/house_market.jsp";
         });
 
     }
@@ -136,7 +136,7 @@ var Page = function () {
         var data = {};
         data.action = "get_specialty_order_record";
         data.id = id;
-        $.post("../../" + module + "_" + sub + "_specialty_order_servlet_action", data, function (json) {
+        $.post(getUrlHead() + "/homestay_servlet_specialty_order_servlet_action", data, function (json) {
             console.log(JSON.stringify(json));
             if (json.result_code == 0) {
                 var list = json.aaData;
@@ -156,7 +156,7 @@ var Page = function () {
         //window.location.href="device_add.jsp";
     }
     var submitAddRecord = function () {
-        var url = "../../homestay_servlet_specialty_order_servlet_action";
+        var url = getUrlHead() + "/homestay_servlet_specialty_order_servlet_action";
         var data = {};
         data.action = "add_device_record";
         data.device_id = $("#device_id").val();
@@ -172,7 +172,7 @@ var Page = function () {
     var submitModifyRecord = function () {
         if (confirm("您确定要修改该记录吗？")) {
             var id = getUrlParam("id");
-            var url = "../../homestay/servlet_specialty_order_servlet_action";
+            var url = getUrlHead() + "/homestay_servlet_room_order_servlet_action";
             var data = {};
             data.action = "modify_device_record";
             data.id = id;
@@ -180,7 +180,7 @@ var Page = function () {
             data.device_name = $("#device_name").val();
             $.post(url, data, function (json) {
                 if (json.result_code == 0) {
-                    alert("已经完成设备修改。");
+                    alert("已经完成订单修改。");
                     window.location.href = "device_list.jsp";
                 }
             });
@@ -206,7 +206,7 @@ var Page = function () {
         data.username = user;
 
         console.log(1)
-        $.post("../../" + module + "_" + sub + "_room_order_servlet_action?action=get_room_order_record", data, function (json) {
+        $.post(getUrlHead() + "/homestay_servlet_room_order_servlet_action?action=get_room_order_record", data, function (json) {
             console.log(JSON.stringify(json));
             if (json.result_code == 0) {
                 var list = json.aaData;
@@ -225,7 +225,7 @@ var Page = function () {
     }
     var onDeleteRecord = function (good_id) {
         if (confirm("您确定要删除这条订单记录吗？")) {
-            var url = "../../homestay_servlet_room_order_servlet_action";
+            var url = getUrlHead() + "/homestay_servlet_room_order_servlet_action";
             var data = {};
             data.action = "delete_room_order_record";
             data.good_id = good_id;
@@ -242,7 +242,7 @@ var Page = function () {
     var onModifyRecord = function (good_id) {
         //显示出修改前数据
         //window.location.href="device_modify.jsp?order_id="+order_id;
-        $.post("../../" + module + "_" + sub + "_room_order_servlet_action?action=get_room_order_record", data, function (json) {
+        $.post(getUrlHead() + "/homestay_servlet_room_order_servlet_action?action=get_room_order_record", data, function (json) {
             console.log(JSON.stringify(json));
             if (json.result_code == 0) {
                 var list = json.aaData;
@@ -289,7 +289,7 @@ var Page = function () {
         console.log("[onJumpUploadFile]====");
         var deviceId = $("#device_id").val();
         var deviceName = $("#device_name").val();
-        jump_form.action = "../../homestay/servlet_specialty_order_servlet_action?action=upload_file&device_id=" + deviceId + "&device_name=" + deviceName;
+        jump_form.action = getUrlHead() + "/homestay_servlet_specialty_order_servlet_action?action=upload_file&device_id=" + deviceId + "&device_name=" + deviceName;
         //jump_form.action="http://192.168.3.111:8888?action=upload_file&device_id="+deviceId+"&device_name="+deviceName;			/*设置提交到TCP工具来接收，TCP工具设置好监听端口例如8888和接收自动存入文件*/
         jump_form.submit();
     }
@@ -303,7 +303,7 @@ var Page = function () {
         var deviceName = $("#device_name").val();
         var options = {
             type: 'post', /*设置表单以post方法提交*/
-            url: '../../homestay/servlet_specialty_order_servlet_action?action=upload_file&device_id=' + deviceId + "&device_name=" + deviceName, /*设置post提交到的页面*/
+            url: '../../homestay_servlet_specialty_order_servlet_action?action=upload_file&device_id=' + deviceId + "&device_name=" + deviceName, /*设置post提交到的页面*/
             success: function (json) {
                 console.log("[onAjaxUploadFile]上传文件返回结果=" + JSON.stringify(json));
                 if (json.upload_files.length > 0) {
@@ -335,7 +335,7 @@ var Page = function () {
         data.username = user;
 
         console.log(1)
-        $.post("../../" + module + "_" + sub + "_room_order_servlet_action?action=get_room_order_record_finished", data, function (json) {
+        $.post(getUrlHead() + "/homestay_servlet_room_order_servlet_action?action=get_room_order_record_finished", data, function (json) {
             console.log(JSON.stringify(json));
             if (json.result_code == 0) {
                 var list = json.aaData;
@@ -414,7 +414,7 @@ var Page = function () {
         data.username = user;
 
         console.log(1)
-        $.post("../../" + module + "_" + sub + "_room_order_servlet_action?action=get_room_order_record_unfinished", data, function (json) {
+        $.post(getUrlHead() + "/homestay_servlet_room_order_servlet_action?action=get_room_order_record_unfinished", data, function (json) {
             console.log(JSON.stringify(json));
             if (json.result_code == 0) {
                 var list = json.aaData;
@@ -461,7 +461,7 @@ var Page = function () {
         data.username = user;
 
         console.log(1)
-        $.post("../../" + module + "_" + sub + "_room_order_servlet_action?action=get_room_order_record_up", data, function (json) {
+        $.post(getUrlHead() + "/homestay_servlet_room_order_servlet_action?action=get_room_order_record_up", data, function (json) {
             console.log(JSON.stringify(json));
             if (json.result_code == 0) {
                 var list = json.aaData;
@@ -487,7 +487,7 @@ var Page = function () {
         data.username = user;
 
         console.log(1)
-        $.post("../../" + module + "_" + sub + "_room_order_servlet_action?action=get_room_order_record_down", data, function (json) {
+        $.post(getUrlHead() + "/homestay_servlet_room_order_servlet_action?action=get_room_order_record_down", data, function (json) {
             console.log(JSON.stringify(json));
             if (json.result_code == 0) {
                 var list = json.aaData;
@@ -506,7 +506,7 @@ var Page = function () {
     }
     var onPayOrder = function (good_id) {
         if (confirm("您确定要支付该订单吗？")) {
-            var url = "../../homestay_servlet_room_order_servlet_action";
+            var url = getUrlHead() + "/homestay_servlet_room_order_servlet_action";
             var data = {};
             data.action = "pay_room_order_record";
             data.good_id = good_id;
@@ -529,7 +529,7 @@ var Page = function () {
     }
     var submitModifyRecordDiv = function () {
         if (confirm("您确定要修改该记录吗？")) {
-            var url = "../../homestay_servlet_room_order_servlet_action";
+            var url = getUrlHead() + "/homestay_servlet_room_order_servlet_action";
             var data = {};
             data.action = "modify_device_record";
             data.good_id = $("#record_modify_div #good_id").val();
@@ -543,7 +543,7 @@ var Page = function () {
         }
     }
     var submitAddRecordDiv = function () {
-        var url = "../../homestay/servlet_specialty_order_servlet_action";
+        var url = getUrlHead() + "/homestay_servlet_specialty_order_servlet_action";
         var data = {};
         data.action = "add_device_record";
         data.device_id = $("#record_add_div #device_id").val();
@@ -567,7 +567,7 @@ var Page = function () {
     }
     var onExportRecord = function () {
         console.log("Export Record post");
-        var url = "../../homestay_servlet_room_order_servlet_action";
+        var url = getUrlHead() + "/homestay_servlet_room_order_servlet_action";
         var data = {"action": "export_device_record"};
         data.username = user;
         $.post(url, data, function (json) {
@@ -585,7 +585,7 @@ var Page = function () {
         $("#page_header").hide();
         $("#page_content").attr("style", "margin-left:0px");
         $("#page_container").attr("style", "margin-top:0px");
-        var url = "../../homestay_servlet_specialty_order_servlet_action";
+        var url = getUrlHead() + "/homestay_servlet_specialty_order_servlet_action";
         var data = {"action": "get_device_record"};
         $.post(url, data, function (json) {
             console.log(JSON.stringify(json));
@@ -629,7 +629,7 @@ var Page = function () {
         $("#page_header").hide();
         $("#page_content").attr("style", "margin-left:0px");
         $("#page_container").attr("style", "margin-top:0px");
-        var url = "../../homestay_servlet_room_order_servlet_action";
+        var url = getUrlHead() + "/homestay_servlet_room_order_servlet_action";
         var data = {"action": "get_room_order_record"};
         data.username = user;
         $.post(url, data, function (json) {
@@ -702,7 +702,7 @@ var Page = function () {
     }
 
     var initOrderStatisticRecord = function () {
-        var url = "../../homestay_servlet_room_order_servlet_action";
+        var url = getUrlHead() + "/homestay_servlet_room_order_servlet_action";
         var data = {"action": "get_room_order_record_by_hour"};
         data.username = user;
         console.log("init statistic record");
@@ -735,7 +735,7 @@ var Page = function () {
     function onCommentClick(house_id, room_id) {
         getCommentById(house_id, room_id);
         $("#submit_order_comment").unbind("click").click((e) => {
-            var url = "/order_comment";
+            var url = getUrlHead() + "/order_comment";
             var data = {
                 "type": "room",
                 "action": "update_comment",
@@ -764,7 +764,7 @@ var Page = function () {
     }
 
     function getCommentById(house_id, room_id) {
-        var url = "/order_comment";
+        var url = getUrlHead() + "/order_comment";
         var data = {
             "type": "room",
             "action": "get_comment",

@@ -18,7 +18,7 @@
 <!--*******************
     Preloader start
 ********************-->
-<%@include file="/frame/frame_preloader.jsp"%>
+<%@include file="../frame/frame_preloader.jsp"%>
 
 <!--*******************
     Preloader end
@@ -28,7 +28,7 @@
 <!--**********************************
     Main wrapper start
 ***********************************-->
-<%@include file="/frame/frame_menu.jsp"%>
+<%@include file="../frame/frame_menu.jsp"%>
 
     <!--**********************************
         Sidebar end
@@ -73,7 +73,7 @@
     <!--**********************************
         Footer start
     ***********************************-->
-<%@include file="/frame/frame_footer.jsp" %>
+<%@include file="../frame/frame_footer.jsp" %>
 
     <!--**********************************
         Footer end
@@ -96,7 +96,7 @@
 <!--**********************************
     Scripts
 ***********************************-->
-<%@include file="/frame/frame_javascript.jsp" %>
+<%@include file="../frame/frame_javascript.jsp" %>
 <!-- Required vendors -->
 <script src="./vendor/global/global.min.js"></script>
 <script src="./vendor/chart.js/Chart.bundle.min.js"></script>

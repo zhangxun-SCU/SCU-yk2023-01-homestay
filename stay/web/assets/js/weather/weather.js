@@ -90,7 +90,7 @@ var Page = function() {
         var data={};
         data.action="get_device_record";
         data.id=id;
-        $.post("/weather",data,function(json){
+        $.post(getUrlHead()+"/weather",data,function(json){
             console.log(JSON.stringify(json));
             if(json.result_code==0){
                 var list=json.aaData;
@@ -108,7 +108,7 @@ var Page = function() {
         $("#weather_add_div").modal("show");
     }
     var submitAddRecord=function(){
-        var url="/weather";
+        var url=getUrlHead()+"/weather";
         var data={};
         data.action="add_device_record";
         data.id=$("#weather_add_div #id").val();
@@ -128,7 +128,8 @@ var Page = function() {
     var submitModifyRecord=function(){
         if(confirm("您确定要修改该记录吗？")){
             var id=getUrlParam("id");
-            var url="/weather";
+            var url=getUrlHead()+"/weather";
+            console.log("modify url: "+url);
             var data={};
             data.action="modify_device_record";
             data.id=id;
@@ -159,7 +160,7 @@ var Page = function() {
         // data.create_date=$("#record_query_setup #create_date").val();
 
         console.log(1)
-        $.post("/weather?action=get_device_record",data,function(json){
+        $.post(getUrlHead()+"/weather?action=get_device_record",data,function(json){
             console.log(JSON.stringify(json));
             if(json.result_code==0){
                 var list=json.aaData;
@@ -192,7 +193,7 @@ var Page = function() {
     var onDeleteRecord = function(id){
         if(confirm("您确定要删除这条记录吗？")){
             if(id>-1){
-                var url="../..//weather";
+                var url=getUrlHead()+"/weather";
                 var data={};
                 data.action="delete_device_record";
                 data.id=id;
@@ -208,17 +209,31 @@ var Page = function() {
     var onModifyRecord=function(id){
         //显示出修改前数据
         //window.location.href="device_modify.jsp?id="+id;
-        /*for(var i=0;i<resultList.length;i++){
-            if(resultList[i].id==id){
-                $("#weather_modify_div #id").val(resultList[i].id);
-                $("#weather_modify_div #city").val(resultList[i].city);
-                $("#weather_modify_div #temperature").val(resultList[i].temperature);
-                $("#weather_modify_div #weather_type").val(resultList[i].weather_type);
-                $("#weather_modify_div #wind").val(resultList[i].wind);
-                $("#weather_modify_div #humidity").val(resultList[i].humidity);
-                $("#weather_modify_div").modal("hide");
+        console.log(id);
+        $.post(
+            getUrlHead()+"/weather?action=get_device_record",
+            {},
+            (res)=>{
+                if(res.result_code===0){
+                    var resultList = res.aaData;
+                    if(resultList!==undefined && resultList.length>0){
+                        for(var i=0;i<resultList.length;i++){
+                            console.log(resultList[i].id)
+                            if(resultList[i].id==id){
+                                console.log(resultList[i]);
+                                $("#weather_modify_div #id").val(resultList[i].id);
+                                $("#weather_modify_div #city").val(resultList[i].city);
+                                $("#weather_modify_div #temperature").val(resultList[i].temperature);
+                                $("#weather_modify_div #weather_type").val(resultList[i].weather_type);
+                                $("#weather_modify_div #wind").val(resultList[i].wind);
+                                $("#weather_modify_div #humidity").val(resultList[i].humidity);
+                                // $("#weather_modify_div").modal("show");
+                            }
+                        }
+                    }
+                }
             }
-        }*/
+        )
         $("#weather_modify_div").modal("show");
     }
     var initWeatherFileControlEvent=function(id){
@@ -237,7 +252,7 @@ var Page = function() {
         console.log("[onJumpUploadFile]====");
         var deviceId=$("#device_id").val();
         var deviceName=$("#device_name").val();
-        jump_form.action="/weather?action=upload_file&device_id="+deviceId+"&device_name="+deviceName;
+        jump_form.action=getUrlHead()+"/weather?action=upload_file&device_id="+deviceId+"&device_name="+deviceName;
         //jump_form.action="http://192.168.3.111:8888?action=upload_file&device_id="+deviceId+"&device_name="+deviceName;			/*设置提交到TCP工具来接收，TCP工具设置好监听端口例如8888和接收自动存入文件*/
         jump_form.submit();
     }
@@ -251,7 +266,7 @@ var Page = function() {
         var deviceName = $("#device_name").val();
         var options = {
             type : 'post', /*设置表单以post方法提交*/
-            url : '/weather?action=upload_file&device_id='+deviceId+"&device_name="+deviceName, /*设置post提交到的页面*/
+            url : getUrlHead()+'/weather?action=upload_file&device_id='+deviceId+"&device_name="+deviceName, /*设置post提交到的页面*/
             success : function(json) {
                 console.log("[onAjaxUploadFile]上传文件返回结果="+JSON.stringify(json));
                 if(json.upload_files.length>0){
@@ -330,7 +345,7 @@ var Page = function() {
             "fnDrawCallback": function(){$(".checkboxes").uniform();$(".group-checkable").uniform();},
             //"sAjaxSource": "get_record.jsp"
             //"data":data.aaData,			//这个用来显示不从后台交互获取数据的情况下，显示当前页面已经有的json数据
-            "sAjaxSource": "/weather?action=get_device_record"
+            "sAjaxSource": getUrlHead()+"/weather?action=get_device_record"
         });
         $('.datatable').find('.group-checkable').change(function () {
             var set = jQuery(this).attr("data-set");
@@ -382,7 +397,7 @@ var Page = function() {
     }
     var submitModifyRecordDiv=function(){
         if(confirm("您确定要修改该记录吗？")){
-            var url="/weather";
+            var url=getUrlHead()+"/weather";
             var data={};
             data.action="modify_device_record";
             data.id=$("#weather_modify_div #id").val();
@@ -400,7 +415,7 @@ var Page = function() {
         }
     }
     var submitAddRecordDiv=function(){
-        var url="/weather";
+        var url=getUrlHead()+"/weather";
         var data={};
         data.action="add_device_record";
         data.city=$("#weather_add_div #city").val();
@@ -427,7 +442,7 @@ var Page = function() {
     var onQueryRecord=function(){
         var data = {};
         data.city=$("#record_query_setup #city").val();
-        $.post("/weather?action=get_device_record",data,function(json){
+        $.post(getUrlHead()+"/weather?action=get_device_record",data,function(json){
             console.log(JSON.stringify(json));
             if(json.result_code==0){
                 var list=json.aaData;
@@ -459,7 +474,7 @@ var Page = function() {
     }
     var onExportRecord=function(){
         console.log("Export Record post");
-        var url="/weather";
+        var url=getUrlHead()+"/weather";
         var data={"action":"export_record"};
         $.post(url,data,function(json){
             if(json.result_code==0){
@@ -476,7 +491,7 @@ var Page = function() {
         $("#page_header").hide();
         $("#page_content").attr("style","margin-left:0px");
         $("#page_container").attr("style","margin-top:0px");
-        var url="/weather";
+        var url=getUrlHead()+"/weather";
         var data={"action":"get_device_record"};
         $.post(url,data,function(json){
             console.log(JSON.stringify(json));
@@ -520,7 +535,7 @@ var Page = function() {
         $("#page_header").hide();
         $("#page_content").attr("style","margin-left:0px");
         $("#page_container").attr("style","margin-top:0px");
-        var url="/weather";
+        var url=getUrlHead()+"/weather";
         var data={"action":"get_device_record"};
         $.post(url,data,function(json){
             console.log(JSON.stringify(json));
@@ -580,7 +595,7 @@ var Page = function() {
     }
 
     var initWeatherStatisticRecord=function(){
-        var url="/weather";
+        var url=getUrlHead()+"/weather";
         var data={"action":"get_gps_receive_count_by_hour"};
         console.log("init statistic record");
         $.post(url,data,function(json){

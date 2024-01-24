@@ -21,7 +21,7 @@ $("#addRoomButton").click((e) => {
         var room_num = $("#add_room_num").val();
         var imageurl = document.querySelector("#add_room_image_preview > img").src;
         imageurl = imageurl.substring(imageurl.indexOf(",") + 1);
-        var url = "/seller";
+        var url = getUrlHead() + "/seller";
         var data = {
             "actionType": "room",
             "action": "add_room",
@@ -46,7 +46,7 @@ $("#addRoomButton").click((e) => {
 })
 
 function getAllRooms() {
-    var url = "/seller";
+    var url = getUrlHead() + "/seller";
     var house_id = getHouseId();
     console.log(house_id)
     var data = {
@@ -118,7 +118,7 @@ function initRoomButtons() {
 function showModifyRoomModal(houseId, roomId) {
     getRoomById(houseId, roomId);
     $("#modifyRoomModelCenter #modifyRoomConfirmButton").click((e) => {
-        var url = "/seller";
+        var url = getUrlHead() + "/seller";
         var data = {
             "actionType": "room",
             "action": "modify_room",
@@ -147,7 +147,7 @@ function showModifyRoomModal(houseId, roomId) {
 }
 
 function getRoomById(houseId, roomId) {
-    var url = "/seller";
+    var url = getUrlHead() + "/seller";
     var data = {
         "actionType": "room",
         "action": "get_room",
@@ -174,7 +174,7 @@ function getRoomById(houseId, roomId) {
 
 function showDeleteRoomModal(houseId, roomId) {
     $("#deleteRoomModalCenter #deleteRoomConfirmButton").click((e) => {
-        var url = "/seller";
+        var url = getUrlHead() + "/seller";
         var data = {
             "actionType": "room",
             "action": "delete_room",

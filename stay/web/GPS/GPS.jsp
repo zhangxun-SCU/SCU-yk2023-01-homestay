@@ -53,7 +53,7 @@
 <!--*******************
     Preloader start
 ********************-->
-<%@ include file="/frame/frame_preloader.jsp" %>
+<%@ include file="../frame/frame_preloader.jsp" %>
 <!--*******************
     Preloader end
 ********************-->
@@ -173,7 +173,7 @@
     <!--**********************************
         Footer start
     ***********************************-->
-    <%@ include file="/frame/frame_footer.jsp" %>
+    <%@ include file="../frame/frame_footer.jsp" %>
     <!--**********************************
         Footer end
     ***********************************-->
@@ -268,7 +268,7 @@
     }
 
     $("#query_button").click((e) => {
-        let url = "/seller";
+        let url = "<%=Config.getInstance().getString("default.urlheader")%>/seller";
         let house_name = $("#house").val();
         if (house_name === undefined || house_name === null || house_name === "") {
             sweetAlert("Error", "请先输入要查询的民宿名称！", "error");

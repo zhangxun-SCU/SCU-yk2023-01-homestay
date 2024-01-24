@@ -35,13 +35,6 @@
     <link href="../assets/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/seller/goods_page.css">
 
-    <!--    &lt;!&ndash; dropify &ndash;&gt;-->
-    <!--&lt;!&ndash;    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"/>&ndash;&gt;-->
-    <!--    <link rel="stylesheet" href="../assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.css"/>-->
-    <!--    <link rel="stylesheet" href="../assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"/>-->
-    <!--    <link rel="stylesheet" href="../assets/plugins/multi-select/css/multi-select.css">-->
-    <!--    <link rel="stylesheet" href="../assets/plugins/dropify/css/dropify.min.css">-->
-
 </head>
 
 <body onload="onLoadFunction();">
@@ -49,12 +42,7 @@
 <!--*******************
     Preloader start
 ********************-->
-<div id="preloader">
-    <div class="lds-ripple">
-        <div></div>
-        <div></div>
-    </div>
-</div>
+<%@include file="../frame/frame_preloader.jsp" %>
 <!--*******************
     Preloader end
 ********************-->
@@ -68,7 +56,7 @@
     <!--**********************************
         Nav header start
     ***********************************-->
-    <%@ include file="/frame/frame_menu.jsp" %>
+    <%@ include file="../frame/frame_menu.jsp" %>
     <!--**********************************
         Sidebar end
     ***********************************-->
@@ -187,7 +175,7 @@
     <!--**********************************
         Footer start
     ***********************************-->
-    <%@ include file="/frame/frame_footer.jsp" %>
+    <%@ include file="../frame/frame_footer.jsp" %>
     <!--**********************************
         Footer end
     ***********************************-->
@@ -215,7 +203,7 @@
 <!--**********************************
     Scripts
 ***********************************-->
-<%@ include file="/frame/frame_javascript.jsp" %>
+<%@ include file="../frame/frame_javascript.jsp" %>
 <!-- Required vendors -->
 <script src="../assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 <script src="../assets/vendor/chart.js/Chart.bundle.min.js"></script>
