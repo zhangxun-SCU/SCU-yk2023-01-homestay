@@ -17,15 +17,18 @@ public class FeedbackDao {
         System.out.println(log);
     }
 
-    public void getAllFeedback(JSONObject json) throws SQLException, JSONException {
+    public void getAllFeedback(Data data, JSONObject json) throws SQLException, JSONException {
         String resCode = "00000";
         String info = "success";
         DB db = new DB("group1");
         // 两表联查，获取用户头像以及feedback信息，按照feedback发布时间降序排列
         String sql = "Select feedback.*, user_account.avatar " +
                 "From feedback Join user_account " +
-                "On feedback.user_id=user_account.user_id " +
-                "Order By feedback.create_time Desc";
+                "On feedback.user_id=user_account.user_id";
+        if (data.getParam().has("order")) {
+            String order = data.getParam().getString("order");
+            sql += " Order By feedback.create_time " + order;
+        }
         showDebug("[getFeedback]", "sql: " + sql);
         ResultSet res = db.executeQuery(sql);
         ResultSetMetaData resMetaData = res.getMetaData();

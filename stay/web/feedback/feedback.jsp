@@ -98,7 +98,10 @@
                                             </div>
                                             <div class="col-xl-12">
                                                 <div class="profile-news">
-                                                    <h4 class="text-primary d-inline">Latest Feedback</h4>
+<%--                                                    <h4 class="text-primary d-inline">Latest Feedback</h4>--%>
+                                                    <button class="btn btn-primary" id="time_order_button">
+                                                        按反馈时间排序
+                                                    </button>
                                                     <div id="feedback_list">
                                                         <div class="media pt-3 pb-3">
                                                             <img src="../assets/images/profile/5.jpg" alt="image"
