@@ -77,37 +77,31 @@
   border-left:none;border-bottom:solid windowtext 1.5pt;border-right:none;
   padding:0cm 5.4pt 0cm 5.4pt'>
                 <p class=MsoNormal align=center style='text-align:center'><b><span
-                        lang=EN-US>ID</span></b></p>
+                        lang=EN-US>记录ID</span></b></p>
             </th>
             <th width=138 valign=top style='width:103.7pt;border-top:solid windowtext 1.5pt;
   border-left:none;border-bottom:solid windowtext 1.5pt;border-right:none;
   padding:0cm 5.4pt 0cm 5.4pt'>
                 <p class=MsoNormal align=center style='text-align:center'><b><span
-                        lang=EN-US>城市</span></b></p>
+                        lang=EN-US>反馈用户ID</span></b></p>
             </th>
             <th width=138 valign=top style='width:103.7pt;border-top:solid windowtext 1.5pt;
   border-left:none;border-bottom:solid windowtext 1.5pt;border-right:none;
   padding:0cm 5.4pt 0cm 5.4pt'>
                 <p class=MsoNormal align=center style='text-align:center'><b><span
-                        lang=EN-US>温度</span></b></p>
+                        lang=EN-US>反馈内容</span></b></p>
             </th>
             <th width=138 valign=top style='width:103.7pt;border-top:solid windowtext 1.5pt;
   border-left:none;border-bottom:solid windowtext 1.5pt;border-right:none;
   padding:0cm 5.4pt 0cm 5.4pt'>
                 <p class=MsoNormal align=center style='text-align:center'><b><span
-                        lang=EN-US>天气</span></b></p>
+                        lang=EN-US>反馈回复</span></b></p>
             </th>
             <th width=138 valign=top style='width:103.7pt;border-top:solid windowtext 1.5pt;
   border-left:none;border-bottom:solid windowtext 1.5pt;border-right:none;
   padding:0cm 5.4pt 0cm 5.4pt'>
                 <p class=MsoNormal align=center style='text-align:center'><b><span
-                        lang=EN-US>风力</span></b></p>
-            </th>
-            <th width=138 valign=top style='width:103.7pt;border-top:solid windowtext 1.5pt;
-  border-left:none;border-bottom:solid windowtext 1.5pt;border-right:none;
-  padding:0cm 5.4pt 0cm 5.4pt'>
-                <p class=MsoNormal align=center style='text-align:center'><b><span
-                        lang=EN-US>湿度</span></b></p>
+                        lang=EN-US>时间</span></b></p>
             </th>
             </thead>
             <tbody id="print_word_div" name="print_word_div">
@@ -153,7 +147,7 @@
 <script src="../assets/js/custom.min.js"></script>
 <script src="../assets/js/dlabnav-init.js"></script>
 <script src="../assets/js/demo.js"></script>
-<script type="text/javascript" src="../assets/js/weather/weather.js"></script>
+<script type="text/javascript" src="../assets/js/feedback/add_feedback.js"></script>
 <input type="hidden" id="page_id" name="page_id" value="print_word">
 </html>
 
