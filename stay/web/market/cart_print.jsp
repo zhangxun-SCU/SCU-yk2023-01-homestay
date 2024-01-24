@@ -1,4 +1,4 @@
-
+<%@ page import="homestay.utils.Config" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html xmlns:v="urn:schemas-microsoft-com:vml"
       xmlns:o="urn:schemas-microsoft-com:office:office"
@@ -968,7 +968,7 @@ punctuation'>
     {
 
 
-        $.post('/getCartGood',{"action":"query"},function(json){
+        $.post('<%=Config.getInstance().getString("default.urlheader")%>/getCartGood',{"action":"query"},function(json){
             var html="";
 
             console.log(JSON.stringify(json));

@@ -194,12 +194,8 @@ To change this template use File | Settings | File Templates.
 <script src="../assets/vendor/toastr/js/toastr.min.js"></script>
 
 
-<!-- Required vendors -->
-<script src="./vendor/global/global.min.js"></script>
-<script src="./vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-<script src="./vendor/chart.js/Chart.bundle.min.js"></script>
-<!-- Apex Chart -->
-<script src="./vendor/apexchart/apexchart.js"></script>
+
+
 
 
 
@@ -260,7 +256,7 @@ To change this template use File | Settings | File Templates.
     var room_list;
     let address;
 
-    $.post('/getTime',{},function (json) {
+    $.post('<%=Config.getInstance().getString("default.urlheader")%>/getTime',{},function (json) {
         console.log(JSON.stringify(json));
         todaystr=json.today;
         console.log(todaystr);
@@ -279,7 +275,7 @@ To change this template use File | Settings | File Templates.
         document.getElementById("demoTest1").value=today+' - '+tomorrow;
         data = {"good_id": good_id,"good_type":"house","in_date":todaystr,"out_date":tomorowstr};
         console.log(data);
-        $.post('/getHouseDetail', data, function (json) {
+        $.post('<%=Config.getInstance().getString("default.urlheader")%>/getHouseDetail', data, function (json) {
             if (json.code == 0) {
                 console.log(JSON.stringify(json));
                 document.getElementById("good_name").innerText = json.good_name;
@@ -359,7 +355,7 @@ To change this template use File | Settings | File Templates.
             data['in_date']=in_date;
             data['out_date']=out_date;
             console.log(JSON.stringify(data));
-            $.post('/getHouseDetail', data, function (json) {
+            $.post('<%=Config.getInstance().getString("default.urlheader")%>/getHouseDetail', data, function (json) {
                 if (json.code == 0) {
                     console.log(JSON.stringify(json));
                     document.getElementById("good_name").innerText = json.good_name;
