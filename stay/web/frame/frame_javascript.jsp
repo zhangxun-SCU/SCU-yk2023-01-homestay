@@ -1,4 +1,4 @@
-<%--
+<%@ page import="homestay.utils.Config" %><%--
   Created by IntelliJ IDEA.
   User: cw
   Date: 2023/12/1
