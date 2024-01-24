@@ -71,6 +71,22 @@ public class RoomOrderServletAction extends HttpServlet {
             json.put("result_msg", "ok");
             //这几个常规增删改查功能
             //买家查询订单操作
+            if (action.equals("get_total_statistics")) {
+                actionOk = true;
+                try {
+                    getOrderRecordAllStatistics(request, response, json);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (action.equals("get_new_orders")) {
+                actionOk = true;
+                try {
+                    getOrderRecordAll(request, response, json);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
             if (action.equals("get_room_order_record")) {
                 actionOk = true;
                 try {
@@ -341,6 +357,14 @@ public class RoomOrderServletAction extends HttpServlet {
 
     /*========================================MySQL HTTP操作通用函数 结束========================================*/
     /*========================================CRUD业务函数 开始========================================*/
+    private void getOrderRecordAllStatistics(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
+        RoomOrderDao dao = new RoomOrderDao();
+        dao.getOrderRecordAllStatistics(data, json);
+    }
+    private void getOrderRecordAll(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
+        RoomOrderDao dao = new RoomOrderDao();
+        dao.getOrderRecordAll(data, json);
+    }
     private void getOrderRecord(HttpServletRequest request, HttpServletResponse response, JSONObject json) throws JSONException, SQLException {
         RoomOrderDao dao = new RoomOrderDao();
         dao.getOrderRecord(data, json);
