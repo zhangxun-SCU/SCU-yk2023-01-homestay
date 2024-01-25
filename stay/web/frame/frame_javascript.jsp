@@ -20,7 +20,7 @@
         return JSON.parse(window.atob(token.split('.')[1]))
     }
 
-    $('#to-profile').attr('href', '/user/user-profile.jsp?id=' + getUserInfo().id)
+    $('#to-profile').attr('href', '<%=Config.getInstance().getString("default.urlheader")%>/user/user-profile.jsp?id=' + getUserInfo().id)
 
     const urlStorage = new Storage("localStorage");
     urlStorage.set("url", '<%=Config.getInstance().getString("default.urlheader")%>');

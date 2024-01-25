@@ -1,4 +1,4 @@
-<%--
+<%@ page import="homestay.utils.Config" %><%--
   Created by IntelliJ IDEA.
   User: cw
   Date: 2024/1/24
@@ -149,7 +149,7 @@
     function flushVerifyCode() {  // 图形验证码
         axios({
             type: 'get',
-            url: '/verify',
+            url: '<%=Config.getInstance().getString("default.urlheader")%>/verify',
             responseType: 'arraybuffer',
         }).then(res => {
             $('#verify_code_img').attr('src', "data:image/png;base64," +
@@ -167,7 +167,7 @@
         let waitTime = 60;
         let userEmail = $('#reset_email').val();
         console.log(userEmail);
-        $.get(`/email?email=\${userEmail}`, (res) => {
+        $.get(`<%=Config.getInstance().getString("default.urlheader")%>/email?email=\${userEmail}`, (res) => {
             console.log("sendEmailRes");
             sendEmailBtn.addClass("disabled");
             sendEmailBtn.text(waitTime);
@@ -191,7 +191,7 @@
         data.email = $('#reset_email').val();
         data.resetPassword = encrypt($('#reset_password').val())
         data.emailVerifyCode = $('#email_verify_code').val();
-        $.post('/reset', data, res => {
+        $.post('<%=Config.getInstance().getString("default.urlheader")%>/reset', data, res => {
             console.log(res);
             if(res.resCode === '00000') {
                 swal("success", "重置成功", "success");
