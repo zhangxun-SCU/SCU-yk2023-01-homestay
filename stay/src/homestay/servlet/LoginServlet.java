@@ -16,6 +16,7 @@ import homestay.dao.UserDao;
 import homestay.entity.User;
 import homestay.service.LoginService;
 import homestay.service.verify.VerifyService;
+import homestay.utils.Config;
 import homestay.utils.JwtUtil;
 import homestay.utils.UserUtil;
 import org.json.JSONException;
@@ -146,6 +147,6 @@ public class LoginServlet extends HttpServlet {
         req.getSession().invalidate();
 
         // 重定向到登录页面
-        resp.sendRedirect("/user/login.jsp");
+        resp.sendRedirect(Config.getInstance().getString("default.urlheader") + "/user/login.jsp");
     }
 }

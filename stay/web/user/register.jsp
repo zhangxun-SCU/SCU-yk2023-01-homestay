@@ -42,7 +42,7 @@
                         <div class="col-xl-12">
                             <div class="auth-form">
                                 <div class="text-center mb-3">
-                                    <a href="../index.html"><img src="./../assets/images/logo-full.png" alt=""></a>
+                                    <a href="../index.jsp"><img src="./../assets/images/logo-full.png" alt=""></a>
                                 </div>
                                 <h4 class="text-center mb-4">注册账号</h4>
                                 <form>
