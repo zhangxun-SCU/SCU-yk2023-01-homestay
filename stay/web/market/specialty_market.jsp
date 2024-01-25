@@ -239,7 +239,7 @@ var ascPrice=function()
         init();
     }
     var toDrive=function(){
-    window.location.href='statistic_driver.html';
+    window.location.href='statistic_driver.jsp';
     }
 
 
