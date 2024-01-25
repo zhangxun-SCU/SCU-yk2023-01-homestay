@@ -25,7 +25,7 @@ $("#specialty_image").change((input_event) => {
 })
 
 $("#add_specialty_button").click((e) => {
-    var url = "/seller";
+    var url = getUrlHead() + "/seller";
     var data = {
         "actionType": "specialty",
         "action": "add_specialty",
@@ -87,7 +87,7 @@ $("#homestay_image").change((input_event) => {
 
 $("#add_homestay_button").click((e) => {
     console.log("add homestay");
-    var url = "/seller";
+    var url = getUrlHead() + "/seller";
     var lnglat = $("#homestay_lnglat").val();
     var longitude = lnglat.split(",")[0];
     var latitude = lnglat.split(",")[1];

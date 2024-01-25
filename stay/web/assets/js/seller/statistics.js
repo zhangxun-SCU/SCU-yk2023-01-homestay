@@ -14,7 +14,7 @@ function getStatistics() {
 }
 
 function getTotalSales(type) {
-    let url = "/seller";
+    let url = getUrlHead() + "/seller";
     let data = {
         "actionType": type,
         "action": "get_statistics",
@@ -43,7 +43,7 @@ function getTotalSales(type) {
 
 function getTopSales(type) {
     console.log(type);
-    let url = "/seller";
+    let url = getUrlHead() + "/seller";
     let data = {
         "actionType": type,
         "action": "get_statistics",
@@ -193,7 +193,7 @@ function drawTopSales(labels, data, type) {
 }
 
 function getExportURL() {
-    let url = "/seller";
+    let url = getUrlHead() + "/seller";
     let data = {
         "actionType": "export",
         "owner_id": getUserInfo().id

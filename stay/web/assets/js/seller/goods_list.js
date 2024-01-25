@@ -1,17 +1,21 @@
 function onLoadFunction() {
-    getAllHomestays();
-    getAllSpecialty();
-    getStatistics();
+    getAllHomestays("");
+    getAllSpecialty("");
+    // getStatistics();
+    initControlButtons();
 }
 
-function getAllHomestays() {
+function getAllHomestays(order) {
     var owner = getUserInfo().id;
-    var url = "/seller";
+    var url = getUrlHead() + "/seller";
     var data = {
         "actionType": "homestay",
         "action": "get_homestay",
         "username": owner
     };
+    if (order !== "") {
+        data.order = order;
+    }
     console.log(data);
     $.ajaxSettings.async = false;
     $.post(
@@ -80,40 +84,12 @@ function initHomestayButtons() {
         var homestayId = e.target.dataset.id;
         showModifyHomestayModal(homestayId);
     })
-
-    // var detailButtons = document.querySelectorAll(".detail_homestay_button");
-    // for (var i = 0; i < detailButtons.length; i++) {
-    //     var button = detailButtons[i];
-    //     button.addEventListener("click", (e) => {
-    //         var homestayId = e.target.dataset.id;
-    //         console.log(homestayId);
-    //         window.location.href = `/seller/house_detail.jsp?house_id=${homestayId}`;
-    //     })
-    // }
-
-    // var deleteButtons = document.querySelectorAll(".delete_homestay_button");
-    // for (var i = 0; i < deleteButtons.length; i++) {
-    //     var button = deleteButtons[i];
-    //     button.addEventListener("click", (e) => {
-    //         var homestayId = e.target.dataset.id;
-    //         showDeleteHomestayModal(homestayId);
-    //     })
-    // }
-
-    // var modifyButtons = document.querySelectorAll(".modify_homestay_button");
-    // for (var i = 0; i < modifyButtons.length; i++) {
-    //     var button = modifyButtons[i];
-    //     button.addEventListener("click", (e) => {
-    //         var homestayId = e.target.dataset.id;
-    //         showModifyHomestayModal(homestayId);
-    //     })
-    // }
 }
 
 function showDeleteHomestayModal(homestayId) {
     console.log(homestayId);
     $("#deleteHomestayModalCenter #deleteHomestayConfirmButton").click((e) => {
-        var url = "/seller";
+        var url = getUrlHead() + "/seller";
         var data = {
             "actionType": "homestay",
             "action": "delete_homestay",
@@ -138,7 +114,7 @@ function showModifyHomestayModal(homestayId) {
     getHomestayById(homestayId);
     $("#modifyHomestayModelCenter #modifyHomestayConfirmButton").click((e) => {
         geoCode();
-        var url = "/seller";
+        var url = getUrlHead() + "/seller";
         var homestayName = $("#modify_homestay_name").val();
         var location = $("#modify_location").val();
         var lnglat = $("#modify_lnglat").val().split(",");
@@ -175,7 +151,7 @@ function showModifyHomestayModal(homestayId) {
 }
 
 function getHomestayById(homestayId) {
-    var url = "/seller";
+    var url = getUrlHead() + "/seller";
     var data = {
         "actionType": "homestay",
         "action": "get_homestay",
@@ -211,14 +187,17 @@ $("#modify_homestay_image").change((input_event) => {
     }
 })
 
-function getAllSpecialty() {
+function getAllSpecialty(order) {
     var owner = getUserInfo().id;
-    var url = "/seller";
+    var url = getUrlHead() + "/seller";
     var data = {
         "actionType": "specialty",
         "action": "get_specialty",
         "username": owner
     };
+    if (order !== "") {
+        data.order = order;
+    }
     $.ajaxSettings.async = false;
     $.post(
         url,
@@ -270,29 +249,11 @@ function initSpecialtyButtons() {
         var specialtyId = e.currentTarget.parentNode.nextElementSibling.value;
         showModifySpecialtyModal(specialtyId);
     })
-
-    // var deleteButtons = document.querySelectorAll(".delete_specialty_button");
-    // for (var i = 0; i < deleteButtons.length; i++) {
-    //     var button = deleteButtons[i];
-    //     button.addEventListener("click", (e) => {
-    //         var specialtyId = e.currentTarget.parentNode.nextElementSibling.value;
-    //         showDeleteSpecialtyModal(specialtyId);
-    //     });
-    // }
-    //
-    // var modifyButtons = document.querySelectorAll(".modify_specialty_button");
-    // for (var i = 0; i < modifyButtons.length; i++) {
-    //     var button = modifyButtons[i];
-    //     button.addEventListener("click", (e) => {
-    //         var specialtyId = e.currentTarget.parentNode.nextElementSibling.value;
-    //         showModifySpecialtyModal(specialtyId);
-    //     });
-    // }
 }
 
 function showDeleteSpecialtyModal(specialtyId) {
     $("#deleteSpecialtyModalCenter #deleteSpecialtyConfirmButton").click((e) => {
-        var url = "/seller";
+        var url = getUrlHead() + "/seller";
         console.log(specialtyId);
         var data = {
             "actionType": "specialty",
@@ -316,7 +277,7 @@ function showDeleteSpecialtyModal(specialtyId) {
 function showModifySpecialtyModal(specialtyId) {
     getSpecialtyByID(specialtyId);
     $("#modifySpecialtyModelCenter #modifySpecialtyConfirmButton").click((e) => {
-        var url = "/seller";
+        var url = getUrlHead() + "/seller";
         console.log(specialtyId);
         var data = {
             "actionType": "specialty",
@@ -347,7 +308,7 @@ function showModifySpecialtyModal(specialtyId) {
 }
 
 function getSpecialtyByID(specialtyId) {
-    var url = "/seller";
+    var url = getUrlHead() + "/seller";
     console.log(specialtyId);
     var data = {
         "actionType": "specialty",
@@ -382,3 +343,9 @@ $("#modify_specialty_image").change((input_event) => {
         document.querySelector("#modify_specialty_image").value = "";
     }
 })
+
+function initControlButtons() {
+    $("#specialty_price_order_button").click((e) => {
+        getAllSpecialty("DESC");
+    })
+}

@@ -242,7 +242,7 @@
 <!--*******************
     Preloader start
 ********************-->
-<%@ include file="/frame/frame_preloader.jsp" %>
+<%@ include file="../frame/frame_preloader.jsp" %>
 <!--*******************
     Preloader end
 ********************-->
@@ -255,7 +255,7 @@
     <!--**********************************
         menu start
     ***********************************-->
-    <%@ include file="/frame/frame_menu.jsp" %>
+    <%@ include file="../frame/frame_menu.jsp" %>
     <!--**********************************
         menu end
     ***********************************-->
@@ -382,6 +382,7 @@
         Main wrapper end
     ***********************************-->
 </body>
+<%@ include file="../frame/frame_javascript.jsp" %>
 <script defer>
     document.addEventListener("DOMContentLoaded", function () {
         // 在这里调用获取和显示数据的函数
@@ -465,7 +466,7 @@
 
     function searchUsers() {
         var searchValue = document.getElementById("searchInput").value;
-        var searchUrl = "/searchUser?user_id=" + searchValue;
+        var searchUrl = "<%=Config.getInstance().getString("default.urlheader")%>/searchUser?user_id=" + searchValue;
 
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
@@ -592,7 +593,7 @@
         // 如果用户确认删除，继续删除流程
         if (isConfirmed) {
             // 构造用于删除用户的URL（根据你的应用程序调整URL）
-            var deleteUrl = "deleteUser?user_id=" + userId;
+            var deleteUrl = "<%=Config.getInstance().getString("default.urlheader")%>/deleteUser?user_id=" + userId;
 
             // 发送用于删除用户的AJAX请求
             var xhr = new XMLHttpRequest();
@@ -691,10 +692,9 @@
     }
 
 </script>
-
 <script defer>
     function exportData() {
-        $.get('/exportUsers', res => {
+        $.get('<%=Config.getInstance().getString("default.urlheader")%>/exportUsers', res => {
             $('#export_users_url').attr('href', res.url);
             $('#export_users_url').attr('download', 'allusers.json');
             document.getElementById('export_users_url').click();
@@ -702,7 +702,7 @@
     }
 
     function statistics() {
-        window.location.href = '/superadmin/statistics.jsp'
+        window.location.href = './statistics.jsp'
     }
 </script>
 
@@ -716,8 +716,8 @@
 <script src="./js/custom.min.js"></script>
 <script src="./js/dlabnav-init.js"></script>
 <script src="./js/demo.js"></script>
-<script src="./../assets/js/utils/throttle.js"></script>
-<script src="./../assets/js/utils/debounce.js"></script>
+<script src="../assets/js/utils/throttle.js"></script>
+<script src="../assets/js/utils/debounce.js"></script>
 <script src="./js/styleSwitcher.js"></script>
 
 

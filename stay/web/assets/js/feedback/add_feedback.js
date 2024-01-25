@@ -1,4 +1,4 @@
-document.domain = "localhost";
+//document.domain = "localhost";
 /*================================================================================*/
 jQuery(document).ready(function () {
     // initiate layout and plugins
@@ -12,6 +12,9 @@ var Page = (function () {
         pageId = $("#page_id").val();
         if (pageId === "feedback_list") {
             initFeedbackList();
+        }
+        if(pageId=="print_word"){
+            initPrintWord();
         }
 
     };
@@ -33,6 +36,7 @@ var Page = (function () {
         $('#feedback_add_div #cancel_button').click(function () {
             reback();
         });
+        $('#print_word_button').click(function() {window.location.href="feedback_print_word.jsp";});
     }
     function getUserInfo() {
         const token = getCookie("token")
@@ -41,7 +45,7 @@ var Page = (function () {
     var getFeedbackRecordList = function () {
         data = {};
 
-        $.post("/feedback?action=get_feedback", data, function (json) {
+        $.post(getUrlHead()+"/feedback?action=get_feedback", data, function (json) {
             console.log(JSON.stringify(json));
             if (json.resCode === "00000") {
                 var list = json.feedbackList;
@@ -72,7 +76,7 @@ var Page = (function () {
         if (window.confirm("您确定要撤回这条反馈吗？")) {
             console.log("yes");
             if (fid !== undefined && fid !== null && fid !== "") {
-                var url = "/feedback";
+                var url = getUrlHead() +"/feedback";
                 var data = {};
                 data.action = "delete_feedback";
                 data.fid = fid;
@@ -95,7 +99,7 @@ var Page = (function () {
         $("#feedback_add_div").modal("hide");
     }
     var submitAddRecordDiv = function () {
-        var url = "/feedback";
+        var url = getUrlHead() +"/feedback";
         var data = {};
         data.action = "add_feedback";
         data.user_id = $("#feedback_add_div #user_id").val();
@@ -107,6 +111,75 @@ var Page = (function () {
             }
         });
     }
+
+    var initPrintWord = function () {
+        initPrintWordRecords();
+    }
+    var initPrintWordRecords=function(){
+        console.log("printWord")
+        $("#page_sidebar_wrapper").hide();
+        $("#page_header").hide();
+        $("#page_content").attr("style","margin-left:0px");
+        $("#page_container").attr("style","margin-top:0px");
+        var url=getUrlHead()+"/feedback";
+        var data={"action":"get_feedback"};
+        $.post(url,data,function(json){
+            console.log(JSON.stringify(json));
+            // var list=json.aaData;
+            if(json.resCode=="00000"){
+                var list=json.feedbackList;
+                console.log(list);
+                if(list!=undefined && list.length>0){
+                    var html = "";
+                    for(var i=0;i<list.length;i++){
+                        var record=list[i];
+                        if (record.user_id === getUserInfo().id) {
+                            html=html+"				<tr>";
+                            html=html+"                <th width=138 valign=top style=\"width:103.7pt;border-top:solid windowtext 1.5pt;";
+                            html=html+"  border-left:none;border-bottom:solid windowtext 1.5pt;border-right:none;";
+                            html=html+"  padding:0cm 5.4pt 0cm 5.4pt\">";
+                            html=html+"                    <p class=MsoNormal align=center style=\"text-align:center\"><b><span";
+                            html=html+"                            lang=EN-US>"+record.fid+"</span></b></p>";
+                            html=html+"                </th>";
+                            html=html+"                <th width=138 valign=top style=\"width:103.7pt;border-top:solid windowtext 1.5pt;";
+                            html=html+"  border-left:none;border-bottom:solid windowtext 1.5pt;border-right:none;";
+                            html=html+"  padding:0cm 5.4pt 0cm 5.4pt\">";
+                            html=html+"                    <p class=MsoNormal align=center style=\"text-align:center\"><b><span";
+                            html=html+"                            lang=EN-US>"+record.user_id+"</span></b></p>";
+                            html=html+"                </th>";
+                            html=html+"                <th width=138 valign=top style=\"width:103.7pt;border-top:solid windowtext 1.5pt;";
+                            html=html+"  border-left:none;border-bottom:solid windowtext 1.5pt;border-right:none;";
+                            html=html+"  padding:0cm 5.4pt 0cm 5.4pt\">";
+                            html=html+"                    <p class=MsoNormal align=center style=\"text-align:center\"><b><span";
+                            html=html+"                            lang=EN-US>"+record.feedback+"</span></b></p>";
+                            html=html+"                </th>";
+                            html=html+"                <th width=138 valign=top style=\"width:103.7pt;border-top:solid windowtext 1.5pt;";
+                            html=html+"  border-left:none;border-bottom:solid windowtext 1.5pt;border-right:none;";
+                            html=html+"  padding:0cm 5.4pt 0cm 5.4pt\">";
+                            html=html+"                    <p class=MsoNormal align=center style=\"text-align:center\"><b><span";
+                            html=html+"                            lang=EN-US>"+record.reply+"</span></b></p>";
+                            html=html+"                </th>";
+                            html=html+"                <th width=138 valign=top style=\"width:103.7pt;border-top:solid windowtext 1.5pt;";
+                            html=html+"  border-left:none;border-bottom:solid windowtext 1.5pt;border-right:none;";
+                            html=html+"  padding:0cm 5.4pt 0cm 5.4pt\">";
+                            html=html+"                    <p class=MsoNormal align=center style=\"text-align:center\"><b><span";
+                            html=html+"                            lang=EN-US>"+record.create_time+"</span></b></p>";
+                            html=html+"                </th>";
+                            html=html+"                <th width=138 valign=top style=\"width:103.7pt;border-top:solid windowtext 1.5pt;";
+                            html=html+"  border-left:none;border-bottom:solid windowtext 1.5pt;border-right:none;";
+                            html=html+"  padding:0cm 5.4pt 0cm 5.4pt\">";
+                            html=html+"                </th>";
+                            html=html+"            </tr>";
+                        }
+                    }
+                    $("#print_word_div").html(html);
+                }else{
+                    alert("[print_table]与后端交互错误！"+json.result.msg);
+                }
+            }
+        })
+    }
+
     return {
         init: function () {
             console.log(123);
@@ -116,4 +189,5 @@ var Page = (function () {
             onDeleteRecord(id);
         }
     }
+
 })();

@@ -164,7 +164,7 @@ To change this template use File | Settings | File Templates.
             "good_list": JSON.stringify(order_list),
             "good_type": "specialty"
         };
-        $.post('/specialtyMarketOrder', data2, function (json) {
+        $.post('<%=Config.getInstance().getString("default.urlheader")%>/specialtyMarketOrder', data2, function (json) {
             if (json.code == 0) {
                 document.getElementById("pay_status").style.display = 'block';
             } else if(json.code==1) {
@@ -184,7 +184,7 @@ To change this template use File | Settings | File Templates.
     var goodlist = JSON.parse(checkgoods);
     var data = {"good_list": checkgoods, "action": "query_by_list", "good_type": "specialty"};
     console.log(JSON.stringify(data));
-    $.post('/specialtyMarketOrder', data, function (json) {
+    $.post('<%=Config.getInstance().getString("default.urlheader")%>/specialtyMarketOrder', data, function (json) {
         if (json.code == 0) {
             var html = "";
             order_list = json.good_list;
@@ -270,7 +270,7 @@ To change this template use File | Settings | File Templates.
         }
     });
     var goSpecialtyOrder = function () {
-        window.location.href = '/order/device/specialty_order.jsp'
+        window.location.href = '../order/device/specialty_order.jsp'
     }
 </script>
 </html>

@@ -1,13 +1,17 @@
 function onLoadFunction() {
-    getAllFeedbacks();
+    getAllFeedbacks("");
+    initControlButtons();
 }
 
-function getAllFeedbacks() {
-    var url = "/feedback";
+function getAllFeedbacks(order) {
+    var url = getUrlHead() + "/feedback";
     var data = {
         "actionType": "feedback",
         "action": "get_feedback"
     };
+    if (order !== "") {
+        data.order = order;
+    }
     $.ajaxSettings.async = false;
     $.post(
         url,
@@ -64,7 +68,7 @@ function showReplyModal(fid) {
     getReply(fid);
     $("#replyModal #replyConfirmButton").click((e) => {
         var reply = $("#reply").val();
-        var url = "/feedback";
+        var url = getUrlHead() + "/feedback";
         var data = {
             "actionType": "feedback",
             "action": "reply_feedback",
@@ -90,7 +94,7 @@ function showReplyModal(fid) {
 }
 
 function getReply(fid) {
-    var url = "/feedback";
+    var url = getUrlHead() + "/feedback";
     var data = {
         "actionType": "feedback",
         "action": "get_feedback",
@@ -113,4 +117,10 @@ function getReply(fid) {
         }
     )
     $.ajaxSettings.async = true;
+}
+
+function initControlButtons() {
+    $("#time_order_button").click((e) => {
+        getAllFeedbacks("DESC");
+    })
 }

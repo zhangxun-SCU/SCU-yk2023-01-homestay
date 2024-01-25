@@ -24,17 +24,17 @@
     <meta property="og:image" content="https://invome.dexignlab.com/xhtml/social-image.png"/>
     <meta name="format-detection" content="telephone=no">
     <title>Title</title>
-    <%@include file="/frame/frame_style.jsp" %>
-    <link rel="stylesheet" href="/assets/css/seller/house_detail.css">
+    <%@include file="../frame/frame_style.jsp" %>
+    <link rel="stylesheet" href="../assets/css/seller/house_detail.css">
 </head>
 <body onload="onLoadFunction();">
 
 <%--  preloader start  --%>
-<%@include file="/frame/frame_preloader.jsp" %>
+<%@include file="../frame/frame_preloader.jsp" %>
 <%--  preloader end  --%>
 <div id="main-wrapper">
     <%--  menu start  --%>
-    <%@include file="/frame/frame_menu.jsp" %>
+    <%@include file="../frame/frame_menu.jsp" %>
     <%--  end  --%>
 
     <%--  获取民宿信息  --%>
@@ -135,16 +135,16 @@
     </div>
 
     <%--  footer start  --%>
-    <%@include file="/frame/frame_footer.jsp" %>
+    <%@include file="../frame/frame_footer.jsp" %>
     <%--  footer end  --%>
 </div>
 
-<%@ include file="/seller/modals/add_room_modal.jsp" %>
-<%@ include file="/seller/modals/modify_room_modal.jsp" %>
-<%@ include file="/seller/modals/delete_room_modal.jsp" %>
+<%@ include file="modals/add_room_modal.jsp" %>
+<%@ include file="modals/modify_room_modal.jsp" %>
+<%@ include file="modals/delete_room_modal.jsp" %>
 <%--  script start  --%>
 
-<%@include file="/frame/frame_javascript.jsp" %>
+<%@include file="../frame/frame_javascript.jsp" %>
 <script src="../assets/js/seller/house_detail.js"></script>
 <%--  script end  --%>
 </body>

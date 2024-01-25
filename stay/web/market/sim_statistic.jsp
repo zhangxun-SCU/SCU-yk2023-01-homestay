@@ -67,7 +67,7 @@
     var barChart1 = function() {
         if (jQuery('#aa').length > 0) {
             let data2 = {"action": "sta"};
-            $.post('/getCartGood', data2, function (json) {
+            $.post('<%=Config.getInstance().getString("default.urlheader")%>/getCartGood', data2, function (json) {
                 if (json.code == 0) {
                     console.log(json);
                     const barChart_1 = document.getElementById("aa").getContext('2d');

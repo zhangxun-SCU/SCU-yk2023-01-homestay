@@ -1,4 +1,6 @@
-﻿<!doctype html>
+﻿<%@ page import="homestay.utils.Config" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -250,7 +252,7 @@ width:80%;
 
         $('.counter').countUp();
         var data={"action":"sun"}
-        $.post('/getDriveData',data,function (json) {
+        $.post('<%=Config.getInstance().getString("default.urlheader")%>/getDriveData',data,function (json) {
             document.getElementById("a").innerText=json.num_room_order;
             document.getElementById("b").innerText=json.num_specialty_order;
             document.getElementById("c").innerText=json.num_room_order+json.num_specialty_order;

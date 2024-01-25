@@ -84,6 +84,10 @@ public class SpecialtyDao {
         DB db = new DB("group1");
         String ownerId = data.getParam().getString("username");
         String sql = "Select * From specialty Where owner_id='" + ownerId + "'";
+        if (data.getParam().has("order")) {
+            String order = data.getParam().getString("order");
+            sql += " Order By price " + order;
+        }
         showDebug("[getSpecialtyByOwner]", "sql: " + sql);
         ResultSet res = db.executeQuery(sql);
         ResultSetMetaData resMetaData = res.getMetaData();
