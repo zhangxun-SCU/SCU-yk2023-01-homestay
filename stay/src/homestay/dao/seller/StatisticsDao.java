@@ -18,14 +18,22 @@ public class StatisticsDao {
         String resCode = "00000";
         String info = "success";
         try {
-            String owner_id = data.getParam().getString("owner_id");
-            String sql = String.format(
-                    "Select user_account.avatar, user_account.user_id, A.specialty_name, specialty_order.num, specialty_order.price, specialty_order.create_date " +
-                            "From specialty_order " +
-                            "Join (Select specialty_id, specialty_name From specialty Where owner_id='%s') A On specialty_order.good_id=A.specialty_id " +
-                            "Join user_account On specialty_order.buyer_id=user_account.user_id Where specialty_order.create_date Between DATE_SUB(NOW(), Interval 1 day) And NOW();",
-                    owner_id
-            );
+            String sql;
+            if (data.getParam().has("owner_id")) {
+                String owner_id = data.getParam().getString("owner_id");
+                sql = String.format(
+                        "Select user_account.avatar, user_account.user_id, A.specialty_name, specialty_order.num, specialty_order.price, specialty_order.create_date " +
+                                "From specialty_order " +
+                                "Join (Select specialty_id, specialty_name From specialty Where owner_id='%s') A On specialty_order.good_id=A.specialty_id " +
+                                "Join user_account On specialty_order.buyer_id=user_account.user_id Where specialty_order.create_date Between DATE_SUB(NOW(), Interval 1 day) And NOW();",
+                        owner_id
+                );
+            } else {
+                sql = "Select user_account.avatar, user_account.user_id, A.specialty_name, specialty_order.num, specialty_order.price, specialty_order.create_date " +
+                        "From specialty_order " +
+                        "Join (Select specialty_id, specialty_name From specialty) A On specialty_order.good_id=A.specialty_id " +
+                        "Join user_account On specialty_order.buyer_id=user_account.user_id";
+            }
             System.out.println("[StatisticsDao][getNewOrders]" + "sql: " + sql);
             ResultSet res = db.executeQuery(sql);
             ResultSetMetaData resMetaData = res.getMetaData();

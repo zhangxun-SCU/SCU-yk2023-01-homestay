@@ -115,8 +115,6 @@ To change this template use File | Settings | File Templates.
                 <div class="boxfoot"></div>
             </div>
         </li>
-
-        </li>
     </ul>
 </div>
 <div class="back"></div>

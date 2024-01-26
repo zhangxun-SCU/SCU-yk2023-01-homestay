@@ -21,9 +21,9 @@ function wbzl() {
     var data={"action":"sun"}
     $.post('/getDriveData',data,function (json) {
         var wbzl = echarts.init(document.getElementById('wbzl'));
-        var hours = ['特产订单数', '民宿订单数', '总和'];
-        var days = ['12月', '1月'];
-        var data = [[0, 0, json.so_m12], [0, 1, json.so_m1],   [1, 0, json.ho_m12], [1, 1, json.ho_m1],   [2, 0, json.so_m12+json.ho_m12], [2, 1, json.so_m1+json.ho_m12],];
+        var hours = ['特产商品数', '民宿商品数', '房间商品数'];
+        var days = ['', ];
+        var data = [[0, 0, json.num_specialty],   [1, 0, json.num_house],   [2, 0, json.so_m12+json.num_room], ];
         option = {
             title: {
                 text: '',
@@ -87,40 +87,43 @@ function wbzl() {
 }
 
 function wxyg() {
-    var wxyg = echarts.init(document.getElementById('wxyg'));
-    option = {
-        tooltip: {trigger: 'axis', axisPointer: {type: 'shadow'}},
-        grid: {left: '0%', top: '10px', right: '0%', bottom: '4%', containLabel: true},
-        xAxis: [{
-            type: 'category',
-            data: ['设备数量', '本月报警', '上月报警'],
-            axisLine: {show: true, lineStyle: {color: "rgba(255,255,255,.1)", width: 1, type: "solid"},},
-            axisTick: {show: false,},
-            axisLabel: {
-                interval: 0,
-                show: true,
-                splitNumber: 15,
-                textStyle: {color: "rgba(255,255,255,.6)", fontSize: '12',},
-            },
-        }],
-        yAxis: [{
-            type: 'value',
-            axisLabel: {show: true, textStyle: {color: "rgba(255,255,255,.6)", fontSize: '12',},},
-            axisTick: {show: false,},
-            axisLine: {show: true, lineStyle: {color: "rgba(255,255,255,.1    )", width: 1, type: "solid"},},
-            splitLine: {lineStyle: {color: "rgba(255,255,255,.1)",}}
-        }],
-        series: [{
-            type: 'bar',
-            data: [600, 200, 900],
-            barWidth: '35%',
-            itemStyle: {normal: {color: '#27d08a', opacity: 1, barBorderRadius: 5,}}
-        }]
-    };
-    wxyg.setOption(option);
-    window.addEventListener("resize", function () {
-        wxyg.resize()
-    })
+    var data={"action":"sun"}
+    $.post('/getDriveData',data,function (json) {
+        var wxyg = echarts.init(document.getElementById('wxyg'));
+        option = {
+            tooltip: {trigger: 'axis', axisPointer: {type: 'shadow'}},
+            grid: {left: '0%', top: '10px', right: '0%', bottom: '4%', containLabel: true},
+            xAxis: [{
+                type: 'category',
+                data: ['普通用户', '管理员', '超级管理员'],
+                axisLine: {show: true, lineStyle: {color: "rgba(255,255,255,.1)", width: 1, type: "solid"},},
+                axisTick: {show: false,},
+                axisLabel: {
+                    interval: 0,
+                    show: true,
+                    splitNumber: 15,
+                    textStyle: {color: "rgba(255,255,255,.6)", fontSize: '12',},
+                },
+            }],
+            yAxis: [{
+                type: 'value',
+                axisLabel: {show: true, textStyle: {color: "rgba(255,255,255,.6)", fontSize: '12',},},
+                axisTick: {show: false,},
+                axisLine: {show: true, lineStyle: {color: "rgba(255,255,255,.1    )", width: 1, type: "solid"},},
+                splitLine: {lineStyle: {color: "rgba(255,255,255,.1)",}}
+            }],
+            series: [{
+                type: 'bar',
+                data: [json.num_normal_user,json.num_admin_user,json.num_super_user],
+                barWidth: '35%',
+                itemStyle: {normal: {color: '#27d08a', opacity: 1, barBorderRadius: 5,}}
+            }]
+        };
+        wxyg.setOption(option);
+        window.addEventListener("resize", function () {
+            wxyg.resize()
+        })
+    });
 }
 
 function yqbj() {

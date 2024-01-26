@@ -64,11 +64,15 @@
                 <div class="col-xl-6 col-xxl-12">
                     <div class="card">
                         <div class="card-header d-block">
-                            <button type="button" class="btn btn-primary"id="add_button" name="add_button">我要反馈</button>
-                            <button type="button" class="btn btn-rounded btn-success"id="print_word_button"
-                                    name="print_word_button"><span
+                            <button type="button" class="btn btn-primary" id="add_button" name="add_button">我要反馈
+                            </button>
+                            <button type="button" class="btn btn-rounded btn-success" id="print_word_button"
+                                    name="print_word_button"
+<%--                                    onclick="window.location.href='./feedback_print_word.jsp'"--%>
+                            ><span
                                     class="btn-icon-start text-success"><i class="fa fa-upload color-success"></i>
-                                    </span>打印反馈记录</button>
+                                    </span>打印反馈记录
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -131,8 +135,8 @@
 <script src="../assets/js/dlabnav-init.js"></script>
 <script src="../assets/js/demo.js"></script>
 <script src="../assets/js/styleSwitcher.js"></script>
-<script src="../assets/js/dashboard/add_feedback.js"></script>
+<script src="../assets/js/feedback/add_feedback.js"></script>
 </body>
 <%@ include file="./feedback_add_div.jsp" %>
-<%@include file="./feedack_print_word.jsp"%>
+<%--<%@include file="./feedback_print_word.jsp" %>--%>
 </html>

@@ -1,6 +1,7 @@
 package homestay.filter;
 
 import homestay.dao.Data;
+import homestay.utils.Config;
 import homestay.utils.JwtUtil;
 import homestay.utils.UserUtil;
 import org.json.JSONException;
@@ -24,7 +25,9 @@ public class    LoginCheckFilter implements Filter {
             "verify",
             "index",
             "assets",
-            "email"
+            "email",
+            "",
+            "/"
     };
 
     @Override
@@ -61,7 +64,7 @@ public class    LoginCheckFilter implements Filter {
 //        System.out.println("request url:" + url);
         // 处理自动登录
 
-        if((url.contains("login")) && !src.startsWith("miniapp")) {
+        if((url.contains("login")) && !src.startsWith("miniapp") && loginJwt!= null && !loginJwt.isEmpty()) {
             if(autoLogin(req, resp, loginJwt)) {return;}
         }
         // 通过必要的请求
@@ -111,7 +114,7 @@ public class    LoginCheckFilter implements Filter {
                 try {
                     System.out.println(UserUtil.getUserId(req) + "auto login:" + auto);
                     JwtUtil.parseJwt(jwt);
-                    resp.sendRedirect("/market/house_market.jsp");
+                    resp.sendRedirect(Config.getInstance().getString("default.urlheader") + "/market/house_market.jsp");
                     return true;
                 } catch (Exception e) {
                     return false;

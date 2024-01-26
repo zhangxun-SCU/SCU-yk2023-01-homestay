@@ -1,4 +1,4 @@
-$.get('/permission_statistics', res => {
+$.get(getUrlHead() + '/permission_statistics', res => {
     console.log(res)
     const statData = {};
     // statData.high = res.data[0].high;
