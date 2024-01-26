@@ -75,6 +75,14 @@ public class WeatherServlet extends HttpServlet {
                     e.printStackTrace();
                 }
             }
+            if (action.equals("get_device_record_by_order")) {
+                actionOk = true;
+                try {
+                    weatherService.getDeviceRecordByorder(data, json);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
             if (action.equals("add_device_record")) {
                 actionOk = true;
                 try {

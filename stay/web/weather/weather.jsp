@@ -104,6 +104,9 @@
                     <button type="button" class="btn btn-rounded btn-secondary"id="weather_statistic"name="weather_statistic"><span
                             class="btn-icon-start text-secondary"><i class="fa fa-share-alt color-secondary"></i>
                                     </span>湿度统计</button>
+                    <button type="button" class="btn btn-rounded btn-primary"id="order_button"name="order_button"><span
+                            class="btn-icon-start text-primary"><i class="fa fa-hourglass-start"></i>
+                                    </span>最新天气记录</button>
                 </div>
             </div>
             <div class="row">

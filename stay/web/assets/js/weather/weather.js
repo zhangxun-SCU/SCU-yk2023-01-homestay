@@ -67,9 +67,10 @@ var Page = function() {
         $('#weather_modify_div #submit_button').click(function() {onModifyDivSubmit();});
         $('#weather_add_div #submit_button').click(function() {onAddDivSubmit();});
         $('#weather_modify_div #cancel_button').click(function() {reback();});
+        $('#weather_view_div #cancel_button').click(function() {reback();});
         $('#record_query_setup #query_button').click(function() {onQueryRecord();});
         $('#export_button').click(function() {onExportRecord();});
-        $('#weather_order').click(function () {onOderRecord();});
+        $('#order_button').click(function () {onOderRecord();});
         $('#weather_statistic').click(function() {window.location.href="weather_statistic.jsp";});
         $('#print_word_button').click(function() {window.location.href="weather_print_word.jsp";});
     }
@@ -151,6 +152,39 @@ var Page = function() {
     var initWeatherMobileRecord=function(){
         getWeatherMobileRecord();
     }
+    var onOderRecord=function () {
+        data={};
+        $.post(getUrlHead()+"/weather?action=get_device_record_by_order",data,function(json){
+            console.log(JSON.stringify(json));
+            if(json.result_code==0){
+                var list=json.aaData;
+                console.log(list);
+                var html="";
+                if(list!=undefined && list.length>0){
+                    for(var i=0;i<list.length;i++){
+                        var record=list[i];
+                        console.log(record);
+                        html=html+"                                   <tr>";
+                        html=html+"                                        <td><strong>"+record.id+"</strong></td>";
+                        html = html + "                                    <td> "+ record.city + "</td>"
+                        html = html + "                                    <td> "+ record.temperature + "</td>"
+                        html = html + "                                    <td> "+ record.weather_type + "</td>"
+                        html = html + "                                    <td> "+ record.wind +  "</td>"
+                        html = html + "                                    <td> "+ record.humidity + "</td>"
+                        html = html + "                                    <td> "+ record.create_time + "</td>"
+                        html = html + "                                    <td>" +
+                            "<a href=\"javascript:Page.onModifyRecord(" + record.id + ")\">【修改记录】</a>" +
+                            "<a href=\"javascript:Page.onDeleteRecord(" + record.id + ")\">【删除记录】</a> <br>"+
+                            "<a href=\"javascript:Page.onViewRecord(" + record.id + ")\">【查看详细数据】</a><br> ";
+                        html = html + "                                </td> ";
+                        html=html+"                                    </tr>";
+                    }
+                }
+                $("#weather_table_content_div").html(html);
+            }
+        })
+
+    }
     var getWeatherRecordList=function(){
         data = {};
         // var data={};
@@ -180,8 +214,8 @@ var Page = function() {
                         html = html + "                                    <td> "+ record.create_time + "</td>"
                         html = html + "                                    <td>" +
                             "<a href=\"javascript:Page.onModifyRecord(" + record.id + ")\">【修改记录】</a>" +
-                            "<a href=\"javascript:Page.onDeleteRecord(" + record.id + ")\">【删除记录】</a> <br>"
-                            //"<a href=\"javascript:Page.onViewRecord(" + record.id + ")\">【查看记录】</a><br> ";
+                            "<a href=\"javascript:Page.onDeleteRecord(" + record.id + ")\">【删除记录】</a><br>"+
+                            "<a href=\"javascript:Page.onViewRecord(" + record.id + ")\">【查看详细数据】</a><br> ";
                         html = html + "                                </td> ";
                         html=html+"                                    </tr>";
                     }
@@ -207,8 +241,6 @@ var Page = function() {
     };
 
     var onModifyRecord=function(id){
-        //显示出修改前数据
-        //window.location.href="device_modify.jsp?id="+id;
         console.log(id);
         $.post(
             getUrlHead()+"/weather?action=get_device_record",
@@ -431,7 +463,31 @@ var Page = function() {
         });
     }
     var onViewRecord=function(id){
-        window.location.href="device_view.jsp?id="+id;
+        console.log(id);
+        $.post(
+            getUrlHead()+"/weather?action=get_device_record",
+            {},
+            (res)=>{
+                if(res.result_code===0){
+                    var resultList = res.aaData;
+                    if(resultList!==undefined && resultList.length>0){
+                        for(var i=0;i<resultList.length;i++){
+                            console.log(resultList[i].id)
+                            if(resultList[i].id==id){
+                                console.log(resultList[i]);
+                                $("#weather_view_div #id").val(resultList[i].id);
+                                $("#weather_view_div #city").val(resultList[i].city);
+                                $("#weather_view_div #temperature").val(resultList[i].temperature);
+                                $("#weather_view_div #weather_type").val(resultList[i].weather_type);
+                                $("#weather_view_div #wind").val(resultList[i].wind);
+                                $("#weather_view_div #humidity").val(resultList[i].humidity);
+                            }
+                        }
+                    }
+                }
+            }
+        )
+        $("#weather_view_div").modal("show");
     }
     var reback=function () {
         window.location.href="weather.jsp";
@@ -462,8 +518,8 @@ var Page = function() {
                         html = html + "                                    <td> "+ record.create_time + "</td>"
                         html = html + "                                    <td>" +
                             "<a href=\"javascript:Page.onModifyRecord(" + record.id + ")\">【修改记录】</a>" +
-                            "<a href=\"javascript:Page.onDeleteRecord(" + record.id + ")\">【删除记录】</a> <br>"
-                        //"<a href=\"javascript:Page.onViewRecord(" + record.id + ")\">【查看记录】</a><br> ";
+                            "<a href=\"javascript:Page.onDeleteRecord(" + record.id + ")\">【删除记录】</a> "+
+                            "<a href=\"javascript:Page.onViewRecord(" + record.id + ")\">【详细数据】</a><br> ";
                         html = html + "                                </td> ";
                         html=html+"                                    </tr>";
                     }

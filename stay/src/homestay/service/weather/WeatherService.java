@@ -17,6 +17,10 @@ public class WeatherService {
         WeatherDao dao = new WeatherDao();
         dao.getDeviceRecord(data, json);
     }
+    public void getDeviceRecordByorder(Data data, JSONObject json) throws JSONException, SQLException {
+        WeatherDao dao = new WeatherDao();
+        dao.getDeviceRecordByorder(data, json);
+    }
 
     public void modifyDeviceRecord(Data data, JSONObject json) throws JSONException, SQLException {
         WeatherDao dao = new WeatherDao();

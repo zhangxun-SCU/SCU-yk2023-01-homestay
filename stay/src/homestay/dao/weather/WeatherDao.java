@@ -88,6 +88,12 @@ public class WeatherDao {
         data.getParam().put("sql", sql);
         queryRecord(data, json);
     }
+    public void getDeviceRecordByorder(Data data, JSONObject json) throws JSONException, SQLException{
+        JSONObject param=data.getParam();
+        String sql="select * from weather_file order by create_time desc";
+        data.getParam().put("sql", sql);
+        queryRecord(data, json);
+    }
 
     /*
      * 这是一个样板的函数，可以拷贝做修改用
