@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="homestay.utils.Config" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -217,35 +218,35 @@
                                             <div class="my-post-content pt-3">
                                             </div>
                                             <div id="comments_list">
-<%--                                                <div class="card-body pb-3 transaction-details d-flex flex-wrap justify-content-between align-items-center">--%>
-<%--                                                    <div class="user-bx-2 me-3 mb-3">--%>
-<%--                                                        <img src="/upload/house_image/GH1705405506092.png"--%>
-<%--                                                             class="rounded-circle" alt="">--%>
-<%--                                                        <div>--%>
-<%--                                                            <h3 class="fs-20 font-w700">hubert</h3>--%>
-<%--                                                            <span class="font-w400 text-muted fs-12">2024-01-16 23:32:30</span>--%>
-<%--                                                        </div>--%>
-<%--                                                    </div>--%>
-<%--                                                    <div class="user-bx-2 d-flex flex-column"--%>
-<%--                                                         style="flex: 0.9; align-items: flex-start;">--%>
-<%--                                                        <div class="mb-2 row">--%>
-<%--                                                            <ul class="stars col-sm-9 float-left" id="stars_0">--%>
-<%--                                                                <li class="me-2" data-score="1"><i--%>
-<%--                                                                        class="fa fa-star"></i></li>--%>
-<%--                                                                <li class="me-2" data-score="2"><i--%>
-<%--                                                                        class="fa fa-star"></i></li>--%>
-<%--                                                                <li class="me-2" data-score="3"><i--%>
-<%--                                                                        class="fa fa-star"></i></li>--%>
-<%--                                                                <li class="me-2" data-score="4"><i--%>
-<%--                                                                        class="fa fa-star"></i></li>--%>
-<%--                                                                <li data-score="5"><i class="fa fa-star"></i></li>--%>
-<%--                                                            </ul>--%>
-<%--                                                        </div>--%>
-<%--                                                        <p class="me-2 mb-2 fs-16 row">--%>
-<%--                                                            aaaaaaaa--%>
-<%--                                                        </p>--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
+                                                <%--                                                <div class="card-body pb-3 transaction-details d-flex flex-wrap justify-content-between align-items-center">--%>
+                                                <%--                                                    <div class="user-bx-2 me-3 mb-3">--%>
+                                                <%--                                                        <img src="/upload/house_image/GH1705405506092.png"--%>
+                                                <%--                                                             class="rounded-circle" alt="">--%>
+                                                <%--                                                        <div>--%>
+                                                <%--                                                            <h3 class="fs-20 font-w700">hubert</h3>--%>
+                                                <%--                                                            <span class="font-w400 text-muted fs-12">2024-01-16 23:32:30</span>--%>
+                                                <%--                                                        </div>--%>
+                                                <%--                                                    </div>--%>
+                                                <%--                                                    <div class="user-bx-2 d-flex flex-column"--%>
+                                                <%--                                                         style="flex: 0.9; align-items: flex-start;">--%>
+                                                <%--                                                        <div class="mb-2 row">--%>
+                                                <%--                                                            <ul class="stars col-sm-9 float-left" id="stars_0">--%>
+                                                <%--                                                                <li class="me-2" data-score="1"><i--%>
+                                                <%--                                                                        class="fa fa-star"></i></li>--%>
+                                                <%--                                                                <li class="me-2" data-score="2"><i--%>
+                                                <%--                                                                        class="fa fa-star"></i></li>--%>
+                                                <%--                                                                <li class="me-2" data-score="3"><i--%>
+                                                <%--                                                                        class="fa fa-star"></i></li>--%>
+                                                <%--                                                                <li class="me-2" data-score="4"><i--%>
+                                                <%--                                                                        class="fa fa-star"></i></li>--%>
+                                                <%--                                                                <li data-score="5"><i class="fa fa-star"></i></li>--%>
+                                                <%--                                                            </ul>--%>
+                                                <%--                                                        </div>--%>
+                                                <%--                                                        <p class="me-2 mb-2 fs-16 row">--%>
+                                                <%--                                                            aaaaaaaa--%>
+                                                <%--                                                        </p>--%>
+                                                <%--                                                    </div>--%>
+                                                <%--                                                </div>--%>
                                             </div>
                                         </div>
                                     </div>
@@ -315,17 +316,17 @@
                             var comment = comments[i];
                             html += `<div class="card-body pb-3 transaction-details d-flex flex-wrap justify-content-between align-items-center">`;
                             html += `    <div class="user-bx-2 me-3 mb-3">`;
-                            html += `        <img src="\${comment.avatar}"`;
+                            html += `        <img src="${comment.avatar}"`;
                             html += `             class="rounded-circle" alt="">`;
                             html += `            <div>`;
-                            html += `                <h3 class="fs-20 font-w700">\${comment.user_id}</h3>`;
-                            html += `                <span class="font-w400 text-muted fs-12">\${comment.create_time}</span>`;
+                            html += `                <h3 class="fs-20 font-w700">${comment.user_id}</h3>`;
+                            html += `                <span class="font-w400 text-muted fs-12">${comment.create_time}</span>`;
                             html += `            </div>`;
                             html += `    </div>`;
                             html += `    <div class="user-bx-2 d-flex flex-column"`;
                             html += `         style="flex: 0.9; align-items: flex-start;">`;
                             html += `        <div class="mb-2 row">`;
-                            html += `            <ul class="stars col-sm-9 float-left" id="stars_\${i}">`;
+                            html += `            <ul class="stars col-sm-9 float-left" id="stars_${i}">`;
                             html += `                <li class="me-2" data-score="1"><i`;
                             html += `                    class="fa fa-star"></i></li>`;
                             html += `                <li class="me-2" data-score="2"><i`;
@@ -338,7 +339,7 @@
                             html += `            </ul>`;
                             html += `        </div>`;
                             html += `        <p class="me-2 mb-2 fs-16 row">`;
-                            html += `            \${comment.comment}`;
+                            html += `            ${comment.comment}`;
                             html += `        </p>`;
                             html += `    </div>`;
                             html += `</div>`;
@@ -356,7 +357,8 @@
     }
 
     function setStars(score, id) {
-        var stars = document.querySelectorAll(`#stars_\${id} > li`);
+        var stars = document.querySelectorAll(`#stars_${id} > li`);
+        console.log(stars);
         for (var j = 0; j < 5; j++) {
             var t_star = stars[j];
             var t_score = t_star.dataset.score;

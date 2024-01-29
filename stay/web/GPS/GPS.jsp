@@ -244,9 +244,9 @@
                 let content = `<div class="card">` +
                     `<div class="card-header">详细信息</div>` +
                     `<div class="card-body">` +
-                    `    <p>民宿名称：\${house.house_name}</p>` +
-                    `    <p>房东：\${house.owner_id}</p>` +
-                    `    <p>详细地址：\${house.location}</p>` +
+                    `    <p>民宿名称：${house.house_name}</p>` +
+                    `    <p>房东：${house.owner_id}</p>` +
+                    `    <p>详细地址：${house.location}</p>` +
                     `</div>` +
                     `</div>`;
                 marker.on("mouseover", (e) => {
